@@ -5,6 +5,8 @@ import Button from "@material-ui/core/Button";
 import M from "@material-ui/core/Menu";
 import MItem from "@material-ui/core/MenuItem";
 import { withStyles } from "@material-ui/core/styles";
+import ProfileBox from "../components/ProfileBox";
+import profilePic from "../assets/images/profileSample.png";
 
 const styles = theme => ({});
 
@@ -21,6 +23,7 @@ const Menu = () => {
 
   return (
     <>
+      <ProfileBox pic={profilePic} id="dummy" name="dummy" rank="dummy" />
       <div>
         <Button
           aria-controls="simple-menu"

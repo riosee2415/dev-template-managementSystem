@@ -43,3 +43,26 @@
 
   align-self: flex-end;
 }
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile :nth-child(1) {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  background-size: contain;
+}
+
+.profile :nth-child(2),
+.profile :nth-child(3),
+.profile :nth-child(4) {
+  margin-bottom: 5px;
+  border-bottom: 1px solid #e7e7e7;
+  font-size: 12px;
+}
