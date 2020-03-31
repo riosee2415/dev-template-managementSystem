@@ -1,6 +1,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
+const routes = require("./routes");
+const apiController = require("./controller/apiController");
 
 const PORT = 5000;
 
@@ -9,6 +11,14 @@ const app = express();
 app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.get(routes.loginProcess, (req, res) => {
+  const loginFlag = apiController.loginProcess();
+
+  res.send({
+    loginFlag
+  });
+});
 
 app.use("/api/profileInfo", (req, res) => {
   res.send({

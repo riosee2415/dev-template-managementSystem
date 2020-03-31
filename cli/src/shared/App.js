@@ -93,12 +93,14 @@ class App extends React.Component {
     );
   }
 
-  _loginHandler = () => {
-    const loginBtn = document.getElementById("loginBtn-js");
-    console.dir(loginBtn);
+  _loginHandler = async () => {
+    const loginFrm = document.getElementById("loginFrm-js");
+
+    const response = await fetch("/api/loginProcess");
+    const body = await response.json();
 
     this.setState({
-      loginStatus: true
+      loginStatus: body.loginFlag
     });
   };
 }

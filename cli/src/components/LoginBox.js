@@ -13,7 +13,7 @@ class LoginBox extends React.Component {
             <input type="text" />
             <input type="text" />
 
-            <button id="loginBtn-js" onClick={this.props.action}>
+            <button type="button" id="loginBtn-js" onClick={this.props.action}>
               Login
             </button>
           </form>
