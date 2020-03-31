@@ -8,12 +8,16 @@ class LoginBox extends React.Component {
   render() {
     return (
       <>
-        <form action="" method="post">
-          <input type="text" />
-          <input type="text" />
+        <div className="login-box">
+          <form action="" method="post">
+            <input type="text" />
+            <input type="text" />
 
-          <button onClick={this.props.action}>Login</button>
-        </form>
+            <button id="loginBtn-js" onClick={this.props.action}>
+              Login
+            </button>
+          </form>
+        </div>
       </>
     );
   }
