@@ -1,4 +1,5 @@
 import React from "react";
+import IconComponent from "./IconComponent";
 
 class LoginBox extends React.Component {
   constructor(props) {
@@ -9,13 +10,27 @@ class LoginBox extends React.Component {
     return (
       <>
         <div className="login-box">
+          <div className="login-img-box">
+            <IconComponent iconName="fas fa-user-circle" />
+          </div>
           <form id="loginFrm-js" action="/api/loginProcess" method="post">
-            <input type="text" />
-            <input type="text" />
+            <h3>Login</h3>
+            <div className="id">
+              <input type="text" placeholder="ID" />
+            </div>
+            <div className="pass">
+              <input type="text" placeholder="PASSWORD" />
+            </div>
 
-            <button type="button" id="loginBtn-js" onClick={this.props.action}>
-              Login
-            </button>
+            <div className="login-btn">
+              <button
+                type="button"
+                id="loginBtn-js"
+                onClick={this.props.action}
+              >
+                Login
+              </button>
+            </div>
           </form>
         </div>
       </>

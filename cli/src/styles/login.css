@@ -1,0 +1,90 @@
+.login-box {
+  width: 1200px;
+  height: 70vh;
+  margin: 30px auto;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+}
+.login-box form {
+  width: 45%;
+  background-color: #f8f8f8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: 0.4s;
+}
+.login-box form:hover {
+  box-shadow: 0px 4px 14px rgb(213, 213, 213);
+}
+.login-box form h3 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 50px;
+}
+.login-box form input,
+.login-box form button {
+  outline: none;
+  border: none;
+  background: transparent;
+}
+.login-box form .id input,
+.login-box form .pass input {
+  width: 250px;
+  height: 50px;
+  border-left: 3px solid #ffa751;
+  margin-bottom: 40px;
+  box-shadow: 5px 4px 15px rgb(206, 206, 206);
+  padding: 10px;
+  box-sizing: border-box;
+  background-color: #fff;
+}
+.login-box form .login-btn button {
+  width: 250px;
+  height: 40px;
+  background: linear-gradient(45deg, #ffe259, #ffa751);
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.5s;
+}
+.login-box form .login-btn button:hover {
+  box-shadow: 4px 4px 10px 0 rgba(0, 0, 0, 0.4);
+  transform: translateY(-4px);
+}
+.login-box .login-img-box {
+  width: 55%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("../assets/images/login-back.png");
+  background-size: cover;
+  background-position: 0px -50px;
+}
+.login-box .login-img-box .fa-user-circle {
+  font-size: 50px;
+}
+.login-box .login-img-box:hover .fa-user-circle {
+  animation: layerize cubic-bezier(0.4, 0, 0.2, 1) 900ms 150ms infinite
+    alternate;
+}
+@keyframes layerize {
+  0% {
+    opacity: 0.5;
+    transform: translate(0, 0);
+    text-shadow: 0 0 transparent, 0em 0em rgba(121, 121, 121, 0.6),
+      0em 0em rgba(121, 121, 121, 0.5), 0em 0em rgba(121, 121, 121, 0.4),
+      0em 0em rgba(121, 121, 121, 0.3);
+  }
+  100% {
+    opacity: 0.8;
+    transform: translate(0.06666em, 0.06666em);
+    text-shadow: 0 0 transparent, 0.03333em 0.03333em rgba(121, 121, 121, 0.4),
+      0.06666em 0.06666em rgba(121, 121, 121, 0.4),
+      0.09999em 0.09999em rgba(121, 121, 121, 0.2),
+      0.1em 0.1em rgba(121, 121, 121, 0.1);
+  }
+}
