@@ -94,6 +94,9 @@ class App extends React.Component {
   }
 
   _loginHandler = () => {
+    const loginBtn = document.getElementById("loginBtn-js");
+    console.dir(loginBtn);
+
     this.setState({
       loginStatus: true
     });

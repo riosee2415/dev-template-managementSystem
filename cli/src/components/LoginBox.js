@@ -9,7 +9,7 @@ class LoginBox extends React.Component {
     return (
       <>
         <div className="login-box">
-          <form id="loginFrm-js" action="" method="post">
+          <form id="loginFrm-js" action="/api/loginProcess" method="post">
             <input type="text" />
             <input type="text" />
 
