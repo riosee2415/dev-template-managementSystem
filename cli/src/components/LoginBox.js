@@ -14,12 +14,17 @@ class LoginBox extends React.Component {
             <IconComponent iconName="fas fa-user-circle" />
           </div>
           <form id="loginFrm-js" action="/api/loginProcess" method="post">
-            <h3>Login</h3>
+            <h3>
+              <p>
+                <span>4</span>LEAF
+              </p>
+              MANAGEMENT SYSTEM
+            </h3>
             <div className="id">
               <input type="text" placeholder="ID" />
             </div>
             <div className="pass">
-              <input type="text" placeholder="PASSWORD" />
+              <input type="password" placeholder="PASSWORD" />
             </div>
 
             <div className="login-btn">

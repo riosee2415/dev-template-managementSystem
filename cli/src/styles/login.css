@@ -19,9 +19,18 @@
   box-shadow: 0px 4px 14px rgb(213, 213, 213);
 }
 .login-box form h3 {
-  font-size: 24px;
-  font-weight: 600;
+  font-size: 22px;
   margin-bottom: 50px;
+  text-align: center;
+}
+.login-box form h3 p {
+  font-weight: 600;
+  margin: 15px;
+  font-size: 30px;
+}
+.login-box form h3 p span {
+  color: #ee0979;
+  font-size: 32px;
 }
 .login-box form input,
 .login-box form button {

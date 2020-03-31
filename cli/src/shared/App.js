@@ -40,7 +40,9 @@ class App extends React.Component {
 
     return (
       <div className="sys">
-        <div className="sys__header"></div>
+        <div className="sys__header">
+          <div className="hd-logo"></div>
+        </div>
 
         <div className="sys__main">
           {loginStatus ? (
