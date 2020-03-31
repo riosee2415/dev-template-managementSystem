@@ -21,6 +21,7 @@ import {
   MM0603,
   MM0701
 } from "../pages";
+import LoginBox from "../components/LoginBox";
 import routes from "../routes";
 import Menu from "../components/Menu";
 import "../styles/styles.css";
@@ -83,11 +84,7 @@ class App extends React.Component {
               </div>
             </>
           ) : (
-            <input
-              type="button"
-              value="LOGIN"
-              onClick={() => this._loginHandler()}
-            />
+            <LoginBox action={this._loginHandler} />
           )}
         </div>
 
