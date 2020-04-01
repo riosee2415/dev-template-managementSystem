@@ -1,0 +1,36 @@
+@charset "utf-8";
+
+.blue {
+  color: #3f5efd;
+}
+.yellow {
+  color: #ffe259;
+}
+.violet {
+  color: #b7a4ed;
+}
+.pink {
+  color: #ee0979;
+}
+.dartGray {
+  color: #353535;
+}
+.gradient {
+  background-color: linear-gradient(#ffe259,  #ffa751);
+}
+.btn {
+  font-size: 14px;
+  height: 30px;
+}
+.btn-xs {
+  width: 50px;
+}
+.btn-s {
+  width: 65px;
+}
+.btn-m {
+  width: 80px;
+}
+.btn-l {
+  width: 95px;
+}

@@ -25,13 +25,14 @@ import LoginBox from "../components/LoginBox";
 import routes from "../routes";
 import Menu from "../components/Menu";
 import "../styles/styles.css";
+import IconComponent from "../components/IconComponent";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      loginStatus: false
+      loginStatus: true
     };
   }
 
@@ -51,6 +52,19 @@ class App extends React.Component {
         <div className="sys__header">
           <div className="hd-logo-box">
             <div className="hd-logo"></div>
+          </div>
+          <div className="hd-search">
+            <span>
+              <input type="text" />
+            </span>
+            <span>
+              <button type="button">
+                <IconComponent iconName="fas fa-search" />
+              </button>
+            </span>
+            <div className="hd-logout">
+              <IconComponent iconName="fas fa-sign-out-alt" /> logout
+            </div>
           </div>
         </div>
 
