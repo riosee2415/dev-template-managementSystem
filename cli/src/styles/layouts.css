@@ -1,3 +1,4 @@
+/* total edge area start */
 .sys {
   display: flex;
   flex-direction: column;
@@ -78,6 +79,66 @@
 
   align-self: flex-end;
 }
+/* total edge area finish */
+
+/* content layout start */
+.mm {
+  display: flex;
+  flex-direction: column;
+
+  margin-left: 20px;
+}
+
+.mm .mm__header {
+  display: flex;
+  flex-direction: row;
+}
+
+.mm .mh .mh__content {
+  width: 100%;
+  height: 40px;
+  margin-right: 20px;
+  margin-bottom: 10px;
+}
+
+.mm .mm__content {
+  display: flex;
+  flex-direction: row;
+}
+
+.mm .mm__content .mc__col1 {
+  width: 300px;
+  min-width: 300px;
+  height: 72vh;
+}
+
+.mm .mm__content .mc__col2 {
+  width: 100%;
+  min-width: 500px;
+  margin-left: 10px;
+  margin-right: 20px;
+  height: 72vh;
+}
+
+.mc .mc__col1 .mc__col1__title {
+  width: 100%;
+  height: 30px;
+  margin-bottom: 5px;
+}
+
+.mc .mc__col1 .mc__col1__desc {
+  width: 100%;
+}
+
+.mc .mc__col2 .mc__col2__title {
+  width: 100%;
+  height: 30px;
+  margin-bottom: 5px;
+}
+
+.mc .mc__col2 .mc__col2__desc {
+  width: 100%;
+}
 
 .menu_list {
   display: flex;
@@ -86,6 +147,8 @@
   align-items: center;
   justify-content: center;
 }
+
+/* content layout finish */
 
 .profile {
   display: flex;
