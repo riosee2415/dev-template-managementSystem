@@ -35,6 +35,14 @@ class App extends React.Component {
     };
   }
 
+  componentDidMount() {
+    const validatorData = sessionStorage.getItem("login_id");
+
+    if (validatorData != null) {
+      this._aleadyLogined();
+    }
+  }
+
   render() {
     const { loginStatus } = this.state;
 
@@ -97,6 +105,12 @@ class App extends React.Component {
     );
   }
 
+  _aleadyLogined = () => {
+    this.setState({
+      loginStatus: true
+    });
+  };
+
   _loginHandler = async () => {
     const inputId = document.getElementById("inputId").value;
     const inputPass = document.getElementById("inputPass").value;
@@ -115,6 +129,11 @@ class App extends React.Component {
     this.setState({
       loginStatus: data.loginResult
     });
+
+    sessionStorage.setItem("login_id", data.empId);
+    sessionStorage.setItem("login_name", data.name);
+    sessionStorage.setItem("login_rank", data.rank);
+    sessionStorage.setItem("login_avatar", data.avatar);
   };
 }
 
