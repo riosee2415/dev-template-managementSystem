@@ -21,13 +21,20 @@
   height: 2px;
   border-bottom: 2px solid rgb(53, 53, 53);
 }
+.sys .sys__header .hd-logo-box {
+  width: 180px;
+  background-color: rgb(90, 90, 90);
+  box-shadow: 2px 0px 4px #999;
+  height: 58px;
+  box-sizing: border-box;
+  padding-top: 12px;
+}
 .sys .sys__header .hd-logo {
   display: block;
   background-image: url("../assets/images/4LEAF_LOGO_W.png");
   width: 120px;
   height: 35px;
-  margin-left: 20px;
-  margin-top: 12px;
+  margin-left: 30px;
   background-size: cover;
 }
 
@@ -43,6 +50,7 @@
 
 .sys .sys__main .sys__menu {
   width: 180px;
+  min-width: 180px;
   height: 100%;
   box-shadow: 2px 4px 5px #f1f1f1;
   display: flex;
