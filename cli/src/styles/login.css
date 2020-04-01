@@ -7,8 +7,9 @@
   flex-direction: row;
 }
 .login-box form {
+  min-width: 450px;
   width: 45%;
-  background-color: #f8f8f8;
+  background-color: #f8f8f8cb;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -65,13 +66,13 @@
   transform: translateY(-4px);
 }
 .login-box .login-img-box {
+  min-width: 450px;
   width: 55%;
   display: flex;
   justify-content: center;
   align-items: center;
   background-image: url("../assets/images/login-back.png");
   background-size: cover;
-  background-position: 0px -50px;
 }
 .login-box .login-img-box .fa-user-circle {
   font-size: 50px;
