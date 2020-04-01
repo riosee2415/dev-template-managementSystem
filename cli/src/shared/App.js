@@ -53,19 +53,22 @@ class App extends React.Component {
           <div className="hd-logo-box">
             <div className="hd-logo"></div>
           </div>
-          <div className="hd-search">
-            <span>
-              <input type="text" />
-            </span>
-            <span>
-              <button type="button">
-                <IconComponent iconName="fas fa-search" />
-              </button>
-            </span>
-            <div className="hd-logout">
-              <IconComponent iconName="fas fa-sign-out-alt" /> logout
+
+          {loginStatus ? (
+            <div className="hd-search">
+              <span>
+                <input type="text" />
+              </span>
+              <span>
+                <button type="button">
+                  <IconComponent iconName="fas fa-search" />
+                </button>
+              </span>
+              <div className="hd-logout" onClick={this._logoutHandler}>
+                <IconComponent iconName="fas fa-sign-out-alt" /> logout
+              </div>
             </div>
-          </div>
+          ) : null}
         </div>
 
         <div className="sys__main">
@@ -147,6 +150,14 @@ class App extends React.Component {
 
     this.setState({
       loginStatus: data.loginResult
+    });
+  };
+
+  _logoutHandler = () => {
+    sessionStorage.clear();
+
+    this.setState({
+      loginStatus: false
     });
   };
 }
