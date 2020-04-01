@@ -32,7 +32,7 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      loginStatus: false
+      loginStatus: true
     };
   }
 
