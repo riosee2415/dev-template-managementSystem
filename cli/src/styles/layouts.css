@@ -8,7 +8,7 @@
 
 .sys .sys__header {
   width: 100%;
-  height: 55px;
+  height: 58px;
   background-color: rgb(53, 53, 53);
   margin-bottom: 20px;
   position: relative;
@@ -24,10 +24,10 @@
 .sys .sys__header .hd-logo {
   display: block;
   background-image: url("../assets/images/4LEAF_LOGO_W.png");
-  width: 150px;
-  height: 40px;
+  width: 120px;
+  height: 35px;
   margin-left: 20px;
-  margin-top: 8px;
+  margin-top: 12px;
   background-size: cover;
 }
 
@@ -42,11 +42,13 @@
 }
 
 .sys .sys__main .sys__menu {
-  width: 170px;
+  width: 180px;
+  height: 100%;
+  box-shadow: 2px 4px 5px #f1f1f1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .sys .sys__main .sys__content {
