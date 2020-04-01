@@ -32,7 +32,7 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      loginStatus: true
+      loginStatus: false
     };
   }
 
@@ -140,14 +140,14 @@ class App extends React.Component {
 
     const data = await response.json();
 
+    await sessionStorage.setItem("login_id", data.empId);
+    await sessionStorage.setItem("login_name", data.name);
+    await sessionStorage.setItem("login_rank", data.rank);
+    await sessionStorage.setItem("login_avatar", data.avatar);
+
     this.setState({
       loginStatus: data.loginResult
     });
-
-    sessionStorage.setItem("login_id", data.empId);
-    sessionStorage.setItem("login_name", data.name);
-    sessionStorage.setItem("login_rank", data.rank);
-    sessionStorage.setItem("login_avatar", data.avatar);
   };
 }
 

@@ -10,15 +10,13 @@ class ProfileBox extends React.Component {
   }
 
   componentDidMount() {
-    this._callProfile().then(res => {
-      this.setState({
-        currentEmp: {
-          login_id: sessionStorage.getItem("login_id"),
-          login_name: sessionStorage.getItem("login_name"),
-          login_rank: sessionStorage.getItem("login_rank"),
-          login_avatar: sessionStorage.getItem("login_avatar")
-        }
-      });
+    this.setState({
+      currentEmp: {
+        login_id: sessionStorage.getItem("login_id"),
+        login_name: sessionStorage.getItem("login_name"),
+        login_rank: sessionStorage.getItem("login_rank"),
+        login_avatar: sessionStorage.getItem("login_avatar")
+      }
     });
   }
 
