@@ -32,8 +32,16 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      loginStatus: true
+      loginStatus: false
     };
+  }
+
+  componentDidMount() {
+    const validatorData = sessionStorage.getItem("login_id");
+
+    if (validatorData != null) {
+      this._aleadyLogined();
+    }
   }
 
   render() {
@@ -111,6 +119,12 @@ class App extends React.Component {
     );
   }
 
+  _aleadyLogined = () => {
+    this.setState({
+      loginStatus: true
+    });
+  };
+
   _loginHandler = async () => {
     const inputId = document.getElementById("inputId").value;
     const inputPass = document.getElementById("inputPass").value;
@@ -125,6 +139,11 @@ class App extends React.Component {
     });
 
     const data = await response.json();
+
+    await sessionStorage.setItem("login_id", data.empId);
+    await sessionStorage.setItem("login_name", data.name);
+    await sessionStorage.setItem("login_rank", data.rank);
+    await sessionStorage.setItem("login_avatar", data.avatar);
 
     this.setState({
       loginStatus: data.loginResult
