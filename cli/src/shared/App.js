@@ -25,6 +25,7 @@ import LoginBox from "../components/LoginBox";
 import routes from "../routes";
 import Menu from "../components/Menu";
 import "../styles/styles.css";
+import IconComponent from "../components/IconComponent";
 
 class App extends React.Component {
   constructor(props) {
@@ -43,6 +44,12 @@ class App extends React.Component {
         <div className="sys__header">
           <div className="hd-logo-box">
             <div className="hd-logo"></div>
+            <div className="hd-search">
+              <input type="text" />
+              <button type="button">
+                <IconComponent iconName="fas fa-search" />
+              </button>
+            </div>
           </div>
         </div>
 
