@@ -52,6 +52,7 @@
   width: 100%;
   flex-direction: row;
   height: 80vh;
+  min-height: 790px;
 
   align-items: flex-start;
   justify-content: flex-start;
