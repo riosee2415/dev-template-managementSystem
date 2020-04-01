@@ -49,3 +49,11 @@
 .btn-l {
   width: 95px;
 }
+.mainTitle {
+  font-size: 20px;
+  font-weight: bold;
+}
+.subTitle {
+  font-size: 18px;
+  font-weight: bold;
+}

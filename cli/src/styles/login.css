@@ -1,6 +1,7 @@
 .login-box {
   width: 1200px;
   height: 70vh;
+  min-height: 700px;
   margin: 30px auto;
   box-sizing: border-box;
   display: flex;
