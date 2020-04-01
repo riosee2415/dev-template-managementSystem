@@ -44,11 +44,18 @@ class App extends React.Component {
         <div className="sys__header">
           <div className="hd-logo-box">
             <div className="hd-logo"></div>
-            <div className="hd-search">
+          </div>
+          <div className="hd-search">
+            <span>
               <input type="text" />
+            </span>
+            <span>
               <button type="button">
                 <IconComponent iconName="fas fa-search" />
               </button>
+            </span>
+            <div className="hd-logout">
+              <IconComponent iconName="fas fa-sign-out-alt" /> logout
             </div>
           </div>
         </div>

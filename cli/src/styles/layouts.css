@@ -12,6 +12,9 @@
   background-color: rgb(53, 53, 53);
   margin-bottom: 20px;
   position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 .sys .sys__header:after {
   content: "";
@@ -28,6 +31,11 @@
   height: 58px;
   box-sizing: border-box;
   padding-top: 12px;
+}
+.sys .sys__header .hd-search,
+.sys .sys__header .hd-search .hd-logout {
+  display: flex;
+  flex-direction: row;
 }
 .sys .sys__header .hd-logo {
   display: block;
