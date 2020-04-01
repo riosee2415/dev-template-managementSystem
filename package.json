@@ -16,6 +16,7 @@
     "express": "^4.16.4",
     "express-router": "^0.0.1",
     "fg-loadcss": "^2.1.0",
+    "firebase": "^7.13.1",
     "http-proxy-middleware": "^1.0.3",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.2",

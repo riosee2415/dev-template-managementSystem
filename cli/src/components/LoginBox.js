@@ -21,10 +21,15 @@ class LoginBox extends React.Component {
               MANAGEMENT SYSTEM
             </h3>
             <div className="id">
-              <input type="text" placeholder="ID" />
+              <input type="text" id="inputId" name="inputId" placeholder="ID" />
             </div>
             <div className="pass">
-              <input type="password" placeholder="PASSWORD" />
+              <input
+                type="password"
+                id="inputPass"
+                name="inputPass"
+                placeholder="PASSWORD"
+              />
             </div>
 
             <div className="login-btn">

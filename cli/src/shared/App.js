@@ -97,13 +97,14 @@ class App extends React.Component {
 
   _loginHandler = async () => {
     const loginFrm = document.getElementById("loginFrm-js");
+    loginFrm.submit();
 
-    const response = await fetch("/api/loginProcess");
-    const body = await response.json();
+    // const response = await fetch("/api/loginProcess");
+    // const body = await response.json();
 
-    this.setState({
-      loginStatus: body.loginFlag
-    });
+    // this.setState({
+    //   loginStatus: body.loginFlag
+    // });
   };
 }
 

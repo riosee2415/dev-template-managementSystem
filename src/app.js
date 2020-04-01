@@ -12,11 +12,17 @@ app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get(routes.loginProcess, (req, res) => {
-  const loginFlag = apiController.loginProcess();
+app.post(routes.loginProcess, (req, res) => {
+  const {
+    body: { inputId, inputPass }
+  } = req;
+
+  const sendData = apiController.loginProcess(inputId, inputPass);
+
+  console.log(sendData);
 
   res.send({
-    loginFlag
+    sendData
   });
 });
 
