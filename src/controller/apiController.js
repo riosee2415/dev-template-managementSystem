@@ -27,7 +27,6 @@ const loginProcess = async (id, pass) => {
   } catch (e) {
     console.log(e);
   } finally {
-    console.log(sendData);
   }
 
   return sendData;
