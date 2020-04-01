@@ -12,18 +12,13 @@ app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.post(routes.loginProcess, (req, res) => {
-  const {
-    body: { inputId, inputPass }
-  } = req;
+app.post(routes.loginProcess, async (req, res) => {
+  const sendData = await apiController.loginProcess(
+    req.body.inputId,
+    req.body.inputPass
+  );
 
-  const sendData = apiController.loginProcess(inputId, inputPass);
-
-  console.log(sendData);
-
-  res.send({
-    sendData
-  });
+  return res.json(sendData);
 });
 
 app.use("/api/profileInfo", (req, res) => {

@@ -9,9 +9,11 @@ const loginProcess = async (id, pass) => {
 
   try {
     fsRef = await firestore.collection("employee");
-    queryRef = await fsRef.where("empId", "==", id);
+    queryRef = await fsRef
+      .where("empId", "==", id)
+      .where("password", "==", pass);
 
-    queryRef.get().then(res => {
+    await queryRef.get().then(res => {
       res.forEach(doc => {
         sendData = {
           empId: doc.data().empId,

@@ -96,15 +96,23 @@ class App extends React.Component {
   }
 
   _loginHandler = async () => {
-    const loginFrm = document.getElementById("loginFrm-js");
-    loginFrm.submit();
+    const inputId = document.getElementById("inputId").value;
+    const inputPass = document.getElementById("inputPass").value;
 
-    // const response = await fetch("/api/loginProcess");
-    // const body = await response.json();
+    const response = await fetch("/api/loginProcess", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: JSON.stringify({ inputId, inputPass })
+    });
 
-    // this.setState({
-    //   loginStatus: body.loginFlag
-    // });
+    const data = await response.json();
+
+    this.setState({
+      loginStatus: data.loginResult
+    });
   };
 }
 
