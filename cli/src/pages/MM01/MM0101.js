@@ -99,7 +99,12 @@ class MM0101 extends React.Component {
                   </span>
                 </div>
                 <div className="mm0101__left__col2">
-                  <button className="btn btn-m bg-gradient">출근</button>
+                  <button
+                    className="btn btn-m bg-gradient"
+                    onClick={this._startWorkHandler}
+                  >
+                    출근
+                  </button>
                   <button className="btn btn-m bg-gridient2">퇴근</button>
                 </div>
                 <div className="mm0101__left__col3">
@@ -124,6 +129,37 @@ class MM0101 extends React.Component {
       </div>
     );
   }
+
+  _startWorkHandler = async () => {
+    const {
+      currentHour,
+      currentMin,
+      currentSec,
+      currentYear,
+      currentMonth,
+      currentDate,
+      currentDay
+    } = this.state;
+
+    const inputDate = currentYear + "/" + currentMonth + "/" + currentDate;
+    const name = sessionStorage.getItem("login_name");
+    const inputStartTime = currentHour + "/" + currentMin + "/" + currentSec;
+
+    const inputData = {
+      inputDate,
+      name,
+      inputStartTime
+    };
+
+    const response = await fetch("/api/saveWorkTimeToStart", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: JSON.stringify({ inputData })
+    });
+  };
 
   _playCurrentTime = () => {
     let date = new Date();
