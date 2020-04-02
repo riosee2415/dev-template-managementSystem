@@ -1,0 +1,33 @@
+.lb {
+  box-shadow: 0 2px 16px rgba(105, 105, 105, 0.2) inset;
+  border-radius: 20px;
+  box-sizing: border-box;
+}
+
+.lb__table {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.lb__table thead th {
+  height: 35px;
+  padding: 10px;
+  line-height: 35px;
+  font-weight: 600;
+}
+
+.lb__table tbody {
+  display: block;
+  height: 500px;
+  overflow: auto;
+}
+
+.lb__table tbody tr {
+  height: 30px;
+  padding: 10px;
+  line-height: 30px;
+  text-align: center;
+}
+.lb__table tbody tr:nth-child(2n + 1) {
+  background-color: #b7a4ed71;
+}

@@ -15,11 +15,16 @@ class LeftListBox extends React.Component {
         <div className="left-list__box lb">
           <table className="lb__table">
             <thead>
-              <th>{this.props.title_01}</th>
-              <th>{this.props.title_02}</th>
-              <th>{this.props.title_03}</th>
+              <tr>
+                <th>{this.props.title_01}</th>
+                <th>{this.props.title_02}</th>
+                <th>{this.props.title_03}</th>
+              </tr>
             </thead>
-            <tbody id="lb-data-js"></tbody>
+            <tbody
+              className="lb__table-data txt-darkGray"
+              id="lb-data-js"
+            ></tbody>
           </table>
         </div>
       </>
