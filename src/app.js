@@ -21,6 +21,14 @@ app.post(routes.loginProcess, async (req, res) => {
   return res.json(sendData);
 });
 
+app.post(routes.callTable, async (req, res) => {
+  const collectionData = req.body.table;
+
+  const sendData = await apiController.callCollection(collectionData);
+
+  return res.json(sendData);
+});
+
 app.listen(PORT, () => {
   console.log(`✅ Server Start On ${PORT}`);
 });

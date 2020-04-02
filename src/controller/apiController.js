@@ -9,6 +9,7 @@ const loginProcess = async (id, pass) => {
 
   try {
     fsRef = await firestore.collection("employee");
+
     queryRef = await fsRef
       .where("empId", "==", id)
       .where("password", "==", pass);
@@ -32,8 +33,33 @@ const loginProcess = async (id, pass) => {
   return sendData;
 };
 
+const callCollection = async collectionData => {
+  let fsRef;
+  let queryRef;
+  let sendData = [];
+
+  try {
+    fsRef = await firestore.collection(collectionData);
+
+    queryRef = await fsRef.get().then(res => {
+      res.forEach(doc => {
+        sendData.push({
+          name: doc.data().name,
+          rank: doc.data().rank
+        });
+      });
+    });
+  } catch (e) {
+    console.log(e);
+  } finally {
+  }
+
+  return sendData;
+};
+
 const apiController = {
-  loginProcess
+  loginProcess,
+  callCollection
 };
 
 module.exports = apiController;

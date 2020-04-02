@@ -12,7 +12,9 @@ class MM0101 extends React.Component {
       currentYear: 0,
       currentMonth: 0,
       currentDate: 0,
-      currentDay: 0
+      currentDay: 0,
+      workStart: "",
+      workEnd: ""
     };
   }
 
@@ -30,7 +32,9 @@ class MM0101 extends React.Component {
       currentDay,
       currentYear,
       currentMonth,
-      currentDate
+      currentDate,
+      workStart,
+      workEnd
     } = this.state;
 
     return (
@@ -98,7 +102,14 @@ class MM0101 extends React.Component {
                   <button className="btn btn-m bg-gradient">출근</button>
                   <button className="btn btn-m bg-gridient2">퇴근</button>
                 </div>
-                <div className="mm0101__left__col3">데이터</div>
+                <div className="mm0101__left__col3">
+                  <div className="mm0101__left__col3__row1">
+                    <span>출근시간</span> <span>{workStart}</span>
+                  </div>
+                  <div className="mm0101__left__col3__row2">
+                    <span>퇴근시간</span> <span>{workEnd}</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
