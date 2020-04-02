@@ -126,7 +126,7 @@ class App extends React.Component {
             target="_blank"
             className="ft-logo"
           ></a>
-          <div className="ft-copyright">
+          <div className="ft-copyright darkgray">
             <p>[35270] 대전 서구 계룡로394번길 14-14</p>
             <p>COPYRIGHT ©2020 ALL RIGHTS RESERVED 4LEAF SOFTWARE</p>
           </div>
@@ -148,6 +148,10 @@ class App extends React.Component {
     const inputId = document.getElementById("inputId").value;
     const inputPass = document.getElementById("inputPass").value;
 
+    if (inputId.length < 1 || inputPass.length < 1) {
+      return;
+    }
+
     const response = await fetch("/api/loginProcess", {
       method: "POST",
       headers: {
@@ -163,6 +167,12 @@ class App extends React.Component {
     await sessionStorage.setItem("login_name", data.name);
     await sessionStorage.setItem("login_rank", data.rank);
     await sessionStorage.setItem("login_avatar", data.avatar);
+
+    if (sessionStorage.getItem("login_id") == "undefined") {
+      sessionStorage.clear();
+
+      return;
+    }
 
     this.setState({
       loginStatus: data.loginResult
