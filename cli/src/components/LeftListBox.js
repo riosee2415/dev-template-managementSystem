@@ -20,7 +20,7 @@ class LeftListBox extends React.Component {
   };
 
   render() {
-    const { dataList } = this.state;
+    const { pageCode, dataList } = this.state;
 
     return (
       <>
@@ -28,7 +28,7 @@ class LeftListBox extends React.Component {
           <div className="lb__head__box">
             <table className="lb__table">
               <colgroup>
-                <col width="80px" />
+                <col width="60px" />
                 <col width="*" />
                 <col width="100px" />
               </colgroup>
@@ -44,19 +44,26 @@ class LeftListBox extends React.Component {
           <div className="lb__body__box">
             <table className="lb__table">
               <colgroup>
-                <col width="80px" />
+                <col width="60px" />
                 <col width="*" />
                 <col width="100px" />
               </colgroup>
               <tbody className="txt-darkGray">
                 {dataList.map((data, idx) => {
-                  return (
-                    <tr>
-                      <td>{idx + 1}</td>
-                      <td>{data.name}</td>
-                      <td>{data.rank}</td>
-                    </tr>
-                  );
+                  if (pageCode == "MM0103") {
+                    return (
+                      <tr
+                        key={data.docId}
+                        onClick={() => this._dataClickHandler(data.empId)}
+                      >
+                        <td>{idx + 1}</td>
+                        <td>{data.name}</td>
+                        <td>{data.rank}</td>
+                      </tr>
+                    );
+                  } else {
+                    return null;
+                  }
                 })}
               </tbody>
             </table>
@@ -79,6 +86,10 @@ class LeftListBox extends React.Component {
     });
 
     return await response.json();
+  };
+
+  _dataClickHandler = empId => {
+    alert(empId);
   };
 }
 

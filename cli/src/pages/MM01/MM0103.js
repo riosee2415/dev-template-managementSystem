@@ -8,7 +8,8 @@ class MM0103 extends React.Component {
 
     this.state = {
       pageCode: "MM0103",
-      selectCollection: "employee"
+      selectCollection: "employee",
+      empInfo: null
     };
   }
 
@@ -47,7 +48,18 @@ class MM0103 extends React.Component {
                 <IconComponent iconName="fas fa-play" />
                 <span className="subTitle">직원 정보</span>
               </div>
-              <div className="mc__col2__desc">desc</div>
+              <div className="mc__col2__desc">
+                <div className="list__style__01">
+                  <div className="list__row">
+                    <div className="list__col">
+                      <span>프로필</span>
+                    </div>
+                    <div className="list__col">
+                      <span></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

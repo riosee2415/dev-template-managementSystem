@@ -1,7 +1,7 @@
 [Firestore Employee Model]
  - addr1        주소        [String]
  - addr2        상세주소    [String]
- - avatar       프로필사진  [String]
+ - avatar       프로필      [String]
  - birthday     생년월일    [String]
  - empId        아이디      [String]
  - hire         고용일      [String]

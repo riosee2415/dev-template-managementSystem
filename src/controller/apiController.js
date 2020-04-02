@@ -45,6 +45,8 @@ const callCollection = async (pageCode, collection) => {
       queryRef = await fsRef.get().then(res => {
         res.forEach(doc => {
           sendData.push({
+            docId: doc.id,
+            empId: doc.data().empId,
             name: doc.data().name,
             rank: doc.data().rank
           });
