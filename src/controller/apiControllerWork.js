@@ -1,13 +1,5 @@
 const firestore = require("../firebase");
 
-/** [Firestore WorkRecord Sample]
- *  date        [String]
- *  endTiem     [String]
- *  holidayType [String]
- *  id          [String]
- *  isHoliday   [Boolean]
- *  startTime   [String]
- */
 const saveWorkTimeToStart = async data => {
   let fsRef;
   let queryRef;
@@ -16,8 +8,6 @@ const saveWorkTimeToStart = async data => {
     id: data.id,
     startTime: data.inputStartTime
   };
-
-  console.log(sendData);
 
   try {
     fsRef = await firestore.collection("workRecord");
@@ -31,6 +21,36 @@ const saveWorkTimeToStart = async data => {
   return null;
 };
 
-const apiControllerWork = { saveWorkTimeToStart };
+const getWorkTime = async inputData => {
+  let fsRef;
+  let queryRef;
+  let sendData = {};
+
+  try {
+    fsRef = await firestore.collection("workRecord");
+
+    queryRef = await fsRef
+      .where("id", "==", inputData.id)
+      .where("date", "==", inputData.date)
+      .get()
+      .then(res => {
+        res.forEach(doc => {
+          sendData = {
+            startTime: doc.data().startTime,
+            endTime: doc.data().endTime
+          };
+        });
+      });
+  } catch (e) {
+    console.log(e);
+  }
+
+  return sendData;
+};
+
+const apiControllerWork = {
+  saveWorkTimeToStart,
+  getWorkTime
+};
 
 module.exports = apiControllerWork;

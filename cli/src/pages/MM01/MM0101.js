@@ -1,5 +1,6 @@
 import React from "react";
 import IconComponent from "../../components/IconComponent";
+import DescriptionAlerts from "../../components/DescriptionAlerts";
 
 class MM0101 extends React.Component {
   constructor(props) {
@@ -14,7 +15,8 @@ class MM0101 extends React.Component {
       currentDate: 0,
       currentDay: 0,
       workStart: "",
-      workEnd: ""
+      workEnd: "",
+      screenReload: false
     };
   }
 
@@ -22,6 +24,8 @@ class MM0101 extends React.Component {
     setInterval(() => {
       setInterval(this._playCurrentTime(), 1000);
     }, 1000);
+
+    this._getworkStart();
   }
 
   render() {
@@ -101,7 +105,7 @@ class MM0101 extends React.Component {
                 <div className="mm0101__left__col2">
                   <button
                     className="btn btn-m bg-gradient"
-                    onClick={this._startWorkHandler}
+                    onClick={() => this._startWorkHandler()}
                   >
                     출근
                   </button>
@@ -109,7 +113,8 @@ class MM0101 extends React.Component {
                 </div>
                 <div className="mm0101__left__col3">
                   <div className="mm0101__left__col3__row1">
-                    <span>출근시간</span> <span>{workStart}</span>
+                    <span>출근시간</span>
+                    <span id="workStart-js">{workStart}</span>
                   </div>
                   <div className="mm0101__left__col3__row2">
                     <span>퇴근시간</span> <span>{workEnd}</span>
@@ -130,14 +135,45 @@ class MM0101 extends React.Component {
     );
   }
 
+  _getworkStart = async () => {
+    let date = new Date();
+    const inputData = {
+      id: sessionStorage.getItem("login_id"),
+      date:
+        date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate()
+    };
+
+    const response = await fetch("/api/getworkStart", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: JSON.stringify({ inputData })
+    });
+    const data = await response.json();
+
+    this.setState({
+      workStart: data.startTime,
+      workEnd: data.endTime
+    });
+  };
+
   _startWorkHandler = async () => {
+    const validation1 = document.getElementById("workStart-js");
+
+    if (validation1.innerText.length > 0) {
+      alert("출근은 하루에 한번만 가능합니다.");
+    }
+
     const {
       currentHour,
       currentMin,
       currentSec,
       currentYear,
       currentMonth,
-      currentDate
+      currentDate,
+      screenReload
     } = this.state;
 
     const inputDate = currentYear + "/" + currentMonth + "/" + currentDate;
@@ -158,6 +194,8 @@ class MM0101 extends React.Component {
       },
       body: JSON.stringify({ inputData })
     });
+
+    console.log(screenReload);
   };
 
   _playCurrentTime = () => {
