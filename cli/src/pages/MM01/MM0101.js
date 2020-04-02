@@ -83,7 +83,7 @@ class MM0101 extends React.Component {
           <div className="mc__col1">
             <div className="mc__col1__title">
               <IconComponent iconName="fas fa-clock" />
-              <span classsName="subTitle">출/퇴근 등록</span>
+              <span className="subTitle">출/퇴근 등록</span>
             </div>
             <div className="mc__col1__desc">
               <div className="mm0101__left">
@@ -121,7 +121,7 @@ class MM0101 extends React.Component {
           <div className="mc__col2">
             <div className="mc__col2__title">
               <IconComponent iconName="fas fa-list-ul" />
-              <span classsName="subTitle">출/퇴근 내역</span>
+              <span className="subTitle">출/퇴근 내역</span>
             </div>
             <div className="mc__col2__desc">desc</div>
           </div>

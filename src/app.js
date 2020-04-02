@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const routes = require("./routes");
 const apiController = require("./controller/apiController");
+const apiControllerWork = require("./controller/apiControllerWork");
 
 const PORT = 5000;
 
@@ -28,6 +29,12 @@ app.post(routes.callCollection, async (req, res) => {
   const sendData = await apiController.callCollection(pageCode, collection);
 
   return res.json(sendData);
+});
+
+app.post(routes.saveWorkTimeToStart, async (req, res) => {
+  const data = req.body.inputData;
+
+  const sendData = await apiControllerWork.saveWorkTimeToStart(data);
 });
 
 app.listen(PORT, () => {
