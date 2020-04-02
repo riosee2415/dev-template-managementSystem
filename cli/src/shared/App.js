@@ -126,7 +126,7 @@ class App extends React.Component {
             target="_blank"
             className="ft-logo"
           ></a>
-          <div className="ft-copyright txt-darkGray">
+          <div className="ft-copyright">
             <p>[35270] 대전 서구 계룡로394번길 14-14</p>
             <p>COPYRIGHT ©2020 ALL RIGHTS RESERVED 4LEAF SOFTWARE</p>
           </div>
