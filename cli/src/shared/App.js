@@ -55,17 +55,20 @@ class App extends React.Component {
           </div>
 
           {loginStatus ? (
-            <div className="hd-search">
-              <span>
-                <input type="text" />
-              </span>
-              <span>
-                <button type="button">
-                  <IconComponent iconName="fas fa-search" />
-                </button>
-              </span>
+            <div className="hd-left">
+              <div className="hd-search">
+                <span className="hd-search__txt" id="search__txt-js">
+                  <input type="text" />
+                </span>
+                <span className="hd-search__btn">
+                  <button type="button" onClick={this._searchClickHandler}>
+                    <IconComponent iconName="fas fa-search" />
+                  </button>
+                </span>
+              </div>
               <div className="hd-logout" onClick={this._logoutHandler}>
-                <IconComponent iconName="fas fa-sign-out-alt" /> logout
+                <IconComponent iconName="fas fa-sign-out-alt" />
+                <span className="hd-logout__txt">logout</span>
               </div>
             </div>
           ) : null}
@@ -159,6 +162,12 @@ class App extends React.Component {
     this.setState({
       loginStatus: false
     });
+  };
+
+  _searchClickHandler = () => {
+    const txtBox = document.getElementById("search__txt-js");
+
+    txtBox.classList.toggle("fadeIn");
   };
 }
 

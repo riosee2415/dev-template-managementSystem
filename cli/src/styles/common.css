@@ -12,30 +12,45 @@
 .txt-pink {
   color: #ee0979;
 }
+.txt-orange {
+  color: #ffa751;
+}
 .txt-darkGray {
   color: #353535;
 }
 .bg-blue {
   background-color: #3f5efd;
+  color: #fff;
 }
 .bg-yellow {
   background-color: #ffe259;
 }
+.bg-orange {
+  background-color: #ffa751;
+  color: #fff;
+}
 .bg-violet {
   background-color: #b7a4ed;
+  color: #fff;
 }
 .bg-pink {
   background-color: #ee0979;
+  color: #fff;
 }
 .bg-darkGray {
   background-color: #353535;
+  color: #fff;
 }
 .gradient {
   background-color: linear-gradient(#ffe259,  #ffa751);
 }
 .btn {
+  border: none;
   font-size: 14px;
   height: 30px;
+  border-radius: 6px;
+  box-shadow: 2px 2px 2px #bfbfbf;
+  cursor: pointer;
 }
 .btn-xs {
   width: 50px;

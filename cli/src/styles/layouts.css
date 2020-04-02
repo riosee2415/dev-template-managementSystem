@@ -33,11 +33,73 @@
   box-sizing: border-box;
   padding-top: 12px;
 }
-.sys .sys__header .hd-search,
-.sys .sys__header .hd-search .hd-logout {
+.sys .sys__header .hd-left {
   display: flex;
   flex-direction: row;
 }
+.sys .sys__header .hd-left .hd-logout {
+  width: 45px;
+  height: 45px;
+  border-radius: 50px;
+  padding: 4px;
+  box-sizing: border-box;
+  background-color: #7d7d7d;
+  margin: 6px 10px;
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+.sys .sys__header .hd-left .hd-logout:hover {
+  border: 1px solid #e7e7e7;
+}
+.sys .sys__header .hd-left .hd-logout .fas {
+  font-size: 18px;
+}
+.sys .sys__header .hd-left .hd-search {
+  width: 210px;
+  height: 60px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 20px;
+  overflow: hidden;
+}
+.sys .sys__header .hd-left .hd-search .hd-search__txt,
+.sys .sys__header .hd-left .hd-search .hd-search__txt input {
+  width: 165px;
+  height: 35px;
+  border-radius: 4px;
+  box-sizing: border-box;
+  transform: translateX(150px);
+  transition: 0.5s;
+  position: relative;
+}
+.sys .sys__header .hd-left .hd-search .hd-search__txt.fadeIn,
+.sys .sys__header .hd-left .hd-search .hd-search__txt input.fadeIn {
+  transform: translateX(-150px);
+}
+.sys .sys__header .hd-left .hd-search .hd-search__txt input {
+  padding: 10px;
+  border: 1px solid #e7e7e7;
+}
+
+.sys .sys__header .hd-left .hd-search .hd-search__btn,
+.sys .sys__header .hd-left .hd-search .hd-search__btn button {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  z-index: 1;
+}
+.sys .sys__header .hd-left .hd-search .hd-search__btn button {
+  color: #fff;
+  background-color: rgb(53, 53, 53);
+  border: 1px solid #7e7e7e;
+  border-radius: 4px;
+}
+
 .sys .sys__header .hd-logo {
   display: block;
   background-image: url("../assets/images/4LEAF_LOGO_W.png");
@@ -104,6 +166,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
 }
 
 .mm .mh .mh__content span {
