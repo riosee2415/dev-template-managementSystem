@@ -21,10 +21,11 @@ app.post(routes.loginProcess, async (req, res) => {
   return res.json(sendData);
 });
 
-app.post(routes.callTable, async (req, res) => {
-  const collectionData = req.body.table;
+app.post(routes.callCollection, async (req, res) => {
+  const pageCode = req.body.pageCode;
+  const collection = req.body.selectCollection;
 
-  const sendData = await apiController.callCollection(collectionData);
+  const sendData = await apiController.callCollection(pageCode, collection);
 
   return res.json(sendData);
 });

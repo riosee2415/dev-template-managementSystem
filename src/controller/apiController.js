@@ -33,22 +33,24 @@ const loginProcess = async (id, pass) => {
   return sendData;
 };
 
-const callCollection = async collectionData => {
+const callCollection = async (pageCode, collection) => {
   let fsRef;
   let queryRef;
   let sendData = [];
-
+  console.log(pageCode, collection);
   try {
-    fsRef = await firestore.collection(collectionData);
+    fsRef = await firestore.collection(collection);
 
-    queryRef = await fsRef.get().then(res => {
-      res.forEach(doc => {
-        sendData.push({
-          name: doc.data().name,
-          rank: doc.data().rank
+    if (pageCode == "MM0103") {
+      queryRef = await fsRef.get().then(res => {
+        res.forEach(doc => {
+          sendData.push({
+            name: doc.data().name,
+            rank: doc.data().rank
+          });
         });
       });
-    });
+    }
   } catch (e) {
     console.log(e);
   } finally {

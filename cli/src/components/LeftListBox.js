@@ -5,13 +5,14 @@ class LeftListBox extends React.Component {
     super(props);
 
     this.state = {
-      table: this.props.table,
+      pageCode: this.props.pageCode,
+      collection: this.props.collection,
       dataList: []
     };
   }
 
   componentDidMount = async () => {
-    const response = await this._callTableInfo();
+    const response = await this._callCollectionInfo();
 
     this.setState({
       dataList: response
@@ -49,20 +50,16 @@ class LeftListBox extends React.Component {
     );
   }
 
-  _callTableInfo = async () => {
-    console.log("callTable Func");
+  _callCollectionInfo = async () => {
+    const { pageCode, selectCollection } = this.state;
 
-    const { table } = this.state;
-
-    console.log(table);
-
-    const response = await fetch("/api/callTable", {
+    const response = await fetch("/api/callCollection", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
         // 'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: JSON.stringify({ table })
+      body: JSON.stringify({ pageCode, selectCollection })
     });
 
     return await response.json();

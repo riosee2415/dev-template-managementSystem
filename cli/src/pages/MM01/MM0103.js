@@ -7,14 +7,13 @@ class MM0103 extends React.Component {
     super(props);
 
     this.state = {
+      pageCode: "MM0103",
       selectCollection: "employee"
     };
   }
 
-  componentDidMount() {}
-
   render() {
-    const { selectCollection } = this.state;
+    const { pageCode, selectCollection } = this.state;
 
     return (
       <>
@@ -22,30 +21,31 @@ class MM0103 extends React.Component {
           <div className="mm__header mh">
             <div className="mh__content">
               <div className="mh__content__title">
-                <IconComponent iconName="fas fa-play" />
-                <span>title</span>
+                <IconComponent iconName="fas fa-leaf" />
+                <span>인사 관리 > 출퇴근 관리</span>
               </div>
             </div>
           </div>
           <div className="mm__content mc">
             <div className="mc__col1">
               <div className="mc__col1__title">
-                <IconComponent iconName="fas fa-play" />
-                <span classsName="subTitle">title</span>
+                <IconComponent iconName="fas fa-list-ul" />
+                <span className="subTitle">직원 목록</span>
               </div>
               <div className="mc__col1__desc">
                 <LeftListBox
-                  title_01="제목1"
-                  title_02="제목2"
-                  title_03="제목3"
-                  table={selectCollection}
+                  title_01="번호"
+                  title_02="직원명"
+                  title_03="직급"
+                  pageCode={pageCode}
+                  collection={selectCollection}
                 />
               </div>
             </div>
             <div className="mc__col2">
               <div className="mc__col2__title">
                 <IconComponent iconName="fas fa-play" />
-                <span classsName="subTitle">title</span>
+                <span className="subTitle">직원 정보</span>
               </div>
               <div className="mc__col2__desc">desc</div>
             </div>
@@ -54,13 +54,6 @@ class MM0103 extends React.Component {
       </>
     );
   }
-
-  _initHandler = () => {
-    const test_data = [];
-
-    test_data.push({ data1: "데이터1", data2: "데이터2", data3: "데이터3" });
-    test_data.push({ data1: "데이터1", data2: "데이터2", data3: "데이터3" });
-  };
 }
 
 export default MM0103;

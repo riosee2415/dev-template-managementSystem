@@ -1,7 +1,7 @@
 const routes = {
   /* api */
   loginProcess: "/api/loginProcess",
-  callTable: "/api/callTable"
+  callCollection: "/api/callCollection"
 };
 
 module.exports = routes;
