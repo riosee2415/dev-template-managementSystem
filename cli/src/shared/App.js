@@ -121,8 +121,18 @@ class App extends React.Component {
         </div>
 
         <div className="sys__footer">
-          <div className="ft-copyright"></div>
-          <div className="ft-info"></div>
+          <a
+            href="https://www.4leaf-dev.com/"
+            target="_blank"
+            className="ft-logo"
+          ></a>
+          <div className="ft-copyright txt-darkGray">
+            <p>[35270] 대전 서구 계룡로394번길 14-14</p>
+            <p>COPYRIGHT ©2020 ALL RIGHTS RESERVED 4LEAF SOFTWARE</p>
+          </div>
+          <div className="ft-info">
+            <IconComponent iconName="fab fa-instagram" />
+          </div>
         </div>
       </div>
     );
