@@ -84,6 +84,7 @@
 .btn-l {
   width: 95px;
 }
+
 .mainTitle {
   font-size: 20px;
   font-weight: bold;
@@ -91,4 +92,32 @@
 .subTitle {
   font-size: 18px;
   font-weight: bold;
+}
+
+.scrollbar::-webkit-scrollbar {
+  width: 14px;
+}
+.scrollbar::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+.scrollbar::-webkit-scrollbar-thumb {
+  background-color: #a4b6edcb;
+  border-radius: 15px;
+}
+.scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #9cb0ec;
+}
+.scrollbar::-webkit-scrollbar-button:start:decrement,
+.scrollbar::-webkit-scrollbar-button:end:increment {
+  width: 16px;
+  height: 16px;
+  background: #cccccc;
+}
+
+.scrollbar.scroll-vertical {
+  overflow-y: auto;
+}
+
+.scrollbar.scroll-horizontal {
+  overflow-x: auto;
 }
