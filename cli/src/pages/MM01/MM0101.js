@@ -164,6 +164,7 @@ class MM0101 extends React.Component {
 
     if (validation1.innerText.length > 0) {
       alert("출근은 하루에 한번만 가능합니다.");
+      return;
     }
 
     const {
@@ -186,6 +187,8 @@ class MM0101 extends React.Component {
       inputStartTime
     };
 
+    console.log(screenReload + "1");
+
     const response = await fetch("/api/saveWorkTimeToStart", {
       method: "POST",
       headers: {
@@ -193,9 +196,7 @@ class MM0101 extends React.Component {
         // 'Content-Type': 'application/x-www-form-urlencoded',
       },
       body: JSON.stringify({ inputData })
-    });
-
-    console.log(screenReload);
+    }).then(this.componentDidMount());
   };
 
   _playCurrentTime = () => {
