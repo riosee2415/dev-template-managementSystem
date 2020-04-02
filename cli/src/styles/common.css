@@ -57,8 +57,10 @@
 
 .bg-gradient:hover,
 .bg-gridient2:hover {
-  box-shadow: 2px 4px 10px #8e8e8e;
-  transform: translateY(-10px);
+  box-shadow: 2px 4px 10px #717171;
+}
+.btn:active {
+  box-shadow: 2px 4px 4px #e6e6e6 inset;
 }
 
 .btn {
