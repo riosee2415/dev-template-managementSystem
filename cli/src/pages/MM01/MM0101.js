@@ -137,17 +137,16 @@ class MM0101 extends React.Component {
       currentSec,
       currentYear,
       currentMonth,
-      currentDate,
-      currentDay
+      currentDate
     } = this.state;
 
     const inputDate = currentYear + "/" + currentMonth + "/" + currentDate;
-    const name = sessionStorage.getItem("login_name");
-    const inputStartTime = currentHour + "/" + currentMin + "/" + currentSec;
+    const id = sessionStorage.getItem("login_id");
+    const inputStartTime = currentHour + ":" + currentMin + ":" + currentSec;
 
     const inputData = {
       inputDate,
-      name,
+      id,
       inputStartTime
     };
 

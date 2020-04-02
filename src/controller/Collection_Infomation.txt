@@ -1,0 +1,25 @@
+[Firestore employee Model]
+ - addr1       [String]
+ - addr2       [String]
+ - avatar      [String]
+ - birthday    [String]
+ - empId       [String]
+ - hire        [String]
+ - loc         [String]
+ - name        [String]
+ - password    [String]
+ - rank        [String]
+ - zoneCode    [String]
+
+
+[Firestore WorkRecord Model]
+ - date        [String]
+ - endTiem     [String]
+ - holidayType [String]
+ - id          [String]
+ - isHoliday   [Boolean]
+ - startTime   [String]
+  
+
+
+
