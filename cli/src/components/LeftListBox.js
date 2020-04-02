@@ -41,7 +41,7 @@ class LeftListBox extends React.Component {
               </thead>
             </table>
           </div>
-          <div className="lb__body__box">
+          <div className="lb__body__box scrollbar scroll-vertical">
             <table className="lb__table">
               <colgroup>
                 <col width="60px" />
@@ -54,7 +54,7 @@ class LeftListBox extends React.Component {
                     return (
                       <tr
                         key={data.docId}
-                        onClick={() => this._dataClickHandler(data.empId)}
+                        onClick={() => this.props.dataClickHandler(data.empId)}
                       >
                         <td>{idx + 1}</td>
                         <td>{data.name}</td>
@@ -62,7 +62,11 @@ class LeftListBox extends React.Component {
                       </tr>
                     );
                   } else {
-                    return null;
+                    return (
+                      <tr>
+                        <td colspan="3">데이터가 없습니다.</td>
+                      </tr>
+                    );
                   }
                 })}
               </tbody>
@@ -86,10 +90,6 @@ class LeftListBox extends React.Component {
     });
 
     return await response.json();
-  };
-
-  _dataClickHandler = empId => {
-    alert(empId);
   };
 }
 

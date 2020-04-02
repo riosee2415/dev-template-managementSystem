@@ -3,7 +3,8 @@ const routes = {
   loginProcess: "/api/loginProcess",
   callCollection: "/api/callCollection",
   saveWorkTimeToStart: "/api/saveWorkTimeToStart",
-  getworkStart: "/api/getworkStart"
+  getworkStart: "/api/getworkStart",
+  getEmpInfo: "/api/getEmpInfo"
 };
 
 module.exports = routes;

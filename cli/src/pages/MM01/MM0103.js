@@ -40,6 +40,7 @@ class MM0103 extends React.Component {
                   title_03="직급"
                   pageCode={pageCode}
                   collection={selectCollection}
+                  dataClickHandler={this._dataClickHandler}
                 />
               </div>
             </div>
@@ -49,16 +50,92 @@ class MM0103 extends React.Component {
                 <span className="subTitle">직원 정보</span>
               </div>
               <div className="mc__col2__desc">
-                <div className="list__style__01">
-                  <div className="list__row">
-                    <div className="list__col">
-                      <span>프로필</span>
+                {this.state.empInfo ? (
+                  <div className="list__style__01">
+                    <div className="list__row">
+                      <div className="list__col">
+                        <span>프로필</span>
+                      </div>
+                      <div className="list__col">
+                        <span>
+                          <img
+                            src={this.state.empInfo.avatar}
+                            className="profile__img"
+                            alt="profile"
+                          />
+                        </span>
+                      </div>
                     </div>
-                    <div className="list__col">
-                      <span></span>
+
+                    <div className="list__row">
+                      <div className="list__col">
+                        <span>아이디</span>
+                      </div>
+                      <div className="list__col">
+                        <span>{this.state.empInfo.empId}</span>
+                      </div>
+                    </div>
+
+                    <div className="list__row">
+                      <div className="list__col">
+                        <span>직원명</span>
+                      </div>
+                      <div className="list__col">
+                        <span>{this.state.empInfo.name}</span>
+                      </div>
+                    </div>
+
+                    <div className="list__row">
+                      <div className="list__col">
+                        <span>직급</span>
+                      </div>
+                      <div className="list__col">
+                        <span>{this.state.empInfo.rank}</span>
+                      </div>
+                    </div>
+
+                    <div className="list__row">
+                      <div className="list__col">
+                        <span>근무위치</span>
+                      </div>
+                      <div className="list__col">
+                        <span>{this.state.empInfo.loc}</span>
+                      </div>
+                    </div>
+
+                    <div className="list__row">
+                      <div className="list__col">
+                        <span>고용일</span>
+                      </div>
+                      <div className="list__col">
+                        <span>{this.state.empInfo.hire}</span>
+                      </div>
+                    </div>
+
+                    <div className="list__row">
+                      <div className="list__col">
+                        <span>생년월일</span>
+                      </div>
+                      <div className="list__col">
+                        <span>{this.state.empInfo.birthday}</span>
+                      </div>
+                    </div>
+
+                    <div className="list__row">
+                      <div className="list__col">
+                        <span>주소</span>
+                      </div>
+                      <div className="list__col">
+                        <span>
+                          {this.state.empInfo.zoneCode
+                            ? `(${this.state.empInfo.zoneCode}) `
+                            : null}
+                          {this.state.empInfo.addr1} {this.state.empInfo.addr2}
+                        </span>
+                      </div>
                     </div>
                   </div>
-                </div>
+                ) : null}
               </div>
             </div>
           </div>
@@ -66,6 +143,23 @@ class MM0103 extends React.Component {
       </>
     );
   }
+
+  _dataClickHandler = async key => {
+    const response = await fetch("/api/getEmpInfo", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: JSON.stringify({ key })
+    });
+
+    const data = await response.json();
+
+    this.setState({
+      empInfo: data
+    });
+  };
 }
 
 export default MM0103;

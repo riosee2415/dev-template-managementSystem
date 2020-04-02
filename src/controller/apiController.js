@@ -61,9 +61,44 @@ const callCollection = async (pageCode, collection) => {
   return sendData;
 };
 
+const getEmpInfo = async key => {
+  let fsRef;
+  let queryRef;
+  let sendData = [];
+
+  try {
+    fsRef = await firestore.collection("employee");
+
+    queryRef = await fsRef.where("empId", "==", key);
+
+    await queryRef.get().then(res => {
+      res.forEach(doc => {
+        sendData = {
+          empId: doc.data().empId,
+          name: doc.data().name,
+          rank: doc.data().rank,
+          avatar: doc.data().avatar,
+          addr1: doc.data().addr1,
+          addr2: doc.data().addr2,
+          birthday: doc.data().birthday,
+          hire: doc.data().hire,
+          loc: doc.data().loc,
+          zoneCode: doc.data().zoneCode
+        };
+      });
+    });
+  } catch (e) {
+    console.log(e);
+  } finally {
+  }
+
+  return sendData;
+};
+
 const apiController = {
   loginProcess,
-  callCollection
+  callCollection,
+  getEmpInfo
 };
 
 module.exports = apiController;
