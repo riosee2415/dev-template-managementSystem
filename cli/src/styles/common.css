@@ -1,5 +1,17 @@
 @charset "utf-8";
 
+@keyframes btnHover {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .txt-blue {
   color: #3f5efd;
 }
@@ -41,9 +53,26 @@
   background-color: #353535;
   color: #fff;
 }
-.gradient {
-  background-color: linear-gradient(#ffe259,  #ffa751);
+.bg-gradient {
+  background: linear-gradient(#ffe259, #ffa751);
+  font-weight: 600;
+  color: #fff;
 }
+
+.bg-gridient2 {
+  background: linear-gradient(#e4e5e6, #00416a);
+  font-weight: 600;
+  color: #fff;
+}
+
+.bg-gradient:hover {
+  animation: btnHover 0.3s forwards;
+}
+
+.bg-gridient2:hover {
+  animation: btnHover 0.3s forwards;
+}
+
 .btn {
   border: none;
   font-size: 14px;

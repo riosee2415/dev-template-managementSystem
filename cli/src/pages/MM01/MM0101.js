@@ -43,7 +43,7 @@ class MM0101 extends React.Component {
             </div>
 
             <div className="mh__content__btn">
-              <span>
+              {/* <span>
                 <input
                   type="button"
                   className="btn btn-xs bg-blue"
@@ -70,7 +70,7 @@ class MM0101 extends React.Component {
                   className="btn btn-xs bg-violet"
                   value="작성"
                 />
-              </span>
+              </span> */}
             </div>
           </div>
         </div>
@@ -94,7 +94,10 @@ class MM0101 extends React.Component {
                     요일
                   </span>
                 </div>
-                <div className="mm0101__left__col2">버튼2개</div>
+                <div className="mm0101__left__col2">
+                  <button className="btn btn-m bg-gradient">출근</button>
+                  <button className="btn btn-m bg-gridient2">퇴근</button>
+                </div>
                 <div className="mm0101__left__col3">데이터</div>
               </div>
             </div>
