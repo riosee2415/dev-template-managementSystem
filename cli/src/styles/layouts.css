@@ -99,6 +99,9 @@
   border: 1px solid #7e7e7e;
   border-radius: 4px;
 }
+.sys .sys__header .hd-left .hd-search .hd-search__btn button .fas {
+  color: #fff;
+}
 
 .sys .sys__header .hd-logo {
   display: block;

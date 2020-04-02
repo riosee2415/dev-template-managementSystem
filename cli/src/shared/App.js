@@ -120,7 +120,10 @@ class App extends React.Component {
           )}
         </div>
 
-        <div className="sys__footer">FOOTER</div>
+        <div className="sys__footer">
+          <div className="ft-copyright"></div>
+          <div className="ft-info"></div>
+        </div>
       </div>
     );
   }
