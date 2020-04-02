@@ -17,6 +17,9 @@
   justify-content: center;
   align-items: center;
 }
+.mm0101__left__col2 {
+  padding-bottom: 15px;
+}
 
 .mm0101__left .mm0101__left__col1 span:nth-child(1) {
   font-size: 22px;
