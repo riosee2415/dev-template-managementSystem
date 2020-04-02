@@ -1,17 +1,5 @@
 @charset "utf-8";
 
-@keyframes btnHover {
-  0% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.6;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
 .txt-blue {
   color: #3f5efd;
 }
@@ -57,20 +45,20 @@
   background: linear-gradient(#ffe259, #ffa751);
   font-weight: 600;
   color: #fff;
+  transition: 0.5s;
 }
 
 .bg-gridient2 {
   background: linear-gradient(200deg, #bdc3c7, #2c3e50);
   font-weight: 600;
   color: #fff;
+  transition: 0.5s;
 }
 
-.bg-gradient:hover {
-  animation: btnHover 0.3s forwards;
-}
-
+.bg-gradient:hover,
 .bg-gridient2:hover {
-  animation: btnHover 0.3s forwards;
+  box-shadow: 2px 4px 10px #8e8e8e;
+  transform: translateY(-10px);
 }
 
 .btn {
@@ -80,6 +68,7 @@
   border-radius: 6px;
   box-shadow: 2px 2px 2px #bfbfbf;
   cursor: pointer;
+  margin-right: 10px;
 }
 .btn-xs {
   width: 50px;

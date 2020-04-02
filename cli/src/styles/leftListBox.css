@@ -18,7 +18,7 @@
 }
 
 .lb .lb__body__box {
-  overflow-y: scroll;
+  overflow: auto;
   height: calc(100% - 58px);
 }
 
@@ -31,4 +31,24 @@
 }
 .lb .lb__body__box tbody tr:nth-child(2n + 1) {
   background-color: #b7a4ed71;
+}
+
+.lb .lb__body__box::-webkit-scrollbar {
+  width: 14px;
+}
+.lb .lb__body__box::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+.lb .lb__body__box::-webkit-scrollbar-thumb {
+  background-color: #a4b6edcb;
+  border-radius: 15px;
+}
+.lb .lb__body__box::-webkit-scrollbar-thumb:hover {
+  background: #9cb0ec;
+}
+.lb .lb__body__box::-webkit-scrollbar-button:start:decrement,
+.lb .lb__body__box::-webkit-scrollbar-button:end:increment {
+  width: 16px;
+  height: 16px;
+  background: #cccccc;
 }
