@@ -37,7 +37,7 @@ const callCollection = async (pageCode, collection) => {
   let fsRef;
   let queryRef;
   let sendData = [];
-  console.log(pageCode, collection);
+
   try {
     fsRef = await firestore.collection(collection);
 

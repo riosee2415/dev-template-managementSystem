@@ -51,7 +51,7 @@ class LeftListBox extends React.Component {
   }
 
   _callCollectionInfo = async () => {
-    const { pageCode, selectCollection } = this.state;
+    const { pageCode, collection } = this.state;
 
     const response = await fetch("/api/callCollection", {
       method: "POST",
@@ -59,7 +59,7 @@ class LeftListBox extends React.Component {
         "Content-Type": "application/json"
         // 'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: JSON.stringify({ pageCode, selectCollection })
+      body: JSON.stringify({ pageCode, collection })
     });
 
     return await response.json();
