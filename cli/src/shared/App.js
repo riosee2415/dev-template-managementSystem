@@ -131,7 +131,9 @@ class App extends React.Component {
             <p>COPYRIGHT ©2020 ALL RIGHTS RESERVED 4LEAF SOFTWARE</p>
           </div>
           <div className="ft-info">
-            <IconComponent iconName="fab fa-instagram" />
+            <a href="https://www.instagram.com/4leaf_dev/" target="_blank">
+              <IconComponent iconName="fab fa-instagram" />
+            </a>
           </div>
         </div>
       </div>
