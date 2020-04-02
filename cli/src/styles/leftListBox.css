@@ -2,6 +2,7 @@
   box-shadow: 0 2px 16px rgba(105, 105, 105, 0.2) inset;
   border-radius: 20px;
   box-sizing: border-box;
+  height: 90%;
 }
 
 .lb__table {
@@ -17,12 +18,12 @@
 }
 
 .lb__table tbody {
-  display: block;
   height: 500px;
   overflow: auto;
 }
 
 .lb__table tbody tr {
+  width: 100%;
   height: 30px;
   padding: 10px;
   line-height: 30px;
