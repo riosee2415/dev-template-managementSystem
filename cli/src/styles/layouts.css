@@ -175,7 +175,8 @@
   font-weight: 600;
 }
 
-.mm .mm__content {
+.mm .mm__content,
+.mh__content__title {
   display: flex;
   flex-direction: row;
 }

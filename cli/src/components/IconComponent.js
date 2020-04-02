@@ -23,7 +23,7 @@ export default function IconComponent({ iconName }) {
 
   return (
     <div className={classes.root}>
-      <Icon className={iconName} />
+      <Icon className={iconName} color="action" />
     </div>
   );
 }

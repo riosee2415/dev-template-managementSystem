@@ -97,7 +97,7 @@ const Menu = () => {
           onClose={handleCloseMM01}
         >
           <MItem onClick={handleCloseMM01}>
-            <NavLink to={routes.MM0101}>출퇴근이력</NavLink>
+            <NavLink to={routes.MM0101}>출퇴근 관리</NavLink>
           </MItem>
 
           <MItem onClick={handleCloseMM01}>
