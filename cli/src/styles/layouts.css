@@ -254,7 +254,7 @@
 
 .mc .mc__col1 .mc__col1__desc {
   width: 100%;
-  height: 100%;
+  height: calc(100% - 40px);
 }
 
 .mc .mc__col2 .mc__col2__desc {
