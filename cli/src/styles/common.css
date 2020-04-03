@@ -121,3 +121,31 @@
 .scrollbar.scroll-horizontal {
   overflow-x: auto;
 }
+
+.sys .sys__main .sys__content::-webkit-scrollbar {
+  width: 14px;
+}
+.sys .sys__main .sys__content::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+.sys .sys__main .sys__content::-webkit-scrollbar-thumb {
+  background-color: #a4b6edcb;
+  border-radius: 15px;
+}
+.sys .sys__main .sys__content::-webkit-scrollbar-thumb:hover {
+  background: #9cb0ec;
+}
+.sys .sys__main .sys__content::-webkit-scrollbar-button:start:decrement,
+.sys .sys__main .sys__content::-webkit-scrollbar-button:end:increment {
+  width: 16px;
+  height: 16px;
+  background: #cccccc;
+}
+
+.sys .sys__main .sys__content.scroll-vertical {
+  overflow-y: auto;
+}
+
+.sys .sys__main .sys__content.scroll-horizontal {
+  overflow-x: auto;
+}
