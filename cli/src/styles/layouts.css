@@ -141,6 +141,7 @@
 
 .sys .sys__main .sys__content {
   width: 100%;
+  overflow: auto;
 }
 
 .sys .sys__footer {
@@ -263,7 +264,8 @@
 
 .mc .mc__col2 .mc__col2__desc {
   width: 100%;
-  box-shadow: 0px 4px 10px #eeeeee inset;
+  border: 3px solid #fff;
+  box-shadow: 0px 4px 10px #e6e6e6 inset, 2px 4px 10px #d6d6d6;
 }
 
 .menu_list {

@@ -64,3 +64,24 @@
   text-shadow: 2px 2px 2px #d2dae2;
   width: 60px;
 }
+
+.mc__col2__desc {
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+}
+
+.mm0101__dataBox {
+  margin: 0 auto;
+  width: 600px;
+  height: 70px;
+  background: linear-gradient(#ffe259, #ffa751);
+  margin: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 15px;
+  box-shadow: 3px 3px 12px Rgb(53, 53, 53);
+}

@@ -67,6 +67,13 @@ app.post(routes.saveWorkTimeToEnd, async (req, res) => {
   return res.json(sendData);
 });
 
+app.post(routes.getDetailDataToWorkTime, async (req, res) => {
+  const data = req.body.inputData;
+  const sendData = await apiControllerWork.getDetailDataToWorkTime(data);
+
+  return res.json(sendData);
+});
+
 app.listen(PORT, () => {
   console.log(`✅ Server Start On ${PORT}`);
 });
