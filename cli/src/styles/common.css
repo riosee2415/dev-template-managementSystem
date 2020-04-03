@@ -3,6 +3,9 @@
 .txt-blue {
   color: #3f5efd;
 }
+.txt-darkBlue {
+  color: #030f42;
+}
 .txt-yellow {
   color: #ffe259;
 }
@@ -20,6 +23,10 @@
 }
 .bg-blue {
   background-color: #3f5efd;
+  color: #fff;
+}
+.bg-darkBlue {
+  background-color: #030f42;
   color: #fff;
 }
 .bg-yellow {
