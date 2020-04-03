@@ -141,7 +141,7 @@ class MM0101 extends React.Component {
           <div className="mc__col2">
             <div className="mc__col2__title">
               <IconComponent iconName="fas fa-list-ul" />
-              <span className="subTitle">출/퇴근 내역</span>
+              <span className="subTitle">출/퇴근 내역 ( 최근 5일 )</span>
             </div>
             <div className="mc__col2__desc">
               {detailList ? (
