@@ -52,6 +52,14 @@ app.post(routes.getEmpInfo, async (req, res) => {
   return res.json(sendData);
 });
 
+// app.post(routes.getAnnualInfo, async (req, res) => {
+//   const key = rew.body.key;
+
+//   const sendData = await apiController.getAnnualInfo(key);
+
+//   return res.json(sendData);
+// });
+
 app.post(routes.saveWorkTimeToEnd, async (req, res) => {
   const data = req.body.inputData;
   const sendData = await apiControllerWork.saveWorkTimeToEnd(data);
