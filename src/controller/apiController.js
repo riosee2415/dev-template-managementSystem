@@ -57,7 +57,7 @@ const callCollection = async (pageCode, collection) => {
         res.forEach(doc => {
           sendData.push({
             docId: doc.id,
-            empId: docdata().empId,
+            empId: doc.data().empId,
             name: doc.data().name,
             rank: doc.data().rank
           });

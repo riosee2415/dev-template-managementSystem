@@ -50,7 +50,18 @@ class LeftListBox extends React.Component {
               </colgroup>
               <tbody className="txt-darkGray">
                 {dataList.map((data, idx) => {
-                  if (pageCode == "MM0103") {
+                  if (pageCode === "MM0103") {
+                    return (
+                      <tr
+                        key={data.docId}
+                        onClick={() => this.props.dataClickHandler(data.empId)}
+                      >
+                        <td>{idx + 1}</td>
+                        <td>{data.name}</td>
+                        <td>{data.rank}</td>
+                      </tr>
+                    );
+                  } else if (pageCode === "MM0102") {
                     return (
                       <tr
                         key={data.docId}

@@ -7,7 +7,7 @@ class MM0102 extends React.Component {
     super(props);
 
     this.state = {
-      pageCode: "NM0102",
+      pageCode: "MM0102",
       selectCollection: "employee",
       empInfo: null
     };
@@ -58,8 +58,9 @@ class MM0102 extends React.Component {
       </>
     );
   }
+  _annualClickHandler = () => {
+    console.log("eeee");
+  };
 }
-
-// _annualClickHandler = async key => {};
 
 export default MM0102;
