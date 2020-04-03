@@ -217,7 +217,11 @@
 }
 .mh__content__title {
   padding-bottom: 10px;
-  border-bottom: 3px solid #ffa8519f;
+}
+.mh__content__title .fas,
+.mh__content__title .fa,
+.mh__content__title .fad {
+  color: #030f4e;
 }
 .mm .mm__content .mc__col1 {
   width: 300px;

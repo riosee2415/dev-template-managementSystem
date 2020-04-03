@@ -137,3 +137,8 @@ input,
 button {
   outline: none;
 }
+
+*::selection {
+  background: #6e6e6e;
+  color: #fff;
+}
