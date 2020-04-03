@@ -148,10 +148,16 @@ class MM0101 extends React.Component {
                 detailList.map((data, idx) => {
                   return (
                     <div key={idx} className="mm0101__dataBox">
-                      <div>{idx}</div>
+                      <div>{idx + 1}</div>
                       <div>{data.date}</div>
-                      <div>{data.startTime}</div>
-                      <div>{data.endTime}</div>
+                      <div>
+                        <span>출근</span>
+                        {data.startTime}
+                      </div>
+                      <div>
+                        <span>퇴근</span>
+                        {data.endTime}
+                      </div>
                     </div>
                   );
                 })
