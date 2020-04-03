@@ -4,7 +4,8 @@ const routes = {
   callCollection: "/api/callCollection",
   saveWorkTimeToStart: "/api/saveWorkTimeToStart",
   getworkStart: "/api/getworkStart",
-  getEmpInfo: "/api/getEmpInfo"
+  getEmpInfo: "/api/getEmpInfo",
+  saveWorkTimeToEnd: "/api/saveWorkTimeToEnd"
 };
 
 module.exports = routes;

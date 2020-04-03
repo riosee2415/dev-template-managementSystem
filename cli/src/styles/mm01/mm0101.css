@@ -34,3 +34,33 @@
   border-bottom: 1px solid #353535;
   padding: 5px;
 }
+
+.mm0101__left .mm0101__left__col3__row3 {
+  display: none;
+}
+
+.mm0101__left .mm0101__left__col3__row1,
+.mm0101__left .mm0101__left__col3__row2 {
+  padding: 5px 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #353535;
+  width: 200px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mm0101__left .mm0101__left__col3__row1 span:nth-child(1),
+.mm0101__left .mm0101__left__col3__row2 span:nth-child(1) {
+  font-weight: 600;
+  text-shadow: 1px 1px 1px rgba(53, 53, 53, 0.4);
+}
+
+.mm0101__left .mm0101__left__col3__row1 span:nth-child(2),
+.mm0101__left .mm0101__left__col3__row2 span:nth-child(2) {
+  font-size: 14px;
+  color: #353535;
+  text-shadow: 2px 2px 2px #d2dae2;
+  width: 60px;
+}

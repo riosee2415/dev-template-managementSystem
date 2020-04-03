@@ -170,7 +170,7 @@ class App extends React.Component {
     await sessionStorage.setItem("login_rank", data.rank);
     await sessionStorage.setItem("login_avatar", data.avatar);
 
-    if (sessionStorage.getItem("login_id") == "undefined") {
+    if (sessionStorage.getItem("login_id") === "undefined") {
       sessionStorage.clear();
 
       return;

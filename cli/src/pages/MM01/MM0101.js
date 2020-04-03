@@ -1,6 +1,5 @@
 import React from "react";
 import IconComponent from "../../components/IconComponent";
-import DescriptionAlerts from "../../components/DescriptionAlerts";
 
 class MM0101 extends React.Component {
   constructor(props) {
@@ -16,6 +15,7 @@ class MM0101 extends React.Component {
       currentDay: 0,
       workStart: "",
       workEnd: "",
+      fsId: "",
       screenReload: false
     };
   }
@@ -23,7 +23,7 @@ class MM0101 extends React.Component {
   componentDidMount() {
     setInterval(() => {
       setInterval(this._playCurrentTime(), 1000);
-    }, 1000);
+    }, 100);
 
     this._getworkStart();
   }
@@ -38,7 +38,8 @@ class MM0101 extends React.Component {
       currentMonth,
       currentDate,
       workStart,
-      workEnd
+      workEnd,
+      fsId
     } = this.state;
 
     return (
@@ -109,7 +110,12 @@ class MM0101 extends React.Component {
                   >
                     출근
                   </button>
-                  <button className="btn btn-m bg-gridient2">퇴근</button>
+                  <button
+                    className="btn btn-m bg-gridient2"
+                    onClick={() => this._endWorkHandler()}
+                  >
+                    퇴근
+                  </button>
                 </div>
                 <div className="mm0101__left__col3">
                   <div className="mm0101__left__col3__row1">
@@ -117,7 +123,12 @@ class MM0101 extends React.Component {
                     <span id="workStart-js">{workStart}</span>
                   </div>
                   <div className="mm0101__left__col3__row2">
-                    <span>퇴근시간</span> <span>{workEnd}</span>
+                    <span>퇴근시간</span>
+                    <span id="workEnd-js">{workEnd}</span>
+                  </div>
+                  <div className="mm0101__left__col3__row3">
+                    <span>아이디</span>
+                    <span id="workId-js">{fsId}</span>
                   </div>
                 </div>
               </div>
@@ -155,7 +166,8 @@ class MM0101 extends React.Component {
 
     this.setState({
       workStart: data.startTime,
-      workEnd: data.endTime
+      workEnd: data.endTime,
+      fsId: data.id
     });
   };
 
@@ -173,23 +185,53 @@ class MM0101 extends React.Component {
       currentSec,
       currentYear,
       currentMonth,
-      currentDate,
-      screenReload
+      currentDate
     } = this.state;
+
+    if (currentHour === 0) {
+      return;
+    }
 
     const inputDate = currentYear + "/" + currentMonth + "/" + currentDate;
     const id = sessionStorage.getItem("login_id");
-    const inputStartTime = currentHour + ":" + currentMin + ":" + currentSec;
-
+    const inputStartTime =
+      (currentHour < 10 ? "0" + currentHour : currentHour) +
+      ":" +
+      (currentMin < 10 ? "0" + currentMin : currentMin) +
+      ":" +
+      (currentSec < 10 ? "0" + currentSec : currentSec);
     const inputData = {
       inputDate,
       id,
       inputStartTime
     };
 
-    console.log(screenReload + "1");
+    await fetch("/api/saveWorkTimeToStart", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: JSON.stringify({ inputData })
+    }).then(this.componentDidMount());
+  };
 
-    const response = await fetch("/api/saveWorkTimeToStart", {
+  _endWorkHandler = async () => {
+    const { currentHour, currentMin, currentSec, fsId } = this.state;
+
+    const inputEndTime =
+      (currentHour < 10 ? "0" + currentHour : currentHour) +
+      ":" +
+      (currentMin < 10 ? "0" + currentMin : currentMin) +
+      ":" +
+      (currentSec < 10 ? "0" + currentSec : currentSec);
+
+    const inputData = {
+      fsId,
+      inputEndTime
+    };
+
+    await fetch("/api/saveWorkTimeToEnd", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

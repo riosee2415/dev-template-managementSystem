@@ -6,7 +6,8 @@ const saveWorkTimeToStart = async data => {
   let sendData = {
     date: data.inputDate,
     id: data.id,
-    startTime: data.inputStartTime
+    startTime: data.inputStartTime,
+    endTime: "00:00:00"
   };
 
   try {
@@ -37,7 +38,8 @@ const getWorkTime = async inputData => {
         res.forEach(doc => {
           sendData = {
             startTime: doc.data().startTime,
-            endTime: doc.data().endTime
+            endTime: doc.data().endTime,
+            id: doc.id
           };
         });
       });
@@ -48,9 +50,28 @@ const getWorkTime = async inputData => {
   return sendData;
 };
 
+const saveWorkTimeToEnd = async inputData => {
+  let fsRef;
+  let queryRef;
+  let sendData = {};
+
+  try {
+    fsRef = await firestore.collection("workRecord");
+
+    await fsRef.doc(inputData.fsId).update({
+      endTime: inputData.inputEndTime
+    });
+  } catch (e) {
+    console.log(e);
+  }
+
+  return sendData;
+};
+
 const apiControllerWork = {
   saveWorkTimeToStart,
-  getWorkTime
+  getWorkTime,
+  saveWorkTimeToEnd
 };
 
 module.exports = apiControllerWork;
