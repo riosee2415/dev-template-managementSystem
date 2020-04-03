@@ -75,6 +75,7 @@
 .mm0101__dataBox:nth-child(2n) {
   margin: 10px auto;
   width: 600px;
+  min-width: 500px;
   height: 70px;
   border-left: 5px solid #ffa751;
   margin: 20px;
@@ -88,6 +89,7 @@
 .mm0101__dataBox:nth-child(2n + 1) {
   margin: 10px auto;
   width: 600px;
+  min-width: 500px;
   height: 70px;
   border-left: 5px solid #ffe259;
   margin: 20px;
@@ -99,7 +101,12 @@
 }
 
 .mm0101__dataBox div {
-  border-right: 1px solid #dedede;
+  height: 70px;
+  line-height: 70px;
+  text-align: center;
+  width: 20%;
+  margin-left: 10px;
+  border-left: 1px solid #f1f1f1;
 }
 
 .mm0101__dataBox div:first-child {

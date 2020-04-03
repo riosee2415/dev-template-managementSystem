@@ -66,7 +66,8 @@
 .btn {
   border: none;
   font-size: 14px;
-  height: 30px;
+  font-weight: bold;
+  height: 25px;
   border-radius: 6px;
   box-shadow: 2px 2px 2px #bfbfbf;
   cursor: pointer;
