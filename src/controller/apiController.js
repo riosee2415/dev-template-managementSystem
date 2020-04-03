@@ -41,12 +41,23 @@ const callCollection = async (pageCode, collection) => {
   try {
     fsRef = await firestore.collection(collection);
 
-    if (pageCode == "MM0103") {
+    if (pageCode === "MM0103") {
       queryRef = await fsRef.get().then(res => {
         res.forEach(doc => {
           sendData.push({
             docId: doc.id,
             empId: doc.data().empId,
+            name: doc.data().name,
+            rank: doc.data().rank
+          });
+        });
+      });
+    } else if (pageCode === "MM0102") {
+      queryRef = await fsRef.get().then(res => {
+        res.forEach(doc => {
+          sendData.push({
+            docId: doc.id,
+            empId: docdata().empId,
             name: doc.data().name,
             rank: doc.data().rank
           });
