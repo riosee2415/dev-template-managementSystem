@@ -1,8 +1,7 @@
 .left-list__box {
   overflow: hidden;
   height: 100%;
-  border-radius: 20px;
-  box-shadow: 0 2px 16px rgba(105, 105, 105, 0.2) inset;
+  border-radius: 10px;
   box-sizing: border-box;
 }
 
@@ -12,9 +11,9 @@
 }
 
 .lb .lb__head__box thead th {
-  height: 35px;
+  height: 30px;
   padding: 10px;
-  line-height: 35px;
+  line-height: 30px;
   font-weight: 600;
 }
 
@@ -28,7 +27,9 @@
   padding: 10px;
   line-height: 30px;
   text-align: center;
+  font-size: 14px;
+  cursor: pointer;
 }
 .lb .lb__body__box tbody tr:nth-child(2n + 1) {
-  background-color: #b7a4ed71;
+  background-color: #e3ddf371;
 }
