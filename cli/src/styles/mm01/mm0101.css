@@ -64,3 +64,8 @@
   text-shadow: 2px 2px 2px #d2dae2;
   width: 60px;
 }
+
+.mm0101__dataBox {
+  margin: 20px;
+  display: flex;
+}

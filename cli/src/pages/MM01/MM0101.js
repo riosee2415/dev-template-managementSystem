@@ -16,7 +16,8 @@ class MM0101 extends React.Component {
       workStart: "",
       workEnd: "",
       fsId: "",
-      screenReload: false
+      screenReload: false,
+      detailList: []
     };
   }
 
@@ -26,6 +27,8 @@ class MM0101 extends React.Component {
     }, 100);
 
     this._getworkStart();
+
+    this._getDetailData();
   }
 
   render() {
@@ -39,7 +42,8 @@ class MM0101 extends React.Component {
       currentDate,
       workStart,
       workEnd,
-      fsId
+      fsId,
+      detailList
     } = this.state;
 
     return (
@@ -139,12 +143,48 @@ class MM0101 extends React.Component {
               <IconComponent iconName="fas fa-list-ul" />
               <span className="subTitle">출/퇴근 내역</span>
             </div>
-            <div className="mc__col2__desc">desc</div>
+            <div className="mc__col2__desc">
+              {detailList ? (
+                detailList.map((data, idx) => {
+                  return (
+                    <div key={idx} className="mm0101__dataBox">
+                      <div>{idx}</div>
+                      <div>{data.date}</div>
+                      <div>{data.startTime}</div>
+                      <div>{data.endTime}</div>
+                    </div>
+                  );
+                })
+              ) : (
+                <div> 출/퇴근 데이터가 없습니다. </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
     );
   }
+
+  _getDetailData = async () => {
+    const inputData = {
+      inputId: sessionStorage.getItem("login_id")
+    };
+
+    const response = await fetch("/api/getDetailDataToWorkTime", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: JSON.stringify({ inputData })
+    });
+
+    let dataList = await response.json();
+
+    this.setState({
+      detailList: dataList
+    });
+  };
 
   _getworkStart = async () => {
     let date = new Date();
