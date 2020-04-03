@@ -30,6 +30,11 @@
   font-size: 14px;
   cursor: pointer;
 }
+
+.lb .lb__body__box tbody tr td:nth-child(2):hover {
+  text-decoration: underline;
+}
+
 .lb .lb__body__box tbody tr:nth-child(2n + 1) {
   background-color: #e3ddf371;
 }

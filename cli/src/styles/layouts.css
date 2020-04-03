@@ -263,6 +263,7 @@
 
 .mc .mc__col2 .mc__col2__desc {
   width: 100%;
+  box-shadow: 0px 4px 10px #eeeeee inset;
 }
 
 .menu_list {
