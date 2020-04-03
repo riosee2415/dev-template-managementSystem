@@ -106,6 +106,34 @@ const getEmpInfo = async key => {
   return sendData;
 };
 
+// const getAnnualInfo = async key => {
+//   let fsRef;
+//   let queryRef;
+//   let sendData = [];
+
+//   try {
+//     fsRef = await firestore.collection("annualHoliday");
+
+//     queryRef = await fsRef.where("empId", "==", key);
+
+//     await queryRef.get().then(res => {
+//       res.forEach(doc => {
+//         sendData = {
+//           empId: doc.data().empId,
+//           name: doc.data().name,
+//           year: doc.data().year,
+//           allAnnual: doc.data().allAnnual,
+//           usedAnnual: doc.data().usedAnnual,
+//           userRef: doc.data().userRef
+//         };
+//       });
+//     });
+//   } catch (e) {
+//     console.log(e);
+//   } finally {
+//   }
+// };
+
 const apiController = {
   loginProcess,
   callCollection,
