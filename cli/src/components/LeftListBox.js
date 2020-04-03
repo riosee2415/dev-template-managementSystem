@@ -65,7 +65,7 @@ class LeftListBox extends React.Component {
                     return (
                       <tr
                         key={data.docId}
-                        onClick={() => this.props.dataClickHandler(data.empId)}
+                        onClick={() => this.props.dataClickHandler(data.docId)}
                       >
                         <td>{idx + 1}</td>
                         <td>{data.name}</td>

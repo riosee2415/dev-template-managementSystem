@@ -52,13 +52,15 @@ app.post(routes.getEmpInfo, async (req, res) => {
   return res.json(sendData);
 });
 
-// app.post(routes.getAnnualInfo, async (req, res) => {
-//   const key = rew.body.key;
+app.post(routes.getAnnualInfo, async (req, res) => {
+  const key = req.body.key;
 
-//   const sendData = await apiController.getAnnualInfo(key);
+  const sendData = await apiController.getAnnualInfo(key);
 
-//   return res.json(sendData);
-// });
+  return res.json(sendData);
+
+  // 이 부분에 userRef가 들어와야함
+});
 
 app.post(routes.saveWorkTimeToEnd, async (req, res) => {
   const data = req.body.inputData;
