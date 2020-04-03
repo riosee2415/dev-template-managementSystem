@@ -58,8 +58,9 @@ class MM0102 extends React.Component {
       </>
     );
   }
-  _annualClickHandler = () => {
-    console.log("eeee");
+
+  _annualClickHandler = async key => {
+    console.log("3wefsdfds");
   };
 }
 
