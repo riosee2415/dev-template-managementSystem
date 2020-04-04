@@ -51,12 +51,12 @@ class MM0103 extends React.Component {
               </div>
               <div className="mc__col2__desc">
                 {this.state.empInfo ? (
-                  <div className="list__style__01">
-                    <div className="list__row">
-                      <div className="list__col">
+                  <div className="mm0103__dataBox">
+                    <div className="dataBox__row">
+                      <div className="dataBox__col">
                         <span>프로필</span>
                       </div>
-                      <div className="list__col">
+                      <div className="dataBox__col">
                         <span>
                           <img
                             src={this.state.empInfo.avatar}
@@ -67,65 +67,65 @@ class MM0103 extends React.Component {
                       </div>
                     </div>
 
-                    <div className="list__row">
-                      <div className="list__col">
+                    <div className="dataBox__row">
+                      <div className="dataBox__col">
                         <span>아이디</span>
                       </div>
-                      <div className="list__col">
+                      <div className="dataBox__col">
                         <span>{this.state.empInfo.empId}</span>
                       </div>
                     </div>
 
-                    <div className="list__row">
-                      <div className="list__col">
+                    <div className="dataBox__row">
+                      <div className="dataBox__col">
                         <span>직원명</span>
                       </div>
-                      <div className="list__col">
+                      <div className="dataBox__col">
                         <span>{this.state.empInfo.name}</span>
                       </div>
                     </div>
 
-                    <div className="list__row">
-                      <div className="list__col">
+                    <div className="dataBox__row">
+                      <div className="dataBox__col">
                         <span>직급</span>
                       </div>
-                      <div className="list__col">
+                      <div className="dataBox__col">
                         <span>{this.state.empInfo.rank}</span>
                       </div>
                     </div>
 
-                    <div className="list__row">
-                      <div className="list__col">
+                    <div className="dataBox__row">
+                      <div className="dataBox__col">
                         <span>근무위치</span>
                       </div>
-                      <div className="list__col">
+                      <div className="dataBox__col">
                         <span>{this.state.empInfo.loc}</span>
                       </div>
                     </div>
 
-                    <div className="list__row">
-                      <div className="list__col">
+                    <div className="dataBox__row">
+                      <div className="dataBox__col">
                         <span>고용일</span>
                       </div>
-                      <div className="list__col">
+                      <div className="dataBox__col">
                         <span>{this.state.empInfo.hire}</span>
                       </div>
                     </div>
 
-                    <div className="list__row">
-                      <div className="list__col">
+                    <div className="dataBox__row">
+                      <div className="dataBox__col">
                         <span>생년월일</span>
                       </div>
-                      <div className="list__col">
+                      <div className="dataBox__col">
                         <span>{this.state.empInfo.birthday}</span>
                       </div>
                     </div>
 
-                    <div className="list__row">
-                      <div className="list__col">
+                    <div className="dataBox__row">
+                      <div className="dataBox__col">
                         <span>주소</span>
                       </div>
-                      <div className="list__col">
+                      <div className="dataBox__col">
                         <span>
                           {this.state.empInfo.zoneCode
                             ? `(${this.state.empInfo.zoneCode}) `
