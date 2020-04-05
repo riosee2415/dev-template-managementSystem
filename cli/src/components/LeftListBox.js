@@ -22,9 +22,6 @@ class LeftListBox extends React.Component {
   };
 
   componentDidUpdate = async (prevProps, prevState) => {
-    console.log("변경되 값 : " + this.props.isRefresh);
-    console.log("이전 값 : " + prevProps.isRefresh);
-    console.log("결과 : " + (prevProps.isRefresh !== this.props.isRefresh));
     if (prevProps.isRefresh !== this.props.isRefresh) {
       const response = await this._callCollectionInfo();
 
