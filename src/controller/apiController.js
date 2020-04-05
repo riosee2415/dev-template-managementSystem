@@ -33,26 +33,55 @@ const loginProcess = async (id, pass) => {
   return sendData;
 };
 
-const callCollection = async (pageCode, collection) => {
+const callCollection = async (pageCode, collections) => {
   let fsRef;
   let queryRef;
   let sendData = [];
+  let collectionIdx = 0;
 
   try {
-    fsRef = await firestore.collection(collection);
+    if (pageCode === "MM0102") {
+      fsRef = await firestore.collection(collections[collectionIdx]);
 
-    if (pageCode === "MM0103") {
-      queryRef = await fsRef.get().then(res => {
-        res.forEach(doc => {
-          sendData.push({
-            docId: doc.id,
-            empId: doc.data().empId,
-            name: doc.data().name,
-            rank: doc.data().rank
+      queryRef = await fsRef
+        .get()
+        .then(res => {
+          res.forEach(doc => {
+            sendData.push({
+              docId: doc.id,
+              empId: doc.data().empId,
+              name: doc.data().name,
+              rank: doc.data().rank
+            });
           });
+        })
+        .then(async () => {
+          collectionIdx++;
+          fsRef = await firestore.collection(collections[collectionIdx]);
+
+          await Promise.all(
+            sendData.map(async (data, idx) => {
+              let annualHolidays = [];
+
+              queryRef = await fsRef.where("userRef", "==", data.docId);
+
+              await queryRef.get().then(res => {
+                res.docs.map(doc => {
+                  annualHolidays.push({
+                    year: doc.data().year,
+                    allAnnual: doc.data().allAnnual,
+                    usedAnnual: doc.data().usedAnnual
+                  });
+                });
+                data.annualHolidays = annualHolidays;
+                sendData.splice(idx, 1, data);
+              });
+            })
+          );
         });
-      });
-    } else if (pageCode === "MM0102") {
+    } else if (pageCode === "MM0103") {
+      fsRef = await firestore.collection(collections[collectionIdx]);
+
       queryRef = await fsRef.get().then(res => {
         res.forEach(doc => {
           sendData.push({
@@ -68,7 +97,6 @@ const callCollection = async (pageCode, collection) => {
     console.log(e);
   } finally {
   }
-
   return sendData;
 };
 

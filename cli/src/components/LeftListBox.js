@@ -6,8 +6,9 @@ class LeftListBox extends React.Component {
 
     this.state = {
       pageCode: this.props.pageCode,
-      collection: this.props.collection,
-      dataList: []
+      collections: this.props.collections,
+      dataList: [],
+      isEmptyData: false
     };
   }
 
@@ -15,12 +16,13 @@ class LeftListBox extends React.Component {
     const response = await this._callCollectionInfo();
 
     this.setState({
-      dataList: response
+      dataList: response,
+      isEmptyData: response.length > 0 ? false : true
     });
   };
 
   render() {
-    const { pageCode, dataList } = this.state;
+    const { pageCode, dataList, isEmptyData } = this.state;
 
     return (
       <>
@@ -49,37 +51,47 @@ class LeftListBox extends React.Component {
                 <col width="100px" />
               </colgroup>
               <tbody className="txt-darkGray">
-                {dataList.map((data, idx) => {
-                  if (pageCode === "MM0103") {
-                    return (
-                      <tr
-                        key={data.docId}
-                        onClick={() => this.props.dataClickHandler(data.empId)}
-                      >
-                        <td>{idx + 1}</td>
-                        <td>{data.name}</td>
-                        <td>{data.rank}</td>
-                      </tr>
-                    );
-                  } else if (pageCode === "MM0102") {
-                    return (
-                      <tr
-                        key={data.docId}
-                        onClick={() => this.props.dataClickHandler(data.docId)}
-                      >
-                        <td>{idx + 1}</td>
-                        <td>{data.name}</td>
-                        <td>{data.rank}</td>
-                      </tr>
-                    );
-                  } else {
-                    return (
-                      <tr>
-                        <td colspan="3">데이터가 없습니다.</td>
-                      </tr>
-                    );
-                  }
-                })}
+                {!isEmptyData ? (
+                  dataList.map((data, idx) => {
+                    if (pageCode === "MM0102") {
+                      return (
+                        <tr
+                          key={idx}
+                          onClick={() =>
+                            this.props.dataClickHandler(data.docId)
+                          }
+                        >
+                          <td>{idx + 1}</td>
+                          <td>{data.name}</td>
+                          <td>{data.rank}</td>
+                        </tr>
+                      );
+                    } else if (pageCode === "MM0103") {
+                      return (
+                        <tr
+                          key={data.docId}
+                          onClick={() =>
+                            this.props.dataClickHandler(data.empId)
+                          }
+                        >
+                          <td>{idx + 1}</td>
+                          <td>{data.name}</td>
+                          <td>{data.rank}</td>
+                        </tr>
+                      );
+                    } else {
+                      return (
+                        <tr className="empty">
+                          <td colSpan="3">데이터가 없습니다.</td>
+                        </tr>
+                      );
+                    }
+                  })
+                ) : (
+                  <tr className="empty">
+                    <td colSpan="3">데이터가 없습니다.</td>
+                  </tr>
+                )}
               </tbody>
             </table>
           </div>
@@ -89,7 +101,7 @@ class LeftListBox extends React.Component {
   }
 
   _callCollectionInfo = async () => {
-    const { pageCode, collection } = this.state;
+    const { pageCode, collections } = this.state;
 
     const response = await fetch("/api/callCollection", {
       method: "POST",
@@ -97,7 +109,7 @@ class LeftListBox extends React.Component {
         "Content-Type": "application/json"
         // 'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: JSON.stringify({ pageCode, collection })
+      body: JSON.stringify({ pageCode, collections })
     });
 
     return await response.json();

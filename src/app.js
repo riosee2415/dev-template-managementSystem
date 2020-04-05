@@ -24,9 +24,8 @@ app.post(routes.loginProcess, async (req, res) => {
 
 app.post(routes.callCollection, async (req, res) => {
   const pageCode = req.body.pageCode;
-  const collection = req.body.collection;
-
-  const sendData = await apiController.callCollection(pageCode, collection);
+  const collections = req.body.collections;
+  const sendData = await apiController.callCollection(pageCode, collections);
 
   return res.json(sendData);
 });

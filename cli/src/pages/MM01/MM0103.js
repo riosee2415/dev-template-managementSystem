@@ -8,7 +8,7 @@ class MM0103 extends React.Component {
 
     this.state = {
       pageCode: "MM0103",
-      selectCollection: "employee",
+      selectCollection: ["employee"],
       empInfo: null
     };
   }
@@ -39,7 +39,7 @@ class MM0103 extends React.Component {
                   title_02="직원명"
                   title_03="직급"
                   pageCode={pageCode}
-                  collection={selectCollection}
+                  collections={selectCollection}
                   dataClickHandler={this._dataClickHandler}
                 />
               </div>

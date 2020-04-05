@@ -8,12 +8,10 @@ class MM0102 extends React.Component {
 
     this.state = {
       pageCode: "MM0102",
-      selectCollection: "employee",
+      selectCollection: ["employee", "annualHoliday"],
       annualInfo: []
     };
   }
-
-  componentDidMount() {}
 
   render() {
     const { pageCode, selectCollection, annualInfo } = this.state;
@@ -41,7 +39,7 @@ class MM0102 extends React.Component {
                   title_02="직원명"
                   title_03="직급"
                   pageCode={pageCode}
-                  collection={selectCollection}
+                  collections={selectCollection}
                   dataClickHandler={this._annualClickHandler}
                 />
               </div>
@@ -78,6 +76,7 @@ class MM0102 extends React.Component {
       body: JSON.stringify({ key })
     });
     const data = await response.json();
+    console.log(data);
     this.setState({
       annualInfo: data
     });

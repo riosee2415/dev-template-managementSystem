@@ -31,6 +31,10 @@
   cursor: pointer;
 }
 
+.lb .lb__body__box tbody tr.empty {
+  cursor: default;
+}
+
 .lb .lb__body__box tbody tr td:nth-child(2):hover {
   text-decoration: underline;
 }
