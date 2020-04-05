@@ -21,6 +21,20 @@ class LeftListBox extends React.Component {
     });
   };
 
+  componentDidUpdate = async (prevProps, prevState) => {
+    console.log("변경되 값 : " + this.props.isRefresh);
+    console.log("이전 값 : " + prevProps.isRefresh);
+    console.log("결과 : " + (prevProps.isRefresh !== this.props.isRefresh));
+    if (prevProps.isRefresh !== this.props.isRefresh) {
+      const response = await this._callCollectionInfo();
+
+      this.setState({
+        dataList: response,
+        isEmptyData: response.length > 0 ? false : true
+      });
+    }
+  };
+
   render() {
     const { pageCode, dataList, isEmptyData } = this.state;
 
@@ -56,7 +70,7 @@ class LeftListBox extends React.Component {
                     if (pageCode === "MM0102") {
                       return (
                         <tr
-                          key={idx}
+                          key={data.docId}
                           onClick={() =>
                             this.props.dataClickHandler(data.docId)
                           }

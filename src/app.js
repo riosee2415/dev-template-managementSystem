@@ -75,6 +75,13 @@ app.post(routes.getDetailDataToWorkTime, async (req, res) => {
   return res.json(sendData);
 });
 
+app.post(routes.removeEmpInfo, async (req, res) => {
+  const empInfo = req.body.empInfo;
+  const sendData = await apiController.removeEmpInfo(empInfo);
+
+  return res.json(sendData);
+});
+
 app.listen(PORT, () => {
   console.log(`✅ Server Start On ${PORT}`);
 });

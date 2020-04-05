@@ -10,7 +10,7 @@
  - password     비밀번호    [String]
  - rank         직급        [String]
  - zoneCode     우편번호    [String]
-
+ - useyn        사용여부    [String]
 
 [Firestore -workRecord- Model]
  - date         날짜        [String]
@@ -19,6 +19,7 @@
  - id           아이디      [String]
  - isHoliday    연차여부    [Boolean]
  - startTime    출근시간    [String]
+
 
  [Firestore -annualHoliday- Model]
  - year         연도        [String]
