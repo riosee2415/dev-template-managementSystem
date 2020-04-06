@@ -54,6 +54,7 @@ class MM0102 extends React.Component {
                   <>
                     <div>{dataInfo.name}</div>
                     <div>{dataInfo.hire}</div>
+                    <div>{dataInfo.hireYear}년차</div>
                   </>
                 ) : null}
                 {dataInfo
@@ -85,6 +86,11 @@ class MM0102 extends React.Component {
     });
 
     const data = await response.json();
+
+    const workYear = data.hire.substring(0, 4) - new Date().getFullYear() + 1;
+    data.hireYear = workYear;
+
+    console.log(workYear);
 
     if (data.empId === sessionStorage.login_id) {
       this.setState({
