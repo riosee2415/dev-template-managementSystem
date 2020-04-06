@@ -1,5 +1,5 @@
-const firebase = require("firebase/app");
-require("firebase/firestore");
+import firebase from "firebase/app";
+import "firebase/firestore";
 
 const config = {
   apiKey: "AIzaSyDvGk7awuufvdrirqjL1jy3RHBWDUbKhy4",
@@ -9,7 +9,7 @@ const config = {
   storageBucket: "systemof4leaf.appspot.com",
   messagingSenderId: "128013314530",
   appId: "1:128013314530:web:80a6437ce9f22db14231bb",
-  measurementId: "G-6HHMHMEL1D"
+  measurementId: "G-6HHMHMEL1D",
 };
 
 firebase.initializeApp(config);

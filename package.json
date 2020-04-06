@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "client": "cd cli && yarn start",
-    "server": "nodemon src/app.js",
+    "server": "nodemon --exec babel-node src/app.js",
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
   },
   "dependencies": {

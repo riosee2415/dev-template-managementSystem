@@ -1,10 +1,10 @@
-const firestore = require("../firebase");
+import firestore from "../firebase";
 
 const loginProcess = async (id, pass) => {
   let fsRef;
   let queryRef;
   let sendData = {
-    loginResult: false
+    loginResult: false,
   };
 
   try {
@@ -14,14 +14,14 @@ const loginProcess = async (id, pass) => {
       .where("empId", "==", id)
       .where("password", "==", pass);
 
-    await queryRef.get().then(res => {
-      res.forEach(doc => {
+    await queryRef.get().then((res) => {
+      res.forEach((doc) => {
         sendData = {
           empId: doc.data().empId,
           name: doc.data().name,
           rank: doc.data().rank,
           avatar: doc.data().avatar,
-          loginResult: true
+          loginResult: true,
         };
       });
     });
@@ -45,13 +45,13 @@ const callCollection = async (pageCode, collections) => {
 
       queryRef = await fsRef
         .get()
-        .then(res => {
-          res.forEach(doc => {
+        .then((res) => {
+          res.forEach((doc) => {
             sendData.push({
               docId: doc.id,
               empId: doc.data().empId,
               name: doc.data().name,
-              rank: doc.data().rank
+              rank: doc.data().rank,
             });
           });
         })
@@ -65,12 +65,12 @@ const callCollection = async (pageCode, collections) => {
 
               queryRef = await fsRef.where("userRef", "==", data.docId);
 
-              await queryRef.get().then(res => {
-                res.docs.map(doc => {
+              await queryRef.get().then((res) => {
+                res.docs.map((doc) => {
                   annualHolidays.push({
                     year: doc.data().year,
                     allAnnual: doc.data().allAnnual,
-                    usedAnnual: doc.data().usedAnnual
+                    usedAnnual: doc.data().usedAnnual,
                   });
                 });
                 data.annualHolidays = annualHolidays;
@@ -84,13 +84,13 @@ const callCollection = async (pageCode, collections) => {
 
       queryRef = await fsRef.where("useyn", "==", "y");
 
-      await queryRef.get().then(res => {
-        res.forEach(doc => {
+      await queryRef.get().then((res) => {
+        res.forEach((doc) => {
           sendData.push({
             docId: doc.id,
             empId: doc.data().empId,
             name: doc.data().name,
-            rank: doc.data().rank
+            rank: doc.data().rank,
           });
         });
       });
@@ -103,7 +103,7 @@ const callCollection = async (pageCode, collections) => {
   return sendData;
 };
 
-const getEmpInfo = async key => {
+const getEmpInfo = async (key) => {
   let fsRef;
   let queryRef;
   let sendData = [];
@@ -113,8 +113,8 @@ const getEmpInfo = async key => {
 
     queryRef = await fsRef.where("empId", "==", key);
 
-    await queryRef.get().then(res => {
-      res.forEach(doc => {
+    await queryRef.get().then((res) => {
+      res.forEach((doc) => {
         sendData = {
           docId: doc.id,
           empId: doc.data().empId,
@@ -127,7 +127,7 @@ const getEmpInfo = async key => {
           hire: doc.data().hire,
           loc: doc.data().loc,
           zoneCode: doc.data().zoneCode,
-          useyn: doc.data().useyn
+          useyn: doc.data().useyn,
         };
       });
     });
@@ -139,11 +139,11 @@ const getEmpInfo = async key => {
   return sendData;
 };
 
-const removeEmpInfo = async empInfo => {
+const removeEmpInfo = async (empInfo) => {
   let fsRef;
   let queryRef;
   let sendData = {
-    result: false
+    result: false,
   };
 
   try {
@@ -163,7 +163,7 @@ const removeEmpInfo = async empInfo => {
   return sendData;
 };
 
-const getAnnualInfo = async key => {
+const getAnnualInfo = async (key) => {
   let fsRef;
   let queryRef;
   let sendData = [];
@@ -171,13 +171,13 @@ const getAnnualInfo = async key => {
   try {
     fsRef = await firestore.collection("annualHoliday");
     queryRef = await fsRef.where("userRef", "==", key);
-    await queryRef.get().then(res => {
-      res.forEach(doc => {
+    await queryRef.get().then((res) => {
+      res.forEach((doc) => {
         sendData.push({
           year: doc.data().year,
           allAnnual: doc.data().allAnnual,
           usedAnnual: doc.data().usedAnnual,
-          userref: doc.data().userRef
+          userref: doc.data().userRef,
         });
       });
     });
@@ -194,7 +194,7 @@ const apiController = {
   callCollection,
   getEmpInfo,
   removeEmpInfo,
-  getAnnualInfo
+  getAnnualInfo,
 };
 
 module.exports = apiController;
