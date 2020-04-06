@@ -8,13 +8,13 @@ class MM0102 extends React.Component {
 
     this.state = {
       pageCode: "MM0102",
-      selectCollection: "employee",
-      empInfo: null
+      selectCollection: ["employee", "annualHoliday"],
+      annualInfo: []
     };
   }
 
   render() {
-    const { pageCode, selectCollection } = this.state;
+    const { pageCode, selectCollection, annualInfo } = this.state;
 
     return (
       <>
@@ -23,7 +23,7 @@ class MM0102 extends React.Component {
             <div className="mh__content">
               <div className="mh__content__title">
                 <IconComponent iconName="fas fa-leaf" />
-                <span>인사관리 > 연차 관리</span>
+                <span>인사 관리 > 연차 관리</span>
               </div>
             </div>
           </div>
@@ -39,7 +39,7 @@ class MM0102 extends React.Component {
                   title_02="직원명"
                   title_03="직급"
                   pageCode={pageCode}
-                  collection={selectCollection}
+                  collections={selectCollection}
                   dataClickHandler={this._annualClickHandler}
                 />
               </div>
@@ -50,7 +50,15 @@ class MM0102 extends React.Component {
                 <span className="subTitle">연차 정보</span>
               </div>
               <div className="mc__col2__desc">
-                각 직원들의 연차정보를 나타내게 할 부분
+                {annualInfo.map(data => {
+                  return (
+                    <>
+                      <div>{data.year}</div>
+                      <div>{data.allAnnual}</div>
+                      <div>{data.usedAnnual}</div>
+                    </>
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -60,7 +68,18 @@ class MM0102 extends React.Component {
   }
 
   _annualClickHandler = async key => {
-    console.log("eeeee");
+    const response = await fetch("/api/getAnnualInfo", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ key })
+    });
+    const data = await response.json();
+    console.log(data);
+    this.setState({
+      annualInfo: data
+    });
   };
 }
 

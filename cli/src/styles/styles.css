@@ -1,8 +1,9 @@
 @import "./reset.css";
 @import "./layouts.css";
+@import "./common.css";
 @import "./login.css";
 @import "./loginRes.css";
-@import "./common.css";
+@import "./profileBox.css";
 @import "./leftListBox.css";
 
 @import "./mm01/mm0101.css";

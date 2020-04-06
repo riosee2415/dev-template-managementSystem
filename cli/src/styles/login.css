@@ -24,6 +24,7 @@
   font-size: 22px;
   margin-bottom: 50px;
   text-align: center;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
 }
 .login-box form h3 p {
   font-weight: 600;

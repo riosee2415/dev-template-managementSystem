@@ -80,7 +80,7 @@ class App extends React.Component {
               <div className="sys__menu">
                 <Menu />
               </div>
-              <div className="sys__content">
+              <div className="sys__content scrollbar scroll-both">
                 <Route exact path={routes.HOME} component={Home} />
                 {/* MM01 인사관리 */}
                 <Route exact path={routes.MM0101} component={MM0101} />

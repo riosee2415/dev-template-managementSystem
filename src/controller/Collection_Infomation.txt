@@ -1,6 +1,6 @@
 [Firestore -employee- Model]
- - addr1        주소       [String]
- - addr2        상세주소     [String]
+ - addr1        주소        [String]
+ - addr2        상세주소    [String]
  - avatar       프로필      [String]
  - birthday     생년월일    [String]
  - empId        아이디      [String]
@@ -10,7 +10,7 @@
  - password     비밀번호    [String]
  - rank         직급        [String]
  - zoneCode     우편번호    [String]
-
+ - useyn        사용여부    [String]
 
 [Firestore -workRecord- Model]
  - date         날짜        [String]
@@ -19,6 +19,7 @@
  - id           아이디      [String]
  - isHoliday    연차여부    [Boolean]
  - startTime    출근시간    [String]
+
 
  [Firestore -annualHoliday- Model]
  - year         날자        [String]

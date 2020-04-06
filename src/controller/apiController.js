@@ -33,27 +33,58 @@ const loginProcess = async (id, pass) => {
   return sendData;
 };
 
-const callCollection = async (pageCode, collection) => {
+const callCollection = async (pageCode, collections) => {
   let fsRef;
   let queryRef;
   let sendData = [];
+  let collectionIdx = 0;
 
   try {
-    fsRef = await firestore.collection(collection);
+    if (pageCode === "MM0102") {
+      fsRef = await firestore.collection(collections[collectionIdx]);
 
-    if (pageCode === "MM0103") {
-      queryRef = await fsRef.get().then(res => {
-        res.forEach(doc => {
-          sendData.push({
-            docId: doc.id,
-            empId: doc.data().empId,
-            name: doc.data().name,
-            rank: doc.data().rank
+      queryRef = await fsRef
+        .get()
+        .then(res => {
+          res.forEach(doc => {
+            sendData.push({
+              docId: doc.id,
+              empId: doc.data().empId,
+              name: doc.data().name,
+              rank: doc.data().rank
+            });
           });
+        })
+        .then(async () => {
+          collectionIdx++;
+          fsRef = await firestore.collection(collections[collectionIdx]);
+
+          await Promise.all(
+            sendData.map(async (data, idx) => {
+              let annualHolidays = [];
+
+              queryRef = await fsRef.where("userRef", "==", data.docId);
+
+              await queryRef.get().then(res => {
+                res.docs.map(doc => {
+                  annualHolidays.push({
+                    year: doc.data().year,
+                    allAnnual: doc.data().allAnnual,
+                    usedAnnual: doc.data().usedAnnual
+                  });
+                });
+                data.annualHolidays = annualHolidays;
+                sendData.splice(idx, 1, data);
+              });
+            })
+          );
         });
-      });
-    } else if (pageCode === "MM0102") {
-      queryRef = await fsRef.get().then(res => {
+    } else if (pageCode === "MM0103") {
+      fsRef = await firestore.collection(collections[collectionIdx]);
+
+      queryRef = await fsRef.where("useyn", "==", "y");
+
+      await queryRef.get().then(res => {
         res.forEach(doc => {
           sendData.push({
             docId: doc.id,
@@ -85,6 +116,7 @@ const getEmpInfo = async key => {
     await queryRef.get().then(res => {
       res.forEach(doc => {
         sendData = {
+          docId: doc.id,
           empId: doc.data().empId,
           name: doc.data().name,
           rank: doc.data().rank,
@@ -94,7 +126,8 @@ const getEmpInfo = async key => {
           birthday: doc.data().birthday,
           hire: doc.data().hire,
           loc: doc.data().loc,
-          zoneCode: doc.data().zoneCode
+          zoneCode: doc.data().zoneCode,
+          useyn: doc.data().useyn
         };
       });
     });
@@ -106,38 +139,62 @@ const getEmpInfo = async key => {
   return sendData;
 };
 
-// const getAnnualInfo = async key => {
-//   let fsRef;
-//   let queryRef;
-//   let sendData = [];
+const removeEmpInfo = async empInfo => {
+  let fsRef;
+  let queryRef;
+  let sendData = {
+    result: false
+  };
 
-//   try {
-//     fsRef = await firestore.collection("annualHoliday");
+  try {
+    fsRef = await firestore.collection("employee");
 
-//     queryRef = await fsRef.where("empId", "==", key);
+    queryRef = await fsRef
+      .doc(empInfo.docId)
+      .update({ useyn: "n" })
+      .then(() => {
+        sendData.result = true;
+      });
+  } catch (e) {
+    console.log(e);
+  } finally {
+  }
 
-//     await queryRef.get().then(res => {
-//       res.forEach(doc => {
-//         sendData = {
-//           empId: doc.data().empId,
-//           name: doc.data().name,
-//           year: doc.data().year,
-//           allAnnual: doc.data().allAnnual,
-//           usedAnnual: doc.data().usedAnnual,
-//           userRef: doc.data().userRef
-//         };
-//       });
-//     });
-//   } catch (e) {
-//     console.log(e);
-//   } finally {
-//   }
-// };
+  return sendData;
+};
+
+const getAnnualInfo = async key => {
+  let fsRef;
+  let queryRef;
+  let sendData = [];
+
+  try {
+    fsRef = await firestore.collection("annualHoliday");
+    queryRef = await fsRef.where("userRef", "==", key);
+    await queryRef.get().then(res => {
+      res.forEach(doc => {
+        sendData.push({
+          year: doc.data().year,
+          allAnnual: doc.data().allAnnual,
+          usedAnnual: doc.data().usedAnnual,
+          userref: doc.data().userRef
+        });
+      });
+    });
+  } catch (e) {
+    console.log(e);
+  } finally {
+  }
+
+  return sendData;
+};
 
 const apiController = {
   loginProcess,
   callCollection,
-  getEmpInfo
+  getEmpInfo,
+  removeEmpInfo,
+  getAnnualInfo
 };
 
 module.exports = apiController;

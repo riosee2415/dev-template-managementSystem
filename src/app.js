@@ -24,9 +24,8 @@ app.post(routes.loginProcess, async (req, res) => {
 
 app.post(routes.callCollection, async (req, res) => {
   const pageCode = req.body.pageCode;
-  const collection = req.body.collection;
-
-  const sendData = await apiController.callCollection(pageCode, collection);
+  const collections = req.body.collections;
+  const sendData = await apiController.callCollection(pageCode, collections);
 
   return res.json(sendData);
 });
@@ -52,13 +51,15 @@ app.post(routes.getEmpInfo, async (req, res) => {
   return res.json(sendData);
 });
 
-// app.post(routes.getAnnualInfo, async (req, res) => {
-//   const key = rew.body.key;
+app.post(routes.getAnnualInfo, async (req, res) => {
+  const key = req.body.key;
 
-//   const sendData = await apiController.getAnnualInfo(key);
+  const sendData = await apiController.getAnnualInfo(key);
 
-//   return res.json(sendData);
-// });
+  return res.json(sendData);
+
+  // 이 부분에 userRef가 들어와야함
+});
 
 app.post(routes.saveWorkTimeToEnd, async (req, res) => {
   const data = req.body.inputData;
@@ -70,6 +71,13 @@ app.post(routes.saveWorkTimeToEnd, async (req, res) => {
 app.post(routes.getDetailDataToWorkTime, async (req, res) => {
   const data = req.body.inputData;
   const sendData = await apiControllerWork.getDetailDataToWorkTime(data);
+
+  return res.json(sendData);
+});
+
+app.post(routes.removeEmpInfo, async (req, res) => {
+  const empInfo = req.body.empInfo;
+  const sendData = await apiController.removeEmpInfo(empInfo);
 
   return res.json(sendData);
 });
