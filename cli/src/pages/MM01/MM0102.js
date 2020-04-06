@@ -9,12 +9,12 @@ class MM0102 extends React.Component {
     this.state = {
       pageCode: "MM0102",
       selectCollection: ["employee", "annualHoliday"],
-      annualInfo: []
+      dataInfo: null
     };
   }
 
   render() {
-    const { pageCode, selectCollection, annualInfo } = this.state;
+    const { pageCode, selectCollection, dataInfo } = this.state;
 
     return (
       <>
@@ -50,15 +50,23 @@ class MM0102 extends React.Component {
                 <span className="subTitle">연차 정보</span>
               </div>
               <div className="mc__col2__desc">
-                {annualInfo.map(data => {
-                  return (
-                    <>
-                      <div>{data.year}</div>
-                      <div>{data.allAnnual}</div>
-                      <div>{data.usedAnnual}</div>
-                    </>
-                  );
-                })}
+                {dataInfo ? (
+                  <>
+                    <div>{dataInfo.name}</div>
+                    <div>{dataInfo.hire}</div>
+                  </>
+                ) : null}
+                {dataInfo
+                  ? dataInfo.annualInfo.map(data => {
+                      return (
+                        <div key={data.docId}>
+                          <div>{data.year}</div>
+                          <div>{data.allAnnual}</div>
+                          <div>{data.usedAnnual}</div>
+                        </div>
+                      );
+                    })
+                  : null}
               </div>
             </div>
           </div>
@@ -75,11 +83,21 @@ class MM0102 extends React.Component {
       },
       body: JSON.stringify({ key })
     });
+
     const data = await response.json();
-    console.log(data);
-    this.setState({
-      annualInfo: data
-    });
+
+    if (data.empId === sessionStorage.login_id) {
+      this.setState({
+        dataInfo: data
+      });
+    } else {
+      this.setState({
+        dataInfo: null
+      });
+      setTimeout(() => {
+        alert("접근 권한이 없습니다.");
+      }, 1);
+    }
   };
 }
 
