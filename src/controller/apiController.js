@@ -94,6 +94,18 @@ const callCollection = async (pageCode, collections) => {
           });
         });
       });
+    } else if (pageCode == "MM0202") {
+      fsRef = await firestore.collection(collections[collectionIdx]);
+
+      queryRef = await fsRef.get().then((res) => {
+        res.forEach((doc) => {
+          sendData.push({
+            docId: doc.id,
+            projectName: doc.data().name,
+            projectType: doc.data().type,
+          });
+        });
+      });
     }
   } catch (e) {
     console.log(e);

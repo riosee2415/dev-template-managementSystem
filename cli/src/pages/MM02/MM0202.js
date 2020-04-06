@@ -9,7 +9,7 @@ class MM0202 extends React.Component {
     this.state = {
       pageCode: "MM0202",
       selectCollection: ["progress_projects"],
-      empInfo: null,
+      projectList: null,
       isLeftRefresh: false,
     };
   }
@@ -87,6 +87,23 @@ class MM0202 extends React.Component {
       </div>
     );
   }
+
+  _dataClickHandler = async () => {
+    const response = await fetch("/api/getEmpInfo", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: JSON.stringify({}),
+    });
+
+    const data = await response.json();
+
+    this.setState({
+      projectList: data,
+    });
+  };
 }
 
 export default MM0202;

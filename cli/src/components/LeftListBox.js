@@ -8,7 +8,7 @@ class LeftListBox extends React.Component {
       pageCode: this.props.pageCode,
       collections: this.props.collections,
       dataList: [],
-      isEmptyData: false
+      isEmptyData: false,
     };
   }
 
@@ -17,7 +17,7 @@ class LeftListBox extends React.Component {
 
     this.setState({
       dataList: response,
-      isEmptyData: response.length > 0 ? false : true
+      isEmptyData: response.length > 0 ? false : true,
     });
   };
 
@@ -27,7 +27,7 @@ class LeftListBox extends React.Component {
 
       this.setState({
         dataList: response,
-        isEmptyData: response.length > 0 ? false : true
+        isEmptyData: response.length > 0 ? false : true,
       });
     }
   };
@@ -90,6 +90,14 @@ class LeftListBox extends React.Component {
                           <td>{data.rank}</td>
                         </tr>
                       );
+                    } else if (pageCode === "MM0202") {
+                      return (
+                        <tr>
+                          <td>{idx + 1}</td>
+                          <td>{data.projectName}</td>
+                          <td>{data.projectType}</td>
+                        </tr>
+                      );
                     } else {
                       return (
                         <tr className="empty">
@@ -117,10 +125,10 @@ class LeftListBox extends React.Component {
     const response = await fetch("/api/callCollection", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
         // 'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: JSON.stringify({ pageCode, collections })
+      body: JSON.stringify({ pageCode, collections }),
     });
 
     return await response.json();
