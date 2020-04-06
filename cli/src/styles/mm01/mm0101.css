@@ -70,11 +70,15 @@
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  margin: 20px auto;
+  margin: 25px auto;
   width: 600px;
   min-width: 500px;
   height: 70px;
   box-shadow: 3px 3px 12px rgba(53, 53, 53, 0.1);
+}
+
+.mm0101__dataBox:hover {
+  background-color: #f4f4f493;
 }
 
 .mm0101__dataBox:nth-child(2n) {
@@ -85,6 +89,11 @@
   border-left: 5px solid #ffe259;
 }
 
+.mm0101__dataBox:first-child {
+  margin-top: 30px;
+  box-shadow: 3px 3px 12px rgba(178, 238, 255, 0.544);
+}
+
 .mm0101__dataBox > div {
   margin-left: 10px;
   width: 20%;
@@ -92,6 +101,7 @@
   line-height: 70px;
   text-align: center;
   border-left: 1px solid #f1f1f1;
+  font-size: 15px;
 }
 
 .mm0101__dataBox > div:first-child {
@@ -102,4 +112,14 @@
   font-weight: bold;
   border: 3px solid #353535;
   border-radius: 50px;
+}
+
+.mm0101__dataBox div:nth-child(3) span:first-child {
+  border-bottom: 1px solid #ffa751;
+  margin-right: 5px;
+}
+
+.mm0101__dataBox div:nth-child(4) span:first-child {
+  border-bottom: 1px solid #2c3e50;
+  margin-right: 5px;
 }
