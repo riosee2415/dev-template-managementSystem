@@ -1,9 +1,10 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const morgan = require("morgan");
-const routes = require("./routes");
-const apiController = require("./controller/apiController");
-const apiControllerWork = require("./controller/apiControllerWork");
+import express from "express";
+import bodyParser from "body-parser";
+import morgan from "morgan";
+import routes from "./routes";
+import apiController from "./controller/apiController";
+import apiControllerWork from "./controller/apiControllerWork";
+import projectController from "./controller/projectController";
 
 const PORT = 5000;
 
@@ -78,6 +79,13 @@ app.post(routes.getDetailDataToWorkTime, async (req, res) => {
 app.post(routes.removeEmpInfo, async (req, res) => {
   const empInfo = req.body.empInfo;
   const sendData = await apiController.removeEmpInfo(empInfo);
+
+  return res.json(sendData);
+});
+
+app.post(routes.getProjectInfo, async (req, res) => {
+  const projectRef = req.body.key;
+  const sendData = await projectController.getProjectInfo(projectRef);
 
   return res.json(sendData);
 });
