@@ -8,7 +8,8 @@ const routes = {
   saveWorkTimeToEnd: "/api/saveWorkTimeToEnd",
   getDetailDataToWorkTime: "/api/getDetailDataToWorkTime",
   getAnnualInfo: "/api/getAnnualInfo",
-  removeEmpInfo: "/api/removeEmpInfo"
+  removeEmpInfo: "/api/removeEmpInfo",
+  getProjectInfo: "/api/getProjectInfo",
 };
 
 module.exports = routes;

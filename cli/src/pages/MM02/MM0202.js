@@ -1,6 +1,7 @@
 import React from "react";
 import IconComponent from "../../components/IconComponent";
 import LeftListBox from "../../components/LeftListBox";
+import TopArea from "../../components/projectView/TopArea";
 
 class MM0202 extends React.Component {
   constructor(props) {
@@ -9,13 +10,18 @@ class MM0202 extends React.Component {
     this.state = {
       pageCode: "MM0202",
       selectCollection: ["progress_projects"],
-      projectList: null,
+      projectInfo: null,
       isLeftRefresh: false,
     };
   }
 
   render() {
-    const { pageCode, selectCollection, isLeftRefresh } = this.state;
+    const {
+      pageCode,
+      selectCollection,
+      isLeftRefresh,
+      projectInfo,
+    } = this.state;
 
     return (
       <div className="mm">
@@ -36,7 +42,7 @@ class MM0202 extends React.Component {
               <span>
                 <input
                   type="button"
-                  className="btn btn-xs bg-orange"
+                  className="btn btn-xs bg-blue"
                   value="수정"
                 />
               </span>
@@ -47,13 +53,6 @@ class MM0202 extends React.Component {
                   value="삭제"
                 />
               </span>
-              <span>
-                <input
-                  type="button"
-                  className="btn btn-xs bg-violet"
-                  value="작성"
-                />
-              </span>
             </div>
           </div>
         </div>
@@ -62,7 +61,7 @@ class MM0202 extends React.Component {
           <div className="mc__col1">
             <div className="mc__col1__title">
               <IconComponent iconName="fas fa-list-ul" />
-              <span className="subTitle">title</span>
+              <span className="subTitle">프로젝트 리스트</span>
             </div>
             <div className="mc__col1__desc">
               <LeftListBox
@@ -78,30 +77,52 @@ class MM0202 extends React.Component {
           </div>
           <div className="mc__col2">
             <div className="mc__col2__title">
-              <IconComponent iconName="fas fa-play" />
-              <span className="subTitle">title</span>
+              <IconComponent iconName="fas fa-file-alt" />
+              <span className="subTitle">상세정보</span>
             </div>
-            <div className="mc__col2__desc"></div>
+            <div className="mc__col2__desc">
+              {projectInfo ? (
+                <>
+                  <TopArea
+                    projectRef={projectInfo.ref}
+                    PM={projectInfo.PM}
+                    clientRef={projectInfo.clientRef}
+                    contactFile={projectInfo.contactFile}
+                    endDate={projectInfo.endDate}
+                    estimateFile={projectInfo.estimateFile}
+                    exDate={projectInfo.exDate}
+                    insDate={projectInfo.insDate}
+                    name={projectInfo.name}
+                    profit={projectInfo.profit}
+                    progress={projectInfo.progress}
+                    startDate={projectInfo.startDate}
+                    type={projectInfo.type}
+                  />
+                  <div className="mc__col2__desc__btnArea">
+                    <button>거래처정보</button>
+                    <button>진행률{projectInfo.progress}</button>
+                  </div>
+                </>
+              ) : null}
+            </div>
           </div>
         </div>
       </div>
     );
   }
 
-  _dataClickHandler = async () => {
-    const response = await fetch("/api/getEmpInfo", {
+  _dataClickHandler = async (key) => {
+    const response = await fetch("/api/getProjectInfo", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         // 'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: JSON.stringify({}),
+      body: JSON.stringify({ key }),
     });
-
     const data = await response.json();
-
     this.setState({
-      projectList: data,
+      projectInfo: data,
     });
   };
 }
