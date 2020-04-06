@@ -1,3 +1,7 @@
+.mm0103__dataBox {
+  margin-top: 30px;
+}
+
 .mm0103__dataBox .dataBox__row {
   display: flex;
   flex-direction: row;

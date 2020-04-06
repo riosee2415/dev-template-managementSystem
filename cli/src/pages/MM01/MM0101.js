@@ -1,5 +1,6 @@
 import React from "react";
 import IconComponent from "../../components/IconComponent";
+import AlertDialog from "../../components/Alertdialog";
 
 class MM0101 extends React.Component {
   constructor(props) {
@@ -17,7 +18,9 @@ class MM0101 extends React.Component {
       workEnd: "",
       fsId: "",
       screenReload: false,
-      detailList: []
+      detailList: [],
+      alert: false,
+      isReflash: false
     };
   }
 
@@ -29,6 +32,10 @@ class MM0101 extends React.Component {
     this._getworkStart();
 
     this._getDetailData();
+
+    this.setState({
+      alert: false
+    });
   }
 
   render() {
@@ -43,11 +50,19 @@ class MM0101 extends React.Component {
       workStart,
       workEnd,
       fsId,
-      detailList
+      detailList,
+      alert
     } = this.state;
 
     return (
       <div className="mm">
+        {alert ? (
+          <AlertDialog
+            alert={alert}
+            title="실행불가"
+            msg="출근은 하루 한번만 가능합니다."
+          />
+        ) : null}
         <div className="mm__header mh">
           <div className="mh__content">
             <div className="mh__content__title">
@@ -110,7 +125,9 @@ class MM0101 extends React.Component {
                 <div className="mm0101__left__col2">
                   <button
                     className="btn btn-m bg-gradient"
-                    onClick={() => this._startWorkHandler()}
+                    onClick={() => {
+                      this._startWorkHandler();
+                    }}
                   >
                     출근
                   </button>
@@ -221,7 +238,13 @@ class MM0101 extends React.Component {
     const validation1 = document.getElementById("workStart-js");
 
     if (validation1.innerText.length > 0) {
-      alert("출근은 하루에 한번만 가능합니다.");
+      await this.setState({
+        alert: false
+      });
+
+      this.setState({
+        alert: !this.state.alert
+      });
       return;
     }
 
