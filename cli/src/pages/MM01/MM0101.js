@@ -1,6 +1,6 @@
 import React from "react";
 import IconComponent from "../../components/IconComponent";
-import AlertDialog from "../../components/Alertdialog";
+import AlertDialog from "../../components/AlertDialog";
 
 class MM0101 extends React.Component {
   constructor(props) {
@@ -19,7 +19,7 @@ class MM0101 extends React.Component {
       fsId: "",
       screenReload: false,
       detailList: [],
-      alert: false,
+      isStartWorkAlertOpen: false,
       isReflash: false
     };
   }
@@ -34,8 +34,9 @@ class MM0101 extends React.Component {
     this._getDetailData();
 
     this.setState({
-      alert: false
+      isStartWorkAlertOpen: false
     });
+    console.log("didMount");
   }
 
   render() {
@@ -51,18 +52,11 @@ class MM0101 extends React.Component {
       workEnd,
       fsId,
       detailList,
-      alert
+      isStartWorkAlertOpen
     } = this.state;
 
     return (
       <div className="mm">
-        {alert ? (
-          <AlertDialog
-            alert={alert}
-            title="실행불가"
-            msg="출근은 하루 한번만 가능합니다."
-          />
-        ) : null}
         <div className="mm__header mh">
           <div className="mh__content">
             <div className="mh__content__title">
@@ -184,6 +178,16 @@ class MM0101 extends React.Component {
             </div>
           </div>
         </div>
+
+        {isStartWorkAlertOpen ? (
+          <AlertDialog
+            isOpen={isStartWorkAlertOpen}
+            type="error"
+            title="실행불가"
+            msg="출근은 하루 한번만 가능합니다."
+            closeDialogHandler={() => (this.state.isStartWorkAlertOpen = false)}
+          />
+        ) : null}
       </div>
     );
   }
@@ -243,7 +247,7 @@ class MM0101 extends React.Component {
       });
 
       this.setState({
-        alert: !this.state.alert
+        isStartWorkAlertOpen: true
       });
       return;
     }

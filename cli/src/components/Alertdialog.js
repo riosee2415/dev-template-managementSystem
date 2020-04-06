@@ -18,12 +18,14 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function AlertDialog({ alert, msg, title }) {
+export default function AlertDialog(props) {
   const classes = useStyles();
 
-  const [open, setOpen] = React.useState(alert);
+  const [open, setOpen] = React.useState(props.isOpen);
 
+  console.log(open, props.isOpen);
   const handleClose = () => {
+    props.closeDialogHandler();
     setOpen(false);
   };
 
@@ -32,9 +34,9 @@ export default function AlertDialog({ alert, msg, title }) {
       <Dialog open={open} onClose={handleClose}>
         <DialogContent className={classes.alertStyle}>
           <div className={classes.root}>
-            <Alert severity="error">
-              <AlertTitle>{title}</AlertTitle>
-              {msg}
+            <Alert severity={props.type}>
+              <AlertTitle>{props.title}</AlertTitle>
+              {props.msg}
             </Alert>
           </div>
         </DialogContent>
