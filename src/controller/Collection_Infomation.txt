@@ -25,4 +25,19 @@
  - allAnnual    전체연차     [String]
  - usedAnnual   사용연차     [String]
  - userRef      사용자키     [String]
-  
+
+
+[Firestore -progress_project- Model]
+ - name         프로젝트이름        [String]
+ - PM           프로젝트담당자       [String]
+ - clientRef    클라이언트아이디     [String]
+ - type         유형              [String]
+ - startDate    시작일            [String]
+ - endDate      종료일            [String]
+ - exDate       연장일            [String]
+ - profit       수익금            [String]
+ - progress     징행률            [String]
+ - contactFile  계약서파일         [String]
+ - estimateFile 견적서파일         [String]
+ - insDate      등록일            [String]
+ 
