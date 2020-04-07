@@ -32,6 +32,7 @@ class MM0202 extends React.Component {
     arr.push({ title: data.data2 });
 
     // get EmpList
+    await this._getEmpList();
 
     this.setState({
       workType: arr,
@@ -46,6 +47,7 @@ class MM0202 extends React.Component {
       projectInfo,
       projectWorkList,
       workType,
+      empList,
     } = this.state;
 
     return (
@@ -207,6 +209,18 @@ class MM0202 extends React.Component {
           />
 
           <ComboBox dataList={workType} title="업무유형" />
+
+          <ComboBox dataList={empList} title="담당자" />
+
+          <TextField
+            autoFocus
+            margin="dense"
+            label="업무내용"
+            type="text"
+            fullWidth
+            multiline={true}
+            rowsMax="10"
+          />
         </FormDialog>
       </div>
     );
@@ -222,6 +236,7 @@ class MM0202 extends React.Component {
       body: JSON.stringify({}),
     });
     const data = await response.json();
+
     this.setState({
       empList: data,
     });

@@ -75,9 +75,33 @@ const getProjectWorkListInfo = async (key) => {
   return sendData;
 };
 
+const getEmpList = async () => {
+  let fsRef;
+  let queryRef;
+  let sendData = [];
+
+  try {
+    fsRef = await firestore.collection("employee");
+
+    await fsRef.get().then((res) => {
+      res.forEach((doc) => {
+        sendData.push({
+          title: doc.data().name,
+        });
+      });
+    });
+  } catch (e) {
+    console.log(e);
+  } finally {
+  }
+
+  return sendData;
+};
+
 const projectController = {
   getProjectInfo,
   getProjectWorkListInfo,
+  getEmpList,
 };
 
 export default projectController;

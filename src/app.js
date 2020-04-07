@@ -109,6 +109,12 @@ app.post(routes.getCommonData, async (req, res) => {
   return res.json(sendData);
 });
 
+app.post(routes.getEmpList, async (req, res) => {
+  const sendData = await projectController.getEmpList();
+
+  return res.json(sendData);
+});
+
 app.listen(PORT, () => {
   console.log(`✅ Server Start On ${PORT}`);
 });
