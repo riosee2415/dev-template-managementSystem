@@ -19,6 +19,10 @@ class MM0102 extends React.Component {
       pageCode: "MM0102",
       selectCollection: ["employee", "annualHoliday"],
       dataInfo: null,
+      isAlertOpen: false,
+      alertType: null,
+      alertTitle: null,
+      alertContent: null
     };
   }
 
@@ -31,14 +35,14 @@ class MM0102 extends React.Component {
         id: "allAnnual",
         label: "총 연차",
         align: "center",
-        minWidth: 170,
+        minWidth: 170
       },
       {
         id: "usedAnnual",
         label: "사용 연차",
         align: "center",
-        minWidth: 170,
-      },
+        minWidth: 170
+      }
     ];
 
     return (
@@ -92,7 +96,7 @@ class MM0102 extends React.Component {
                     {dataInfo ? (
                       <TableHead>
                         <TableRow>
-                          {columns.map((column) => (
+                          {columns.map(column => (
                             <TableCell
                               key={column.id}
                               align={column.align}
@@ -106,7 +110,7 @@ class MM0102 extends React.Component {
                     ) : null}
 
                     {dataInfo
-                      ? dataInfo.annualInfo.map((data) => {
+                      ? dataInfo.annualInfo.map(data => {
                           return (
                             <TableBody>
                               <TableRow hover role="checkbox">
@@ -130,17 +134,27 @@ class MM0102 extends React.Component {
             </div>
           </div>
         </div>
+
+        {this.state.isAlertOpen ? (
+          <AlertDialog
+            isOpen={this.state.isAlertOpen}
+            type={this.state.alertType}
+            title={this.state.alertTitle}
+            content={this.state.alertContent}
+            closeDialogHandler={() => this.setState({ isAlertOpen: false })}
+          />
+        ) : null}
       </div>
     );
   }
 
-  _annualClickHandler = async (key) => {
+  _annualClickHandler = async key => {
     const response = await fetch("/api/getAnnualInfo", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
       },
-      body: JSON.stringify({ key }),
+      body: JSON.stringify({ key })
     });
 
     const data = await response.json();
@@ -148,18 +162,22 @@ class MM0102 extends React.Component {
     const workYear = data.hire.substring(0, 4) - new Date().getFullYear() + 1;
     data.hireYear = workYear;
 
-    console.log(workYear);
-
     if (data.empId === sessionStorage.login_id) {
       this.setState({
-        dataInfo: data,
+        dataInfo: data
       });
     } else {
       this.setState({
-        dataInfo: null,
+        dataInfo: null
       });
       setTimeout(() => {
         alert("접근 권한이 없습니다.");
+        this.setState({
+          isAlertOpen: true,
+          alertType: "error",
+          alertTitle: "알림",
+          alertContent: "접근 권한이 없습니다."
+        });
       }, 1);
     }
   };

@@ -7,11 +7,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles(theme => ({}));
-
 export default function ConfirmDialog(props) {
-  const classes = useStyles();
-
   return (
     <Dialog
       open={props.open}
