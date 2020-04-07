@@ -20,7 +20,7 @@ class MM0202 extends React.Component {
       isLeftRefresh: false,
       isRegistFormOpen: false,
       workType: [],
-      empList: [],
+      empList: []
     };
   }
 
@@ -32,10 +32,9 @@ class MM0202 extends React.Component {
     arr.push({ title: data.data2 });
 
     // get EmpList
-    await this._getEmpList();
 
     this.setState({
-      workType: arr,
+      workType: arr
     });
   };
 
@@ -46,8 +45,7 @@ class MM0202 extends React.Component {
       isLeftRefresh,
       projectInfo,
       projectWorkList,
-      workType,
-      empList,
+      workType
     } = this.state;
 
     return (
@@ -209,18 +207,6 @@ class MM0202 extends React.Component {
           />
 
           <ComboBox dataList={workType} title="업무유형" />
-
-          <ComboBox dataList={empList} title="담당자" />
-
-          <TextField
-            autoFocus
-            margin="dense"
-            label="업무내용"
-            type="text"
-            fullWidth
-            multiline={true}
-            rowsMax="10"
-          />
         </FormDialog>
       </div>
     );
@@ -230,57 +216,56 @@ class MM0202 extends React.Component {
     const response = await fetch("/api/getEmpList", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
         // 'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: JSON.stringify({}),
+      body: JSON.stringify({})
     });
     const data = await response.json();
-
     this.setState({
-      empList: data,
+      empList: data
     });
   };
 
   _addBtnHandler = () => {
     this.setState({
-      isRegistFormOpen: true,
+      isRegistFormOpen: true
     });
   };
 
   _addBtnCloseDialogHandler = () => {
     this.setState({
-      isRegistFormOpen: false,
+      isRegistFormOpen: false
     });
   };
 
-  _progressBtnHandler = async (projectId) => {
+  _progressBtnHandler = async projectId => {
     const response = await fetch("/api/getProjectWorkListInfo", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
         // 'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: JSON.stringify({ projectId }),
+      body: JSON.stringify({ projectId })
     });
     const data = await response.json();
     this.setState({
-      projectWorkList: data,
+      projectWorkList: data
     });
   };
 
-  _dataClickHandler = async (key) => {
+  _dataClickHandler = async key => {
     const response = await fetch("/api/getProjectInfo", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
         // 'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: JSON.stringify({ key }),
+      body: JSON.stringify({ key })
     });
     const data = await response.json();
     this.setState({
-      projectInfo: data,
+      projectInfo: data
     });
   };
 }
