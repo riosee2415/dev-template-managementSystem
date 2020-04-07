@@ -25,6 +25,22 @@ class MM0102 extends React.Component {
   render() {
     const { pageCode, selectCollection, dataInfo } = this.state;
 
+    const columns = [
+      { id: "year", label: "년도", align: "center", minWidth: 170 },
+      {
+        id: "allAnnual",
+        label: "총 연차",
+        align: "center",
+        minWidth: 170,
+      },
+      {
+        id: "usedAnnual",
+        label: "사용 연차",
+        align: "center",
+        minWidth: 170,
+      },
+    ];
+
     return (
       <div className="mm">
         <div className="mm__header mh">
@@ -70,35 +86,47 @@ class MM0102 extends React.Component {
                 </>
               ) : null}
 
-              {dataInfo
-                ? dataInfo.annualInfo.map((data) => {
-                    return (
-                      <Paper>
-                        <TableContainer>
-                          <Table stickyHeader aria-label="sticky table">
-                            <TableHead>
-                              <TableRow>
-                                <TableCell>년도</TableCell>
-                                <TableCell>총 연차</TableCell>
-                                <TableCell>사용 연차</TableCell>
+              <Paper>
+                <TableContainer>
+                  <Table stickyHeader aria-label="sticky table">
+                    {dataInfo ? (
+                      <TableHead>
+                        <TableRow>
+                          {columns.map((column) => (
+                            <TableCell
+                              key={column.id}
+                              align={column.align}
+                              style={{ minWidth: column.minWidth }}
+                            >
+                              {column.label}
+                            </TableCell>
+                          ))}
+                        </TableRow>
+                      </TableHead>
+                    ) : null}
+
+                    {dataInfo
+                      ? dataInfo.annualInfo.map((data) => {
+                          return (
+                            <TableBody>
+                              <TableRow hover role="checkbox">
+                                <TableCell key={data.docId}>
+                                  {data.year}
+                                </TableCell>
+                                <TableCell key={data.docId}>
+                                  {data.allAnnual}
+                                </TableCell>
+                                <TableCell key={data.docId}>
+                                  {data.usedAnnual}
+                                </TableCell>
                               </TableRow>
-                            </TableHead>
-                            <TableBody></TableBody>
-                            <TableRow hover role="checkbox">
-                              <TableCell>
-                                <div key={data.docId}>
-                                  <div>{data.year}</div>
-                                  <div>{data.allAnnual}</div>
-                                  <div>{data.usedAnnual}</div>
-                                </div>
-                              </TableCell>
-                            </TableRow>
-                          </Table>
-                        </TableContainer>
-                      </Paper>
-                    );
-                  })
-                : null}
+                            </TableBody>
+                          );
+                        })
+                      : null}
+                  </Table>
+                </TableContainer>
+              </Paper>
             </div>
           </div>
         </div>
