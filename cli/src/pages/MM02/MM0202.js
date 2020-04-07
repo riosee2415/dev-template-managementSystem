@@ -208,9 +208,11 @@ class MM0202 extends React.Component {
             fullWidth
           />
 
-          <ComboBox dataList={workType} title="업무유형" />
+          <div className="comboArea">
+            <ComboBox dataList={workType} title="업무유형" />
 
-          <ComboBox dataList={empList} title="담당자" />
+            <ComboBox dataList={empList} title="담당자" />
+          </div>
 
           <TextField
             autoFocus

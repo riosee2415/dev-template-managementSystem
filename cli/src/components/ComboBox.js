@@ -8,7 +8,7 @@ export default function ComboBox({ dataList, title }) {
       id="combo-box-demo"
       options={dataList}
       getOptionLabel={(option) => option.title}
-      style={{ width: 300 }}
+      style={{ width: 300, marginRight: 50 }}
       renderInput={(params) => (
         <TextField {...params} label={title} variant="outlined" />
       )}

@@ -62,3 +62,10 @@
   font-size: 13px;
   justify-content: space-between;
 }
+
+.comboArea {
+  margin: 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
