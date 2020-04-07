@@ -106,7 +106,6 @@ app.post(routes.getCommonData, async (req, res) => {
 
   const sendData = await commonController.getCommonData(param1, param2);
 
-  console.log(sendData);
   return res.json(sendData);
 });
 

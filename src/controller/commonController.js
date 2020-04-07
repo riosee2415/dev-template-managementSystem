@@ -15,7 +15,6 @@ const getCommonData = async (collectionName, docName) => {
   } catch (e) {
     console.log(e);
   } finally {
-    console.log(sendData);
   }
 
   return sendData;

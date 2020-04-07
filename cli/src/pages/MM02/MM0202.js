@@ -19,15 +19,22 @@ class MM0202 extends React.Component {
       projectWorkList: null,
       isLeftRefresh: false,
       isRegistFormOpen: false,
-      workType: null,
+      workType: [],
+      empList: [],
     };
   }
 
   componentDidMount = async () => {
+    // get WorkType
     const data = await middleware.getCommonData("common", "workType");
+    let arr = [];
+    arr.push({ title: data.data1 });
+    arr.push({ title: data.data2 });
+
+    // get EmpList
 
     this.setState({
-      workType: data,
+      workType: arr,
     });
   };
 
@@ -38,6 +45,7 @@ class MM0202 extends React.Component {
       isLeftRefresh,
       projectInfo,
       projectWorkList,
+      workType,
     } = this.state;
 
     return (
@@ -198,14 +206,26 @@ class MM0202 extends React.Component {
             fullWidth
           />
 
-          <ComboBox
-            dataList={[{ title: "ddd" }, { title: "aaa" }]}
-            title="담당자"
-          />
+          <ComboBox dataList={workType} title="업무유형" />
         </FormDialog>
       </div>
     );
   }
+
+  _getEmpList = async () => {
+    const response = await fetch("/api/getEmpList", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: JSON.stringify({}),
+    });
+    const data = await response.json();
+    this.setState({
+      empList: data,
+    });
+  };
 
   _addBtnHandler = () => {
     this.setState({
