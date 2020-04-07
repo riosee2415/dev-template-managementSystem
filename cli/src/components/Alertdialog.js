@@ -24,7 +24,6 @@ export default function AlertDialog(props) {
 
   const [open, setOpen] = React.useState(props.isOpen);
 
-  console.log(open, props.isOpen);
   const handleClose = () => {
     props.closeDialogHandler();
     setOpen(false);
