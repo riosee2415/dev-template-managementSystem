@@ -21,6 +21,8 @@ class MM0102 extends React.Component {
   }
 
   render() {
+    console.log(new Date().getFullYear());
+
     const { pageCode, selectCollection, dataInfo } = this.state;
 
     const columns = [
@@ -37,6 +39,12 @@ class MM0102 extends React.Component {
         align: "center",
         minWidth: 170,
       },
+      {
+        id: "applicationAnnual",
+        label: "연차 사용",
+        align: "center",
+        minWidth: 170,
+      },
     ];
 
     return (
@@ -46,6 +54,37 @@ class MM0102 extends React.Component {
             <div className="mh__content__title">
               <IconComponent iconName="fas fa-leaf" />
               <span>인사 관리 > 연차 관리</span>
+            </div>
+
+            <div className="mh__content__btn">
+              <span>
+                <input
+                  type="button"
+                  className="btn btn-xs bg-blue"
+                  value="추가"
+                />
+              </span>
+              <span>
+                <input
+                  type="button"
+                  className="btn btn-xs bg-orange"
+                  value="수정"
+                />
+              </span>
+              <span>
+                <input
+                  type="button"
+                  className="btn btn-xs bg-pink"
+                  value="삭제"
+                />
+              </span>
+              <span>
+                <input
+                  type="button"
+                  className="btn btn-xs bg-violet"
+                  value="작성"
+                />
+              </span>
             </div>
           </div>
         </div>
@@ -117,6 +156,16 @@ class MM0102 extends React.Component {
                                 <TableCell key={data.docId}>
                                   {data.usedAnnual}
                                 </TableCell>
+                                <TableCell>
+                                  {data.year ===
+                                  new Date().getFullYear() + "" ? (
+                                    <input
+                                      type="button"
+                                      className="btn btn-xs bg-violet"
+                                      value="사용"
+                                    />
+                                  ) : null}
+                                </TableCell>
                               </TableRow>
                             </TableBody>
                           );
@@ -125,6 +174,14 @@ class MM0102 extends React.Component {
                   </Table>
                 </TableContainer>
               </Paper>
+
+              {dataInfo ? (
+                <input
+                  type="button"
+                  className="btn btn-l bg-blue"
+                  value="사용 내역"
+                />
+              ) : null}
             </div>
           </div>
         </div>

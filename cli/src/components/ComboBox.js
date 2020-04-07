@@ -5,10 +5,11 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 export default function ComboBox({ dataList, title }) {
   return (
     <Autocomplete
-      id="combo-box-demo"
+      id="blur-on-select"
+      blurOnSelect
       options={dataList}
       getOptionLabel={(option) => option.title}
-      style={{ width: 300 }}
+      style={{ width: 300, marginRight: 50 }}
       renderInput={(params) => (
         <TextField {...params} label={title} variant="outlined" />
       )}
