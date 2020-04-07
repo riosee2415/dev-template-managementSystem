@@ -99,6 +99,11 @@ app.post(routes.getProjectWorkListInfo, async (req, res) => {
   return res.json(sendData);
 });
 
+app.post(routes.getCommonData, async (req, res) => {
+  console.log(req.body.collectionName);
+  console.log(req.body.docName);
+});
+
 app.listen(PORT, () => {
   console.log(`✅ Server Start On ${PORT}`);
 });

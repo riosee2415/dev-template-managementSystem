@@ -5,6 +5,7 @@ import TopArea from "../../components/projectView/TopArea";
 import WorkList from "../../components/projectView/WorkList";
 import FormDialog from "../../components/FormDialog";
 import { TextField } from "@material-ui/core";
+import ComboBox from "../../components/ComboBox";
 
 class MM0202 extends React.Component {
   constructor(props) {
@@ -17,8 +18,27 @@ class MM0202 extends React.Component {
       projectWorkList: null,
       isLeftRefresh: false,
       isRegistFormOpen: false,
+      empList: null,
     };
   }
+
+  componentDidMount = async () => {
+    const collectionName = "common";
+    const docName = "workType";
+
+    const response = await fetch("/api/getCommonData", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: JSON.stringify({ collectionName, docName }),
+    });
+    const data = await response.json();
+    this.setState({
+      empList: data,
+    });
+  };
 
   render() {
     const {
@@ -185,6 +205,11 @@ class MM0202 extends React.Component {
             label="코드"
             type="text"
             fullWidth
+          />
+
+          <ComboBox
+            dataList={[{ title: "ddd" }, { title: "aaa" }]}
+            title="담당자"
           />
         </FormDialog>
       </div>
