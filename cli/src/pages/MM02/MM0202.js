@@ -32,7 +32,7 @@ class MM0202 extends React.Component {
     arr.push({ title: data.data2 });
 
     // get EmpList
-    await this._getEmpList();
+    this._getEmpList();
 
     this.setState({
       workType: arr,
@@ -238,7 +238,6 @@ class MM0202 extends React.Component {
       body: JSON.stringify({}),
     });
     const data = await response.json();
-
     this.setState({
       empList: data,
     });

@@ -1,6 +1,8 @@
 import firestore from "../firebase";
 
 const saveWorkTimeToStart = async (data) => {
+  const date = new Date();
+
   let fsRef;
   let queryRef;
   let sendData = {
@@ -8,6 +10,7 @@ const saveWorkTimeToStart = async (data) => {
     id: data.id,
     startTime: data.inputStartTime,
     endTime: "00:00:00",
+    idx: date.getDate(),
   };
 
   try {
