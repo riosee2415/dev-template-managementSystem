@@ -2,6 +2,8 @@ import React from "react";
 import IconComponent from "../../components/IconComponent";
 import LeftListBox from "../../components/LeftListBox";
 import FormDialog from "../../components/FormDialog";
+import AlertDialog from "../../components/AlertDialog";
+import ConfirmDialog from "../../components/ConfirmDialog";
 import { TextField } from "@material-ui/core";
 import { KeyboardDatePicker } from "@material-ui/pickers";
 
@@ -14,7 +16,14 @@ class MM0103 extends React.Component {
       selectCollection: ["employee"],
       empInfo: null,
       isLeftRefresh: false,
-      isRegistFormOpen: false
+      isEmpRegistFormOpen: false,
+      isAlertOpen: false,
+      alertType: null,
+      alertTitle: null,
+      alertContent: null,
+      isConfirmOpen: false,
+      confirmTitle: null,
+      confirmContent: null
     };
   }
 
@@ -171,42 +180,64 @@ class MM0103 extends React.Component {
           </div>
         </div>
 
-        <FormDialog
-          open={this.state.isRegistFormOpen}
-          title="직원 등록"
-          content="등록할 직원정보를 입력해주세요."
-          submitDialogHandler={this._empRegistSubmitDialogHandler}
-          closeDialogHandler={this._empRegistCloseDialogHandler}
-        >
-          <TextField
-            autoFocus
-            margin="dense"
-            label="아이디"
-            type="text"
-            fullWidth
+        {this.state.isAlertOpen ? (
+          <AlertDialog
+            isOpen={this.state.isAlertOpen}
+            type={this.state.alertType}
+            title={this.state.alertTitle}
+            content={this.state.alertContent}
+            closeDialogHandler={() => this.setState({ isAlertOpen: false })}
           />
-          <TextField
-            autoFocus
-            margin="dense"
-            label="직원명"
-            type="text"
-            fullWidth
+        ) : null}
+
+        {this.state.isConfirmOpen ? (
+          <ConfirmDialog
+            open={this.state.isConfirmOpen}
+            title={this.state.confirmTitle}
+            content={this.state.confirmContent}
+            submitDialogHandler={this._empRemoveConfirmSubmitDialogHandler}
+            closeDialogHandler={() => this.setState({ isConfirmOpen: false })}
           />
-          <TextField
-            autoFocus
-            margin="dense"
-            label="생년월일"
-            type="text"
-            fullWidth
-          />
-          <TextField
-            autoFocus
-            margin="dense"
-            label="생년월일"
-            type="text"
-            fullWidth
-          />
-        </FormDialog>
+        ) : null}
+
+        {this.state.isEmpRegistFormOpen ? (
+          <FormDialog
+            open={this.state.isEmpRegistFormOpen}
+            title="직원 등록"
+            content="등록할 직원정보를 입력해주세요."
+            submitDialogHandler={this._empRegistFormSubmitDialogHandler}
+            closeDialogHandler={this._empRegistFormCloseDialogHandler}
+          >
+            <TextField
+              autoFocus
+              margin="dense"
+              label="아이디"
+              type="text"
+              fullWidth
+            />
+            <TextField
+              autoFocus
+              margin="dense"
+              label="직원명"
+              type="text"
+              fullWidth
+            />
+            <TextField
+              autoFocus
+              margin="dense"
+              label="생년월일"
+              type="text"
+              fullWidth
+            />
+            <TextField
+              autoFocus
+              margin="dense"
+              label="생년월일"
+              type="text"
+              fullWidth
+            />
+          </FormDialog>
+        ) : null}
       </div>
     );
   }
@@ -230,31 +261,47 @@ class MM0103 extends React.Component {
 
   _empRegistHandler = async () => {
     this.setState({
-      isRegistFormOpen: true
+      isEmpRegistFormOpen: true
     });
   };
 
-  _empRegistSubmitDialogHandler = () => {
+  _empRegistFormSubmitDialogHandler = () => {
     this.setState({
-      isRegistFormOpen: false
+      isEmpRegistFormOpen: false
     });
-    console.log("submit!!");
   };
 
-  _empRegistCloseDialogHandler = () => {
+  _empRegistFormCloseDialogHandler = () => {
     this.setState({
-      isRegistFormOpen: false
+      isEmpRegistFormOpen: false
     });
-    console.log("close!!");
   };
 
-  _empRemoveHandler = async () => {
-    const { empInfo, isLeftRefresh } = this.state;
+  _empRemoveHandler = () => {
+    const { empInfo } = this.state;
 
     if (!empInfo) {
-      alert("삭제할 직원을 선택해주세요.");
+      this.setState({
+        isAlertOpen: true,
+        alertType: "info",
+        alertTitle: "알림",
+        alertContent: "삭제할 직원을 선택해주세요."
+      });
       return;
     }
+    this.setState({
+      isConfirmOpen: true,
+      confirmTitle: "확인",
+      confirmContent: "[" + empInfo.name + "] 님을 삭제하시겠습니까 ?"
+    });
+  };
+
+  _empRemoveConfirmSubmitDialogHandler = async () => {
+    const { empInfo, isLeftRefresh } = this.state;
+
+    this.setState({
+      isConfirmOpen: false
+    });
 
     const response = await fetch("/api/removeEmpInfo", {
       method: "POST",
@@ -268,14 +315,24 @@ class MM0103 extends React.Component {
     const data = await response.json();
 
     if (data.result) {
-      alert("삭제 처리되었습니다.");
+      this.setState({
+        isAlertOpen: true,
+        alertType: "success",
+        alertTitle: "알림",
+        alertContent: "삭제 처리되었습니다."
+      });
 
       this.setState({
         empInfo: null,
         isLeftRefresh: !isLeftRefresh
       });
     } else {
-      alert("데이터 처리 중 문제가 발생했습니다.");
+      this.setState({
+        isAlertOpen: true,
+        alertType: "error",
+        alertTitle: "알림",
+        alertContent: "데이터 처리 중 문제가 발생했습니다."
+      });
     }
   };
 }

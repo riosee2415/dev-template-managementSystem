@@ -1,6 +1,6 @@
 import React from "react";
 import IconComponent from "../../components/IconComponent";
-import AlertDialog from "../../components/Alertdialog";
+import AlertDialog from "../../components/AlertDialog";
 
 class MM0101 extends React.Component {
   constructor(props) {
