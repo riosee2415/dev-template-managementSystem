@@ -44,3 +44,12 @@
  - estimateFile 견적서파일         [String]
  - insDate      등록일            [String]
  
+
+[Firestore -progress_project => workList - Model]
+ - result       개발상태          [String]      0: 개발중 / 1: 개발완료
+ - workCode     작업코드          [String]
+ - workDate     개발일            [String]
+ - workDesc     상세설명          [String]
+ - workEmp      담당개발자        [String]
+ - workName     작업명            [String]
+ - workType     작업유형          [String]
