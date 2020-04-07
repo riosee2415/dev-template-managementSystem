@@ -1,7 +1,7 @@
 import React from "react";
 import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
+import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import { makeStyles } from "@material-ui/core/styles";
@@ -13,7 +13,7 @@ const useStyles = makeStyles(theme => ({
       marginTop: theme.spacing(2)
     }
   },
-  alertStyle: {
+  dialogContent: {
     width: 500
   }
 }));
@@ -30,22 +30,20 @@ export default function AlertDialog(props) {
   };
 
   return (
-    <div>
-      <Dialog open={open} onClose={handleClose}>
-        <DialogContent className={classes.alertStyle}>
-          <div className={classes.root}>
-            <Alert severity={props.type}>
-              <AlertTitle>{props.title}</AlertTitle>
-              {props.msg}
-            </Alert>
-          </div>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} autoFocus>
-            확인
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </div>
+    <Dialog open={open}>
+      <DialogContent className={classes.dialogContent}>
+        <div className={classes.root}>
+          <Alert severity={props.type} className={classes.alert}>
+            <AlertTitle>{props.title}</AlertTitle>
+            {props.content}
+          </Alert>
+        </div>
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={handleClose} autoFocus>
+          확인
+        </Button>
+      </DialogActions>
+    </Dialog>
   );
 }

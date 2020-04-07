@@ -5,23 +5,29 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
+import { makeStyles } from "@material-ui/core/styles";
 
-export default function FormDialog(props) {
+const useStyles = makeStyles(theme => ({}));
+
+export default function ConfirmDialog(props) {
+  const classes = useStyles();
+
   return (
     <Dialog
       open={props.open}
-      aria-labelledby="form-dialog-title"
+      aria-labelledby="confirmation-dialog-title"
+      disableBackdropClick
+      disableEscapeKeyDown
       fullWidth={true}
-      maxWidth="md"
+      maxWidth="sm"
     >
-      <DialogTitle id="form-dialog-title">{props.title}</DialogTitle>
-      <DialogContent>
+      <DialogTitle id="confirmation-dialog-title">{props.title}</DialogTitle>
+      <DialogContent dividers>
         <DialogContentText>{props.content}</DialogContentText>
-        {props.children}
       </DialogContent>
       <DialogActions>
-        <Button onClick={props.submitDialogHandler} color="primary">
-          등록
+        <Button autoFocus onClick={props.submitDialogHandler} color="primary">
+          확인
         </Button>
         <Button onClick={props.closeDialogHandler} color="primary">
           취소
