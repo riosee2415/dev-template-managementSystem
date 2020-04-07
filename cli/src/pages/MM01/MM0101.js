@@ -1,6 +1,6 @@
 import React from "react";
 import IconComponent from "../../components/IconComponent";
-import AlertDialog from "../../components/AlertDialog";
+import AlertDialog from "../../components/Alertdialog";
 
 class MM0101 extends React.Component {
   constructor(props) {
@@ -20,7 +20,7 @@ class MM0101 extends React.Component {
       screenReload: false,
       detailList: [],
       isStartWorkAlertOpen: false,
-      isReflash: false
+      isReflash: false,
     };
   }
 
@@ -34,7 +34,7 @@ class MM0101 extends React.Component {
     this._getDetailData();
 
     this.setState({
-      isStartWorkAlertOpen: false
+      isStartWorkAlertOpen: false,
     });
     console.log("didMount");
   }
@@ -52,7 +52,7 @@ class MM0101 extends React.Component {
       workEnd,
       fsId,
       detailList,
-      isStartWorkAlertOpen
+      isStartWorkAlertOpen,
     } = this.state;
 
     return (
@@ -194,22 +194,22 @@ class MM0101 extends React.Component {
 
   _getDetailData = async () => {
     const inputData = {
-      inputId: sessionStorage.getItem("login_id")
+      inputId: sessionStorage.getItem("login_id"),
     };
 
     const response = await fetch("/api/getDetailDataToWorkTime", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
         // 'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: JSON.stringify({ inputData })
+      body: JSON.stringify({ inputData }),
     });
 
     let dataList = await response.json();
 
     this.setState({
-      detailList: dataList
+      detailList: dataList,
     });
   };
 
@@ -218,23 +218,23 @@ class MM0101 extends React.Component {
     const inputData = {
       id: sessionStorage.getItem("login_id"),
       date:
-        date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate()
+        date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate(),
     };
 
     const response = await fetch("/api/getworkStart", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
         // 'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: JSON.stringify({ inputData })
+      body: JSON.stringify({ inputData }),
     });
     const data = await response.json();
 
     this.setState({
       workStart: data.startTime,
       workEnd: data.endTime,
-      fsId: data.id
+      fsId: data.id,
     });
   };
 
@@ -243,11 +243,11 @@ class MM0101 extends React.Component {
 
     if (validation1.innerText.length > 0) {
       await this.setState({
-        alert: false
+        alert: false,
       });
 
       this.setState({
-        isStartWorkAlertOpen: true
+        isStartWorkAlertOpen: true,
       });
       return;
     }
@@ -258,7 +258,7 @@ class MM0101 extends React.Component {
       currentSec,
       currentYear,
       currentMonth,
-      currentDate
+      currentDate,
     } = this.state;
 
     if (currentHour === 0) {
@@ -276,16 +276,16 @@ class MM0101 extends React.Component {
     const inputData = {
       inputDate,
       id,
-      inputStartTime
+      inputStartTime,
     };
 
     await fetch("/api/saveWorkTimeToStart", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
         // 'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: JSON.stringify({ inputData })
+      body: JSON.stringify({ inputData }),
     }).then(this.componentDidMount());
   };
 
@@ -301,16 +301,16 @@ class MM0101 extends React.Component {
 
     const inputData = {
       fsId,
-      inputEndTime
+      inputEndTime,
     };
 
     await fetch("/api/saveWorkTimeToEnd", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
         // 'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: JSON.stringify({ inputData })
+      body: JSON.stringify({ inputData }),
     }).then(this.componentDidMount());
   };
 
@@ -349,7 +349,7 @@ class MM0101 extends React.Component {
       currentDay: currentDay,
       currentYear: date.getFullYear(),
       currentMonth: date.getMonth() + 1,
-      currentDate: date.getDate()
+      currentDate: date.getDate(),
     });
   };
 }
