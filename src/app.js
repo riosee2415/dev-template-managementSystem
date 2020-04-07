@@ -5,6 +5,7 @@ import routes from "./routes";
 import apiController from "./controller/apiController";
 import apiControllerWork from "./controller/apiControllerWork";
 import projectController from "./controller/projectController";
+import commonController from "./controller/commonController";
 
 const PORT = 5000;
 
@@ -100,8 +101,13 @@ app.post(routes.getProjectWorkListInfo, async (req, res) => {
 });
 
 app.post(routes.getCommonData, async (req, res) => {
-  console.log(req.body.collectionName);
-  console.log(req.body.docName);
+  const param1 = req.body.collectionName;
+  const param2 = req.body.docName;
+
+  const sendData = await commonController.getCommonData(param1, param2);
+
+  console.log(sendData);
+  return res.json(sendData);
 });
 
 app.listen(PORT, () => {

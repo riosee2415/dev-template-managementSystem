@@ -6,6 +6,7 @@ import WorkList from "../../components/projectView/WorkList";
 import FormDialog from "../../components/FormDialog";
 import { TextField } from "@material-ui/core";
 import ComboBox from "../../components/ComboBox";
+import middleware from "../../middleware/common";
 
 class MM0202 extends React.Component {
   constructor(props) {
@@ -18,25 +19,15 @@ class MM0202 extends React.Component {
       projectWorkList: null,
       isLeftRefresh: false,
       isRegistFormOpen: false,
-      empList: null,
+      workType: null,
     };
   }
 
   componentDidMount = async () => {
-    const collectionName = "common";
-    const docName = "workType";
+    const data = await middleware.getCommonData("common", "workType");
 
-    const response = await fetch("/api/getCommonData", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        // 'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: JSON.stringify({ collectionName, docName }),
-    });
-    const data = await response.json();
     this.setState({
-      empList: data,
+      workType: data,
     });
   };
 
