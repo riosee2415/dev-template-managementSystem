@@ -1,6 +1,15 @@
 import React from "react";
 import IconComponent from "../../components/IconComponent";
 import LeftListBox from "../../components/LeftListBox";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import TablePagination from "@material-ui/core/TablePagination";
+import Paprer from "@material-ui/core/Paper";
+import Paper from "@material-ui/core/Paper";
 
 class MM0102 extends React.Component {
   constructor(props) {
@@ -9,7 +18,7 @@ class MM0102 extends React.Component {
     this.state = {
       pageCode: "MM0102",
       selectCollection: ["employee", "annualHoliday"],
-      dataInfo: null
+      dataInfo: null,
     };
   }
 
@@ -51,19 +60,42 @@ class MM0102 extends React.Component {
             <div className="mc__col2__desc">
               {dataInfo ? (
                 <>
-                  <div>{dataInfo.name}</div>
-                  <div>{dataInfo.hire}</div>
-                  <div>{dataInfo.hireYear}년차</div>
+                  <div>
+                    <div>{dataInfo.name}</div>
+                    <div>
+                      <div>{dataInfo.hire}</div>
+                      <div>{dataInfo.hireYear}년차</div>
+                    </div>
+                  </div>
                 </>
               ) : null}
+
               {dataInfo
-                ? dataInfo.annualInfo.map(data => {
+                ? dataInfo.annualInfo.map((data) => {
                     return (
-                      <div key={data.docId}>
-                        <div>{data.year}</div>
-                        <div>{data.allAnnual}</div>
-                        <div>{data.usedAnnual}</div>
-                      </div>
+                      <Paper>
+                        <TableContainer>
+                          <Table stickyHeader aria-label="sticky table">
+                            <TableHead>
+                              <TableRow>
+                                <TableCell>년도</TableCell>
+                                <TableCell>총 연차</TableCell>
+                                <TableCell>사용 연차</TableCell>
+                              </TableRow>
+                            </TableHead>
+                            <TableBody></TableBody>
+                            <TableRow hover role="checkbox">
+                              <TableCell>
+                                <div key={data.docId}>
+                                  <div>{data.year}</div>
+                                  <div>{data.allAnnual}</div>
+                                  <div>{data.usedAnnual}</div>
+                                </div>
+                              </TableCell>
+                            </TableRow>
+                          </Table>
+                        </TableContainer>
+                      </Paper>
                     );
                   })
                 : null}
@@ -74,13 +106,13 @@ class MM0102 extends React.Component {
     );
   }
 
-  _annualClickHandler = async key => {
+  _annualClickHandler = async (key) => {
     const response = await fetch("/api/getAnnualInfo", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({ key })
+      body: JSON.stringify({ key }),
     });
 
     const data = await response.json();
@@ -92,11 +124,11 @@ class MM0102 extends React.Component {
 
     if (data.empId === sessionStorage.login_id) {
       this.setState({
-        dataInfo: data
+        dataInfo: data,
       });
     } else {
       this.setState({
-        dataInfo: null
+        dataInfo: null,
       });
       setTimeout(() => {
         alert("접근 권한이 없습니다.");
