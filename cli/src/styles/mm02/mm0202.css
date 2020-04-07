@@ -4,12 +4,16 @@
   padding: 5px;
 }
 
+.project-info-main {
+  width: 780px;
+  min-width: 500px;
+}
+
 .project-info .project-info__box {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
   align-items: flex-end;
-  overflow: auto;
 }
 
 .project-info .project-info__box div {

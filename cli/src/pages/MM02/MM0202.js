@@ -11,7 +11,7 @@ class MM0202 extends React.Component {
       pageCode: "MM0202",
       selectCollection: ["progress_projects"],
       projectInfo: null,
-      isLeftRefresh: false,
+      isLeftRefresh: false
     };
   }
 
@@ -20,7 +20,7 @@ class MM0202 extends React.Component {
       pageCode,
       selectCollection,
       isLeftRefresh,
-      projectInfo,
+      projectInfo
     } = this.state;
 
     return (
@@ -81,29 +81,31 @@ class MM0202 extends React.Component {
               <span className="subTitle">상세정보</span>
             </div>
             <div className="mc__col2__desc">
-              {projectInfo ? (
-                <>
-                  <TopArea
-                    projectRef={projectInfo.ref}
-                    PM={projectInfo.PM}
-                    clientRef={projectInfo.clientRef}
-                    contactFile={projectInfo.contactFile}
-                    endDate={projectInfo.endDate}
-                    estimateFile={projectInfo.estimateFile}
-                    exDate={projectInfo.exDate}
-                    insDate={projectInfo.insDate}
-                    name={projectInfo.name}
-                    profit={projectInfo.profit}
-                    progress={projectInfo.progress}
-                    startDate={projectInfo.startDate}
-                    type={projectInfo.type}
-                  />
-                  <div className="mc__col2__desc__btnArea">
-                    <button>거래처정보</button>
-                    <button>진행률{projectInfo.progress}</button>
-                  </div>
-                </>
-              ) : null}
+              <div className="project-info-main">
+                {projectInfo ? (
+                  <>
+                    <TopArea
+                      projectRef={projectInfo.ref}
+                      PM={projectInfo.PM}
+                      clientRef={projectInfo.clientRef}
+                      contactFile={projectInfo.contactFile}
+                      endDate={projectInfo.endDate}
+                      estimateFile={projectInfo.estimateFile}
+                      exDate={projectInfo.exDate}
+                      insDate={projectInfo.insDate}
+                      name={projectInfo.name}
+                      profit={projectInfo.profit}
+                      progress={projectInfo.progress}
+                      startDate={projectInfo.startDate}
+                      type={projectInfo.type}
+                    />
+                    <div className="mc__col2__desc__btnArea">
+                      <button>거래처정보</button>
+                      <button>진행률{projectInfo.progress}</button>
+                    </div>
+                  </>
+                ) : null}
+              </div>
             </div>
           </div>
         </div>
@@ -111,18 +113,18 @@ class MM0202 extends React.Component {
     );
   }
 
-  _dataClickHandler = async (key) => {
+  _dataClickHandler = async key => {
     const response = await fetch("/api/getProjectInfo", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
         // 'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: JSON.stringify({ key }),
+      body: JSON.stringify({ key })
     });
     const data = await response.json();
     this.setState({
-      projectInfo: data,
+      projectInfo: data
     });
   };
 }
