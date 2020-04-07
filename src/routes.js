@@ -10,6 +10,8 @@ const routes = {
   getAnnualInfo: "/api/getAnnualInfo",
   removeEmpInfo: "/api/removeEmpInfo",
   getProjectInfo: "/api/getProjectInfo",
+  getProjectWorkListInfo: "/api/getProjectWorkListInfo",
+  getCommonData: "/api/getCommonData",
 };
 
 module.exports = routes;

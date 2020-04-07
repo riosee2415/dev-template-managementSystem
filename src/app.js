@@ -5,6 +5,7 @@ import routes from "./routes";
 import apiController from "./controller/apiController";
 import apiControllerWork from "./controller/apiControllerWork";
 import projectController from "./controller/projectController";
+import commonController from "./controller/commonController";
 
 const PORT = 5000;
 
@@ -88,6 +89,22 @@ app.post(routes.removeEmpInfo, async (req, res) => {
 app.post(routes.getProjectInfo, async (req, res) => {
   const projectRef = req.body.key;
   const sendData = await projectController.getProjectInfo(projectRef);
+
+  return res.json(sendData);
+});
+
+app.post(routes.getProjectWorkListInfo, async (req, res) => {
+  const projectRef = req.body.projectId;
+  const sendData = await projectController.getProjectWorkListInfo(projectRef);
+
+  return res.json(sendData);
+});
+
+app.post(routes.getCommonData, async (req, res) => {
+  const param1 = req.body.collectionName;
+  const param2 = req.body.docName;
+
+  const sendData = await commonController.getCommonData(param1, param2);
 
   return res.json(sendData);
 });

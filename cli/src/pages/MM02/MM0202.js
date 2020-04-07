@@ -2,6 +2,11 @@ import React from "react";
 import IconComponent from "../../components/IconComponent";
 import LeftListBox from "../../components/LeftListBox";
 import TopArea from "../../components/projectView/TopArea";
+import WorkList from "../../components/projectView/WorkList";
+import FormDialog from "../../components/FormDialog";
+import { TextField } from "@material-ui/core";
+import ComboBox from "../../components/ComboBox";
+import middleware from "../../middleware/common";
 
 class MM0202 extends React.Component {
   constructor(props) {
@@ -11,16 +16,36 @@ class MM0202 extends React.Component {
       pageCode: "MM0202",
       selectCollection: ["progress_projects"],
       projectInfo: null,
-      isLeftRefresh: false
+      projectWorkList: null,
+      isLeftRefresh: false,
+      isRegistFormOpen: false,
+      workType: [],
+      empList: []
     };
   }
+
+  componentDidMount = async () => {
+    // get WorkType
+    const data = await middleware.getCommonData("common", "workType");
+    let arr = [];
+    arr.push({ title: data.data1 });
+    arr.push({ title: data.data2 });
+
+    // get EmpList
+
+    this.setState({
+      workType: arr
+    });
+  };
 
   render() {
     const {
       pageCode,
       selectCollection,
       isLeftRefresh,
-      projectInfo
+      projectInfo,
+      projectWorkList,
+      workType
     } = this.state;
 
     return (
@@ -95,13 +120,62 @@ class MM0202 extends React.Component {
                       insDate={projectInfo.insDate}
                       name={projectInfo.name}
                       profit={projectInfo.profit}
-                      progress={projectInfo.progress}
                       startDate={projectInfo.startDate}
                       type={projectInfo.type}
                     />
                     <div className="mc__col2__desc__btnArea">
                       <button>거래처정보</button>
-                      <button>진행률{projectInfo.progress}</button>
+                      <button
+                        onClick={() =>
+                          this._progressBtnHandler(projectInfo.ref)
+                        }
+                      >
+                        업무차트
+                      </button>
+                    </div>
+
+                    <div>
+                      {projectWorkList ? (
+                        <>
+                          <div>
+                            <button onClick={() => this._addBtnHandler()}>
+                              업무추가
+                            </button>
+                          </div>
+
+                          <div>
+                            <ul className="workList-main" key={this.props.idx}>
+                              <li>번호</li>
+                              <li>업무</li>
+                              <li>코드</li>
+                              <li>유형</li>
+                              <li>담당자</li>
+                              <li>작업일</li>
+                              <li>업무내용</li>
+                              <li>상태</li>
+                              <li>삭제</li>
+                            </ul>
+                          </div>
+                        </>
+                      ) : null}
+
+                      {projectWorkList
+                        ? projectWorkList.map((doc, idx) => {
+                            return (
+                              <WorkList
+                                key={idx}
+                                idx={idx + 1}
+                                workName={doc.workName}
+                                result={doc.result}
+                                workCode={doc.workCode}
+                                workDate={doc.workDate}
+                                workDesc={doc.workDesc}
+                                workEmp={doc.workEmp}
+                                workType={doc.workType}
+                              />
+                            );
+                          })
+                        : null}
                     </div>
                   </>
                 ) : null}
@@ -109,9 +183,76 @@ class MM0202 extends React.Component {
             </div>
           </div>
         </div>
+        <FormDialog
+          open={this.state.isRegistFormOpen}
+          title="업무 등록"
+          //content="등록할 직원정보를 입력해주세요."
+          submitDialogHandler={this._empRegistSubmitDialogHandler}
+          closeDialogHandler={this._addBtnCloseDialogHandler}
+        >
+          <TextField
+            autoFocus
+            margin="dense"
+            label="업무"
+            type="text"
+            fullWidth
+          />
+
+          <TextField
+            autoFocus
+            margin="dense"
+            label="코드"
+            type="text"
+            fullWidth
+          />
+
+          <ComboBox dataList={workType} title="업무유형" />
+        </FormDialog>
       </div>
     );
   }
+
+  _getEmpList = async () => {
+    const response = await fetch("/api/getEmpList", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: JSON.stringify({})
+    });
+    const data = await response.json();
+    this.setState({
+      empList: data
+    });
+  };
+
+  _addBtnHandler = () => {
+    this.setState({
+      isRegistFormOpen: true
+    });
+  };
+
+  _addBtnCloseDialogHandler = () => {
+    this.setState({
+      isRegistFormOpen: false
+    });
+  };
+
+  _progressBtnHandler = async projectId => {
+    const response = await fetch("/api/getProjectWorkListInfo", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: JSON.stringify({ projectId })
+    });
+    const data = await response.json();
+    this.setState({
+      projectWorkList: data
+    });
+  };
 
   _dataClickHandler = async key => {
     const response = await fetch("/api/getProjectInfo", {
