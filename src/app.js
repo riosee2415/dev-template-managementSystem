@@ -92,6 +92,13 @@ app.post(routes.getProjectInfo, async (req, res) => {
   return res.json(sendData);
 });
 
+app.post(routes.getProjectWorkListInfo, async (req, res) => {
+  const projectRef = req.body.projectId;
+  const sendData = await projectController.getProjectWorkListInfo(projectRef);
+
+  return res.json(sendData);
+});
+
 app.listen(PORT, () => {
   console.log(`✅ Server Start On ${PORT}`);
 });
