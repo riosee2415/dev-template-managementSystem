@@ -9,6 +9,7 @@ import ComboBox from "../../components/ComboBox";
 import middleware from "../../middleware/common";
 import AlertDialog from "../../components/AlertDialog";
 import OutlinedButtonFull from "../../components/material/OutlinedButtonFull";
+import OutlinedButtonHalf from "../../components/material/OutlinedButtonHalf";
 
 class MM0202 extends React.Component {
   constructor(props) {
@@ -130,7 +131,7 @@ class MM0202 extends React.Component {
                       type={projectInfo.type}
                     />
                     <div className="mc__col2__desc__btnArea">
-                      <OutlinedButtonFull text="거래처정보" />
+                      <OutlinedButtonFull text="거래처정보" color="primary" />
                       <OutlinedButtonFull
                         action={() => this._progressBtnHandler(projectInfo.ref)}
                         text="업무차트"
@@ -141,13 +142,11 @@ class MM0202 extends React.Component {
                     <div>
                       {projectWorkList ? (
                         <>
-                          <div>
-                            <button
-                              className="btn btn-m bg-blue"
-                              onClick={() => this._addBtnHandler()}
-                            >
-                              업무추가
-                            </button>
+                          <div className="mm-add">
+                            <OutlinedButtonHalf
+                              text="업무추가"
+                              action={() => this._addBtnHandler()}
+                            />
                           </div>
 
                           <div>

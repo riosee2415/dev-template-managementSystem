@@ -1,5 +1,6 @@
 import React from "react";
-import TextButton from "../../components/material/TextButton";
+import OutlinedButton from "../../components/material/OutlinedButton";
+import IconComponent from "../IconComponent";
 
 class WorkList extends React.Component {
   render() {
@@ -13,19 +14,19 @@ class WorkList extends React.Component {
         <li>{this.props.workDate}</li>
 
         <li>
-          <button className="btn btn-m bg-violet">업무내용</button>
+          <button className="btn btn-s bg-violet">내용</button>
         </li>
 
         <li>
           {this.props.result === "0" ? (
-            <TextButton text="개발중" color="secondary" />
+            <OutlinedButton text="개발중" color="secondary" />
           ) : (
-            <TextButton text="개발완료" isDisabled={true} />
+            <OutlinedButton text="개발완료" isDisabled={true} />
           )}
         </li>
 
         <li>
-          <button className="btn btn-m bg-pink">업무삭제</button>
+          <IconComponent iconName="far fa-times-circle" />
         </li>
       </ul>
     );

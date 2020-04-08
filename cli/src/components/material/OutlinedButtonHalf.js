@@ -6,12 +6,12 @@ const useStyles = makeStyles((theme) => ({
   root: {
     "& > *": {
       margin: theme.spacing(2),
-      width: 365,
+      width: 250,
     },
   },
 }));
 
-export default function OutlinedButtonFull({
+export default function OutlinedButtonHalf({
   text,
   color,
   action,
