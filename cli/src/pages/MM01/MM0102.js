@@ -11,7 +11,7 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import FormDialog from "../../components/FormDialog";
 import ComboBox from "../../components/ComboBox";
-import { makeStyles } from "@material-ui/core/styles";
+import { TextField } from "@material-ui/core";
 
 class MM0102 extends React.Component {
   constructor(props) {
@@ -241,7 +241,16 @@ class MM0102 extends React.Component {
           submitDialogHandler={this._addApplicationAnnualHandler}
           closeDialogHandler={this._closeUsageDialogBtnHandler}
         >
-          <div> efefef</div>
+          {dataInfo ? (
+            <>
+              <div>{dataInfo.name}</div>
+              <div>{dataInfo.rank}</div>
+              <div>{new Date().getFullYear()}</div>
+            </>
+          ) : null}
+          <div>휴가기간 : </div>
+          <div>휴가 사유 : </div>
+          <div>첨부 파일 : </div>
         </FormDialog>
 
         {/* 사용연차 리스트 */}
@@ -354,6 +363,10 @@ class MM0102 extends React.Component {
 
   __usageApplicationHandler = () => {
     this.setState({ isUsageFormOpen: true });
+  };
+
+  _addApplicationAnnualHandler = () => {
+    alert("전송하구싶다!!!＼○∇○／");
   };
 
   _closeUsageDialogBtnHandler = () => {
