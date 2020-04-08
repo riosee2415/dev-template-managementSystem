@@ -5,12 +5,17 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
+import { withStyles } from "@material-ui/core/styles";
+
+const styles = {};
 
 class FormDialog extends React.Component {
   render() {
+    const { classes } = this.props;
+
     return (
       <Dialog
-        open={this.props.open}
+        open={this.props.isOpen}
         aria-labelledby="form-dialog-title"
         fullWidth={true}
         maxWidth="md"
@@ -28,7 +33,7 @@ class FormDialog extends React.Component {
           ) : (
             <>
               <Button onClick={this.props.submitDialogHandler} color="primary">
-                {this.props.isModified ? <span>수정</span> : <span>등록</span>}
+                {this.props.isModified ? <span>변경</span> : <span>등록</span>}
               </Button>
               <Button onClick={this.props.closeDialogHandler} color="primary">
                 취소
@@ -41,4 +46,4 @@ class FormDialog extends React.Component {
   }
 }
 
-export default FormDialog;
+export default withStyles(styles)(FormDialog);

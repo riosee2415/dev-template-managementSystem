@@ -192,7 +192,7 @@ class MM0103 extends React.Component {
 
         {this.state.isConfirmOpen ? (
           <ConfirmDialog
-            open={this.state.isConfirmOpen}
+            isOpen={this.state.isConfirmOpen}
             title={this.state.confirmTitle}
             content={this.state.confirmContent}
             submitDialogHandler={this._empRemoveConfirmSubmitDialogHandler}
@@ -202,7 +202,7 @@ class MM0103 extends React.Component {
 
         {this.state.isEmpRegistFormOpen ? (
           <FormDialog
-            open={this.state.isEmpRegistFormOpen}
+            isOpen={this.state.isEmpRegistFormOpen}
             title="직원 등록"
             content="등록할 직원정보를 입력해주세요."
             submitDialogHandler={this._empRegistFormSubmitDialogHandler}

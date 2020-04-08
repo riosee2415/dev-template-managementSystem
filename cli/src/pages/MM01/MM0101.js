@@ -52,7 +52,11 @@ class MM0101 extends React.Component {
       workStart,
       workEnd,
       fsId,
-      detailList
+      detailList,
+      isAlertOpen,
+      alertType,
+      alertTitle,
+      alertContent
     } = this.state;
 
     return (
@@ -179,12 +183,12 @@ class MM0101 extends React.Component {
           </div>
         </div>
 
-        {this.state.isAlertOpen ? (
+        {isAlertOpen ? (
           <AlertDialog
-            isOpen={this.state.isAlertOpen}
-            type={this.state.alertType}
-            title={this.state.alertTitle}
-            content={this.state.alertContent}
+            isOpen={isAlertOpen}
+            type={alertType}
+            title={alertTitle}
+            content={alertContent}
             closeDialogHandler={() => this.setState({ isAlertOpen: false })}
           />
         ) : null}
