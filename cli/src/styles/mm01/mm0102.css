@@ -1,0 +1,31 @@
+.dataInfo {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 10px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #ffa751;
+}
+
+.dataInfo div:first-child {
+  font-weight: 600;
+  color: #00004e;
+}
+
+.dataSubInfo {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.dataSubInfo > div:first-child span {
+  color: #535353;
+  font-weight: bold;
+}
+
+.dataSubInfo > div:nth-child(2) {
+  background-color: #5353531d;
+  padding: 5px 10px;
+  font-size: 14px;
+  margin-left: 50px;
+}
