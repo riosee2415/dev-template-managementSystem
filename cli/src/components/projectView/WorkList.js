@@ -1,4 +1,5 @@
 import React from "react";
+import TextButton from "../../components/material/TextButton";
 
 class WorkList extends React.Component {
   render() {
@@ -12,19 +13,19 @@ class WorkList extends React.Component {
         <li>{this.props.workDate}</li>
 
         <li>
-          <button>업무내용</button>
+          <button className="btn btn-m bg-violet">업무내용</button>
         </li>
 
         <li>
           {this.props.result === "0" ? (
-            <button>개발중</button>
+            <TextButton text="개발중" color="secondary" />
           ) : (
-            <div>개발완료</div>
+            <TextButton text="개발완료" isDisabled={true} />
           )}
         </li>
 
         <li>
-          <button>업무삭제</button>
+          <button className="btn btn-m bg-pink">업무삭제</button>
         </li>
       </ul>
     );

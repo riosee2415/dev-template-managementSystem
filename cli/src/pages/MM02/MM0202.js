@@ -7,6 +7,8 @@ import FormDialog from "../../components/FormDialog";
 import { TextField } from "@material-ui/core";
 import ComboBox from "../../components/ComboBox";
 import middleware from "../../middleware/common";
+import AlertDialog from "../../components/AlertDialog";
+import OutlinedButtonFull from "../../components/material/OutlinedButtonFull";
 
 class MM0202 extends React.Component {
   constructor(props) {
@@ -21,6 +23,7 @@ class MM0202 extends React.Component {
       isRegistFormOpen: false,
       workType: [],
       empList: [],
+      isAlertOpen: 0,
     };
   }
 
@@ -48,6 +51,7 @@ class MM0202 extends React.Component {
       projectWorkList,
       workType,
       empList,
+      isAlertOpen,
     } = this.state;
 
     return (
@@ -126,21 +130,22 @@ class MM0202 extends React.Component {
                       type={projectInfo.type}
                     />
                     <div className="mc__col2__desc__btnArea">
-                      <button>거래처정보</button>
-                      <button
-                        onClick={() =>
-                          this._progressBtnHandler(projectInfo.ref)
-                        }
-                      >
-                        업무차트
-                      </button>
+                      <OutlinedButtonFull text="거래처정보" />
+                      <OutlinedButtonFull
+                        action={() => this._progressBtnHandler(projectInfo.ref)}
+                        text="업무차트"
+                        color="primary"
+                      />
                     </div>
 
                     <div>
                       {projectWorkList ? (
                         <>
                           <div>
-                            <button onClick={() => this._addBtnHandler()}>
+                            <button
+                              className="btn btn-m bg-blue"
+                              onClick={() => this._addBtnHandler()}
+                            >
                               업무추가
                             </button>
                           </div>
@@ -184,15 +189,33 @@ class MM0202 extends React.Component {
               </div>
             </div>
           </div>
+          {isAlertOpen === 1 ? (
+            <AlertDialog
+              isOpen={isAlertOpen}
+              type="error"
+              title="실행불가"
+              content="업무가 누락되었습니다."
+              closeDialogHandler={() => this.setState({ isAlertOpen: 0 })}
+            />
+          ) : isAlertOpen === 2 ? (
+            <AlertDialog
+              isOpen={isAlertOpen}
+              type="error"
+              title="실행불가"
+              content="업무코드가 누락되었습니다."
+              closeDialogHandler={() => this.setState({ isAlertOpen: 0 })}
+            />
+          ) : null}
         </div>
         <FormDialog
           open={this.state.isRegistFormOpen}
           title="업무 등록"
           //content="등록할 직원정보를 입력해주세요."
-          submitDialogHandler={this._empRegistSubmitDialogHandler}
+          submitDialogHandler={this._addBtnSubmitDialogHandler}
           closeDialogHandler={this._addBtnCloseDialogHandler}
         >
           <TextField
+            id="workName-js"
             autoFocus
             margin="dense"
             label="업무"
@@ -201,6 +224,7 @@ class MM0202 extends React.Component {
           />
 
           <TextField
+            id="workCode-js"
             autoFocus
             margin="dense"
             label="코드"
@@ -208,13 +232,18 @@ class MM0202 extends React.Component {
             fullWidth
           />
 
-          <div className="comboArea">
-            <ComboBox dataList={workType} title="업무유형" />
+          <div className="comboArea" id="comboArea-js">
+            <ComboBox
+              dataList={workType}
+              title="업무유형"
+              txtId="workType-js"
+            />
 
-            <ComboBox dataList={empList} title="담당자" />
+            <ComboBox dataList={empList} title="담당자" txtId="workEmp-js" />
           </div>
 
           <TextField
+            id="workDesc-js"
             autoFocus
             margin="dense"
             label="업무내용"
@@ -246,6 +275,73 @@ class MM0202 extends React.Component {
   _addBtnHandler = () => {
     this.setState({
       isRegistFormOpen: true,
+    });
+  };
+
+  _addBtnSubmitDialogHandler = () => {
+    const workName = document.getElementById("workName-js");
+    const workCode = document.getElementById("workCode-js");
+    const workDesc = document.getElementById("workDesc-js");
+    const workType = document.getElementById("workType-js");
+    const workEmp = document.getElementById("workEmp-js");
+
+    if (workName.value.length < 1) {
+      this.setState({
+        isAlertOpen: 1,
+      });
+      workName.focus();
+      return;
+    }
+
+    if (workCode.value.length < 1) {
+      this.setState({
+        isAlertOpen: 2,
+      });
+      workCode.focus();
+      return;
+    }
+
+    if (workDesc.length < 1) {
+      alert("내용 입력 누락");
+      return;
+    }
+
+    if (workType.length < 1) {
+      alert("타입 선택 누락");
+      return;
+    }
+
+    if (workEmp.length < 1) {
+      alert("담당자 선택 누락");
+      return;
+    }
+
+    const date = new Date();
+    let y = date.getFullYear();
+    let m = date.getMonth() + 1;
+    let d = date.getDate();
+
+    m = m < 10 ? "0" + m : m;
+    d = d < 10 ? "0" + d : d;
+
+    const workdate = y + "/" + m + "/" + d;
+
+    console.log(workdate);
+
+    const addData = {
+      workName: workName.value,
+      workCode: workCode.value,
+      workDesc: workDesc.value,
+      workType: workType.value,
+      workEmp: workEmp.value,
+      result: "0",
+      workdate: workdate,
+    };
+
+    console.log(addData);
+
+    this.setState({
+      isRegistFormOpen: false,
     });
   };
 
