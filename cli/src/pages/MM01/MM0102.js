@@ -135,9 +135,9 @@ class MM0102 extends React.Component {
             <div className="mc__col2__desc">
               {dataInfo ? (
                 <>
-                  <div>
+                  <div className="dataInfo">
                     <div>{dataInfo.name}</div>
-                    <div>
+                    <div className="dataSubInfo">
                       <div>고용일 : {dataInfo.hire}</div>
                       <div>{dataInfo.hireYear}년차</div>
                     </div>
@@ -257,9 +257,9 @@ class MM0102 extends React.Component {
                       return (
                         <TableBody>
                           <TableRow hover role="checkbox">
-                            <TableCell>20/03/19 </TableCell>
-                            <TableCell>1</TableCell>
-                            <TableCell>프로젝트 마감 후 휴식</TableCell>
+                            <TableCell>{data.year}</TableCell>
+                            <TableCell>{data.usedAnnual}</TableCell>
+                            <TableCell>{data.userRef}</TableCell>
                           </TableRow>
                         </TableBody>
                       );
