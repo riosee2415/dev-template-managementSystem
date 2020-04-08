@@ -7,7 +7,6 @@ import FormDialog from "../../components/FormDialog";
 import { TextField } from "@material-ui/core";
 import ComboBox from "../../components/ComboBox";
 import middleware from "../../middleware/common";
-import AlertDialog from "../../components/AlertDialog";
 import OutlinedButtonFull from "../../components/material/OutlinedButtonFull";
 import OutlinedButtonHalf from "../../components/material/OutlinedButtonHalf";
 
@@ -24,7 +23,6 @@ class MM0202 extends React.Component {
       isRegistFormOpen: false,
       workType: [],
       empList: [],
-      isAlertOpen: 0,
     };
   }
 
@@ -52,7 +50,7 @@ class MM0202 extends React.Component {
       projectWorkList,
       workType,
       empList,
-      isAlertOpen,
+      isRegistFormOpen,
     } = this.state;
 
     return (
@@ -190,7 +188,7 @@ class MM0202 extends React.Component {
           </div>
         </div>
         <FormDialog
-          open={this.state.isRegistFormOpen}
+          isOpen={isRegistFormOpen}
           title="업무 등록"
           //content="등록할 직원정보를 입력해주세요."
           submitDialogHandler={this._addBtnSubmitDialogHandler}
