@@ -9,6 +9,7 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
+import FormDialog2 from "../../components/FormDialog2";
 
 class MM0102 extends React.Component {
   constructor(props) {
@@ -21,7 +22,8 @@ class MM0102 extends React.Component {
       isAlertOpen: false,
       alertType: null,
       alertTitle: null,
-      alertContent: null
+      alertContent: null,
+      isUsedFormOpen: false,
     };
   }
 
@@ -32,22 +34,38 @@ class MM0102 extends React.Component {
       { id: "year", label: "년도", align: "center", minWidth: 170 },
       {
         id: "allAnnual",
-        label: "총 연차",
+        label: "총 연차(일)",
         align: "center",
-        minWidth: 170
+        minWidth: 170,
       },
       {
         id: "usedAnnual",
-        label: "사용 연차",
+        label: "사용 연차(일)",
         align: "center",
-        minWidth: 170
+        minWidth: 170,
       },
       {
         id: "applicationAnnual",
         label: "연차 사용",
         align: "center",
-        minWidth: 170
-      }
+        minWidth: 170,
+      },
+    ];
+
+    const usedlist = [
+      {
+        id: "year",
+        label: "연도",
+        align: "center",
+        minWidth: 170,
+      },
+      { id: "year", label: "사용 연차(일)", align: "center", minWidth: 170 },
+      {
+        id: "whtused",
+        label: "사유",
+        align: "center",
+        minWidth: 170,
+      },
     ];
 
     return (
@@ -132,7 +150,7 @@ class MM0102 extends React.Component {
                     {dataInfo ? (
                       <TableHead>
                         <TableRow>
-                          {columns.map(column => (
+                          {columns.map((column) => (
                             <TableCell
                               key={column.id}
                               align={column.align}
@@ -146,7 +164,7 @@ class MM0102 extends React.Component {
                     ) : null}
 
                     {dataInfo
-                      ? dataInfo.annualInfo.map(data => {
+                      ? dataInfo.annualInfo.map((data) => {
                           return (
                             <TableBody>
                               <TableRow hover role="checkbox">
@@ -183,12 +201,61 @@ class MM0102 extends React.Component {
                   type="button"
                   className="btn btn-l bg-blue"
                   value="사용 내역"
+                  onClick={() => this.__usedAnnualHandler()}
                 />
               ) : null}
             </div>
           </div>
         </div>
 
+        {/* 사용연차 리스트 */}
+        <FormDialog2
+          open={this.state.isUsedFormOpen}
+          title="사용 연차 리스트"
+          closeDialogHandler={this._closeDialogBtnHandler}
+        >
+          {dataInfo
+            ? dataInfo.annualInfo.map((data) => {
+                return <div>{data.usedAnnual}</div>;
+              })
+            : null}
+
+          <Paper>
+            <TableContainer>
+              <Table stickyHeader aria-label="sticky table">
+                <TableHead>
+                  <TableRow>
+                    {usedlist.map((column) => (
+                      <TableCell
+                        key={column.id}
+                        align={column.align}
+                        style={{ minWidth: column.minWidth }}
+                      >
+                        {column.label}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                </TableHead>
+
+                {dataInfo
+                  ? dataInfo.annualInfo.map((data) => {
+                      return (
+                        <TableBody>
+                          <TableRow hover role="checkbox">
+                            <TableCell>20/03/19 </TableCell>
+                            <TableCell>1</TableCell>
+                            <TableCell>프로젝트 마감 후 휴식</TableCell>
+                          </TableRow>
+                        </TableBody>
+                      );
+                    })
+                  : null}
+              </Table>
+            </TableContainer>
+          </Paper>
+        </FormDialog2>
+
+        {/* 접근권한 alert */}
         {this.state.isAlertOpen ? (
           <AlertDialog
             isOpen={this.state.isAlertOpen}
@@ -202,13 +269,13 @@ class MM0102 extends React.Component {
     );
   }
 
-  _annualClickHandler = async key => {
+  _annualClickHandler = async (key) => {
     const response = await fetch("/api/getAnnualInfo", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({ key })
+      body: JSON.stringify({ key }),
     });
 
     const data = await response.json();
@@ -218,22 +285,29 @@ class MM0102 extends React.Component {
 
     if (data.empId === sessionStorage.login_id) {
       this.setState({
-        dataInfo: data
+        dataInfo: data,
       });
     } else {
       this.setState({
-        dataInfo: null
+        dataInfo: null,
       });
       setTimeout(() => {
-        alert("접근 권한이 없습니다.");
         this.setState({
           isAlertOpen: true,
           alertType: "error",
           alertTitle: "알림",
-          alertContent: "접근 권한이 없습니다."
+          alertContent: "접근 권한이 없습니다.",
         });
-      }, 1);
+      }, 0);
     }
+  };
+
+  __usedAnnualHandler = () => {
+    this.setState({ isUsedFormOpen: true });
+  };
+
+  _closeDialogBtnHandler = () => {
+    this.setState({ isUsedFormOpen: false });
   };
 }
 
