@@ -11,6 +11,7 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import FormDialog from "../../components/FormDialog";
 import ComboBox from "../../components/ComboBox";
+import { makeStyles } from "@material-ui/core/styles";
 
 class MM0102 extends React.Component {
   constructor(props) {
@@ -30,7 +31,17 @@ class MM0102 extends React.Component {
   }
 
   render() {
-    const { pageCode, selectCollection, dataInfo } = this.state;
+    const {
+      pageCode,
+      selectCollection,
+      dataInfo,
+      isAlertOpen,
+      alertType,
+      alertTitle,
+      alertContent,
+      isUsedFormOpen,
+      isUsageFormOpen,
+    } = this.state;
 
     const columns = [
       { id: "year", label: "년도", align: "center", minWidth: 170 },
@@ -174,7 +185,7 @@ class MM0102 extends React.Component {
                     {dataInfo
                       ? dataInfo.annualInfo.map((data) => {
                           return (
-                            <TableBody>
+                            <TableBody className="annualTb">
                               <TableRow hover role="checkbox">
                                 <TableCell key={data.docId}>
                                   {data.year}
@@ -221,7 +232,7 @@ class MM0102 extends React.Component {
 
         {/* 연차 사용 신청 */}
         <FormDialog
-          open={this.state.isUsageFormOpen}
+          isOpen={isUsageFormOpen}
           title="연차 사용 신청"
           submitDialogHandler={this._addApplicationAnnualHandler}
           closeDialogHandler={this._closeUsageDialogBtnHandler}
@@ -231,7 +242,7 @@ class MM0102 extends React.Component {
 
         {/* 사용연차 리스트 */}
         <FormDialog
-          open={this.state.isUsedFormOpen}
+          isOpen={isUsedFormOpen}
           title="사용 연차 리스트"
           closeDialogHandler={this._closeDialogBtnHandler}
           isOnlyCheck={true}
@@ -291,12 +302,12 @@ class MM0102 extends React.Component {
         </FormDialog>
 
         {/* 접근권한 alert */}
-        {this.state.isAlertOpen ? (
+        {isAlertOpen ? (
           <AlertDialog
-            isOpen={this.state.isAlertOpen}
-            type={this.state.alertType}
-            title={this.state.alertTitle}
-            content={this.state.alertContent}
+            isOpen={isAlertOpen}
+            type={alertType}
+            title={alertTitle}
+            content={alertContent}
             closeDialogHandler={() => this.setState({ isAlertOpen: false })}
           />
         ) : null}
