@@ -3,15 +3,15 @@ import { loadCSS } from "fg-loadcss";
 import { makeStyles } from "@material-ui/core/styles";
 import Icon from "@material-ui/core/Icon";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     "& > .fa": {
-      margin: theme.spacing(2)
-    }
-  }
+      margin: theme.spacing(2),
+    },
+  },
 }));
 
-export default function IconComponent({ iconName }) {
+export default function IconComponent({ iconName, color = "black" }) {
   const classes = useStyles();
 
   React.useEffect(() => {
@@ -23,7 +23,7 @@ export default function IconComponent({ iconName }) {
 
   return (
     <div className={classes.root}>
-      <Icon className={iconName} color="action" />
+      <Icon className={iconName} color={color} />
     </div>
   );
 }

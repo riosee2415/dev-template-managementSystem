@@ -1,5 +1,8 @@
 .mm0103__dataBox {
   margin-top: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .mm0103__dataBox .dataBox__row {
@@ -10,6 +13,16 @@
   padding: 17px;
 }
 
+.mm0103__dataBox .dataBox__row .dataBox__col {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.mm0103__dataBox .dataBox__row .dataBox__col span.data__icon {
+  margin-left: 20px;
+}
+
 .mm0103__dataBox .dataBox__row .dataBox__col .profile__img {
   width: 100px;
   height: 100px;
@@ -18,13 +31,4 @@
 .mm0103__dataBox .dataBox__row .dataBox__col:first-child {
   width: 200px;
   text-indent: 10px;
-}
-
-.mm0103__dataBox .dataBox__row .dataBox__col:first-child span {
-  padding-left: 5px;
-  border-left: 3px solid #ffa751;
-}
-
-.mm0103__dataBox .dataBox__row .dataBox__col:nth-child(2) {
-  color: #777;
 }
