@@ -138,8 +138,14 @@ class MM0102 extends React.Component {
                   <div className="dataInfo">
                     <div>{dataInfo.name}</div>
                     <div className="dataSubInfo">
-                      <div>고용일 : {dataInfo.hire}</div>
-                      <div>{dataInfo.hireYear}년차</div>
+                      <div>
+                        <span>고용일 :</span>
+                        {dataInfo.hire}
+                      </div>
+                      <div>
+                        {dataInfo.hireYear}
+                        <span>년차</span>
+                      </div>
                     </div>
                   </div>
                 </>
@@ -185,6 +191,9 @@ class MM0102 extends React.Component {
                                       type="button"
                                       className="btn btn-xs bg-violet"
                                       value="사용"
+                                      onClick={() =>
+                                        this.__usageApplicationHandler()
+                                      }
                                     />
                                   ) : null}
                                 </TableCell>
@@ -200,7 +209,7 @@ class MM0102 extends React.Component {
               {dataInfo ? (
                 <input
                   type="button"
-                  className="btn btn-l bg-blue"
+                  className="btn btn-l bg-blue usedlist"
                   value="사용 내역"
                   onClick={() => this.__usedAnnualHandler()}
                 />
