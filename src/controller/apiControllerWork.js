@@ -77,7 +77,7 @@ const getDetailDataToWorkTime = async (inputData) => {
   let sendData = [];
 
   try {
-    fsRef = await firestore.collection("workRecord");
+    fsRef = await firestore.collection("workRecord").orderBy("date", "desc");
 
     await fsRef
       .where("id", "==", inputData.inputId)

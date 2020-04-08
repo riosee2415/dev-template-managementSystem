@@ -2,10 +2,10 @@ import React from "react";
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 
-export default function ComboBox({ dataList, title }) {
+export default function ComboBox({ dataList, title, txtId }) {
   return (
     <Autocomplete
-      id="blur-on-select"
+      id={txtId}
       blurOnSelect
       options={dataList}
       getOptionLabel={(option) => option.title}
