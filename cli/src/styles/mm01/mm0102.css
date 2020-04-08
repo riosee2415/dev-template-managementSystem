@@ -9,7 +9,7 @@
 
 .dataInfo div:first-child {
   font-weight: 600;
-  color: #00004e;
+  color: #000090;
 }
 
 .dataSubInfo {
@@ -18,9 +18,13 @@
   justify-content: space-around;
 }
 
-.dataSubInfo > div:first-child span {
-  color: #535353;
+.dataSubInfo div:first-child span {
   font-weight: bold;
+}
+
+.dataSubInfo div:first-child {
+  color: #535353;
+  font-weight: normal;
 }
 
 .dataSubInfo > div:nth-child(2) {
@@ -28,4 +32,11 @@
   padding: 5px 10px;
   font-size: 14px;
   margin-left: 50px;
+}
+
+.usedlist {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  text-align: center;
 }
