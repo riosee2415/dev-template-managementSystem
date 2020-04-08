@@ -10,9 +10,6 @@ class TopArea extends React.Component {
 
           <div>프로젝트 수익</div>
           <div>{this.props.profit}</div>
-
-          <div></div>
-          <div></div>
         </div>
 
         <div className="project-info__box">
@@ -21,9 +18,6 @@ class TopArea extends React.Component {
 
           <div>종료일</div>
           <div>{this.props.endDate}</div>
-
-          <div>연장일</div>
-          <div>{this.props.exDate}</div>
         </div>
 
         <div className="project-info__box">
@@ -32,9 +26,12 @@ class TopArea extends React.Component {
 
           <div>프로젝트 매니저</div>
           <div>{this.props.PM}</div>
-
-          <div></div>
-          <div></div>
+        </div>
+        <div className="project-info__box">
+          <div>연장일</div>
+          <div>{this.props.exDate}</div>
+          <div>진척도</div>
+          <div>0%</div>
         </div>
 
         <div className="saperator-line"></div>

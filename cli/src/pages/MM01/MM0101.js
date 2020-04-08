@@ -19,8 +19,14 @@ class MM0101 extends React.Component {
       fsId: "",
       screenReload: false,
       detailList: [],
-      isStartWorkAlertOpen: false,
-      isReflash: false,
+      isLeftRefresh: false,
+      isAlertOpen: false,
+      alertType: null,
+      alertTitle: null,
+      alertContent: null,
+      isConfirmOpen: false,
+      confirmTitle: null,
+      confirmContent: null
     };
   }
 
@@ -32,11 +38,6 @@ class MM0101 extends React.Component {
     this._getworkStart();
 
     this._getDetailData();
-
-    this.setState({
-      isStartWorkAlertOpen: false,
-    });
-    console.log("didMount");
   }
 
   render() {
@@ -51,8 +52,7 @@ class MM0101 extends React.Component {
       workStart,
       workEnd,
       fsId,
-      detailList,
-      isStartWorkAlertOpen,
+      detailList
     } = this.state;
 
     return (
@@ -179,13 +179,13 @@ class MM0101 extends React.Component {
           </div>
         </div>
 
-        {isStartWorkAlertOpen ? (
+        {this.state.isAlertOpen ? (
           <AlertDialog
-            isOpen={isStartWorkAlertOpen}
-            type="error"
-            title="실행불가"
-            msg="출근은 하루 한번만 가능합니다."
-            closeDialogHandler={() => (this.state.isStartWorkAlertOpen = false)}
+            isOpen={this.state.isAlertOpen}
+            type={this.state.alertType}
+            title={this.state.alertTitle}
+            content={this.state.alertContent}
+            closeDialogHandler={() => this.setState({ isAlertOpen: false })}
           />
         ) : null}
       </div>
@@ -194,22 +194,22 @@ class MM0101 extends React.Component {
 
   _getDetailData = async () => {
     const inputData = {
-      inputId: sessionStorage.getItem("login_id"),
+      inputId: sessionStorage.getItem("login_id")
     };
 
     const response = await fetch("/api/getDetailDataToWorkTime", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
         // 'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: JSON.stringify({ inputData }),
+      body: JSON.stringify({ inputData })
     });
 
     let dataList = await response.json();
 
     this.setState({
-      detailList: dataList,
+      detailList: dataList
     });
   };
 
@@ -218,23 +218,23 @@ class MM0101 extends React.Component {
     const inputData = {
       id: sessionStorage.getItem("login_id"),
       date:
-        date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate(),
+        date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate()
     };
 
     const response = await fetch("/api/getworkStart", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
         // 'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: JSON.stringify({ inputData }),
+      body: JSON.stringify({ inputData })
     });
     const data = await response.json();
 
     this.setState({
       workStart: data.startTime,
       workEnd: data.endTime,
-      fsId: data.id,
+      fsId: data.id
     });
   };
 
@@ -242,12 +242,11 @@ class MM0101 extends React.Component {
     const validation1 = document.getElementById("workStart-js");
 
     if (validation1.innerText.length > 0) {
-      await this.setState({
-        alert: false,
-      });
-
       this.setState({
-        isStartWorkAlertOpen: true,
+        isAlertOpen: true,
+        alertType: "error",
+        alertTitle: "실행불가",
+        alertContent: "출근은 하루 한번만 가능합니다."
       });
       return;
     }
@@ -258,7 +257,7 @@ class MM0101 extends React.Component {
       currentSec,
       currentYear,
       currentMonth,
-      currentDate,
+      currentDate
     } = this.state;
 
     if (currentHour === 0) {
@@ -276,16 +275,16 @@ class MM0101 extends React.Component {
     const inputData = {
       inputDate,
       id,
-      inputStartTime,
+      inputStartTime
     };
 
     await fetch("/api/saveWorkTimeToStart", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
         // 'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: JSON.stringify({ inputData }),
+      body: JSON.stringify({ inputData })
     }).then(this.componentDidMount());
   };
 
@@ -301,16 +300,16 @@ class MM0101 extends React.Component {
 
     const inputData = {
       fsId,
-      inputEndTime,
+      inputEndTime
     };
 
     await fetch("/api/saveWorkTimeToEnd", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
         // 'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: JSON.stringify({ inputData }),
+      body: JSON.stringify({ inputData })
     }).then(this.componentDidMount());
   };
 
@@ -349,7 +348,7 @@ class MM0101 extends React.Component {
       currentDay: currentDay,
       currentYear: date.getFullYear(),
       currentMonth: date.getMonth() + 1,
-      currentDate: date.getDate(),
+      currentDate: date.getDate()
     });
   };
 }
