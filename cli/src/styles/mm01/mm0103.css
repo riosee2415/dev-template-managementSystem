@@ -1,8 +1,14 @@
 .mm0103__dataBox {
   margin-top: 30px;
   display: flex;
+  flex-direction: column;
+}
+
+.dataBox__body {
+  display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .mm0103__dataBox .dataBox__row {

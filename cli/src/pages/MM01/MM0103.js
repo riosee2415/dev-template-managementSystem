@@ -23,7 +23,7 @@ class MM0103 extends React.Component {
       alertContent: null,
       isConfirmOpen: false,
       confirmTitle: null,
-      confirmContent: null
+      confirmContent: null,
     };
   }
 
@@ -39,7 +39,7 @@ class MM0103 extends React.Component {
       alertContent,
       isConfirmOpen,
       confirmTitle,
-      confirmContent
+      confirmContent,
     } = this.state;
 
     return (
@@ -180,7 +180,7 @@ class MM0103 extends React.Component {
 
                       <div className="dataBox__row">
                         <span className="data__icon">
-                          <IconComponent iconName="fas fa-map-marker-alt" />
+                          <IconComponent iconName="fas fa-id-badge" />
                         </span>
                         <span className="data__info">
                           {this.state.empInfo.empNo}
@@ -292,38 +292,38 @@ class MM0103 extends React.Component {
     );
   }
 
-  _dataClickHandler = async key => {
+  _dataClickHandler = async (key) => {
     const response = await fetch("/api/getEmpInfo", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
         // 'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: JSON.stringify({ key })
+      body: JSON.stringify({ key }),
     });
 
     const data = await response.json();
 
     this.setState({
-      empInfo: data
+      empInfo: data,
     });
   };
 
   _empRegistHandler = async () => {
     this.setState({
-      isEmpRegistFormOpen: true
+      isEmpRegistFormOpen: true,
     });
   };
 
   _empRegistFormSubmitDialogHandler = () => {
     this.setState({
-      isEmpRegistFormOpen: false
+      isEmpRegistFormOpen: false,
     });
   };
 
   _empRegistFormCloseDialogHandler = () => {
     this.setState({
-      isEmpRegistFormOpen: false
+      isEmpRegistFormOpen: false,
     });
   };
 
@@ -335,14 +335,14 @@ class MM0103 extends React.Component {
         isAlertOpen: true,
         alertType: "info",
         alertTitle: "알림",
-        alertContent: "삭제할 직원을 선택해주세요."
+        alertContent: "삭제할 직원을 선택해주세요.",
       });
       return;
     }
     this.setState({
       isConfirmOpen: true,
       confirmTitle: "확인",
-      confirmContent: "[" + empInfo.name + "] 님을 삭제하시겠습니까 ?"
+      confirmContent: "[" + empInfo.name + "] 님을 삭제하시겠습니까 ?",
     });
   };
 
@@ -350,16 +350,16 @@ class MM0103 extends React.Component {
     const { empInfo, isLeftRefresh } = this.state;
 
     this.setState({
-      isConfirmOpen: false
+      isConfirmOpen: false,
     });
 
     const response = await fetch("/api/removeEmpInfo", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
         // 'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: JSON.stringify({ empInfo })
+      body: JSON.stringify({ empInfo }),
     });
 
     const data = await response.json();
@@ -369,19 +369,19 @@ class MM0103 extends React.Component {
         isAlertOpen: true,
         alertType: "success",
         alertTitle: "알림",
-        alertContent: "삭제 처리되었습니다."
+        alertContent: "삭제 처리되었습니다.",
       });
 
       this.setState({
         empInfo: null,
-        isLeftRefresh: !isLeftRefresh
+        isLeftRefresh: !isLeftRefresh,
       });
     } else {
       this.setState({
         isAlertOpen: true,
         alertType: "error",
         alertTitle: "알림",
-        alertContent: "데이터 처리 중 문제가 발생했습니다."
+        alertContent: "데이터 처리 중 문제가 발생했습니다.",
       });
     }
   };
