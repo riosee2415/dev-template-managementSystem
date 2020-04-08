@@ -5,7 +5,7 @@ import IconComponent from "../IconComponent";
 class WorkList extends React.Component {
   render() {
     return (
-      <ul className="workList-main" key={this.props.idx}>
+      <ul className="workList-main" key={this.props.workRef}>
         <li>{this.props.idx}</li>
         <li>{this.props.workName}</li>
         <li>{this.props.workCode}</li>
@@ -26,7 +26,9 @@ class WorkList extends React.Component {
         </li>
 
         <li>
-          <IconComponent iconName="far fa-times-circle" />
+          <button onClick={() => this.props.deleteHandler(this.props.workRef)}>
+            <IconComponent iconName="far fa-times-circle" />
+          </button>
         </li>
       </ul>
     );
