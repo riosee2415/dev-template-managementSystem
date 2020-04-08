@@ -11,6 +11,7 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import FormDialog from "../../components/FormDialog";
 import ComboBox from "../../components/ComboBox";
+import { TextField } from "@material-ui/core";
 
 class MM0102 extends React.Component {
   constructor(props) {
@@ -25,11 +26,22 @@ class MM0102 extends React.Component {
       alertTitle: null,
       alertContent: null,
       isUsedFormOpen: false,
+      isUsageFormOpen: false,
     };
   }
 
   render() {
-    const { pageCode, selectCollection, dataInfo } = this.state;
+    const {
+      pageCode,
+      selectCollection,
+      dataInfo,
+      isAlertOpen,
+      alertType,
+      alertTitle,
+      alertContent,
+      isUsedFormOpen,
+      isUsageFormOpen,
+    } = this.state;
 
     const columns = [
       { id: "year", label: "년도", align: "center", minWidth: 170 },
@@ -139,7 +151,7 @@ class MM0102 extends React.Component {
                     <div>{dataInfo.name}</div>
                     <div className="dataSubInfo">
                       <div>
-                        <span>고용일 :</span>
+                        <span>고용일 : </span>
                         {dataInfo.hire}
                       </div>
                       <div>
@@ -174,7 +186,11 @@ class MM0102 extends React.Component {
                       ? dataInfo.annualInfo.map((data) => {
                           return (
                             <TableBody>
-                              <TableRow hover role="checkbox">
+                              <TableRow
+                                hover
+                                role="checkbox"
+                                className="annualTb"
+                              >
                                 <TableCell key={data.docId}>
                                   {data.year}
                                 </TableCell>
@@ -209,7 +225,7 @@ class MM0102 extends React.Component {
               {dataInfo ? (
                 <input
                   type="button"
-                  className="btn btn-l bg-blue usedlist"
+                  className="btn btn-l bg-blue usedList"
                   value="사용 내역"
                   onClick={() => this.__usedAnnualHandler()}
                 />
@@ -218,9 +234,28 @@ class MM0102 extends React.Component {
           </div>
         </div>
 
+        {/* 연차 사용 신청 */}
+        <FormDialog
+          isOpen={isUsageFormOpen}
+          title="연차 사용 신청"
+          submitDialogHandler={this._addApplicationAnnualHandler}
+          closeDialogHandler={this._closeUsageDialogBtnHandler}
+        >
+          {dataInfo ? (
+            <>
+              <div>{dataInfo.name}</div>
+              <div>{dataInfo.rank}</div>
+              <div>{new Date().getFullYear()}</div>
+            </>
+          ) : null}
+          <div>휴가기간 : </div>
+          <div>휴가 사유 : </div>
+          <div>첨부 파일 : </div>
+        </FormDialog>
+
         {/* 사용연차 리스트 */}
         <FormDialog
-          open={this.state.isUsedFormOpen}
+          isOpen={isUsedFormOpen}
           title="사용 연차 리스트"
           closeDialogHandler={this._closeDialogBtnHandler}
           isOnlyCheck={true}
@@ -265,7 +300,7 @@ class MM0102 extends React.Component {
                   ? dataInfo.annualInfo.map((data) => {
                       return (
                         <TableBody>
-                          <TableRow hover role="checkbox">
+                          <TableRow hover role="checkbox" className="annualTb">
                             <TableCell>{data.year}</TableCell>
                             <TableCell>{data.usedAnnual}</TableCell>
                             <TableCell>{data.userRef}</TableCell>
@@ -280,12 +315,12 @@ class MM0102 extends React.Component {
         </FormDialog>
 
         {/* 접근권한 alert */}
-        {this.state.isAlertOpen ? (
+        {isAlertOpen ? (
           <AlertDialog
-            isOpen={this.state.isAlertOpen}
-            type={this.state.alertType}
-            title={this.state.alertTitle}
-            content={this.state.alertContent}
+            isOpen={isAlertOpen}
+            type={alertType}
+            title={alertTitle}
+            content={alertContent}
             closeDialogHandler={() => this.setState({ isAlertOpen: false })}
           />
         ) : null}
@@ -324,6 +359,18 @@ class MM0102 extends React.Component {
         });
       }, 0);
     }
+  };
+
+  __usageApplicationHandler = () => {
+    this.setState({ isUsageFormOpen: true });
+  };
+
+  _addApplicationAnnualHandler = () => {
+    alert("전송하구싶다!!!＼○∇○／");
+  };
+
+  _closeUsageDialogBtnHandler = () => {
+    this.setState({ isUsageFormOpen: false });
   };
 
   __usedAnnualHandler = () => {

@@ -234,7 +234,7 @@
   margin-right: 20px;
   padding-bottom: 20px;
   width: 100%;
-  min-width: 800px;
+  min-width: 900px;
   height: 72vh;
   box-sizing: content-box;
 }
@@ -264,6 +264,7 @@
 }
 
 .mc .mc__col2 .mc__col2__desc {
+  position: relative;
   display: flex;
   flex-direction: column;
   padding: 10px 20px;
