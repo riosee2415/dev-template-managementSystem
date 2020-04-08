@@ -9,7 +9,8 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import FormDialog2 from "../../components/FormDialog2";
+import FormDialog from "../../components/FormDialog";
+import ComboBox from "../../components/ComboBox";
 
 class MM0102 extends React.Component {
   constructor(props) {
@@ -24,6 +25,7 @@ class MM0102 extends React.Component {
       alertTitle: null,
       alertContent: null,
       isUsedFormOpen: false,
+      isUsageFormOpen: false,
     };
   }
 
@@ -55,7 +57,7 @@ class MM0102 extends React.Component {
     const usedlist = [
       {
         id: "year",
-        label: "연도",
+        label: "사용일",
         align: "center",
         minWidth: 170,
       },
@@ -134,11 +136,17 @@ class MM0102 extends React.Component {
             <div className="mc__col2__desc">
               {dataInfo ? (
                 <>
-                  <div>
+                  <div className="dataInfo">
                     <div>{dataInfo.name}</div>
-                    <div>
-                      <div>{dataInfo.hire}</div>
-                      <div>{dataInfo.hireYear}년차</div>
+                    <div className="dataSubInfo">
+                      <div>
+                        <span>고용일 : </span>
+                        {dataInfo.hire}
+                      </div>
+                      <div>
+                        {dataInfo.hireYear}
+                        <span>년차</span>
+                      </div>
                     </div>
                   </div>
                 </>
@@ -184,6 +192,9 @@ class MM0102 extends React.Component {
                                       type="button"
                                       className="btn btn-xs bg-violet"
                                       value="사용"
+                                      onClick={() =>
+                                        this.__usageApplicationHandler()
+                                      }
                                     />
                                   ) : null}
                                 </TableCell>
@@ -199,7 +210,7 @@ class MM0102 extends React.Component {
               {dataInfo ? (
                 <input
                   type="button"
-                  className="btn btn-l bg-blue"
+                  className="btn btn-l bg-blue usedlist"
                   value="사용 내역"
                   onClick={() => this.__usedAnnualHandler()}
                 />
@@ -208,17 +219,41 @@ class MM0102 extends React.Component {
           </div>
         </div>
 
+        {/* 연차 사용 신청 */}
+        <FormDialog
+          open={this.state.isUsageFormOpen}
+          title="연차 사용 신청"
+          submitDialogHandler={this._addApplicationAnnualHandler}
+          closeDialogHandler={this._closeUsageDialogBtnHandler}
+        >
+          <div> efefef</div>
+        </FormDialog>
+
         {/* 사용연차 리스트 */}
-        <FormDialog2
+        <FormDialog
           open={this.state.isUsedFormOpen}
           title="사용 연차 리스트"
           closeDialogHandler={this._closeDialogBtnHandler}
+          isOnlyCheck={true}
         >
-          {dataInfo
-            ? dataInfo.annualInfo.map((data) => {
-                return <div>{data.usedAnnual}</div>;
-              })
-            : null}
+          <ComboBox dataList={[{ title: "aaa" }, { title: "aaa" }]}></ComboBox>
+
+          <div>
+            총 사용 연차 :
+            {dataInfo
+              ? dataInfo.annualInfo.map((data) => {
+                  return (
+                    <div>
+                      {data.year === new Date().getFullYear + "" ? (
+                        <div>{data.usedAnnual}</div>
+                      ) : (
+                        <div>0</div>
+                      )}
+                    </div>
+                  );
+                })
+              : null}
+          </div>
 
           <Paper>
             <TableContainer>
@@ -242,9 +277,9 @@ class MM0102 extends React.Component {
                       return (
                         <TableBody>
                           <TableRow hover role="checkbox">
-                            <TableCell>20/03/19 </TableCell>
-                            <TableCell>1</TableCell>
-                            <TableCell>프로젝트 마감 후 휴식</TableCell>
+                            <TableCell>{data.year}</TableCell>
+                            <TableCell>{data.usedAnnual}</TableCell>
+                            <TableCell>{data.userRef}</TableCell>
                           </TableRow>
                         </TableBody>
                       );
@@ -253,7 +288,7 @@ class MM0102 extends React.Component {
               </Table>
             </TableContainer>
           </Paper>
-        </FormDialog2>
+        </FormDialog>
 
         {/* 접근권한 alert */}
         {this.state.isAlertOpen ? (
@@ -300,6 +335,14 @@ class MM0102 extends React.Component {
         });
       }, 0);
     }
+  };
+
+  __usageApplicationHandler = () => {
+    this.setState({ isUsageFormOpen: true });
+  };
+
+  _closeUsageDialogBtnHandler = () => {
+    this.setState({ isUsageFormOpen: false });
   };
 
   __usedAnnualHandler = () => {

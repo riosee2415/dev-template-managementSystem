@@ -4,46 +4,30 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
 import { Alert, AlertTitle } from "@material-ui/lab";
-import { makeStyles } from "@material-ui/core/styles";
+import { withStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: "100%",
-    "& > * + *": {
-      marginTop: theme.spacing(2),
-    },
-  },
+const styles = {};
 
-  dialogContent: {
-    width: 500,
-  },
-}));
+class AlertDialog extends React.Component {
+  render() {
+    const { classes } = this.props;
 
-export default function AlertDialog(props) {
-  const classes = useStyles();
-
-  const [open, setOpen] = React.useState(props.isOpen);
-
-  const handleClose = () => {
-    props.closeDialogHandler();
-    setOpen(false);
-  };
-
-  return (
-    <Dialog open={open}>
-      <DialogContent className={classes.dialogContent}>
-        <div className={classes.root}>
-          <Alert severity={props.type} className={classes.alert}>
-            <AlertTitle>{props.title}</AlertTitle>
-            {props.content}
+    return (
+      <Dialog open={this.props.isOpen} fullWidth maxWidth="xs">
+        <DialogContent>
+          <Alert severity={this.props.type}>
+            <AlertTitle>{this.props.title}</AlertTitle>
+            {this.props.content}
           </Alert>
-        </div>
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={handleClose} autoFocus>
-          확인
-        </Button>
-      </DialogActions>
-    </Dialog>
-  );
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={this.props.closeDialogHandler} autoFocus>
+            확인
+          </Button>
+        </DialogActions>
+      </Dialog>
+    );
+  }
 }
+
+export default withStyles(styles)(AlertDialog);

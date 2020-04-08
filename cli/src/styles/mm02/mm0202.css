@@ -55,6 +55,10 @@
   align-items: center;
 }
 
+.mm-add {
+  text-align: right;
+}
+
 .workList-main {
   width: 100%;
   margin-top: 10px;
@@ -80,7 +84,7 @@
 }
 
 .workList-main li:nth-child(2) {
-  width: 170px;
+  width: 240px;
   text-align: left;
 }
 
@@ -95,8 +99,13 @@
 }
 
 .workList-main li:nth-child(n + 7):nth-child(-n + 9) {
-  width: 100px;
+  width: 70px;
   text-align: center;
+}
+
+.workList-main li:last-child .far {
+  color: #e71c18;
+  cursor: pointer;
 }
 
 .workList-main li .progress {

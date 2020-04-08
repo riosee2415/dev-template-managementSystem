@@ -5,13 +5,13 @@ import Button from "@material-ui/core/Button";
 const useStyles = makeStyles((theme) => ({
   root: {
     "& > *": {
-      margin: theme.spacing(2),
-      width: 365,
+      margin: theme.spacing(0),
+      padding: 0,
     },
   },
 }));
 
-export default function OutlinedButtonFull({
+export default function OutlinedButton({
   text,
   color,
   action,
