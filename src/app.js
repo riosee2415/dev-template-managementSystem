@@ -115,6 +115,14 @@ app.post(routes.getEmpList, async (req, res) => {
   return res.json(sendData);
 });
 
+app.post(routes.addWorkList, async (req, res) => {
+  const data = req.body.addData;
+
+  const sendData = await projectController.addWorkList(data);
+
+  return res.json(sendData);
+});
+
 app.listen(PORT, () => {
   console.log(`✅ Server Start On ${PORT}`);
 });

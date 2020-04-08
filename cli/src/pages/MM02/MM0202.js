@@ -189,23 +189,6 @@ class MM0202 extends React.Component {
               </div>
             </div>
           </div>
-          {isAlertOpen === 1 ? (
-            <AlertDialog
-              isOpen={isAlertOpen}
-              type="error"
-              title="실행불가"
-              content="업무가 누락되었습니다."
-              closeDialogHandler={() => this.setState({ isAlertOpen: 0 })}
-            />
-          ) : isAlertOpen === 2 ? (
-            <AlertDialog
-              isOpen={isAlertOpen}
-              type="error"
-              title="실행불가"
-              content="업무코드가 누락되었습니다."
-              closeDialogHandler={() => this.setState({ isAlertOpen: 0 })}
-            />
-          ) : null}
         </div>
         <FormDialog
           open={this.state.isRegistFormOpen}
@@ -278,7 +261,9 @@ class MM0202 extends React.Component {
     });
   };
 
-  _addBtnSubmitDialogHandler = () => {
+  _addBtnSubmitDialogHandler = async () => {
+    const { projectInfo } = this.state;
+
     const workName = document.getElementById("workName-js");
     const workCode = document.getElementById("workCode-js");
     const workDesc = document.getElementById("workDesc-js");
@@ -286,33 +271,27 @@ class MM0202 extends React.Component {
     const workEmp = document.getElementById("workEmp-js");
 
     if (workName.value.length < 1) {
-      this.setState({
-        isAlertOpen: 1,
-      });
       workName.focus();
       return;
     }
 
     if (workCode.value.length < 1) {
-      this.setState({
-        isAlertOpen: 2,
-      });
       workCode.focus();
       return;
     }
 
-    if (workDesc.length < 1) {
-      alert("내용 입력 누락");
+    if (workDesc.value.length < 1) {
+      workDesc.focus();
       return;
     }
 
-    if (workType.length < 1) {
-      alert("타입 선택 누락");
+    if (workType.value.length < 1) {
+      workType.focus();
       return;
     }
 
-    if (workEmp.length < 1) {
-      alert("담당자 선택 누락");
+    if (workEmp.value.length < 1) {
+      workEmp.focus();
       return;
     }
 
@@ -326,8 +305,6 @@ class MM0202 extends React.Component {
 
     const workdate = y + "/" + m + "/" + d;
 
-    console.log(workdate);
-
     const addData = {
       workName: workName.value,
       workCode: workCode.value,
@@ -335,14 +312,23 @@ class MM0202 extends React.Component {
       workType: workType.value,
       workEmp: workEmp.value,
       result: "0",
-      workdate: workdate,
+      workDate: workdate,
+      key: projectInfo.ref,
     };
-
-    console.log(addData);
 
     this.setState({
       isRegistFormOpen: false,
     });
+
+    const response = await fetch("/api/addWorkList", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: JSON.stringify({ addData }),
+    });
+    const data = await response.json();
   };
 
   _addBtnCloseDialogHandler = () => {

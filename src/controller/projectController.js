@@ -98,10 +98,40 @@ const getEmpList = async () => {
   return sendData;
 };
 
+const addWorkList = async (addData) => {
+  let fsRef;
+  let queryRef;
+  let sendData = {
+    result: addData.result,
+    workCode: addData.workCode,
+    workDate: addData.workDate,
+    workDesc: addData.workDesc,
+    workEmp: addData.workEmp,
+    workType: addData.workType,
+    workName: addData.workName,
+  };
+
+  console.log(sendData);
+
+  try {
+    fsRef = await firestore.collection("progress_projects").doc(addData.key);
+    console.log("getCollection");
+
+    await fsRef.collection("workList").add(sendData);
+    console.log("addData");
+  } catch (e) {
+    console.log(e);
+  } finally {
+  }
+
+  return null;
+};
+
 const projectController = {
   getProjectInfo,
   getProjectWorkListInfo,
   getEmpList,
+  addWorkList,
 };
 
 export default projectController;

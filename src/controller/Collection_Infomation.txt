@@ -13,6 +13,7 @@
  - useyn        사용여부    [String]
  - position     직책        [String]
  - mobile       핸드폰 번호   [String]
+ - email        이메일      [String]
 
 [Firestore -workRecord- Model]
  - date         날짜        [String]
