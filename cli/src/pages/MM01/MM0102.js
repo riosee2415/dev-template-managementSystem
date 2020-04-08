@@ -25,6 +25,7 @@ class MM0102 extends React.Component {
       alertTitle: null,
       alertContent: null,
       isUsedFormOpen: false,
+      isUsageFormOpen: false,
     };
   }
 
@@ -139,7 +140,7 @@ class MM0102 extends React.Component {
                     <div>{dataInfo.name}</div>
                     <div className="dataSubInfo">
                       <div>
-                        <span>고용일 :</span>
+                        <span>고용일 : </span>
                         {dataInfo.hire}
                       </div>
                       <div>
@@ -217,6 +218,16 @@ class MM0102 extends React.Component {
             </div>
           </div>
         </div>
+
+        {/* 연차 사용 신청 */}
+        <FormDialog
+          open={this.state.isUsageFormOpen}
+          title="연차 사용 신청"
+          submitDialogHandler={this._addApplicationAnnualHandler}
+          closeDialogHandler={this._closeUsageDialogBtnHandler}
+        >
+          <div> efefef</div>
+        </FormDialog>
 
         {/* 사용연차 리스트 */}
         <FormDialog
@@ -324,6 +335,14 @@ class MM0102 extends React.Component {
         });
       }, 0);
     }
+  };
+
+  __usageApplicationHandler = () => {
+    this.setState({ isUsageFormOpen: true });
+  };
+
+  _closeUsageDialogBtnHandler = () => {
+    this.setState({ isUsageFormOpen: false });
   };
 
   __usedAnnualHandler = () => {
