@@ -9,6 +9,7 @@ import ComboBox from "../../components/ComboBox";
 import middleware from "../../middleware/common";
 import OutlinedButtonFull from "../../components/material/OutlinedButtonFull";
 import OutlinedButtonHalf from "../../components/material/OutlinedButtonHalf";
+import DatePickers from "../../components/material/DatePickers";
 
 class MM0202 extends React.Component {
   constructor(props) {
@@ -23,6 +24,7 @@ class MM0202 extends React.Component {
       isRegistFormOpen: false,
       workType: [],
       empList: [],
+      isReload: false,
     };
   }
 
@@ -169,6 +171,7 @@ class MM0202 extends React.Component {
                               <WorkList
                                 key={idx}
                                 idx={idx + 1}
+                                workRef={doc.workRef}
                                 workName={doc.workName}
                                 result={doc.result}
                                 workCode={doc.workCode}
@@ -176,6 +179,7 @@ class MM0202 extends React.Component {
                                 workDesc={doc.workDesc}
                                 workEmp={doc.workEmp}
                                 workType={doc.workType}
+                                deleteHandler={this._workDeleteHandler}
                               />
                             );
                           })
@@ -232,10 +236,16 @@ class MM0202 extends React.Component {
             multiline={true}
             rowsMax="10"
           />
+
+          <DatePickers lab="작업일" dateId="workDate-js" />
         </FormDialog>
       </div>
     );
   }
+
+  _workDeleteHandler = async (workRef) => {
+    console.log(workRef);
+  };
 
   _getEmpList = async () => {
     const response = await fetch("/api/getEmpList", {
@@ -266,6 +276,7 @@ class MM0202 extends React.Component {
     const workDesc = document.getElementById("workDesc-js");
     const workType = document.getElementById("workType-js");
     const workEmp = document.getElementById("workEmp-js");
+    const workDate = document.getElementById("workDate-js");
 
     if (workName.value.length < 1) {
       workName.focus();
@@ -292,16 +303,6 @@ class MM0202 extends React.Component {
       return;
     }
 
-    const date = new Date();
-    let y = date.getFullYear();
-    let m = date.getMonth() + 1;
-    let d = date.getDate();
-
-    m = m < 10 ? "0" + m : m;
-    d = d < 10 ? "0" + d : d;
-
-    const workdate = y + "/" + m + "/" + d;
-
     const addData = {
       workName: workName.value,
       workCode: workCode.value,
@@ -309,7 +310,7 @@ class MM0202 extends React.Component {
       workType: workType.value,
       workEmp: workEmp.value,
       result: "0",
-      workDate: workdate,
+      workDate: workDate.value,
       key: projectInfo.ref,
     };
 
@@ -325,7 +326,8 @@ class MM0202 extends React.Component {
       },
       body: JSON.stringify({ addData }),
     });
-    const data = await response.json();
+
+    this._progressBtnHandler(projectInfo.ref);
   };
 
   _addBtnCloseDialogHandler = () => {
@@ -344,6 +346,7 @@ class MM0202 extends React.Component {
       body: JSON.stringify({ projectId }),
     });
     const data = await response.json();
+
     this.setState({
       projectWorkList: data,
     });

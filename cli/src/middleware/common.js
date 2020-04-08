@@ -5,17 +5,17 @@ const getCommonData = async (param1, param2) => {
   const response = await fetch("/api/getCommonData", {
     method: "POST",
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "application/json"
       // 'Content-Type': 'application/x-www-form-urlencoded',
     },
-    body: JSON.stringify({ collectionName, docName }),
+    body: JSON.stringify({ collectionName, docName })
   });
 
   return await response.json();
 };
 
 const middleware = {
-  getCommonData,
+  getCommonData
 };
 
 export default middleware;

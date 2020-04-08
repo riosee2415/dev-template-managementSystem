@@ -14,6 +14,8 @@
  - rank         직책                [String]
  - mobile       핸드폰              [String]
  - email        이메일              [String]
+ - empNo        사번                [String]
+ - dept         부서                [String]
 
 
 [Firestore -workRecord- Model]

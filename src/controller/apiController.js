@@ -142,6 +142,8 @@ const getEmpInfo = async key => {
           zoneCode: res.data().zoneCode,
           mobile: res.data().mobile,
           email: res.data().email,
+          empNo: res.data().empNo,
+          dept: res.data().dept,
           useyn: res.data().useyn
         };
       });

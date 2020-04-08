@@ -55,6 +55,7 @@ const getProjectWorkListInfo = async (key) => {
       .then((res) => {
         res.forEach((doc) => {
           sendData.push({
+            workRef: doc.id,
             result: doc.data().result,
             workCode: doc.data().workCode,
             workDate: doc.data().workDate,
