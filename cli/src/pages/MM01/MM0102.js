@@ -185,8 +185,12 @@ class MM0102 extends React.Component {
                     {dataInfo
                       ? dataInfo.annualInfo.map((data) => {
                           return (
-                            <TableBody className="annualTb">
-                              <TableRow hover role="checkbox">
+                            <TableBody>
+                              <TableRow
+                                hover
+                                role="checkbox"
+                                className="annualTb"
+                              >
                                 <TableCell key={data.docId}>
                                   {data.year}
                                 </TableCell>
@@ -221,7 +225,7 @@ class MM0102 extends React.Component {
               {dataInfo ? (
                 <input
                   type="button"
-                  className="btn btn-l bg-blue usedlist"
+                  className="btn btn-l bg-blue usedList"
                   value="사용 내역"
                   onClick={() => this.__usedAnnualHandler()}
                 />
@@ -287,7 +291,7 @@ class MM0102 extends React.Component {
                   ? dataInfo.annualInfo.map((data) => {
                       return (
                         <TableBody>
-                          <TableRow hover role="checkbox">
+                          <TableRow hover role="checkbox" className="annualTb">
                             <TableCell>{data.year}</TableCell>
                             <TableCell>{data.usedAnnual}</TableCell>
                             <TableCell>{data.userRef}</TableCell>

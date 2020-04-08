@@ -34,7 +34,11 @@
   margin-left: 50px;
 }
 
-.usedlist {
+.annualTb > td {
+  text-align: center;
+}
+
+.usedList {
   position: absolute;
   bottom: 20px;
   right: 20px;
