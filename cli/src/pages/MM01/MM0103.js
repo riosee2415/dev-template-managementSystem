@@ -28,7 +28,19 @@ class MM0103 extends React.Component {
   }
 
   render() {
-    const { pageCode, selectCollection, isLeftRefresh } = this.state;
+    const {
+      pageCode,
+      selectCollection,
+      isLeftRefresh,
+      isEmpRegistFormOpen,
+      isAlertOpen,
+      alertType,
+      alertTitle,
+      alertContent,
+      isConfirmOpen,
+      confirmTitle,
+      confirmContent
+    } = this.state;
 
     return (
       <div className="mm">
@@ -92,12 +104,12 @@ class MM0103 extends React.Component {
             <div className="mc__col2__desc">
               {this.state.empInfo ? (
                 <div className="mm0103__dataBox">
-                  <div className="dataBox__row">
-                    <div className="dataBox__col">
-                      <span>프로필</span>
-                    </div>
-                    <div className="dataBox__col">
-                      <span>
+                  <div className="dataBox__col">
+                    <div className="dataBox__row">
+                      <span className="data__icon">
+                        <IconComponent iconName="fas fa-info-circle" />
+                      </span>
+                      <span className="data__info">
                         <img
                           src={this.state.empInfo.avatar}
                           className="profile__img"
@@ -105,72 +117,99 @@ class MM0103 extends React.Component {
                         />
                       </span>
                     </div>
-                  </div>
 
-                  <div className="dataBox__row">
-                    <div className="dataBox__col">
-                      <span>아이디</span>
+                    <div className="dataBox__row">
+                      <span className="data__icon">
+                        <IconComponent iconName="fas fa-info-circle" />
+                      </span>
+                      <span className="data__info">
+                        {this.state.empInfo.empId}
+                      </span>
                     </div>
-                    <div className="dataBox__col">
-                      <span>{this.state.empInfo.empId}</span>
-                    </div>
-                  </div>
 
-                  <div className="dataBox__row">
-                    <div className="dataBox__col">
-                      <span>직원명</span>
+                    <div className="dataBox__row">
+                      <span className="data__icon">
+                        <IconComponent iconName="fas fa-info-circle" />
+                      </span>
+                      <span className="data__info">
+                        {this.state.empInfo.name}
+                      </span>
                     </div>
-                    <div className="dataBox__col">
-                      <span>{this.state.empInfo.name}</span>
-                    </div>
-                  </div>
 
-                  <div className="dataBox__row">
-                    <div className="dataBox__col">
-                      <span>직급</span>
+                    <div className="dataBox__row">
+                      <span className="data__icon">
+                        <IconComponent iconName="fas fa-info-circle" />
+                      </span>
+                      <span className="data__info">
+                        {this.state.empInfo.mobile}
+                      </span>
                     </div>
-                    <div className="dataBox__col">
-                      <span>{this.state.empInfo.rank}</span>
-                    </div>
-                  </div>
 
-                  <div className="dataBox__row">
-                    <div className="dataBox__col">
-                      <span>근무위치</span>
+                    <div className="dataBox__row">
+                      <span className="data__icon">
+                        <IconComponent iconName="fas fa-info-circle" />
+                      </span>
+                      <span className="data__info">
+                        {this.state.empInfo.email}
+                      </span>
                     </div>
-                    <div className="dataBox__col">
-                      <span>{this.state.empInfo.loc}</span>
-                    </div>
-                  </div>
 
-                  <div className="dataBox__row">
-                    <div className="dataBox__col">
-                      <span>고용일</span>
+                    <div className="dataBox__row">
+                      <span className="data__icon">
+                        <IconComponent iconName="fas fa-info-circle" />
+                      </span>
+                      <span className="data__info">
+                        {this.state.empInfo.birthday}
+                      </span>
                     </div>
-                    <div className="dataBox__col">
-                      <span>{this.state.empInfo.hire}</span>
-                    </div>
-                  </div>
 
-                  <div className="dataBox__row">
-                    <div className="dataBox__col">
-                      <span>생년월일</span>
-                    </div>
-                    <div className="dataBox__col">
-                      <span>{this.state.empInfo.birthday}</span>
-                    </div>
-                  </div>
-
-                  <div className="dataBox__row">
-                    <div className="dataBox__col">
-                      <span>주소</span>
-                    </div>
-                    <div className="dataBox__col">
-                      <span>
+                    <div className="dataBox__row">
+                      <span className="data__icon">
+                        <IconComponent iconName="fas fa-info-circle" />
+                      </span>
+                      <span className="data__info">
                         {this.state.empInfo.zoneCode
                           ? `(${this.state.empInfo.zoneCode}) `
                           : null}
                         {this.state.empInfo.addr1} {this.state.empInfo.addr2}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="dataBox__col">
+                    <div className="dataBox__row">
+                      <span className="data__icon">
+                        <IconComponent iconName="fas fa-info-circle" />
+                      </span>
+                      <span className="data__info">
+                        {this.state.empInfo.hire}
+                      </span>
+                    </div>
+
+                    <div className="dataBox__row">
+                      <span className="data__icon">
+                        <IconComponent iconName="fas fa-info-circle" />
+                      </span>
+                      <span className="data__info">
+                        {this.state.empInfo.loc}
+                      </span>
+                    </div>
+
+                    <div className="dataBox__row">
+                      <span className="data__icon">
+                        <IconComponent iconName="fas fa-info-circle" />
+                      </span>
+                      <span className="data__info">
+                        {this.state.empInfo.position}
+                      </span>
+                    </div>
+
+                    <div className="dataBox__row">
+                      <span className="data__icon">
+                        <IconComponent iconName="fas fa-info-circle" />
+                      </span>
+                      <span className="data__info">
+                        {this.state.empInfo.rank}
                       </span>
                     </div>
                   </div>
@@ -180,29 +219,29 @@ class MM0103 extends React.Component {
           </div>
         </div>
 
-        {this.state.isAlertOpen ? (
+        {isAlertOpen ? (
           <AlertDialog
-            isOpen={this.state.isAlertOpen}
-            type={this.state.alertType}
-            title={this.state.alertTitle}
-            content={this.state.alertContent}
+            isOpen={isAlertOpen}
+            type={alertType}
+            title={alertTitle}
+            content={alertContent}
             closeDialogHandler={() => this.setState({ isAlertOpen: false })}
           />
         ) : null}
 
-        {this.state.isConfirmOpen ? (
+        {isConfirmOpen ? (
           <ConfirmDialog
-            isOpen={this.state.isConfirmOpen}
-            title={this.state.confirmTitle}
-            content={this.state.confirmContent}
+            isOpen={isConfirmOpen}
+            title={confirmTitle}
+            content={confirmContent}
             submitDialogHandler={this._empRemoveConfirmSubmitDialogHandler}
             closeDialogHandler={() => this.setState({ isConfirmOpen: false })}
           />
         ) : null}
 
-        {this.state.isEmpRegistFormOpen ? (
+        {isEmpRegistFormOpen ? (
           <FormDialog
-            isOpen={this.state.isEmpRegistFormOpen}
+            isOpen={isEmpRegistFormOpen}
             title="직원 등록"
             content="등록할 직원정보를 입력해주세요."
             submitDialogHandler={this._empRegistFormSubmitDialogHandler}

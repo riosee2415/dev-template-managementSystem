@@ -74,7 +74,7 @@ class LeftListBox extends React.Component {
                         >
                           <td>{idx + 1}</td>
                           <td>{data.name}</td>
-                          <td>{data.rank}</td>
+                          <td>{data.position}</td>
                         </tr>
                       );
                     } else if (pageCode === "MM0103") {
@@ -87,7 +87,7 @@ class LeftListBox extends React.Component {
                         >
                           <td>{idx + 1}</td>
                           <td>{data.name}</td>
-                          <td>{data.rank}</td>
+                          <td>{data.position}</td>
                         </tr>
                       );
                     } else if (pageCode === "MM0202") {
