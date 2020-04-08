@@ -7,6 +7,7 @@ import FormDialog from "../../components/FormDialog";
 import { TextField } from "@material-ui/core";
 import ComboBox from "../../components/ComboBox";
 import middleware from "../../middleware/common";
+import OutlinedButtonFull from "../../components/material/OutlinedButtonFull";
 
 class MM0202 extends React.Component {
   constructor(props) {
@@ -126,21 +127,22 @@ class MM0202 extends React.Component {
                       type={projectInfo.type}
                     />
                     <div className="mc__col2__desc__btnArea">
-                      <button>거래처정보</button>
-                      <button
-                        onClick={() =>
-                          this._progressBtnHandler(projectInfo.ref)
-                        }
-                      >
-                        업무차트
-                      </button>
+                      <OutlinedButtonFull text="거래처정보" />
+                      <OutlinedButtonFull
+                        action={() => this._progressBtnHandler(projectInfo.ref)}
+                        text="업무차트"
+                        color="primary"
+                      />
                     </div>
 
                     <div>
                       {projectWorkList ? (
                         <>
                           <div>
-                            <button onClick={() => this._addBtnHandler()}>
+                            <button
+                              className="btn btn-m bg-blue"
+                              onClick={() => this._addBtnHandler()}
+                            >
                               업무추가
                             </button>
                           </div>
