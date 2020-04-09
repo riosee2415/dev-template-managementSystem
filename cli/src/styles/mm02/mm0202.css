@@ -83,8 +83,8 @@
 }
 
 .workList-main-box {
-  height: 400px;
-  min-height: 400px;
+  height: 300px;
+  min-height: 300px;
 
   width: calc(100% + 14px);
 }
