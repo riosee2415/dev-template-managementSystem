@@ -30,6 +30,8 @@ class TabBox extends React.Component {
             <Tabs
               value={selectedTab - 1}
               onChange={this._tabChangeHandler}
+              indicatorColor="primary"
+              textColor="primary"
               centered
             >
               {this.props.tabs.map((tab, idx) => {
