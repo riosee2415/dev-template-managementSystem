@@ -122,6 +122,7 @@ class MM0103 extends React.Component {
                       </div>
                       <div className="data__info">
                         <span>{this.state.empInfo.name}</span>
+                        <span>{this.state.empInfo.rank}</span>
                       </div>
                     </div>
 
@@ -213,15 +214,6 @@ class MM0103 extends React.Component {
                           </span>
                           <span className="data__info">
                             {this.state.empInfo.position}
-                          </span>
-                        </div>
-
-                        <div className="dataBox__row">
-                          <span className="data__icon">
-                            <IconComponent iconName="fas fa-user-circle" />
-                          </span>
-                          <span className="data__info">
-                            {this.state.empInfo.rank}
                           </span>
                         </div>
 
