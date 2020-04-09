@@ -2,6 +2,11 @@ import React from "react";
 import OutlinedButton from "../../components/material/OutlinedButton";
 import IconComponent from "../IconComponent";
 import FormDialog from "../FormDialog";
+import { withStyles } from "@material-ui/core/styles";
+
+const styles = {
+  workDes: { lineHeight: 1.5 },
+};
 
 class WorkList extends React.Component {
   state = {
@@ -9,6 +14,7 @@ class WorkList extends React.Component {
   };
 
   render() {
+    const { classes } = this.props;
     const { isDescFormOpen } = this.state;
 
     return (
@@ -57,7 +63,7 @@ class WorkList extends React.Component {
             closeDialogHandler={this._descFormCloseDialogHandler}
             isOnlyCheck={true}
           >
-            <div>{this.props.workDesc}</div>
+            <div className={classes.workDes}>{this.props.workDesc}</div>
           </FormDialog>
         ) : null}
       </>
@@ -77,4 +83,4 @@ class WorkList extends React.Component {
   };
 }
 
-export default WorkList;
+export default withStyles(styles)(WorkList);
