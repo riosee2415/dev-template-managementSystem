@@ -1,6 +1,8 @@
-import firestore from "../firebase";
+import firestore from "../../firebase";
 
-const getProjectInfo = async (key) => {
+const getProjectInfo = async (req, res) => {
+  const key = req.body.key;
+
   let fsRef;
   let queryRef;
   let sendData = {};
@@ -33,10 +35,12 @@ const getProjectInfo = async (key) => {
   } finally {
   }
 
-  return sendData;
+  return res.json(sendData);
 };
 
-const getProjectWorkListInfo = async (key) => {
+const getProjectWorkListInfo = async (req, res) => {
+  const key = req.body.projectId;
+
   let fsRef;
   let fsRef2;
   let queryRef;
@@ -73,10 +77,10 @@ const getProjectWorkListInfo = async (key) => {
   } finally {
   }
 
-  return sendData;
+  return res.json(sendData);
 };
 
-const getEmpList = async () => {
+const getEmpList = async (req, res) => {
   let fsRef;
   let queryRef;
   let sendData = [];
@@ -96,10 +100,12 @@ const getEmpList = async () => {
   } finally {
   }
 
-  return sendData;
+  return res.json(sendData);
 };
 
-const addWorkList = async (addData) => {
+const addWorkList = async (req, res) => {
+  const addData = req.body.addData;
+
   let fsRef;
   let queryRef;
   let sendData = {
@@ -144,11 +150,27 @@ const deleteWorkList = async (req, res) => {
 };
 
 const chagneStatus = async (req, res) => {
-  console.log(req.body.workRef);
-  console.log(req.body.parentKey);
+  let fsRef;
+  let queryRef;
+  let sendData = [];
+
+  try {
+    fsRef = await firestore
+      .collection("progress_projects")
+      .doc(req.body.parentKey);
+
+    await fsRef.collection("workList").doc(req.body.workRef).update({
+      result: "1",
+    });
+  } catch (e) {
+    console.log(e);
+  } finally {
+  }
+
+  return null;
 };
 
-const projectController = {
+const MM0202Controller = {
   getProjectInfo,
   getProjectWorkListInfo,
   getEmpList,
@@ -157,4 +179,4 @@ const projectController = {
   chagneStatus,
 };
 
-export default projectController;
+export default MM0202Controller;
