@@ -125,6 +125,7 @@ const addWorkList = async (req, res) => {
   } catch (e) {
     console.log(e);
   } finally {
+    fsRef = null;
   }
 
   return null;
