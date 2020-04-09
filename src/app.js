@@ -6,6 +6,7 @@ import apiController from "./controller/apiController";
 import apiControllerWork from "./controller/apiControllerWork";
 import projectController from "./controller/projectController";
 import commonController from "./controller/commonController";
+import workListRouter from "./router/workListRouter";
 
 const PORT = 5000;
 
@@ -122,6 +123,9 @@ app.post(routes.addWorkList, async (req, res) => {
 
   return res.json(sendData);
 });
+
+app.post(routes.deleteWorkList, workListRouter);
+app.post(routes.changedWorkListStatus, workListRouter);
 
 app.listen(PORT, () => {
   console.log(`✅ Server Start On ${PORT}`);

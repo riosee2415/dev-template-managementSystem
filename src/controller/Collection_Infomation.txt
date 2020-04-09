@@ -57,3 +57,14 @@
  - workEmp      담당개발자          [String]
  - workName     작업명              [String]
  - workType     작업유형            [String]
+
+
+ [Firestore -annualUsage => workList - Model]
+ - userName         신청자명            [String]
+ - applicationDay   신청일              [String]
+ - annualStartDay   시작일              [String]
+ - annualEndDay     종료일              [String]
+ - usageReason      사유                [String]
+ - applicationFile  첨부파일            [String]
+ - annualSettlement 결제자              [String]
+ - SettlementYN     결제유무            [String]    0: 미결제 / 1: 결제

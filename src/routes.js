@@ -14,6 +14,8 @@ const routes = {
   getCommonData: "/api/getCommonData",
   getEmpList: "/api/getEmpList",
   addWorkList: "/api/addWorkList",
+  deleteWorkList: "/api/deleteWorkList",
+  changedWorkListStatus: "/api/changedWorkListStatus",
 };
 
-module.exports = routes;
+export default routes;

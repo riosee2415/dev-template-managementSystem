@@ -112,14 +112,10 @@ const addWorkList = async (addData) => {
     workName: addData.workName,
   };
 
-  console.log(sendData);
-
   try {
     fsRef = await firestore.collection("progress_projects").doc(addData.key);
-    console.log("getCollection");
 
     await fsRef.collection("workList").add(sendData);
-    console.log("addData");
   } catch (e) {
     console.log(e);
   } finally {
@@ -128,11 +124,37 @@ const addWorkList = async (addData) => {
   return null;
 };
 
+const deleteWorkList = async (req, res) => {
+  let fsRef;
+  let queryRef;
+  let sendData = [];
+
+  try {
+    fsRef = await firestore
+      .collection("progress_projects")
+      .doc(req.body.parentKey);
+
+    await fsRef.collection("workList").doc(req.body.workRef).delete();
+  } catch (e) {
+    console.log(e);
+  } finally {
+  }
+
+  return null;
+};
+
+const chagneStatus = async (req, res) => {
+  console.log(req.body.workRef);
+  console.log(req.body.parentKey);
+};
+
 const projectController = {
   getProjectInfo,
   getProjectWorkListInfo,
   getEmpList,
   addWorkList,
+  deleteWorkList,
+  chagneStatus,
 };
 
 export default projectController;
