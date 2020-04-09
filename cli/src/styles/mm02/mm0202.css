@@ -64,6 +64,8 @@
   margin-top: 10px;
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   padding: 5px;
   font-size: 13px;
   overflow: auto;
@@ -115,8 +117,12 @@
 }
 
 .workList-main li:last-child .far {
-  color: #e71c18;
+  color: #e45856;
   cursor: pointer;
+}
+
+.workList-main li:last-child .far:hover {
+  color: #bf1310;
 }
 
 .workList-main li .progress {
