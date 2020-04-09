@@ -10,8 +10,12 @@ class TabBox extends React.Component {
               return (
                 <div
                   key={idx}
-                  className="tab__item"
-                  onClick={() => this._tabClickHandler(idx + 1)}
+                  className={
+                    this.props.selectedTab == idx + 1
+                      ? "tab__item active"
+                      : "tab__item"
+                  }
+                  onClick={() => this.props.tabClickHandler(idx + 1)}
                 >
                   {tab}
                 </div>
@@ -22,10 +26,6 @@ class TabBox extends React.Component {
       </>
     );
   }
-
-  _tabClickHandler = number => {
-    console.log(number);
-  };
 }
 
 export default TabBox;
