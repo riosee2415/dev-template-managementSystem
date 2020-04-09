@@ -44,24 +44,30 @@ class MM0102 extends React.Component {
     } = this.state;
 
     const columns = [
-      { id: "year", label: "년도", align: "center", minWidth: 170 },
+      { id: "year", label: "년도", align: "center", minWidth: 100 },
       {
         id: "allAnnual",
         label: "총 연차(일)",
         align: "center",
-        minWidth: 170,
+        minWidth: 100,
       },
       {
         id: "usedAnnual",
         label: "사용 연차(일)",
         align: "center",
-        minWidth: 170,
+        minWidth: 100,
       },
       {
         id: "applicationAnnual",
         label: "연차 사용",
         align: "center",
-        minWidth: 170,
+        minWidth: 150,
+      },
+      {
+        id: "paymentSataus",
+        label: "결제 상태",
+        align: "center",
+        minWidth: 150,
       },
     ];
 
@@ -90,7 +96,7 @@ class MM0102 extends React.Component {
               <span>인사 관리 > 연차 관리</span>
             </div>
 
-            <div className="mh__content__btn">
+            {/* <div className="mh__content__btn">
               <span>
                 <input
                   type="button"
@@ -119,7 +125,7 @@ class MM0102 extends React.Component {
                   value="작성"
                 />
               </span>
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="mm__content mc">
@@ -185,7 +191,7 @@ class MM0102 extends React.Component {
                     {dataInfo
                       ? dataInfo.annualInfo.map((data) => {
                           return (
-                            <TableBody>
+                            <TableBody className="annualTbody">
                               <TableRow
                                 hover
                                 role="checkbox"
@@ -206,7 +212,7 @@ class MM0102 extends React.Component {
                                     <input
                                       type="button"
                                       className="btn btn-xs bg-violet"
-                                      value="사용"
+                                      value="신청"
                                       onClick={() =>
                                         this.__usageApplicationHandler()
                                       }
