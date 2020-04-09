@@ -1,6 +1,6 @@
 import express from "express";
 import routes from "../routes";
-import CommonController from "../../controller/CommonController";
+import CommonController from "../controller/CommonController";
 
 const CommonRouter = express.Router();
 
