@@ -8,7 +8,7 @@ import { TextField } from "@material-ui/core";
 import ComboBox from "../../components/ComboBox";
 import middleware from "../../middleware/common";
 import OutlinedButtonFull from "../../components/material/OutlinedButtonFull";
-import OutlinedButtonHalf from "../../components/material/OutlinedButtonHalf";
+import OutlinedButton from "../../components/material/OutlinedButton";
 import DatePickers from "../../components/material/DatePickers";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
@@ -146,8 +146,9 @@ class MM0202 extends React.Component {
                       {projectWorkList ? (
                         <>
                           <div className="mm-add">
-                            <OutlinedButtonHalf
+                            <OutlinedButton
                               text="업무추가"
+                              className="mm-add-btn"
                               action={() => this._addBtnHandler()}
                             />
                           </div>
@@ -167,28 +168,29 @@ class MM0202 extends React.Component {
                           </div>
                         </>
                       ) : null}
-
-                      {projectWorkList
-                        ? projectWorkList.map((doc, idx) => {
-                            return (
-                              <WorkList
-                                key={idx}
-                                idx={idx + 1}
-                                workRef={doc.workRef}
-                                workName={doc.workName}
-                                result={doc.result}
-                                workCode={doc.workCode}
-                                workDate={doc.workDate}
-                                workDesc={doc.workDesc}
-                                workEmp={doc.workEmp}
-                                workType={doc.workType}
-                                delConfirm={this._deleteConfirm}
-                                descViewHandler={this._descViewHandler}
-                                changeStatus={this._changedStatus}
-                              />
-                            );
-                          })
-                        : null}
+                      <div className="workList-main-box scrollbar scroll-vertical">
+                        {projectWorkList
+                          ? projectWorkList.map((doc, idx) => {
+                              return (
+                                <WorkList
+                                  key={idx}
+                                  idx={idx + 1}
+                                  workRef={doc.workRef}
+                                  workName={doc.workName}
+                                  result={doc.result}
+                                  workCode={doc.workCode}
+                                  workDate={doc.workDate}
+                                  workDesc={doc.workDesc}
+                                  workEmp={doc.workEmp}
+                                  workType={doc.workType}
+                                  delConfirm={this._deleteConfirm}
+                                  descViewHandler={this._descViewHandler}
+                                  changeStatus={this._changedStatus}
+                                />
+                              );
+                            })
+                          : null}
+                      </div>
                     </div>
                   </>
                 ) : null}

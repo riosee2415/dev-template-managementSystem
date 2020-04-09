@@ -19,6 +19,7 @@
 
 .lb .lb__body__box {
   height: calc(100% - 55px);
+  width: calc(100% + 14px);
 }
 
 .lb .lb__body__box tbody tr {

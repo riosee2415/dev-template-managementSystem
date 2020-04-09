@@ -4,11 +4,7 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import { withStyles } from "@material-ui/core/styles";
 
-const styles = {
-  root: {
-    flexGrow: 1
-  }
-};
+const styles = {};
 
 class TabBox extends React.Component {
   constructor(props) {
@@ -26,7 +22,7 @@ class TabBox extends React.Component {
     return (
       <>
         {this.props.tabs ? (
-          <Paper className={classes.root}>
+          <Paper>
             <Tabs
               value={selectedTab - 1}
               onChange={this._tabChangeHandler}
