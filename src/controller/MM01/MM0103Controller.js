@@ -13,7 +13,7 @@ const getEmpInfo = async (req, res) => {
     queryRef = await fsRef
       .doc(key)
       .get()
-      .then(res => {
+      .then((res) => {
         sendData = {
           docId: res.id,
           empId: res.data().empId,
@@ -31,7 +31,7 @@ const getEmpInfo = async (req, res) => {
           email: res.data().email,
           empNo: res.data().empNo,
           dept: res.data().dept,
-          useyn: res.data().useyn
+          useyn: res.data().useyn,
         };
       });
   } catch (e) {
@@ -39,7 +39,7 @@ const getEmpInfo = async (req, res) => {
   } finally {
   }
 
-  return res.json(sendData);
+  return req.body.isController ? sendData : res.json(sendData);
 };
 
 const removeEmpInfo = async (req, res) => {
@@ -48,7 +48,7 @@ const removeEmpInfo = async (req, res) => {
   let fsRef;
   let queryRef;
   let sendData = {
-    result: false
+    result: false,
   };
 
   try {
@@ -70,7 +70,7 @@ const removeEmpInfo = async (req, res) => {
 
 const MM0103Controller = {
   getEmpInfo,
-  removeEmpInfo
+  removeEmpInfo,
 };
 
 export default MM0103Controller;
