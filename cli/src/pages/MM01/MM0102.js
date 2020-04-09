@@ -12,6 +12,7 @@ import Paper from "@material-ui/core/Paper";
 import FormDialog from "../../components/FormDialog";
 import ComboBox from "../../components/ComboBox";
 import { TextField } from "@material-ui/core";
+import DatePickers from "../../components/material/DatePickers";
 
 class MM0102 extends React.Component {
   constructor(props) {
@@ -255,9 +256,36 @@ class MM0102 extends React.Component {
               </div>
             </>
           ) : null}
-          <div>휴가기간 : </div>
-          <div>휴가 사유 : </div>
-          <div>첨부 파일 : </div>
+          <div className="usageDays">
+            <div>기간 : </div>
+            <div className="usageStartEnd">
+              <DatePickers lab="시작일" dateId="annualStartDay" />
+              <span> ~ </span>
+              <DatePickers lab="종료일" dateId="annuaEndDay" />
+              <div>총 : 시작일-종료일+1 일</div>
+            </div>
+          </div>
+
+          <div className="applicationReason">
+            <span>사유 : </span>
+            <TextField
+              id="applicationReason-js"
+              margin="dense"
+              type="text"
+              label="사유"
+              variant="outlined"
+            />
+          </div>
+
+          <input type="file"></input>
+
+          <div className="annualSettlement">
+            결제자 :
+            <ComboBox
+              dataList={[{ title: "aaa" }, { title: "bbb" }]}
+              label="결제자"
+            ></ComboBox>
+          </div>
         </FormDialog>
 
         {/* 사용연차 리스트 */}
