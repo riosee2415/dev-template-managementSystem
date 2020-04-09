@@ -59,6 +59,17 @@
   text-align: right;
 }
 
+.mm-add button {
+  padding: 0 10px;
+  background-color: #535353;
+  color: #fff;
+}
+
+.mm-add button:hover {
+  background-color: #535353;
+  color: #ffe259;
+}
+
 .workList-main {
   width: 100%;
   margin-top: 10px;
@@ -71,9 +82,21 @@
   overflow: auto;
 }
 
+.workList-main-box {
+  height: 300px;
+  min-height: 300px;
+
+  width: calc(100% + 14px);
+}
+
 .workList-main:first-child {
   border-bottom: 1px solid #dedede;
   font-weight: 600;
+}
+
+.workList-main-box .workList-main:first-child {
+  border: none;
+  font-weight: normal;
 }
 
 .workList-main li {
