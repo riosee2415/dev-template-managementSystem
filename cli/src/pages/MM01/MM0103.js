@@ -109,8 +109,8 @@ class MM0103 extends React.Component {
                   <TabBox
                     tabs={["기본정보", "추가정보"]}
                     selectedTab={selectedTab}
-                    tabClickHandler={number =>
-                      this.setState({ selectedTab: number })
+                    tabChangeHandler={value =>
+                      this.setState({ selectedTab: value })
                     }
                   />
 
@@ -235,7 +235,11 @@ class MM0103 extends React.Component {
                   ) : null}
 
                   {selectedTab === 2 ? (
-                    <div className="mm0103__dataBox__02">정보2</div>
+                    <div className="mm0103__dataBox__02">
+                      <div className="aa">
+                        <h1>추가정보</h1>
+                      </div>
+                    </div>
                   ) : null}
                 </>
               ) : null}
