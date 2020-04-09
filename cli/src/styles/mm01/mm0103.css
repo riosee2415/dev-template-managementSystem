@@ -54,7 +54,7 @@
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  padding: 17px;
+  margin: 17px;
 }
 
 .mm0103__dataBox .dataBox__row:hover span {
