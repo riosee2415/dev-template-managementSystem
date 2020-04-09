@@ -2,9 +2,9 @@ import express from "express";
 import bodyParser from "body-parser";
 import morgan from "morgan";
 import routes from "./routes";
-import apiController from "./controller/apiController";
 import CommonRouter from "./router/CommonRouter";
 import MM0101Router from "./router/MM01/MM0101Router";
+import MM0102Router from "./router/MM01/MM0102Router";
 import MM0103Router from "./router/MM01/MM0103Router";
 import MM0202Router from "./router/MM02/MM0202Router";
 
@@ -15,18 +15,6 @@ const app = express();
 app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-app.post(routes.getAnnualInfo, async (req, res) => {
-  const key = req.body.key;
-
-  const sendData = await apiController.getEmpInfo(key);
-
-  const annualInfo = await apiController.getAnnualInfo(key);
-
-  sendData.annualInfo = annualInfo;
-
-  return res.json(sendData);
-});
 
 /* COMMON */
 app.post(routes.loginProcess, CommonRouter);
@@ -40,6 +28,8 @@ app.post(routes.saveWorkTimeToStart, MM0101Router);
 app.post(routes.saveWorkTimeToEnd, MM0101Router);
 
 /* MM0102 */
+
+app.post(routes.getAnnualInfo, MM0102Router);
 
 /* MM0103 */
 app.post(routes.getEmpInfo, MM0103Router);
