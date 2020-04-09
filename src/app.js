@@ -3,8 +3,9 @@ import bodyParser from "body-parser";
 import morgan from "morgan";
 import routes from "./routes";
 import apiController from "./controller/apiController";
-import apiControllerWork from "./controller/apiControllerWork";
-import commonController from "./controller/commonController";
+import CommonRouter from "./router/CommonRouter";
+import MM0101Router from "./router/MM01/MM0101Router";
+import MM0103Router from "./router/MM01/MM0103Router";
 import MM0202Router from "./router/MM02/MM0202Router";
 
 const PORT = 5000;
@@ -14,44 +15,6 @@ const app = express();
 app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-app.post(routes.loginProcess, async (req, res) => {
-  const sendData = await apiController.loginProcess(
-    req.body.inputId,
-    req.body.inputPass
-  );
-
-  return res.json(sendData);
-});
-
-app.post(routes.callCollection, async (req, res) => {
-  const pageCode = req.body.pageCode;
-  const collections = req.body.collections;
-  const sendData = await apiController.callCollection(pageCode, collections);
-
-  return res.json(sendData);
-});
-
-app.post(routes.saveWorkTimeToStart, async (req, res) => {
-  const data = req.body.inputData;
-
-  const sendData = await apiControllerWork.saveWorkTimeToStart(data);
-});
-
-app.post(routes.getworkStart, async (req, res) => {
-  const data = req.body.inputData;
-  const sendData = await apiControllerWork.getWorkTime(data);
-
-  return res.json(sendData);
-});
-
-app.post(routes.getEmpInfo, async (req, res) => {
-  const key = req.body.key;
-
-  const sendData = await apiController.getEmpInfo(key);
-
-  return res.json(sendData);
-});
 
 app.post(routes.getAnnualInfo, async (req, res) => {
   const key = req.body.key;
@@ -65,35 +28,22 @@ app.post(routes.getAnnualInfo, async (req, res) => {
   return res.json(sendData);
 });
 
-app.post(routes.saveWorkTimeToEnd, async (req, res) => {
-  const data = req.body.inputData;
-  const sendData = await apiControllerWork.saveWorkTimeToEnd(data);
+/* COMMON */
+app.post(routes.loginProcess, CommonRouter);
+app.post(routes.callCollection, CommonRouter);
+app.post(routes.getCommonData, CommonRouter);
 
-  return res.json(sendData);
-});
+/* MM0101 */
+app.post(routes.getworkStart, MM0101Router);
+app.post(routes.getDetailDataToWorkTime, MM0101Router);
+app.post(routes.saveWorkTimeToStart, MM0101Router);
+app.post(routes.saveWorkTimeToEnd, MM0101Router);
 
-app.post(routes.getDetailDataToWorkTime, async (req, res) => {
-  const data = req.body.inputData;
-  const sendData = await apiControllerWork.getDetailDataToWorkTime(data);
+/* MM0102 */
 
-  return res.json(sendData);
-});
-
-app.post(routes.removeEmpInfo, async (req, res) => {
-  const empInfo = req.body.empInfo;
-  const sendData = await apiController.removeEmpInfo(empInfo);
-
-  return res.json(sendData);
-});
-
-app.post(routes.getCommonData, async (req, res) => {
-  const param1 = req.body.collectionName;
-  const param2 = req.body.docName;
-
-  const sendData = await commonController.getCommonData(param1, param2);
-
-  return res.json(sendData);
-});
+/* MM0103 */
+app.post(routes.getEmpInfo, MM0103Router);
+app.post(routes.removeEmpInfo, MM0103Router);
 
 /* MM0202 */
 app.post(routes.deleteWorkList, MM0202Router);
