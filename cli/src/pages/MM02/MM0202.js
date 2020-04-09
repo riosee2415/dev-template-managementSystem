@@ -10,6 +10,8 @@ import middleware from "../../middleware/common";
 import OutlinedButtonFull from "../../components/material/OutlinedButtonFull";
 import OutlinedButtonHalf from "../../components/material/OutlinedButtonHalf";
 import DatePickers from "../../components/material/DatePickers";
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
 
 class MM0202 extends React.Component {
   constructor(props) {
@@ -53,6 +55,7 @@ class MM0202 extends React.Component {
       workType,
       empList,
       isRegistFormOpen,
+      isDescFormOpen,
     } = this.state;
 
     return (
@@ -179,7 +182,9 @@ class MM0202 extends React.Component {
                                 workDesc={doc.workDesc}
                                 workEmp={doc.workEmp}
                                 workType={doc.workType}
-                                deleteHandler={this._workDeleteHandler}
+                                delConfirm={this._deleteConfirm}
+                                descViewHandler={this._descViewHandler}
+                                changeStatus={this._changedStatus}
                               />
                             );
                           })
@@ -244,8 +249,49 @@ class MM0202 extends React.Component {
     );
   }
 
+  _deleteConfirm = (workRef) => {
+    confirmAlert({
+      title: "작업리스트 삭제 확인",
+      message: "삭제한 작업리스틑 되돌릴 수 없습니다. 삭제하시겠습니까 ?",
+      buttons: [
+        {
+          label: "예",
+          onClick: () => this._workDeleteHandler(workRef),
+        },
+        {
+          label: "취소",
+          onClick: () => {},
+        },
+      ],
+    });
+  };
+
+  _changedStatus = async (workRef) => {
+    const { projectInfo } = this.state;
+    const parentKey = projectInfo.ref;
+
+    const response = await fetch("/api/changedWorkListStatus", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: JSON.stringify({ workRef, parentKey }),
+    }).then(this._progressBtnHandler(projectInfo.ref));
+  };
+
   _workDeleteHandler = async (workRef) => {
-    console.log(workRef);
+    const { projectInfo } = this.state;
+    const parentKey = projectInfo.ref;
+
+    const response = await fetch("/api/deleteWorkList", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: JSON.stringify({ workRef, parentKey }),
+    }).then(this._progressBtnHandler(projectInfo.ref));
   };
 
   _getEmpList = async () => {
@@ -326,9 +372,7 @@ class MM0202 extends React.Component {
         // 'Content-Type': 'application/x-www-form-urlencoded',
       },
       body: JSON.stringify({ addData }),
-    });
-
-    this._progressBtnHandler(projectInfo.ref);
+    }).then(this._progressBtnHandler(projectInfo.ref));
   };
 
   _addBtnCloseDialogHandler = () => {
