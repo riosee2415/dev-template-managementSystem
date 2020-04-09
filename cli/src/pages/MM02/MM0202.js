@@ -393,7 +393,11 @@ class MM0202 extends React.Component {
         // 'Content-Type': 'application/x-www-form-urlencoded',
       },
       body: JSON.stringify({ addData }),
-    }).then(this._progressBtnHandler(projectInfo.ref));
+    })
+      .then(this._progressBtnHandler(projectInfo.ref))
+      .then(() => {
+        return;
+      });
   };
 
   _addBtnCloseDialogHandler = () => {
