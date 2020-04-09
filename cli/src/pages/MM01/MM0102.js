@@ -249,9 +249,10 @@ class MM0102 extends React.Component {
         >
           {dataInfo ? (
             <>
-              <div>{dataInfo.name}</div>
-              <div>{dataInfo.rank}</div>
-              <div>{new Date().getFullYear()}</div>
+              <div className="usageSubTitle">
+                <div>{dataInfo.name}</div>
+                <div>{new Date().getFullYear()}</div>
+              </div>
             </>
           ) : null}
           <div>휴가기간 : </div>
