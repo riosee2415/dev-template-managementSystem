@@ -4,9 +4,8 @@ import morgan from "morgan";
 import routes from "./routes";
 import apiController from "./controller/apiController";
 import apiControllerWork from "./controller/apiControllerWork";
-import projectController from "./controller/projectController";
 import commonController from "./controller/commonController";
-import workListRouter from "./router/workListRouter";
+import MM0202Router from "./router/MM02/MM0202Router";
 
 const PORT = 5000;
 
@@ -87,20 +86,6 @@ app.post(routes.removeEmpInfo, async (req, res) => {
   return res.json(sendData);
 });
 
-app.post(routes.getProjectInfo, async (req, res) => {
-  const projectRef = req.body.key;
-  const sendData = await projectController.getProjectInfo(projectRef);
-
-  return res.json(sendData);
-});
-
-app.post(routes.getProjectWorkListInfo, async (req, res) => {
-  const projectRef = req.body.projectId;
-  const sendData = await projectController.getProjectWorkListInfo(projectRef);
-
-  return res.json(sendData);
-});
-
 app.post(routes.getCommonData, async (req, res) => {
   const param1 = req.body.collectionName;
   const param2 = req.body.docName;
@@ -110,22 +95,13 @@ app.post(routes.getCommonData, async (req, res) => {
   return res.json(sendData);
 });
 
-app.post(routes.getEmpList, async (req, res) => {
-  const sendData = await projectController.getEmpList();
-
-  return res.json(sendData);
-});
-
-app.post(routes.addWorkList, async (req, res) => {
-  const data = req.body.addData;
-
-  const sendData = await projectController.addWorkList(data);
-
-  return res.json(sendData);
-});
-
-app.post(routes.deleteWorkList, workListRouter);
-app.post(routes.changedWorkListStatus, workListRouter);
+/* MM0202 */
+app.post(routes.deleteWorkList, MM0202Router);
+app.post(routes.changedWorkListStatus, MM0202Router);
+app.post(routes.addWorkList, MM0202Router);
+app.post(routes.getEmpList, MM0202Router);
+app.post(routes.getProjectWorkListInfo, MM0202Router);
+app.post(routes.getProjectInfo, MM0202Router);
 
 app.listen(PORT, () => {
   console.log(`✅ Server Start On ${PORT}`);
