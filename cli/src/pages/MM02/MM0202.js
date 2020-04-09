@@ -1,6 +1,7 @@
 import React from "react";
 import IconComponent from "../../components/IconComponent";
 import LeftListBox from "../../components/LeftListBox";
+import TabBox from "../../components/TabBox";
 import TopArea from "../../components/projectView/TopArea";
 import WorkList from "../../components/projectView/WorkList";
 import FormDialog from "../../components/FormDialog";
@@ -56,6 +57,7 @@ class MM0202 extends React.Component {
       empList,
       isRegistFormOpen,
       isDescFormOpen,
+      selectedTab,
     } = this.state;
 
     return (
@@ -134,64 +136,82 @@ class MM0202 extends React.Component {
                       type={projectInfo.type}
                     />
                     <div className="mc__col2__desc__btnArea">
-                      <OutlinedButtonFull text="거래처정보" color="primary" />
+                      {/* <OutlinedButtonFull text="거래처정보" color="primary" />
                       <OutlinedButtonFull
                         action={() => this._progressBtnHandler(projectInfo.ref)}
                         text="업무차트"
                         color="primary"
+                      /> */}
+                      <TabBox
+                        tabs={["거래처정보", "업무차트"]}
+                        selectedTab={selectedTab}
+                        tabChangeHandler={(value) =>
+                          this.setState({ selectedTab: value })
+                        }
                       />
                     </div>
-
-                    <div>
-                      {projectWorkList ? (
-                        <>
-                          <div className="mm-add">
-                            <OutlinedButton
-                              text="업무추가"
-                              className="mm-add-btn"
-                              action={() => this._addBtnHandler()}
-                            />
-                          </div>
-
-                          <div>
-                            <ul className="workList-main" key={this.props.idx}>
-                              <li>번호</li>
-                              <li>업무</li>
-                              <li>코드</li>
-                              <li>유형</li>
-                              <li>담당자</li>
-                              <li>작업일</li>
-                              <li>업무내용</li>
-                              <li>상태</li>
-                              <li>삭제</li>
-                            </ul>
-                          </div>
-                        </>
-                      ) : null}
-                      <div className="workList-main-box scrollbar scroll-vertical">
-                        {projectWorkList
-                          ? projectWorkList.map((doc, idx) => {
-                              return (
-                                <WorkList
-                                  key={idx}
-                                  idx={idx + 1}
-                                  workRef={doc.workRef}
-                                  workName={doc.workName}
-                                  result={doc.result}
-                                  workCode={doc.workCode}
-                                  workDate={doc.workDate}
-                                  workDesc={doc.workDesc}
-                                  workEmp={doc.workEmp}
-                                  workType={doc.workType}
-                                  delConfirm={this._deleteConfirm}
-                                  descViewHandler={this._descViewHandler}
-                                  changeStatus={this._changedStatus}
-                                />
-                              );
-                            })
-                          : null}
+                    {selectedTab === 1 ? (
+                      <div className="mm0103__dataBox__02">
+                        <div className="aa">
+                          <h1>추가정보</h1>
+                        </div>
                       </div>
-                    </div>
+                    ) : null}
+                    {selectedTab === 2 ? (
+                      <div>
+                        {projectWorkList ? (
+                          <>
+                            <div className="mm-add">
+                              <OutlinedButton
+                                text="업무추가"
+                                className="mm-add-btn"
+                                action={() => this._addBtnHandler()}
+                              />
+                            </div>
+
+                            <div>
+                              <ul
+                                className="workList-main"
+                                key={this.props.idx}
+                              >
+                                <li>번호</li>
+                                <li>업무</li>
+                                <li>코드</li>
+                                <li>유형</li>
+                                <li>담당자</li>
+                                <li>작업일</li>
+                                <li>업무내용</li>
+                                <li>상태</li>
+                                <li>삭제</li>
+                              </ul>
+                            </div>
+                          </>
+                        ) : null}
+                        <div className="workList-main-box scrollbar scroll-vertical">
+                          {projectWorkList
+                            ? projectWorkList.map((doc, idx) => {
+                                return (
+                                  <WorkList
+                                    key={idx}
+                                    idx={idx + 1}
+                                    workRef={doc.workRef}
+                                    workName={doc.workName}
+                                    result={doc.result}
+                                    workCode={doc.workCode}
+                                    workDate={doc.workDate}
+                                    workDesc={doc.workDesc}
+                                    workEmp={doc.workEmp}
+                                    workType={doc.workType}
+                                    delConfirm={this._deleteConfirm}
+                                    descViewHandler={this._descViewHandler}
+                                    changeStatus={this._changedStatus}
+                                  />
+                                );
+                              })
+                            : null}
+                        </div>
+                      </div>
+                    ) : null}
                   </>
                 ) : null}
               </div>
@@ -393,11 +413,7 @@ class MM0202 extends React.Component {
         // 'Content-Type': 'application/x-www-form-urlencoded',
       },
       body: JSON.stringify({ addData }),
-    })
-      .then(this._progressBtnHandler(projectInfo.ref))
-      .then(() => {
-        return;
-      });
+    }).then(this._progressBtnHandler(projectInfo.ref));
   };
 
   _addBtnCloseDialogHandler = () => {
