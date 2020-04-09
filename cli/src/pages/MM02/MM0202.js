@@ -250,6 +250,25 @@ class MM0202 extends React.Component {
   }
 
   _deleteConfirm = (workRef) => {
+    console.log(sessionStorage.getItem("login_name"));
+
+    const { projectInfo } = this.state;
+
+    if (projectInfo.PM !== sessionStorage.getItem("login_name")) {
+      confirmAlert({
+        title: "접근권한 불가",
+        message: "업무를 삭제할 수 없습니다. PM에게 문의하세요.",
+        buttons: [
+          {
+            label: "닫기",
+            onClick: () => {},
+          },
+        ],
+      });
+
+      return;
+    }
+
     confirmAlert({
       title: "작업리스트 삭제 확인",
       message: "삭제한 작업리스틑 되돌릴 수 없습니다. 삭제하시겠습니까 ?",
