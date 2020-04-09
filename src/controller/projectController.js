@@ -144,8 +144,24 @@ const deleteWorkList = async (req, res) => {
 };
 
 const chagneStatus = async (req, res) => {
-  console.log(req.body.workRef);
-  console.log(req.body.parentKey);
+  let fsRef;
+  let queryRef;
+  let sendData = [];
+
+  try {
+    fsRef = await firestore
+      .collection("progress_projects")
+      .doc(req.body.parentKey);
+
+    await fsRef.collection("workList").doc(req.body.workRef).update({
+      result: "1",
+    });
+  } catch (e) {
+    console.log(e);
+  } finally {
+  }
+
+  return null;
 };
 
 const projectController = {
