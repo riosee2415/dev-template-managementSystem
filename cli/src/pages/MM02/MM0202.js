@@ -216,16 +216,6 @@ class MM0202 extends React.Component {
             fullWidth
           />
 
-          <div className="comboArea" id="comboArea-js">
-            <ComboBox
-              dataList={workType}
-              title="업무유형"
-              txtId="workType-js"
-            />
-
-            <ComboBox dataList={empList} title="담당자" txtId="workEmp-js" />
-          </div>
-
           <TextField
             id="workDesc-js"
             autoFocus
@@ -236,6 +226,17 @@ class MM0202 extends React.Component {
             multiline={true}
             rowsMax="10"
           />
+          <div style={{ width: "100%", height: 15 }}></div>
+          <div className="comboArea" id="comboArea-js">
+            <ComboBox
+              dataList={workType}
+              title="업무유형"
+              txtId="workType-js"
+            />
+
+            <div style={{ width: "100%", height: 15 }}></div>
+            <ComboBox dataList={empList} title="담당자" txtId="workEmp-js" />
+          </div>
 
           <DatePickers lab="작업일" dateId="workDate-js" />
         </FormDialog>

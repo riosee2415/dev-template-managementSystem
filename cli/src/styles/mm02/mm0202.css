@@ -138,6 +138,6 @@
 .comboArea {
   margin: 15px;
   display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
+  flex-direction: column;
+  justify-content: space-around;
 }
