@@ -8,47 +8,47 @@
 }
 
 .sys .sys__header {
-  width: 100%;
-  height: 58px;
-  background-color: rgb(53, 53, 53);
-  margin-bottom: 20px;
-  position: relative;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  position: relative;
+  margin-bottom: 20px;
+  width: 100%;
+  height: 58px;
+  background-color: rgb(53, 53, 53);
 }
 .sys .sys__header:after {
   content: "";
-  position: absolute;
-  bottom: -5px;
   width: 100%;
   height: 2px;
+  position: absolute;
+  bottom: -5px;
   border-bottom: 2px solid rgb(53, 53, 53);
 }
 .sys .sys__header .hd-logo-box {
   width: 180px;
+  height: 58px;
+  padding-top: 12px;
   background-color: rgb(90, 90, 90);
   box-shadow: 2px 0px 4px #999;
-  height: 58px;
   box-sizing: border-box;
-  padding-top: 12px;
 }
 .sys .sys__header .hd-left {
   display: flex;
   flex-direction: row;
 }
 .sys .sys__header .hd-left .hd-logout {
-  width: 45px;
-  height: 45px;
-  border-radius: 50px;
-  padding: 4px;
-  box-sizing: border-box;
-  background-color: #7d7d7d;
-  margin: 6px 10px;
-  font-size: 12px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 6px 10px;
+  padding: 4px;
+  width: 45px;
+  height: 45px;
+  border-radius: 50px;
+  box-sizing: border-box;
+  background-color: #7d7d7d;
+  font-size: 12px;
   cursor: pointer;
   transition: 0.5s;
 }
@@ -59,24 +59,24 @@
   font-size: 18px;
 }
 .sys .sys__header .hd-left .hd-search {
-  width: 210px;
-  height: 60px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-right: 20px;
   overflow: hidden;
+  width: 210px;
+  height: 60px;
+  margin-right: 20px;
 }
 .sys .sys__header .hd-left .hd-search .hd-search__txt,
 .sys .sys__header .hd-left .hd-search .hd-search__txt input {
+  position: relative;
   width: 165px;
   height: 35px;
   border-radius: 4px;
   box-sizing: border-box;
   transform: translateX(200px);
   transition: 0.5s;
-  position: relative;
   box-shadow: 2px 2px 5px #999;
 }
 .sys .sys__header .hd-left .hd-search .hd-search__txt input:focus {
@@ -99,10 +99,10 @@
   z-index: 1;
 }
 .sys .sys__header .hd-left .hd-search .hd-search__btn button {
-  color: #fff;
   background-color: rgba(53, 53, 53);
   border: 1px solid #7e7e7e;
   border-radius: 4px;
+  color: #fff;
 }
 .sys .sys__header .hd-left .hd-search .hd-search__btn button .fas {
   color: #fff;
@@ -122,45 +122,44 @@
 
 .sys .sys__header .hd-left .hd-alerm-num {
   position: absolute;
+  top: 10px;
+  right: 0;
   width: 15px;
   height: 15px;
   font-size: 13px;
   font-weight: bold;
   text-align: center;
   border-radius: 10px;
-  top: 10px;
-  right: 0;
 }
 
 .sys .sys__header .hd-logo {
   display: block;
-  background-image: url("../assets/images/4LEAF_LOGO_W.png");
   width: 120px;
   height: 35px;
   margin-left: 30px;
+  background-image: url("../assets/images/4LEAF_LOGO_W.png");
   background-size: cover;
 }
 
 .sys .sys__main {
   display: flex;
-  width: 100%;
   flex-direction: row;
+  width: 100%;
   height: 80vh;
   min-height: 790px;
-
   align-items: flex-start;
   justify-content: flex-start;
 }
 
 .sys .sys__main .sys__menu {
-  width: 180px;
-  min-width: 180px;
-  height: 100%;
-  box-shadow: 2px 4px 5px #f1f1f1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
+  width: 180px;
+  min-width: 180px;
+  height: 100%;
+  box-shadow: 2px 4px 5px #f1f1f1;
 }
 
 .sys .sys__main .sys__content {
@@ -168,14 +167,13 @@
 }
 
 .sys .sys__footer {
-  width: 100%;
-  height: 100px;
-  background: #222222;
-
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  height: 100px;
+  background: #222222;
 }
 .sys .sys__footer > * {
   margin-right: 40px;
@@ -183,10 +181,10 @@
 }
 .sys .sys__footer .ft-logo {
   display: block;
-  background-image: url("../assets/images/4LEAF_LOGO_W.png");
   width: 120px;
   height: 35px;
   margin-left: 30px;
+  background-image: url("../assets/images/4LEAF_LOGO_W.png");
   background-size: cover;
 }
 .sys .sys__footer .ft-copyright {
@@ -217,15 +215,14 @@
 }
 
 .mm .mh .mh__content {
-  width: 100%;
-  height: 40px;
-  margin-right: 20px;
-  margin-bottom: 15px;
-
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  width: 100%;
+  height: 40px;
+  margin-right: 20px;
+  margin-bottom: 15px;
 }
 
 .mm .mh .mh__content span {
@@ -265,14 +262,13 @@
 
 .mc .mc__col1 .mc__col1__title,
 .mc .mc__col2 .mc__col2__title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   width: 100%;
   height: 30px;
   margin-bottom: 10px;
   border-left: 4px solid #030f4e;
-
-  display: flex;
-  flex-direction: row;
-  align-items: center;
 }
 
 .mc .mc__col1 .mc__col1__title span,
