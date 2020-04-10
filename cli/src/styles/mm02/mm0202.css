@@ -47,14 +47,6 @@
   background-color: #3f5ffda3;
 }
 
-.mc__col2__desc__btnArea {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-}
-
 .mm-add {
   text-align: right;
 }

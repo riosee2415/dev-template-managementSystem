@@ -28,6 +28,7 @@ class MM0202 extends React.Component {
       workType: [],
       empList: [],
       isReload: false,
+      selectedTab: 1,
     };
   }
 
@@ -142,21 +143,19 @@ class MM0202 extends React.Component {
                         text="업무차트"
                         color="primary"
                       /> */}
-                      <TabBox
-                        tabs={["거래처정보", "업무차트"]}
-                        selectedTab={selectedTab}
-                        tabChangeHandler={(value) =>
-                          this.setState({ selectedTab: value })
-                        }
-                      />
                     </div>
-                    {selectedTab === 1 ? (
-                      <div className="mm0103__dataBox__02">
-                        <div className="aa">
-                          <h1>추가정보</h1>
-                        </div>
-                      </div>
-                    ) : null}
+                    <TabBox
+                      tabs={["거래처정보", "업무차트"]}
+                      selectedTab={selectedTab}
+                      tabChangeHandler={(value) => {
+                        this.setState({ selectedTab: value });
+                        if (value == 1) {
+                        } else if (value == 2) {
+                          this._progressBtnHandler(projectInfo.ref);
+                        }
+                      }}
+                    />
+                    {selectedTab === 1 ? <div>거래처정보</div> : null}
                     {selectedTab === 2 ? (
                       <div>
                         {projectWorkList ? (

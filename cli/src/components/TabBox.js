@@ -22,7 +22,7 @@ class TabBox extends React.Component {
     return (
       <>
         {this.props.tabs ? (
-          <Paper>
+          <Paper style={{ margin: 10 }}>
             <Tabs
               value={selectedTab - 1}
               onChange={this._tabChangeHandler}
@@ -30,8 +30,8 @@ class TabBox extends React.Component {
               textColor="primary"
               centered
             >
-              {this.props.tabs.map((tab, action, idx) => {
-                return <Tab key={idx} onClick={action} label={tab} />;
+              {this.props.tabs.map((tab, idx) => {
+                return <Tab key={idx} label={tab} />;
               })}
             </Tabs>
           </Paper>
