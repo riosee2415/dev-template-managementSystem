@@ -19,14 +19,14 @@
 }
 
 .mm0103__dataBox .dataBox__header .data__info span:first-child {
-  font-weight: 600;
   margin: 10px;
+  font-weight: 600;
 }
 
 .mm0103__dataBox .dataBox__header .data__info span:last-child {
+  padding: 5px 20px;
   background-color: rgb(230, 235, 255);
   border-radius: 20px;
-  padding: 5px 20px;
   font-size: 14px;
 }
 
@@ -42,14 +42,20 @@
   box-shadow: 5px 5px 20px #aeaeae;
 }
 
-.dataBox__body {
+.mm0103__dataBox .dataBox__body {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
 }
 
-.mm0103__dataBox .dataBox__row {
+.mm0103__dataBox .dataBox__body .dataBox__col {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.mm0103__dataBox .dataBox__body .dataBox__col .dataBox__row {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -57,21 +63,15 @@
   margin: 17px;
 }
 
-.mm0103__dataBox .dataBox__row:hover span {
+.mm0103__dataBox .dataBox__body .dataBox__col .dataBox__row:hover span {
   color: #ffa751;
 }
 
-.mm0103__dataBox .dataBox__col {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.dataBox__body .dataBox__col .dataBox__row span.data__info {
+.mm0103__dataBox .dataBox__body .dataBox__col .dataBox__row span.data__info {
   line-height: 1.3;
   color: #535353;
 }
 
-.dataBox__body .dataBox__col .dataBox__row span.data__icon {
+.mm0103__dataBox .dataBox__body .dataBox__col .dataBox__row span.data__icon {
   margin-right: 20px;
 }
