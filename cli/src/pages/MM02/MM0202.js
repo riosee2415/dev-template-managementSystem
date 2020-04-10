@@ -13,6 +13,7 @@ import OutlinedButton from "../../components/material/OutlinedButton";
 import DatePickers from "../../components/material/DatePickers";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
+import Grid from "@material-ui/core/Grid";
 
 class MM0202 extends React.Component {
   constructor(props) {
@@ -29,6 +30,7 @@ class MM0202 extends React.Component {
       empList: [],
       isReload: false,
       selectedTab: 0,
+      clientInfo: null,
     };
   }
 
@@ -57,8 +59,8 @@ class MM0202 extends React.Component {
       workType,
       empList,
       isRegistFormOpen,
-      isDescFormOpen,
       selectedTab,
+      clientInfo,
     } = this.state;
 
     return (
@@ -149,8 +151,8 @@ class MM0202 extends React.Component {
                       tabs={[
                         {
                           label: "거래처정보",
-                          action: () => {},
-                          param1: projectInfo.ref,
+                          action: this._clientInfoHandler,
+                          param1: projectInfo.clientRef,
                           param2: null,
                           param3: null,
                           param4: null,
@@ -169,7 +171,52 @@ class MM0202 extends React.Component {
                         this.setState({ selectedTab: value });
                       }}
                     />
-                    {selectedTab === 1 ? <div>거래처정보</div> : null}
+                    {selectedTab === 1 ? (
+                      <div>
+                        {clientInfo ? (
+                          <div>
+                            <div className="clientBlock">
+                              <div>사업자번호</div>
+                              <div>{clientInfo.businessNumber}</div>
+                            </div>
+
+                            <div className="clientBlock">
+                              <div>상호명</div>
+                              <div>{clientInfo.name}</div>
+                            </div>
+                            <div className="clientBlock">
+                              <div>대표자명</div>
+                              <div>{clientInfo.chiefName}</div>
+                            </div>
+
+                            <div className="clientBlock">
+                              <div>업태</div>
+                              <div>{clientInfo.business}</div>
+                            </div>
+
+                            <div className="clientBlock">
+                              <div>종목</div>
+                              <div>{clientInfo.type}</div>
+                            </div>
+
+                            <div className="clientBlock">
+                              <div>사업자유형</div>
+                              <div>{clientInfo.BP}</div>
+                            </div>
+
+                            <div className="clientBlock">
+                              <div>과세유형</div>
+                              <div>{clientInfo.taxation}</div>
+                            </div>
+
+                            <div className="clientBlock">
+                              <div>사업자주소</div>
+                              <div>{clientInfo.address}</div>
+                            </div>
+                          </div>
+                        ) : null}
+                      </div>
+                    ) : null}
                     {selectedTab === 2 ? (
                       <div>
                         {projectWorkList ? (
@@ -266,23 +313,44 @@ class MM0202 extends React.Component {
             multiline={true}
             rowsMax="10"
           />
-          <div style={{ width: "100%", height: 15 }}></div>
-          <div className="comboArea" id="comboArea-js">
-            <ComboBox
-              dataList={workType}
-              title="업무유형"
-              txtId="workType-js"
-            />
 
-            <div style={{ width: "100%", height: 15 }}></div>
-            <ComboBox dataList={empList} title="담당자" txtId="workEmp-js" />
-          </div>
+          <Grid container spacing={2}>
+            <Grid item xs={6}>
+              <ComboBox
+                dataList={workType}
+                title="업무유형"
+                txtId="workType-js"
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <ComboBox dataList={empList} title="담당자" txtId="workEmp-js" />
+            </Grid>
+          </Grid>
 
           <DatePickers lab="작업일" dateId="workDate-js" />
         </FormDialog>
       </div>
     );
   }
+
+  _clientInfoHandler = async (cliRef) => {
+    const { clientInfo } = this.state;
+
+    const response = await fetch("/api/getClientInfo", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: JSON.stringify({ cliRef }),
+    });
+
+    const data = await response.json();
+
+    this.setState({
+      clientInfo: data,
+    });
+  };
 
   _deleteConfirm = (workRef) => {
     console.log(sessionStorage.getItem("login_name"));

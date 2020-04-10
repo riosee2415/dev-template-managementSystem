@@ -28,7 +28,7 @@ class MM0102 extends React.Component {
       alertContent: null,
       isUsedFormOpen: false,
       isUsageFormOpen: false,
-      allUsageDay: null,
+      empList: [],
     };
   }
 
@@ -49,7 +49,6 @@ class MM0102 extends React.Component {
       alertContent,
       isUsedFormOpen,
       isUsageFormOpen,
-      allUsageDay,
     } = this.state;
 
     const columns = [
@@ -260,7 +259,7 @@ class MM0102 extends React.Component {
             <>
               <div className="usageSubTitle">
                 <div>{dataInfo.name}</div>
-                <div>{new Date().getFullYear()}</div>
+                <div>신청일 : {dataInfo.currentDate}</div>
               </div>
             </>
           ) : null}
@@ -271,10 +270,10 @@ class MM0102 extends React.Component {
               <span> ~ </span>
               <DatePickers
                 lab="종료일"
-                dateId="annuaEndDay"
+                dateId="annualEndDay"
                 changed={this._getUseDay}
               />
-              <div>(총 : 일)</div>
+              <div id="allusageDay-js">(총 : 일)</div>
             </div>
           </div>
 
@@ -282,17 +281,18 @@ class MM0102 extends React.Component {
             <span>사유 : </span>
             <TextField
               id="applicationReason-js"
+              multiline
               margin="dense"
               type="text"
               label="사유"
-              variant="outlined"
             />
           </div>
 
           <input type="file"></input>
 
           <div className="annualSettlement">
-            결제자 :
+            <div className="personSettlement"> 결제자 :</div>
+
             <ComboBox
               dataList={[{ title: "aaa" }, { title: "bbb" }]}
               label="결제자"
@@ -386,6 +386,19 @@ class MM0102 extends React.Component {
 
     const data = await response.json();
 
+    const date = new Date();
+
+    let y = date.getFullYear();
+    let m = date.getMonth() + 1;
+    let d = date.getDate();
+
+    m = m < 10 ? "0" + m : m;
+    d = d < 10 ? "0" + d : d;
+
+    const appDay = y + "-" + m + "-" + d;
+
+    data.currentDate = appDay;
+
     const workYear = data.hire.substring(0, 4) - new Date().getFullYear() + 1;
     data.hireYear = workYear;
 
@@ -410,12 +423,12 @@ class MM0102 extends React.Component {
 
   _getUseDay = () => {
     const annualStartDay = document.getElementById("annualStartDay");
-    const annuaEndDay = document.getElementById("annuaEndDay");
+    const annualEndDay = document.getElementById("annualEndDay");
 
     let sDay = annualStartDay.value.replace("-", "");
     sDay = sDay.replace("-", "");
 
-    let eDay = annuaEndDay.value.replace("-", "");
+    let eDay = annualEndDay.value.replace("-", "");
     eDay = eDay.replace("-", "");
 
     sDay = parseInt(sDay);
@@ -424,14 +437,33 @@ class MM0102 extends React.Component {
     if (eDay < sDay) {
       alert("종료일이 시작이보다 ");
       return;
-    }
-
-    if (eDay - sDay > 15) {
-      alert("15일 이상은 사용할 수 없습니다.");
+    } else if (eDay - sDay > 15) {
+      alert("15일 이상은 신청할 수 없습니다.");
       return;
     }
 
     const useDay = eDay - sDay + 1;
+
+    const eMs = document.getElementById("allusageDay-js");
+
+    eMs.innerHTML = useDay;
+
+    console.log(useDay);
+  };
+
+  _getEmpList = async () => {
+    const response = await fetch("/api/getEmpList", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: JSON.stringify({}),
+    });
+    const data = await response.json();
+    this.setState({
+      empList: data,
+    });
   };
 
   __usageApplicationHandler = () => {

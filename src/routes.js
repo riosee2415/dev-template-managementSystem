@@ -3,6 +3,7 @@ const routes = {
   loginProcess: "/api/loginProcess",
   callCollection: "/api/callCollection",
   getCommonData: "/api/getCommonData",
+  getClientInfo: "/api/getClientInfo",
 
   /* MM0101 */
   getworkStart: "/api/getworkStart",
@@ -25,7 +26,7 @@ const routes = {
   getEmpList: "/api/getEmpList",
   addWorkList: "/api/addWorkList",
   deleteWorkList: "/api/deleteWorkList",
-  changedWorkListStatus: "/api/changedWorkListStatus"
+  changedWorkListStatus: "/api/changedWorkListStatus",
 };
 
 export default routes;

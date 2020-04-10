@@ -20,6 +20,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.post(routes.loginProcess, CommonRouter);
 app.post(routes.callCollection, CommonRouter);
 app.post(routes.getCommonData, CommonRouter);
+app.post(routes.getClientInfo, CommonRouter);
 
 /* MM0101 */
 app.post(routes.getworkStart, MM0101Router);

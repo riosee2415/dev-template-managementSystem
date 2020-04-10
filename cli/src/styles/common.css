@@ -71,14 +71,14 @@
 }
 
 .btn {
+  height: 25px;
+  margin-right: 10px;
   border: none;
+  border-radius: 6px;
   font-size: 14px;
   font-weight: bold;
-  height: 25px;
-  border-radius: 6px;
   box-shadow: 2px 2px 2px #bfbfbf;
   cursor: pointer;
-  margin-right: 10px;
 }
 .btn-xs {
   width: 50px;

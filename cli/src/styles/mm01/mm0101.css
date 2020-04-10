@@ -41,14 +41,14 @@
 
 .mm0101__left .mm0101__left__col3__row1,
 .mm0101__left .mm0101__left__col3__row2 {
-  padding: 5px 10px;
-  margin-bottom: 10px;
-  border-bottom: 1px solid #353535;
-  width: 200px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  width: 200px;
+  padding: 5px 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #353535;
 }
 
 .mm0101__left .mm0101__left__col3__row1 span:nth-child(1),
@@ -59,10 +59,10 @@
 
 .mm0101__left .mm0101__left__col3__row1 span:nth-child(2),
 .mm0101__left .mm0101__left__col3__row2 span:nth-child(2) {
-  font-size: 14px;
-  color: #353535;
-  text-shadow: 2px 2px 2px #d2dae2;
   width: 60px;
+  color: #353535;
+  font-size: 14px;
+  text-shadow: 2px 2px 2px #d2dae2;
 }
 
 .mm0101__dataBox {
@@ -95,19 +95,19 @@
 }
 
 .mm0101__dataBox > div {
-  margin-left: 10px;
   width: 20%;
   height: 70px;
   line-height: 70px;
+  margin-left: 10px;
   text-align: center;
   border-left: 1px solid #f1f1f1;
   font-size: 15px;
 }
 
 .mm0101__dataBox > div:first-child {
-  padding: 5px;
   width: 15px;
   height: 15px;
+  padding: 5px;
   line-height: 15px;
   font-weight: bold;
   border: 3px solid #353535;

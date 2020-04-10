@@ -9,6 +9,7 @@ import ComboBox from "../../components/ComboBox";
 import { TextField } from "@material-ui/core";
 import middleware from "../../middleware/common";
 import DatePickers from "../../components/material/DatePickers";
+import Grid from "@material-ui/core/Grid";
 
 class MM0103 extends React.Component {
   constructor(props) {
@@ -356,14 +357,28 @@ class MM0103 extends React.Component {
               type="text"
               fullWidth
             />
-            <ComboBox dataList={empLocList} title="근무위치" txtId="loc-js" />
-            <ComboBox dataList={empDeptList} title="부서" txtId="dept-js" />
-            <ComboBox
-              dataList={empPositionList}
-              title="직급"
-              txtId="position-js"
-            />
-            <ComboBox dataList={empRankList} title="직책" txtId="rank-js" />
+            <Grid container spacing={2}>
+              <Grid item xs={6}>
+                <ComboBox
+                  dataList={empLocList}
+                  title="근무위치"
+                  txtId="loc-js"
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <ComboBox dataList={empDeptList} title="부서" txtId="dept-js" />
+              </Grid>
+              <Grid item xs={6}>
+                <ComboBox
+                  dataList={empPositionList}
+                  title="직급"
+                  txtId="position-js"
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <ComboBox dataList={empRankList} title="직책" txtId="rank-js" />{" "}
+              </Grid>
+            </Grid>
             <TextField
               id="mobile-js"
               margin="dense"
