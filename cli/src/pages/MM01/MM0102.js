@@ -28,8 +28,15 @@ class MM0102 extends React.Component {
       alertContent: null,
       isUsedFormOpen: false,
       isUsageFormOpen: false,
+      allUsageDay: null,
     };
   }
+
+  // componentDidMount = () => {
+  //   const annualStartDay = document.getElementById("annualStartDay");
+  //   const annualEndDay = document.getElementById("annuaEndDay");
+  //   console.log(annualStartDay, annuaEndDay);
+  // };
 
   render() {
     const {
@@ -42,6 +49,7 @@ class MM0102 extends React.Component {
       alertContent,
       isUsedFormOpen,
       isUsageFormOpen,
+      allUsageDay,
     } = this.state;
 
     const columns = [
@@ -261,8 +269,12 @@ class MM0102 extends React.Component {
             <div className="usageStartEnd">
               <DatePickers lab="시작일" dateId="annualStartDay" />
               <span> ~ </span>
-              <DatePickers lab="종료일" dateId="annuaEndDay" />
-              <div>총 : 시작일-종료일+1 일</div>
+              <DatePickers
+                lab="종료일"
+                dateId="annuaEndDay"
+                changed={this._getUseDay}
+              />
+              <div>총 : 일</div>
             </div>
           </div>
 
@@ -396,13 +408,37 @@ class MM0102 extends React.Component {
     }
   };
 
+  _getUseDay = () => {
+    const annualStartDay = document.getElementById("annualStartDay");
+    const annuaEndDay = document.getElementById("annuaEndDay");
+
+    let sDay = annualStartDay.value.replace("-", "");
+    sDay = sDay.replace("-", "");
+
+    let eDay = annuaEndDay.value.replace("-", "");
+    eDay = eDay.replace("-", "");
+
+    sDay = parseInt(sDay);
+    eDay = parseInt(eDay);
+
+    if (eDay < sDay) {
+      alert("불가!");
+      return;
+    }
+
+    if (eDay - sDay > 15) {
+      alert("15일 이상은 사용할 수 없습니다.");
+      return;
+    }
+
+    const useDay = eDay - sDay + 1;
+  };
+
   __usageApplicationHandler = () => {
     this.setState({ isUsageFormOpen: true });
   };
 
-  _addApplicationAnnualHandler = () => {
-    alert("전송하구싶다!!!＼○∇○／");
-  };
+  _addApplicationAnnualHandler = () => {};
 
   _closeUsageDialogBtnHandler = () => {
     this.setState({ isUsageFormOpen: false });
