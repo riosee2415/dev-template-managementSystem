@@ -75,6 +75,7 @@
 }
 
 .workList-main:first-child {
+  width: calc(100% - 14px);
   border-bottom: 1px solid #dedede;
   font-weight: 600;
 }
@@ -85,6 +86,10 @@
   min-height: 300px;
 }
 
+.workList-main-box .workList-main {
+  width: calc(100% + 14px);
+}
+
 .workList-main-box .workList-main:first-child {
   border: none;
   font-weight: normal;
@@ -93,37 +98,37 @@
 .workList-main-box .workList-main li {
   margin-right: 25px;
 }
-
+.workList-main li:first-child,
 .workList-main-box .workList-main li:first-child {
   width: 40px;
   min-width: 30px;
   text-align: center;
 }
-
+.workList-main li:nth-child(2),
 .workList-main-box .workList-main li:nth-child(2) {
   width: 240px;
   min-width: 200px;
   text-align: left;
 }
-
+.workList-main li:nth-child(n + 3):nth-child(-n + 5),
 .workList-main-box .workList-main li:nth-child(n + 3):nth-child(-n + 5) {
   width: 65px;
   min-width: 50px;
   text-align: left;
 }
-
+.workList-main li:nth-child(6),
 .workList-main-box .workList-main li:nth-child(6) {
   width: 100px;
   min-width: 100px;
   text-align: left;
 }
-
+.workList-main li:nth-child(7),
 .workList-main-box .workList-main li:nth-child(7) {
   width: 70px;
   min-width: 60px;
   text-align: center;
 }
-
+.workList-main li:nth-child(n + 8):nth-child(-n + 9),
 .workList-main-box .workList-main li:nth-child(n + 8):nth-child(-n + 9) {
   width: 50px;
   min-width: 50px;
