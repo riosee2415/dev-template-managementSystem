@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function DatePickers({ lab, dateId }) {
+export default function DatePickers({ lab, dateId, changed = null }) {
   const classes = useStyles();
 
   const date = new Date();
@@ -33,6 +33,7 @@ export default function DatePickers({ lab, dateId }) {
         type="date"
         defaultValue={currentDate}
         className={classes.textField}
+        onChange={changed}
         InputLabelProps={{
           shrink: true
         }}
