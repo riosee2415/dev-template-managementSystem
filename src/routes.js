@@ -1,21 +1,31 @@
 const routes = {
-  /* api */
+  /* COMMON */
   loginProcess: "/api/loginProcess",
   callCollection: "/api/callCollection",
-  saveWorkTimeToStart: "/api/saveWorkTimeToStart",
+  getCommonData: "/api/getCommonData",
+
+  /* MM0101 */
   getworkStart: "/api/getworkStart",
-  getEmpInfo: "/api/getEmpInfo",
-  saveWorkTimeToEnd: "/api/saveWorkTimeToEnd",
   getDetailDataToWorkTime: "/api/getDetailDataToWorkTime",
+  saveWorkTimeToStart: "/api/saveWorkTimeToStart",
+  saveWorkTimeToEnd: "/api/saveWorkTimeToEnd",
+
+  /* MM0102 */
   getAnnualInfo: "/api/getAnnualInfo",
+
+  /* MM0103 */
+  getEmpInfo: "/api/getEmpInfo",
+  addEmpInfo: "/api/addEmpInfo",
+  modifyEmpInfo: "/api/modifyEmpInfo",
   removeEmpInfo: "/api/removeEmpInfo",
+
+  /* MM0202 */
   getProjectInfo: "/api/getProjectInfo",
   getProjectWorkListInfo: "/api/getProjectWorkListInfo",
-  getCommonData: "/api/getCommonData",
   getEmpList: "/api/getEmpList",
   addWorkList: "/api/addWorkList",
   deleteWorkList: "/api/deleteWorkList",
-  changedWorkListStatus: "/api/changedWorkListStatus",
+  changedWorkListStatus: "/api/changedWorkListStatus"
 };
 
 export default routes;

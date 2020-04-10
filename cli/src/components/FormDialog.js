@@ -21,10 +21,7 @@ class FormDialog extends React.Component {
         maxWidth="md"
       >
         <DialogTitle id="form-dialog-title">{this.props.title}</DialogTitle>
-        <DialogContent>
-          <DialogContentText>{this.props.content}</DialogContentText>
-          {this.props.children}
-        </DialogContent>
+        <DialogContent>{this.props.children}</DialogContent>
         <DialogActions>
           {this.props.isOnlyCheck ? (
             <Button onClick={this.props.closeDialogHandler} color="primary">

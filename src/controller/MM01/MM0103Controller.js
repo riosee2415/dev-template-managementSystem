@@ -13,7 +13,7 @@ const getEmpInfo = async (req, res) => {
     queryRef = await fsRef
       .doc(key)
       .get()
-      .then((res) => {
+      .then(res => {
         sendData = {
           docId: res.id,
           empId: res.data().empId,
@@ -31,7 +31,7 @@ const getEmpInfo = async (req, res) => {
           email: res.data().email,
           empNo: res.data().empNo,
           dept: res.data().dept,
-          useyn: res.data().useyn,
+          useyn: res.data().useyn
         };
       });
   } catch (e) {
@@ -42,13 +42,86 @@ const getEmpInfo = async (req, res) => {
   return req.body.isController ? sendData : res.json(sendData);
 };
 
+const addEmpInfo = async (req, res) => {
+  const data = req.body.data;
+
+  let fsRef;
+  let queryRef;
+  let sendData = {
+    empId: data.empId,
+    password: data.password,
+    empNo: data.empNo,
+    name: data.name,
+    loc: data.loc,
+    dept: data.dept,
+    position: data.position,
+    rank: data.rank,
+    hire: data.hire,
+    avatar: data.avatar,
+    birthday: data.birthday,
+    mobile: data.mobile,
+    email: data.email,
+    addr1: data.addr1,
+    addr2: data.addr2,
+    zoneCode: data.zoneCode,
+    useyn: data.useyn
+  };
+
+  try {
+    fsRef = await firestore.collection("employee");
+
+    queryRef = await fsRef.add(sendData);
+  } catch (e) {
+    console.log(e);
+  } finally {
+    fsRef = null;
+  }
+
+  return null;
+};
+
+const modifyEmpInfo = async (req, res) => {
+  const data = req.body.data;
+
+  let fsRef;
+  let queryRef;
+  let sendData = {
+    empId: data.empId,
+    empNo: data.empNo,
+    name: data.name,
+    loc: data.loc,
+    dept: data.dept,
+    position: data.position,
+    rank: data.rank,
+    avatar: data.avatar,
+    birthday: data.birthday,
+    mobile: data.mobile,
+    email: data.email,
+    addr1: data.addr1,
+    addr2: data.addr2,
+    zoneCode: data.zoneCode
+  };
+
+  try {
+    fsRef = await firestore.collection("employee").doc(data.key);
+
+    queryRef = await fsRef.update(sendData);
+  } catch (e) {
+    console.log(e);
+  } finally {
+    fsRef = null;
+  }
+
+  return null;
+};
+
 const removeEmpInfo = async (req, res) => {
   const empInfo = req.body.empInfo;
 
   let fsRef;
   let queryRef;
   let sendData = {
-    result: false,
+    result: false
   };
 
   try {
@@ -70,7 +143,9 @@ const removeEmpInfo = async (req, res) => {
 
 const MM0103Controller = {
   getEmpInfo,
-  removeEmpInfo,
+  addEmpInfo,
+  modifyEmpInfo,
+  removeEmpInfo
 };
 
 export default MM0103Controller;

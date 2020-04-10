@@ -28,11 +28,12 @@ app.post(routes.saveWorkTimeToStart, MM0101Router);
 app.post(routes.saveWorkTimeToEnd, MM0101Router);
 
 /* MM0102 */
-
 app.post(routes.getAnnualInfo, MM0102Router);
 
 /* MM0103 */
 app.post(routes.getEmpInfo, MM0103Router);
+app.post(routes.addEmpInfo, MM0103Router);
+app.post(routes.modifyEmpInfo, MM0103Router);
 app.post(routes.removeEmpInfo, MM0103Router);
 
 /* MM0202 */

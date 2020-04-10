@@ -2,16 +2,14 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   container: {
     display: "flex",
-    flexWrap: "wrap",
+    flexWrap: "wrap"
   },
   textField: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    width: 200,
-  },
+    width: 200
+  }
 }));
 
 export default function DatePickers({ lab, dateId, changed = null }) {
@@ -37,8 +35,10 @@ export default function DatePickers({ lab, dateId, changed = null }) {
         className={classes.textField}
         onChange={changed}
         InputLabelProps={{
-          shrink: true,
+          shrink: true
         }}
+        margin="dense"
+        fullWidth
       />
     </form>
   );
