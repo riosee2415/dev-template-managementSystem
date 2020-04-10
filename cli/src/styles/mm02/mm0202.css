@@ -155,10 +155,3 @@
   color: #00157e;
   font-weight: 600;
 }
-
-.comboArea {
-  margin: 15px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-}
