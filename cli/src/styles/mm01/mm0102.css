@@ -28,10 +28,10 @@
 }
 
 .dataSubInfo > div:nth-child(2) {
-  background-color: #5353531d;
   padding: 5px 10px;
-  font-size: 14px;
   margin-left: 50px;
+  background-color: #5353531d;
+  font-size: 14px;
 }
 
 .annualTbody {
