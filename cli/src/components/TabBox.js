@@ -22,7 +22,7 @@ class TabBox extends React.Component {
     return (
       <>
         {this.props.tabs ? (
-          <Paper>
+          <Paper style={{ margin: 10 }}>
             <Tabs
               value={selectedTab - 1}
               onChange={this._tabChangeHandler}
