@@ -11,7 +11,7 @@ class TabBox extends React.Component {
     super(props);
 
     this.state = {
-      selectedTab: this.props.selectedTab
+      selectedTab: this.props.selectedTab,
     };
   }
 
@@ -31,7 +31,15 @@ class TabBox extends React.Component {
               centered
             >
               {this.props.tabs.map((tab, idx) => {
-                return <Tab key={idx} label={tab} />;
+                return (
+                  <Tab
+                    key={idx}
+                    label={tab.label}
+                    onClick={() =>
+                      tab.action(tab.param1, tab.param2, tab.param3, tab.param4)
+                    }
+                  />
+                );
               })}
             </Tabs>
           </Paper>
@@ -43,7 +51,7 @@ class TabBox extends React.Component {
   _tabChangeHandler = (event, newValue) => {
     this.props.tabChangeHandler(newValue + 1);
     this.setState({
-      selectedTab: newValue + 1
+      selectedTab: newValue + 1,
     });
   };
 }

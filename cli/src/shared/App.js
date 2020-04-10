@@ -19,7 +19,7 @@ import {
   MM0601,
   MM0602,
   MM0603,
-  MM0701
+  MM0701,
 } from "../pages";
 import LoginBox from "../components/LoginBox";
 import routes from "../routes";
@@ -32,7 +32,7 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      loginStatus: false
+      loginStatus: false,
     };
   }
 
@@ -65,6 +65,12 @@ class App extends React.Component {
                     <IconComponent iconName="fas fa-search" />
                   </button>
                 </span>
+              </div>
+              <div className="hd-alerm">
+                <IconComponent iconName="fas fa-bell" />
+                <div className="hd-alerm-num bg-yellow">
+                  <span>1</span>
+                </div>
               </div>
               <div className="hd-logout" onClick={this._logoutHandler}>
                 <IconComponent iconName="fas fa-sign-out-alt" />
@@ -142,7 +148,7 @@ class App extends React.Component {
 
   _aleadyLogined = () => {
     this.setState({
-      loginStatus: true
+      loginStatus: true,
     });
   };
 
@@ -157,10 +163,10 @@ class App extends React.Component {
     const response = await fetch("/api/loginProcess", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
         // 'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: JSON.stringify({ inputId, inputPass })
+      body: JSON.stringify({ inputId, inputPass }),
     });
 
     const data = await response.json();
@@ -177,7 +183,7 @@ class App extends React.Component {
     }
 
     this.setState({
-      loginStatus: data.loginResult
+      loginStatus: data.loginResult,
     });
   };
 
@@ -185,7 +191,7 @@ class App extends React.Component {
     sessionStorage.clear();
 
     this.setState({
-      loginStatus: false
+      loginStatus: false,
     });
   };
 
