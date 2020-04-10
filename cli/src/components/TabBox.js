@@ -11,7 +11,7 @@ class TabBox extends React.Component {
     super(props);
 
     this.state = {
-      selectedTab: this.props.selectedTab,
+      selectedTab: this.props.selectedTab
     };
   }
 
@@ -51,7 +51,7 @@ class TabBox extends React.Component {
   _tabChangeHandler = (event, newValue) => {
     this.props.tabChangeHandler(newValue + 1);
     this.setState({
-      selectedTab: newValue + 1,
+      selectedTab: newValue + 1
     });
   };
 }

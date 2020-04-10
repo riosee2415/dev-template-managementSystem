@@ -27,28 +27,35 @@ class MM0103 extends React.Component {
       isConfirmOpen: false,
       confirmTitle: null,
       confirmContent: null,
-      selectedTab: 1,
+      selectedTab: 0,
       empLocList: [],
       empDeptList: [],
       empPositionList: [],
-      empRankList: [],
+      empRankList: []
     };
   }
 
   componentDidMount = async () => {
     const empLocList = await middleware.getCommonData("common", "loc");
-    //const empDeptList = await middleware.getCommonData("common", "dept");
+    const empDeptList = await middleware.getCommonData("common", "dept");
     const empPositionList = await middleware.getCommonData(
       "common",
       "position"
     );
-    //const empRankList = await middleware.getCommonData("common", "rank");
+    const empRankList = await middleware.getCommonData("common", "rank");
 
     const empLocArray = [];
     for (let i = 1; i <= Object.keys(empLocList).length; i++) {
       const data = empLocList["data" + i];
       if (!data) continue;
       empLocArray.push({ title: data });
+    }
+
+    const empDeptArray = [];
+    for (let i = 1; i <= Object.keys(empDeptList).length; i++) {
+      const data = empDeptList["data" + i];
+      if (!data) continue;
+      empDeptArray.push({ title: data });
     }
 
     const empPositionArray = [];
@@ -58,11 +65,18 @@ class MM0103 extends React.Component {
       empPositionArray.push({ title: data });
     }
 
+    const empRankArray = [];
+    for (let i = 1; i <= Object.keys(empRankList).length; i++) {
+      const data = empRankList["data" + i];
+      if (!data) continue;
+      empRankArray.push({ title: data });
+    }
+
     this.setState({
       empLocList: empLocArray,
-      //empDeptList: empDeptList,
+      empDeptList: empDeptArray,
       empPositionList: empPositionArray,
-      //empRankList: empRankList
+      empRankList: empRankArray
     });
   };
 
@@ -80,10 +94,11 @@ class MM0103 extends React.Component {
       confirmTitle,
       confirmContent,
       selectedTab,
+      empInfo,
       empLocList,
       empDeptList,
       empPositionList,
-      empRankList,
+      empRankList
     } = this.state;
 
     return (
@@ -149,9 +164,19 @@ class MM0103 extends React.Component {
               {this.state.empInfo ? (
                 <>
                   <TabBox
-                    tabs={["기본정보", "추가정보"]}
+                    tabs={[
+                      {
+                        label: "기본정보",
+                        action: this._tab01ClickHandler,
+                        param1: empInfo.docId
+                      },
+                      {
+                        label: "추가정보",
+                        action: () => {}
+                      }
+                    ]}
                     selectedTab={selectedTab}
-                    tabChangeHandler={(value) =>
+                    tabChangeHandler={value =>
                       this.setState({ selectedTab: value })
                     }
                   />
@@ -361,32 +386,40 @@ class MM0103 extends React.Component {
     );
   }
 
-  _dataClickHandler = async (key) => {
+  _dataClickHandler = async key => {
+    await this._tab01ClickHandler(key);
+  };
+
+  _tab01ClickHandler = async key => {
     const response = await fetch("/api/getEmpInfo", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
         // 'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: JSON.stringify({ key }),
-    });
+      body: JSON.stringify({ key })
+    }).then(
+      this.setState({
+        selectedTab: 1
+      })
+    );
 
     const data = await response.json();
 
     this.setState({
-      empInfo: data,
+      empInfo: data
     });
   };
 
   _empRegistHandler = async () => {
     this.setState({
-      isEmpRegistFormOpen: true,
+      isEmpRegistFormOpen: true
     });
   };
 
   _empRegistFormSubmitDialogHandler = () => {
     this.setState({
-      isEmpRegistFormOpen: false,
+      isEmpRegistFormOpen: false
     });
 
     const empId = document.getElementById("empId-js");
@@ -402,7 +435,7 @@ class MM0103 extends React.Component {
 
   _empRegistFormCloseDialogHandler = () => {
     this.setState({
-      isEmpRegistFormOpen: false,
+      isEmpRegistFormOpen: false
     });
   };
 
@@ -414,14 +447,14 @@ class MM0103 extends React.Component {
         isAlertOpen: true,
         alertType: "info",
         alertTitle: "알림",
-        alertContent: "삭제할 직원을 선택해주세요.",
+        alertContent: "삭제할 직원을 선택해주세요."
       });
       return;
     }
     this.setState({
       isConfirmOpen: true,
       confirmTitle: "확인",
-      confirmContent: "[" + empInfo.name + "] 님을 삭제하시겠습니까 ?",
+      confirmContent: "[" + empInfo.name + "] 님을 삭제하시겠습니까 ?"
     });
   };
 
@@ -429,16 +462,16 @@ class MM0103 extends React.Component {
     const { empInfo, isLeftRefresh } = this.state;
 
     this.setState({
-      isConfirmOpen: false,
+      isConfirmOpen: false
     });
 
     const response = await fetch("/api/removeEmpInfo", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
         // 'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: JSON.stringify({ empInfo }),
+      body: JSON.stringify({ empInfo })
     });
 
     const data = await response.json();
@@ -448,19 +481,19 @@ class MM0103 extends React.Component {
         isAlertOpen: true,
         alertType: "success",
         alertTitle: "알림",
-        alertContent: "삭제 처리되었습니다.",
+        alertContent: "삭제 처리되었습니다."
       });
 
       this.setState({
         empInfo: null,
-        isLeftRefresh: !isLeftRefresh,
+        isLeftRefresh: !isLeftRefresh
       });
     } else {
       this.setState({
         isAlertOpen: true,
         alertType: "error",
         alertTitle: "알림",
-        alertContent: "데이터 처리 중 문제가 발생했습니다.",
+        alertContent: "데이터 처리 중 문제가 발생했습니다."
       });
     }
   };
