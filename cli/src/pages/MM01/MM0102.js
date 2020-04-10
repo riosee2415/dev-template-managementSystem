@@ -274,7 +274,7 @@ class MM0102 extends React.Component {
                 dateId="annuaEndDay"
                 changed={this._getUseDay}
               />
-              <div>총 : 일</div>
+              <div>(총 : 일)</div>
             </div>
           </div>
 
@@ -422,7 +422,7 @@ class MM0102 extends React.Component {
     eDay = parseInt(eDay);
 
     if (eDay < sDay) {
-      alert("불가!");
+      alert("종료일이 시작이보다 ");
       return;
     }
 
