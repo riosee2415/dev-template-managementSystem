@@ -5,7 +5,10 @@ import TabBox from "../../components/TabBox";
 import FormDialog from "../../components/FormDialog";
 import AlertDialog from "../../components/AlertDialog";
 import ConfirmDialog from "../../components/ConfirmDialog";
+import ComboBox from "../../components/ComboBox";
 import { TextField } from "@material-ui/core";
+import middleware from "../../middleware/common";
+import DatePickers from "../../components/material/DatePickers";
 
 class MM0103 extends React.Component {
   constructor(props) {
@@ -24,9 +27,44 @@ class MM0103 extends React.Component {
       isConfirmOpen: false,
       confirmTitle: null,
       confirmContent: null,
-      selectedTab: 1
+      selectedTab: 1,
+      empLocList: [],
+      empDeptList: [],
+      empPositionList: [],
+      empRankList: []
     };
   }
+
+  componentDidMount = async () => {
+    const empLocList = await middleware.getCommonData("common", "loc");
+    //const empDeptList = await middleware.getCommonData("common", "dept");
+    const empPositionList = await middleware.getCommonData(
+      "common",
+      "position"
+    );
+    //const empRankList = await middleware.getCommonData("common", "rank");
+
+    const empLocArray = [];
+    for (let i = 1; i <= Object.keys(empLocList).length; i++) {
+      const data = empLocList["data" + i];
+      if (!data) continue;
+      empLocArray.push({ title: data });
+    }
+
+    const empPositionArray = [];
+    for (let i = 1; i <= Object.keys(empPositionList).length; i++) {
+      const data = empPositionList["data" + i];
+      if (!data) continue;
+      empPositionArray.push({ title: data });
+    }
+
+    this.setState({
+      empLocList: empLocArray,
+      //empDeptList: empDeptList,
+      empPositionList: empPositionArray
+      //empRankList: empRankList
+    });
+  };
 
   render() {
     const {
@@ -41,7 +79,11 @@ class MM0103 extends React.Component {
       isConfirmOpen,
       confirmTitle,
       confirmContent,
-      selectedTab
+      selectedTab,
+      empLocList,
+      empDeptList,
+      empPositionList,
+      empRankList
     } = this.state;
 
     return (
@@ -271,11 +313,11 @@ class MM0103 extends React.Component {
           <FormDialog
             isOpen={isEmpRegistFormOpen}
             title="직원 등록"
-            content="등록할 직원정보를 입력해주세요."
             submitDialogHandler={this._empRegistFormSubmitDialogHandler}
             closeDialogHandler={this._empRegistFormCloseDialogHandler}
           >
             <TextField
+              id="empId-js"
               autoFocus
               margin="dense"
               label="아이디"
@@ -283,26 +325,36 @@ class MM0103 extends React.Component {
               fullWidth
             />
             <TextField
-              autoFocus
+              id="name-js"
               margin="dense"
               label="직원명"
               type="text"
               fullWidth
             />
+            <ComboBox dataList={empLocList} title="근무위치" txtId="loc-js" />
+            <ComboBox dataList={empDeptList} title="부서" txtId="dept-js" />
+            <ComboBox
+              dataList={empPositionList}
+              title="직급"
+              txtId="position-js"
+            />
+            <ComboBox dataList={empRankList} title="직책" txtId="rank-js" />
             <TextField
-              autoFocus
+              id="mobile-js"
               margin="dense"
-              label="생년월일"
+              label="핸드폰"
               type="text"
               fullWidth
             />
             <TextField
-              autoFocus
+              id="email-js"
               margin="dense"
-              label="생년월일"
+              label="이메일"
               type="text"
               fullWidth
             />
+            <DatePickers margin="dense" lab="생년월일" dateId="birthday-js" />
+            <TextField margin="dense" label="주소" type="text" fullWidth />
           </FormDialog>
         ) : null}
       </div>
@@ -336,6 +388,17 @@ class MM0103 extends React.Component {
     this.setState({
       isEmpRegistFormOpen: false
     });
+
+    const empId = document.getElementById("empId-js");
+    const name = document.getElementById("name-js");
+    const loc = document.getElementById("loc-js");
+    const dept = document.getElementById("dept-js");
+    const position = document.getElementById("position-js");
+    const rank = document.getElementById("rank-js");
+    const dept = document.getElementById("dept-js");
+    const birthday = document.getElementById("birthday-js");
+    const mobile = document.getElementById("mobile-js");
+    const email = document.getElementById("email-js");
   };
 
   _empRegistFormCloseDialogHandler = () => {
