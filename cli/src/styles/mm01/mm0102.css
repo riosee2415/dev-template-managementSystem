@@ -50,4 +50,34 @@
 }
 
 /* 연차 사용신청 FormDialog*/
+.usageSubTitle {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.usageDays {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+}
+
+.usageStartEnd {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+}
+
+.applicationReason {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+}
+
+.annualSettlement {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+}
+
 /* 사용연차 리스트 FormDialog*/
