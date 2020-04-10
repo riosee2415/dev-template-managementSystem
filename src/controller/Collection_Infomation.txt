@@ -68,3 +68,15 @@
  - applicationFile  첨부파일            [String]
  - annualSettlement 결제자              [String]
  - SettlementYN     결제유무            [String]    0: 미결제 / 1: 결제
+
+
+ [Firestore -client- Model]
+ - BP               사업자유형      [String]
+ - address          주소          [String]
+ - business         업태          [String]
+ - type             종목          [String]
+ - businessNumber   사업자번호      [String]
+ - chiefName        대표자명        [String]
+ - insDate          등록일         [String]
+ - name             상호명         [String]
+ - taxation         과세유형        [String]

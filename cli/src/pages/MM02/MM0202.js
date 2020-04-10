@@ -149,8 +149,8 @@ class MM0202 extends React.Component {
                       tabs={[
                         {
                           label: "거래처정보",
-                          action: () => {},
-                          param1: projectInfo.ref,
+                          action: this._clientInfoHandler,
+                          param1: projectInfo.clientRef,
                           param2: null,
                           param3: null,
                           param4: null,
@@ -283,6 +283,17 @@ class MM0202 extends React.Component {
       </div>
     );
   }
+
+  _clientInfoHandler = async (cliRef) => {
+    const response = await fetch("/api/getClientInfo", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: JSON.stringify({ cliRef }),
+    });
+  };
 
   _deleteConfirm = (workRef) => {
     console.log(sessionStorage.getItem("login_name"));
