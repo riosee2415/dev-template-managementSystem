@@ -161,7 +161,6 @@ const getClientInfo = async (req, res) => {
   } catch (e) {
     console.log(e);
   } finally {
-    console.log(sendData);
   }
 
   return res.json(sendData);

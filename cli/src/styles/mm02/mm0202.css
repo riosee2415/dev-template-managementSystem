@@ -155,3 +155,8 @@
   color: #00157e;
   font-weight: 600;
 }
+
+.clientBlock {
+  display: flex;
+  flex-direction: row;
+}
