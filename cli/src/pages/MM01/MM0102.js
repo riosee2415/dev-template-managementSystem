@@ -28,6 +28,7 @@ class MM0102 extends React.Component {
       alertContent: null,
       isUsedFormOpen: false,
       isUsageFormOpen: false,
+      empList: [],
     };
   }
 
@@ -448,6 +449,21 @@ class MM0102 extends React.Component {
     eMs.innerHTML = useDay;
 
     console.log(useDay);
+  };
+
+  _getEmpList = async () => {
+    const response = await fetch("/api/getEmpList", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: JSON.stringify({}),
+    });
+    const data = await response.json();
+    this.setState({
+      empList: data,
+    });
   };
 
   __usageApplicationHandler = () => {
