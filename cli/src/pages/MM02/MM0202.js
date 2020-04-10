@@ -28,7 +28,7 @@ class MM0202 extends React.Component {
       workType: [],
       empList: [],
       isReload: false,
-      selectedTab: 1,
+      selectedTab: 0,
     };
   }
 
@@ -144,15 +144,29 @@ class MM0202 extends React.Component {
                         color="primary"
                       /> */}
                     </div>
+
                     <TabBox
-                      tabs={["거래처정보", "업무차트"]}
+                      tabs={[
+                        {
+                          label: "거래처정보",
+                          action: () => {},
+                          param1: projectInfo.ref,
+                          param2: null,
+                          param3: null,
+                          param4: null,
+                        },
+                        {
+                          label: "업무차트",
+                          action: this._progressBtnHandler,
+                          param1: projectInfo.ref,
+                          param2: null,
+                          param3: null,
+                          param4: null,
+                        },
+                      ]}
                       selectedTab={selectedTab}
                       tabChangeHandler={(value) => {
                         this.setState({ selectedTab: value });
-                        if (value == 1) {
-                        } else if (value == 2) {
-                          this._progressBtnHandler(projectInfo.ref);
-                        }
                       }}
                     />
                     {selectedTab === 1 ? <div>거래처정보</div> : null}
@@ -449,7 +463,10 @@ class MM0202 extends React.Component {
     const data = await response.json();
     this.setState({
       projectInfo: data,
+      selectedTab: 2,
     });
+
+    this._progressBtnHandler(this.state.projectInfo.ref);
   };
 }
 
