@@ -3,16 +3,12 @@ import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 
 const useStyles = makeStyles(theme => ({
-  container: {
-    display: "flex",
-    flexWrap: "wrap"
-  },
-  textField: {
+  root: {
     width: 200
   }
 }));
 
-export default function DatePickers({ lab, dateId, changed = null }) {
+export default function DatePickers(props) {
   const classes = useStyles();
 
   const date = new Date();
@@ -26,20 +22,15 @@ export default function DatePickers({ lab, dateId, changed = null }) {
   const currentDate = y + "-" + m + "-" + d;
 
   return (
-    <form className={classes.container} noValidate>
-      <TextField
-        id={dateId}
-        label={lab}
-        type="date"
-        defaultValue={currentDate}
-        className={classes.textField}
-        onChange={changed}
-        InputLabelProps={{
-          shrink: true
-        }}
-        margin="dense"
-        fullWidth
-      />
-    </form>
+    <TextField
+      className={classes.root}
+      type="date"
+      margin="dense"
+      defaultValue={currentDate}
+      InputLabelProps={{
+        shrink: true
+      }}
+      {...props}
+    />
   );
 }

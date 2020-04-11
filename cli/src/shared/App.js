@@ -19,20 +19,20 @@ import {
   MM0601,
   MM0602,
   MM0603,
-  MM0701,
+  MM0701
 } from "../pages";
 import LoginBox from "../components/LoginBox";
 import routes from "../routes";
 import Menu from "../components/Menu";
 import "../styles/styles.css";
-import IconComponent from "../components/IconComponent";
+import IconComponent from "../components/material/IconComponent";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      loginStatus: false,
+      loginStatus: false
     };
   }
 
@@ -148,7 +148,7 @@ class App extends React.Component {
 
   _aleadyLogined = () => {
     this.setState({
-      loginStatus: true,
+      loginStatus: true
     });
   };
 
@@ -163,10 +163,10 @@ class App extends React.Component {
     const response = await fetch("/api/loginProcess", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
         // 'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: JSON.stringify({ inputId, inputPass }),
+      body: JSON.stringify({ inputId, inputPass })
     });
 
     const data = await response.json();
@@ -183,7 +183,7 @@ class App extends React.Component {
     }
 
     this.setState({
-      loginStatus: data.loginResult,
+      loginStatus: data.loginResult
     });
   };
 
@@ -191,7 +191,7 @@ class App extends React.Component {
     sessionStorage.clear();
 
     this.setState({
-      loginStatus: false,
+      loginStatus: false
     });
   };
 

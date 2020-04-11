@@ -1,7 +1,7 @@
 import React from "react";
-import IconComponent from "../../components/IconComponent";
+import IconComponent from "../../components/material/IconComponent";
 import LeftListBox from "../../components/LeftListBox";
-import AlertDialog from "../../components/AlertDialog";
+import AlertDialog from "../../components/material/AlertDialog";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -9,9 +9,9 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import FormDialog from "../../components/FormDialog";
-import ComboBox from "../../components/ComboBox";
-import { TextField } from "@material-ui/core";
+import FormDialog from "../../components/material/FormDialog";
+import ComboBox from "../../components/material/ComboBox";
+import TextField from "../../components/material/TextField";
 import DatePickers from "../../components/material/DatePickers";
 
 class MM0102 extends React.Component {
@@ -28,7 +28,7 @@ class MM0102 extends React.Component {
       alertContent: null,
       isUsedFormOpen: false,
       isUsageFormOpen: false,
-      empList: [],
+      empList: []
     };
   }
 
@@ -48,7 +48,7 @@ class MM0102 extends React.Component {
       alertTitle,
       alertContent,
       isUsedFormOpen,
-      isUsageFormOpen,
+      isUsageFormOpen
     } = this.state;
 
     const columns = [
@@ -57,26 +57,26 @@ class MM0102 extends React.Component {
         id: "allAnnual",
         label: "총 연차(일)",
         align: "center",
-        minWidth: 100,
+        minWidth: 100
       },
       {
         id: "usedAnnual",
         label: "사용 연차(일)",
         align: "center",
-        minWidth: 100,
+        minWidth: 100
       },
       {
         id: "applicationAnnual",
         label: "연차 사용",
         align: "center",
-        minWidth: 150,
+        minWidth: 150
       },
       {
         id: "paymentSataus",
         label: "결제 상태",
         align: "center",
-        minWidth: 150,
-      },
+        minWidth: 150
+      }
     ];
 
     const usedlist = [
@@ -84,15 +84,15 @@ class MM0102 extends React.Component {
         id: "year",
         label: "사용일",
         align: "center",
-        minWidth: 170,
+        minWidth: 170
       },
       { id: "year", label: "사용 연차(일)", align: "center", minWidth: 170 },
       {
         id: "whtused",
         label: "사유",
         align: "center",
-        minWidth: 170,
-      },
+        minWidth: 170
+      }
     ];
 
     return (
@@ -183,7 +183,7 @@ class MM0102 extends React.Component {
                     {dataInfo ? (
                       <TableHead>
                         <TableRow>
-                          {columns.map((column) => (
+                          {columns.map(column => (
                             <TableCell
                               key={column.id}
                               align={column.align}
@@ -197,7 +197,7 @@ class MM0102 extends React.Component {
                     ) : null}
 
                     {dataInfo
-                      ? dataInfo.annualInfo.map((data) => {
+                      ? dataInfo.annualInfo.map(data => {
                           return (
                             <TableBody className="annualTbody">
                               <TableRow
@@ -222,7 +222,7 @@ class MM0102 extends React.Component {
                                       className="btn btn-xs bg-violet"
                                       value="신청"
                                       onClick={() =>
-                                        this.__usageApplicationHandler()
+                                        this._usageApplicationHandler()
                                       }
                                     />
                                   ) : null}
@@ -241,7 +241,7 @@ class MM0102 extends React.Component {
                   type="button"
                   className="btn btn-l bg-blue usedList"
                   value="사용 내역"
-                  onClick={() => this.__usedAnnualHandler()}
+                  onClick={() => this._usedAnnualHandler()}
                 />
               ) : null}
             </div>
@@ -266,12 +266,12 @@ class MM0102 extends React.Component {
           <div className="usageDays">
             <div>기간 : </div>
             <div className="usageStartEnd">
-              <DatePickers lab="시작일" dateId="annualStartDay" />
+              <DatePickers id="annualStartDay" label="시작일" />
               <span> ~ </span>
               <DatePickers
-                lab="종료일"
-                dateId="annualEndDay"
-                changed={this._getUseDay}
+                id="annualEndDay"
+                label="종료일"
+                onChange={this._getUseDay}
               />
               <div id="allusageDay-js">(총 : 일)</div>
             </div>
@@ -281,10 +281,10 @@ class MM0102 extends React.Component {
             <span>사유 : </span>
             <TextField
               id="applicationReason-js"
-              multiline
-              margin="dense"
               type="text"
               label="사유"
+              multiline
+              margin="dense"
             />
           </div>
 
@@ -294,9 +294,9 @@ class MM0102 extends React.Component {
             <div className="personSettlement"> 결제자 :</div>
 
             <ComboBox
-              dataList={[{ title: "aaa" }, { title: "bbb" }]}
+              options={[{ title: "aaa" }, { title: "bbb" }]}
               label="결제자"
-            ></ComboBox>
+            />
           </div>
         </FormDialog>
 
@@ -307,12 +307,12 @@ class MM0102 extends React.Component {
           closeDialogHandler={this._closeDialogBtnHandler}
           isOnlyCheck={true}
         >
-          <ComboBox dataList={[{ title: "aaa" }, { title: "aaa" }]}></ComboBox>
+          <ComboBox options={[{ title: "aaa" }, { title: "aaa" }]} label="aa" />
 
           <div>
             총 사용 연차 :
             {dataInfo
-              ? dataInfo.annualInfo.map((data) => {
+              ? dataInfo.annualInfo.map(data => {
                   return (
                     <div>
                       {data.year === new Date().getFullYear + "" ? (
@@ -331,7 +331,7 @@ class MM0102 extends React.Component {
               <Table stickyHeader aria-label="sticky table">
                 <TableHead>
                   <TableRow>
-                    {usedlist.map((column) => (
+                    {usedlist.map(column => (
                       <TableCell
                         key={column.id}
                         align={column.align}
@@ -344,7 +344,7 @@ class MM0102 extends React.Component {
                 </TableHead>
 
                 {dataInfo
-                  ? dataInfo.annualInfo.map((data) => {
+                  ? dataInfo.annualInfo.map(data => {
                       return (
                         <TableBody>
                           <TableRow hover role="checkbox" className="annualTb">
@@ -375,13 +375,13 @@ class MM0102 extends React.Component {
     );
   }
 
-  _annualClickHandler = async (key) => {
+  _annualClickHandler = async key => {
     const response = await fetch("/api/getAnnualInfo", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
       },
-      body: JSON.stringify({ key }),
+      body: JSON.stringify({ key })
     });
 
     const data = await response.json();
@@ -404,18 +404,18 @@ class MM0102 extends React.Component {
 
     if (data.empId === sessionStorage.login_id) {
       this.setState({
-        dataInfo: data,
+        dataInfo: data
       });
     } else {
       this.setState({
-        dataInfo: null,
+        dataInfo: null
       });
       setTimeout(() => {
         this.setState({
           isAlertOpen: true,
           alertType: "error",
           alertTitle: "알림",
-          alertContent: "접근 권한이 없습니다.",
+          alertContent: "접근 권한이 없습니다."
         });
       }, 0);
     }
@@ -455,18 +455,18 @@ class MM0102 extends React.Component {
     const response = await fetch("/api/getEmpList", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
         // 'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: JSON.stringify({}),
+      body: JSON.stringify({})
     });
     const data = await response.json();
     this.setState({
-      empList: data,
+      empList: data
     });
   };
 
-  __usageApplicationHandler = () => {
+  _usageApplicationHandler = () => {
     this.setState({ isUsageFormOpen: true });
   };
 
@@ -476,7 +476,7 @@ class MM0102 extends React.Component {
     this.setState({ isUsageFormOpen: false });
   };
 
-  __usedAnnualHandler = () => {
+  _usedAnnualHandler = () => {
     this.setState({ isUsedFormOpen: true });
   };
 

@@ -1,14 +1,16 @@
 import React from "react";
-import IconComponent from "../../components/IconComponent";
+import middleware from "../../middleware/common";
+import IconComponent from "../../components/material/IconComponent";
 import LeftListBox from "../../components/LeftListBox";
 import TabBox from "../../components/TabBox";
-import FormDialog from "../../components/FormDialog";
-import AlertDialog from "../../components/AlertDialog";
-import ConfirmDialog from "../../components/ConfirmDialog";
-import ComboBox from "../../components/ComboBox";
-import { TextField } from "@material-ui/core";
-import middleware from "../../middleware/common";
+import FormDialog from "../../components/material/FormDialog";
+import AlertDialog from "../../components/material/AlertDialog";
+import ConfirmDialog from "../../components/material/ConfirmDialog";
+import ComboBox from "../../components/material/ComboBox";
 import DatePickers from "../../components/material/DatePickers";
+import OutlinedButton from "../../components/material/OutlinedButton";
+import Postcode from "../../components/Postcode";
+import TextField from "../../components/material/TextField";
 import Grid from "@material-ui/core/Grid";
 
 class MM0103 extends React.Component {
@@ -20,6 +22,7 @@ class MM0103 extends React.Component {
       selectCollection: ["employee"],
       empInfo: null,
       isLeftRefresh: false,
+      isPostcodeOpen: false,
       isEmpRegistFormOpen: false,
       isAlertOpen: false,
       alertType: null,
@@ -86,6 +89,7 @@ class MM0103 extends React.Component {
       pageCode,
       selectCollection,
       isLeftRefresh,
+      isPostcodeOpen,
       isEmpRegistFormOpen,
       isAlertOpen,
       alertType,
@@ -342,60 +346,123 @@ class MM0103 extends React.Component {
             submitDialogHandler={this._empRegistFormSubmitDialogHandler}
             closeDialogHandler={this._empRegistFormCloseDialogHandler}
           >
-            <TextField
-              id="empId-js"
-              autoFocus
-              margin="dense"
-              label="아이디"
-              type="text"
-              fullWidth
-            />
-            <TextField
-              id="name-js"
-              margin="dense"
-              label="직원명"
-              type="text"
-              fullWidth
-            />
             <Grid container spacing={2}>
-              <Grid item xs={6}>
-                <ComboBox
-                  dataList={empLocList}
-                  title="근무위치"
-                  txtId="loc-js"
+              <Grid item xs={12}>
+                <TextField
+                  id="empId-js"
+                  type="text"
+                  label="아이디"
+                  fullWidth
+                  autoFocus
+                  required
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  id="name-js"
+                  label="직원명"
+                  type="text"
+                  fullWidth
+                  required
                 />
               </Grid>
               <Grid item xs={6}>
-                <ComboBox dataList={empDeptList} title="부서" txtId="dept-js" />
+                <ComboBox id="loc-js" options={empLocList} label="근무위치" />
+              </Grid>
+              <Grid item xs={6}>
+                <ComboBox id="dept-js" options={empDeptList} label="부서" />
               </Grid>
               <Grid item xs={6}>
                 <ComboBox
-                  dataList={empPositionList}
-                  title="직급"
-                  txtId="position-js"
+                  id="position-js"
+                  options={empPositionList}
+                  label="직급"
                 />
               </Grid>
               <Grid item xs={6}>
-                <ComboBox dataList={empRankList} title="직책" txtId="rank-js" />{" "}
+                <ComboBox id="rank-js" options={empRankList} label="직책" />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  id="mobile-js"
+                  label="핸드폰"
+                  type="text"
+                  fullWidth
+                  required
+                  helperText="- 를 포함해서 핸드폰 번호를 입력해주세요."
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  id="email-js"
+                  label="이메일"
+                  type="text"
+                  fullWidth
+                  required
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <DatePickers id="birthday-js" label="생년월일" required />
+              </Grid>
+              <Grid item xs={2}>
+                <TextField
+                  id="zoneCode-js"
+                  type="text"
+                  label="우편번호"
+                  fullWidth
+                  required
+                  InputLabelProps={{
+                    shrink: true
+                  }}
+                  InputProps={{
+                    readOnly: true
+                  }}
+                />
+              </Grid>
+              <Grid item xs={9}>
+                <TextField
+                  id="addr1-js"
+                  type="text"
+                  label="주소"
+                  fullWidth
+                  required
+                  InputLabelProps={{
+                    shrink: true
+                  }}
+                  InputProps={{
+                    readOnly: true
+                  }}
+                />
+              </Grid>
+              <Grid item container={true} alignItems="flex-end" xs={1}>
+                <OutlinedButton
+                  size="large"
+                  color="primary"
+                  text="검색"
+                  action={() => {
+                    this.setState({ isPostcodeOpen: true });
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  id="addr2-js"
+                  label="상세주소"
+                  type="text"
+                  fullWidth
+                  required
+                />
               </Grid>
             </Grid>
-            <TextField
-              id="mobile-js"
-              margin="dense"
-              label="핸드폰"
-              type="text"
-              fullWidth
-            />
-            <TextField
-              id="email-js"
-              margin="dense"
-              label="이메일"
-              type="text"
-              fullWidth
-            />
-            <DatePickers margin="dense" lab="생년월일" dateId="birthday-js" />
-            <TextField margin="dense" label="주소" type="text" fullWidth />
           </FormDialog>
+        ) : null}
+
+        {isPostcodeOpen ? (
+          <Postcode
+            completeHandler={() => {
+              this.setState({ isPostcodeOpen: false });
+            }}
+          />
         ) : null}
       </div>
     );
@@ -433,10 +500,6 @@ class MM0103 extends React.Component {
   };
 
   _empRegistFormSubmitDialogHandler = () => {
-    this.setState({
-      isEmpRegistFormOpen: false
-    });
-
     const empId = document.getElementById("empId-js");
     const name = document.getElementById("name-js");
     const loc = document.getElementById("loc-js");
@@ -446,6 +509,127 @@ class MM0103 extends React.Component {
     const birthday = document.getElementById("birthday-js");
     const mobile = document.getElementById("mobile-js");
     const email = document.getElementById("email-js");
+
+    let regExp = null;
+
+    if (empId.value.length < 1) {
+      this.setState({
+        isAlertOpen: true,
+        alertType: "warning",
+        alertTitle: "알림",
+        alertContent: "아이디를 입력해주세요."
+      });
+      empId.focus();
+      return;
+    }
+    if (name.value.length < 1) {
+      this.setState({
+        isAlertOpen: true,
+        alertType: "warning",
+        alertTitle: "알림",
+        alertContent: "직원명을 입력해주세요."
+      });
+      name.focus();
+      return;
+    }
+    if (loc.value.length < 1) {
+      this.setState({
+        isAlertOpen: true,
+        alertType: "warning",
+        alertTitle: "알림",
+        alertContent: "근무위치를 선택해주세요."
+      });
+      loc.focus();
+      return;
+    }
+    if (dept.value.length < 1) {
+      this.setState({
+        isAlertOpen: true,
+        alertType: "warning",
+        alertTitle: "알림",
+        alertContent: "부서를 선택해주세요."
+      });
+      dept.focus();
+      return;
+    }
+    if (position.value.length < 1) {
+      this.setState({
+        isAlertOpen: true,
+        alertType: "warning",
+        alertTitle: "알림",
+        alertContent: "직급을 선택해주세요."
+      });
+      position.focus();
+      return;
+    }
+    if (rank.value.length < 1) {
+      this.setState({
+        isAlertOpen: true,
+        alertType: "warning",
+        alertTitle: "알림",
+        alertContent: "직책을 선택해주세요."
+      });
+      rank.focus();
+      return;
+    }
+    if (birthday.value.length < 1) {
+      this.setState({
+        isAlertOpen: true,
+        alertType: "warning",
+        alertTitle: "알림",
+        alertContent: "생년월일을 입력해주세요."
+      });
+      birthday.focus();
+      return;
+    }
+    if (mobile.value.length < 1) {
+      this.setState({
+        isAlertOpen: true,
+        alertType: "warning",
+        alertTitle: "알림",
+        alertContent: "핸드폰 번호를 입력해주세요."
+      });
+      mobile.focus();
+      return;
+    }
+    regExp = /^01([0|1|6|7|8|9]?)-([0-9]{3,4})-([0-9]{4})$/;
+    if (!regExp.test(mobile.value)) {
+      this.setState({
+        isAlertOpen: true,
+        alertType: "warning",
+        alertTitle: "알림",
+        alertContent: "올바르지 않은 형식입니다."
+      });
+      mobile.focus();
+      return;
+    }
+
+    if (email.value.length < 1) {
+      this.setState({
+        isAlertOpen: true,
+        alertType: "warning",
+        alertTitle: "알림",
+        alertContent: "이메일을 입력해주세요."
+      });
+      email.focus();
+      return;
+    }
+    regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+    if (!regExp.test(email.value)) {
+      this.setState({
+        isAlertOpen: true,
+        alertType: "warning",
+        alertTitle: "알림",
+        alertContent: "올바르지 않은 형식입니다."
+      });
+      //- 를 포함해서 핸드폰 번호를 입력해주세요.
+      email.focus();
+      return;
+    }
+
+    this.setState({
+      isEmpRegistFormOpen: false
+    });
   };
 
   _empRegistFormCloseDialogHandler = () => {

@@ -1,5 +1,5 @@
 import React from "react";
-import IconComponent from "./IconComponent";
+import IconComponent from "./material/IconComponent";
 
 class LoginBox extends React.Component {
   constructor(props) {

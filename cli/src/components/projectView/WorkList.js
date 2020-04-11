@@ -1,16 +1,16 @@
 import React from "react";
-import OutlinedButton from "../../components/material/OutlinedButton";
-import IconComponent from "../IconComponent";
-import FormDialog from "../FormDialog";
+import OutlinedButton from "../material/OutlinedButton";
+import IconComponent from "../material/IconComponent";
+import FormDialog from "../material/FormDialog";
 import { withStyles } from "@material-ui/core/styles";
 
 const styles = {
-  workDes: { lineHeight: 1.5 },
+  workDes: { lineHeight: 1.5 }
 };
 
 class WorkList extends React.Component {
   state = {
-    isDescFormOpen: false,
+    isDescFormOpen: false
   };
 
   render() {
@@ -72,13 +72,13 @@ class WorkList extends React.Component {
 
   _descFormCloseDialogHandler = () => {
     this.setState({
-      isDescFormOpen: false,
+      isDescFormOpen: false
     });
   };
 
   _descViewHandler = () => {
     this.setState({
-      isDescFormOpen: true,
+      isDescFormOpen: true
     });
   };
 }
