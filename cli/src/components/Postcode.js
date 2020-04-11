@@ -1,6 +1,8 @@
 import React from "react";
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
+import DialogActions from "@material-ui/core/DialogActions";
+import Button from "@material-ui/core/Button";
 import DaumPostcode from "react-daum-postcode";
 
 const Postcode = props => {
@@ -18,7 +20,7 @@ const Postcode = props => {
       }
       fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
     }
-    props.completeHandler();
+    props.closeDialogHandler();
 
     const zoneCode = document.getElementById("zoneCode-js");
     const addr1 = document.getElementById("addr1-js");
@@ -39,6 +41,11 @@ const Postcode = props => {
           {...props}
         />
       </DialogContent>
+      <DialogActions>
+        <Button onClick={props.closeDialogHandler} color="primary">
+          닫기
+        </Button>
+      </DialogActions>
     </Dialog>
   );
 };

@@ -5,45 +5,19 @@ import Button from "@material-ui/core/Button";
 const useStyles = makeStyles(theme => ({
   root: {
     "& > *": {
-      margin: theme.spacing(0),
-      padding: 0
+      margin: theme.spacing(0)
     }
   }
 }));
 
-export default function OutlinedButton({
-  text,
-  color,
-  action,
-  size = "medium",
-  isDisabled = false
-}) {
+export default function OutlinedButton(props) {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
-      <Button
-        size={size}
-        color={color}
-        variant="outlined"
-        disabled={isDisabled}
-        onClick={action}
-      >
-        {text}
+      <Button variant="outlined" {...props}>
+        {props.children}
       </Button>
-
-      {/* <Button variant="outlined" color="primary">
-      {text}
-      </Button>
-      <Button variant="outlined" color="secondary">
-      {text}
-      </Button>
-      <Button variant="outlined" disabled>
-       {text}
-      </Button>
-      <Button variant="outlined" color="primary" href="#outlined-buttons">
-      {text}
-      </Button> */}
     </div>
   );
 }

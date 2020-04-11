@@ -12,6 +12,7 @@ import OutlinedButton from "../../components/material/OutlinedButton";
 import Postcode from "../../components/Postcode";
 import TextField from "../../components/material/TextField";
 import Grid from "@material-ui/core/Grid";
+import Tooltip from "@material-ui/core/Tooltip";
 
 class MM0103 extends React.Component {
   constructor(props) {
@@ -31,6 +32,7 @@ class MM0103 extends React.Component {
       isConfirmOpen: false,
       confirmTitle: null,
       confirmContent: null,
+      confirmSubmitHandler: null,
       selectedTab: 0,
       empLocList: [],
       empDeptList: [],
@@ -98,6 +100,7 @@ class MM0103 extends React.Component {
       isConfirmOpen,
       confirmTitle,
       confirmContent,
+      confirmSubmitHandler,
       selectedTab,
       empInfo,
       empLocList,
@@ -163,7 +166,7 @@ class MM0103 extends React.Component {
           <div className="mc__col2">
             <div className="mc__col2__title">
               <IconComponent iconName="fas fa-file-alt" />
-              <span className="subTitle">상세정보</span>
+              <span className="subTitle">상세 정보</span>
             </div>
             <div className="mc__col2__desc">
               {this.state.empInfo ? (
@@ -204,103 +207,101 @@ class MM0103 extends React.Component {
 
                       <div className="dataBox__body">
                         <div className="dataBox__col">
-                          <div className="dataBox__row">
-                            <span className="data__icon">
-                              <IconComponent iconName="fas fa-id-card-alt" />
-                            </span>
-                            <span className="data__info">
-                              {this.state.empInfo.empId}
-                            </span>
-                          </div>
+                          <Tooltip title="고용일" placement="left">
+                            <div className="dataBox__row">
+                              <span className="data__icon">
+                                <IconComponent iconName="fas fa-calendar-alt" />
+                              </span>
+                              <span className="data__info">
+                                {this.state.empInfo.hire}
+                              </span>
+                            </div>
+                          </Tooltip>
 
-                          <div className="dataBox__row">
-                            <span className="data__icon">
-                              <IconComponent iconName="fas fa-phone-volume" />
-                            </span>
-                            <span className="data__info">
-                              {this.state.empInfo.mobile}
-                            </span>
-                          </div>
+                          <Tooltip title="핸드폰" placement="left">
+                            <div className="dataBox__row">
+                              <span className="data__icon">
+                                <IconComponent iconName="fas fa-phone-volume" />
+                              </span>
+                              <span className="data__info">
+                                {this.state.empInfo.mobile}
+                              </span>
+                            </div>
+                          </Tooltip>
 
-                          <div className="dataBox__row">
-                            <span className="data__icon">
-                              <IconComponent iconName="fas fa-at" />
-                            </span>
-                            <span className="data__info">
-                              {this.state.empInfo.email}
-                            </span>
-                          </div>
+                          <Tooltip title="이메일" placement="left">
+                            <div className="dataBox__row">
+                              <span className="data__icon">
+                                <IconComponent iconName="fas fa-at" />
+                              </span>
+                              <span className="data__info">
+                                {this.state.empInfo.email}
+                              </span>
+                            </div>
+                          </Tooltip>
 
-                          <div className="dataBox__row">
-                            <span className="data__icon">
-                              <IconComponent iconName="fas fa-birthday-cake" />
-                            </span>
-                            <span className="data__info">
-                              {this.state.empInfo.birthday}
-                            </span>
-                          </div>
-
-                          <div className="dataBox__row">
-                            <span className="data__icon">
-                              <IconComponent iconName="fas fa-home" />
-                            </span>
-                            <span className="data__info">
-                              {this.state.empInfo.zoneCode
-                                ? `(${this.state.empInfo.zoneCode}) `
-                                : null}
-                              &nbsp;
-                              {this.state.empInfo.addr1}
-                              <br />
-                              {this.state.empInfo.addr2}
-                            </span>
-                          </div>
+                          <Tooltip title="주소" placement="left">
+                            <div className="dataBox__row">
+                              <span className="data__icon">
+                                <IconComponent iconName="fas fa-home" />
+                              </span>
+                              <span className="data__info">
+                                {this.state.empInfo.zoneCode
+                                  ? `(${this.state.empInfo.zoneCode}) `
+                                  : null}
+                                &nbsp;
+                                {this.state.empInfo.addr1}
+                                <br />
+                                {this.state.empInfo.addr2}
+                              </span>
+                            </div>
+                          </Tooltip>
                         </div>
 
                         <div className="dataBox__col">
-                          <div className="dataBox__row">
-                            <span className="data__icon">
-                              <IconComponent iconName="fas fa-map-marker-alt" />
-                            </span>
-                            <span className="data__info">
-                              {this.state.empInfo.loc}
-                            </span>
-                          </div>
+                          <Tooltip title="근무위치" placement="left">
+                            <div className="dataBox__row">
+                              <span className="data__icon">
+                                <IconComponent iconName="fas fa-map-marker-alt" />
+                              </span>
+                              <span className="data__info">
+                                {this.state.empInfo.loc}
+                              </span>
+                            </div>
+                          </Tooltip>
 
-                          <div className="dataBox__row">
-                            <span className="data__icon">
-                              <IconComponent iconName="fas fa-id-badge" />
-                            </span>
-                            <span className="data__info">
-                              {this.state.empInfo.empNo}
-                            </span>
-                          </div>
+                          <Tooltip title="사번" placement="left">
+                            <div className="dataBox__row">
+                              <span className="data__icon">
+                                <IconComponent iconName="fas fa-id-badge" />
+                              </span>
+                              <span className="data__info">
+                                {this.state.empInfo.empNo}
+                              </span>
+                            </div>
+                          </Tooltip>
 
-                          <div className="dataBox__row">
-                            <span className="data__icon">
-                              <IconComponent iconName="fas fa-users" />
-                            </span>
-                            <span className="data__info">
-                              {this.state.empInfo.dept}
-                            </span>
-                          </div>
+                          <Tooltip title="부서" placement="left">
+                            <div className="dataBox__row">
+                              <span className="data__icon">
+                                <IconComponent iconName="fas fa-users" />
+                              </span>
+                              <span className="data__info">
+                                {this.state.empInfo.dept}
+                              </span>
+                            </div>
+                          </Tooltip>
 
-                          <div className="dataBox__row">
-                            <span className="data__icon">
-                              <IconComponent iconName="fas fa-user-tie" />
-                            </span>
-                            <span className="data__info">
-                              {this.state.empInfo.position}
-                            </span>
-                          </div>
-
-                          <div className="dataBox__row">
-                            <span className="data__icon">
-                              <IconComponent iconName="fas fa-calendar-alt" />
-                            </span>
-                            <span className="data__info">
-                              {this.state.empInfo.hire}
-                            </span>
-                          </div>
+                          <Tooltip title="직급" placement="left">
+                            <div className="dataBox__row">
+                              <span className="data__icon">
+                                <IconComponent iconName="fas fa-user-tie" />
+                              </span>
+                              <span className="data__info">
+                                {this.state.empInfo.position}
+                              </span>
+                            </div>
+                          </Tooltip>
                         </div>
                       </div>
                     </div>
@@ -334,7 +335,7 @@ class MM0103 extends React.Component {
             isOpen={isConfirmOpen}
             title={confirmTitle}
             content={confirmContent}
-            submitDialogHandler={this._empRemoveConfirmSubmitDialogHandler}
+            submitDialogHandler={confirmSubmitHandler}
             closeDialogHandler={() => this.setState({ isConfirmOpen: false })}
           />
         ) : null}
@@ -347,7 +348,7 @@ class MM0103 extends React.Component {
             closeDialogHandler={this._empRegistFormCloseDialogHandler}
           >
             <Grid container spacing={2}>
-              <Grid item xs={12}>
+              <Grid item xs={11}>
                 <TextField
                   id="empId-js"
                   type="text"
@@ -356,6 +357,15 @@ class MM0103 extends React.Component {
                   autoFocus
                   required
                 />
+              </Grid>
+              <Grid item container={true} alignItems="flex-end" xs={1}>
+                <OutlinedButton
+                  size="small"
+                  color="primary"
+                  onClick={this._empIdCheckHandler}
+                >
+                  확인
+                </OutlinedButton>
               </Grid>
               <Grid item xs={12}>
                 <TextField
@@ -436,13 +446,14 @@ class MM0103 extends React.Component {
               </Grid>
               <Grid item container={true} alignItems="flex-end" xs={1}>
                 <OutlinedButton
-                  size="large"
+                  size="small"
                   color="primary"
-                  text="검색"
-                  action={() => {
+                  onClick={() => {
                     this.setState({ isPostcodeOpen: true });
                   }}
-                />
+                >
+                  검색
+                </OutlinedButton>
               </Grid>
               <Grid item xs={12}>
                 <TextField
@@ -450,7 +461,6 @@ class MM0103 extends React.Component {
                   label="상세주소"
                   type="text"
                   fullWidth
-                  required
                 />
               </Grid>
             </Grid>
@@ -459,7 +469,7 @@ class MM0103 extends React.Component {
 
         {isPostcodeOpen ? (
           <Postcode
-            completeHandler={() => {
+            closeDialogHandler={() => {
               this.setState({ isPostcodeOpen: false });
             }}
           />
@@ -499,7 +509,9 @@ class MM0103 extends React.Component {
     });
   };
 
-  _empRegistFormSubmitDialogHandler = () => {
+  _empIdCheckHandler = async () => {};
+
+  _empRegistFormSubmitDialogHandler = async () => {
     const empId = document.getElementById("empId-js");
     const name = document.getElementById("name-js");
     const loc = document.getElementById("loc-js");
@@ -509,6 +521,7 @@ class MM0103 extends React.Component {
     const birthday = document.getElementById("birthday-js");
     const mobile = document.getElementById("mobile-js");
     const email = document.getElementById("email-js");
+    const addr1 = document.getElementById("addr1-js");
 
     let regExp = null;
 
@@ -622,13 +635,96 @@ class MM0103 extends React.Component {
         alertTitle: "알림",
         alertContent: "올바르지 않은 형식입니다."
       });
-      //- 를 포함해서 핸드폰 번호를 입력해주세요.
       email.focus();
       return;
     }
 
+    if (addr1.value.length < 1) {
+      this.setState({
+        isAlertOpen: true,
+        alertType: "warning",
+        alertTitle: "알림",
+        alertContent: "주소를 검색해주세요."
+      });
+      addr1.focus();
+      return;
+    }
+
     this.setState({
-      isEmpRegistFormOpen: false
+      isConfirmOpen: true,
+      confirmTitle: "등록",
+      confirmContent: "입력하신 내용으로 직원을 등록하시겠습니까 ?",
+      confirmSubmitHandler: this._empRegistConfirmSubmitDialogHandler
+    });
+  };
+
+  _empRegistConfirmSubmitDialogHandler = async () => {
+    this.setState({
+      isEmpRegistFormOpen: false,
+      isConfirmOpen: false
+    });
+
+    const date = new Date();
+    let y = date.getFullYear();
+    let m = date.getMonth() + 1;
+    let d = date.getDate();
+
+    m = m < 10 ? "0" + m : m;
+    d = d < 10 ? "0" + d : d;
+
+    const currentDate = y + "-" + m + "-" + d;
+
+    const empId = document.getElementById("empId-js");
+    const name = document.getElementById("name-js");
+    const loc = document.getElementById("loc-js");
+    const dept = document.getElementById("dept-js");
+    const position = document.getElementById("position-js");
+    const rank = document.getElementById("rank-js");
+    const birthday = document.getElementById("birthday-js");
+    const mobile = document.getElementById("mobile-js");
+    const email = document.getElementById("email-js");
+    const addr1 = document.getElementById("addr1-js");
+    const addr2 = document.getElementById("addr2-js");
+    const zoneCode = document.getElementById("zoneCode-js");
+
+    const data = {
+      empId: empId.value,
+      password: birthday.value.replace(/-/gi, "").substring(2, 8) + "a",
+      empNo: "SD202000001",
+      name: name.value,
+      loc: loc.value,
+      dept: dept.value,
+      position: position.value,
+      rank: rank.value,
+      hire: currentDate,
+      birthday: birthday.value,
+      mobile: mobile.value,
+      email: email.value,
+      addr1: addr1.value,
+      addr2: addr2.value,
+      zoneCode: zoneCode.value,
+      avatar: "..",
+      useyn: "y"
+    };
+
+    const { isLeftRefresh } = this.state;
+
+    this.setState({
+      isAlertOpen: true,
+      alertType: "success",
+      alertTitle: "알림",
+      alertContent: "등록 되었습니다.",
+      isLeftRefresh: !isLeftRefresh,
+      empInfo: null
+    });
+
+    const response = await fetch("/api/addEmpInfo", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: JSON.stringify({ data })
     });
   };
 
@@ -653,7 +749,8 @@ class MM0103 extends React.Component {
     this.setState({
       isConfirmOpen: true,
       confirmTitle: "확인",
-      confirmContent: "[" + empInfo.name + "] 님을 삭제하시겠습니까 ?"
+      confirmContent: "[" + empInfo.name + "] 님을 삭제하시겠습니까 ?",
+      confirmSubmitHandler: this._empRemoveConfirmSubmitDialogHandler
     });
   };
 
@@ -680,12 +777,9 @@ class MM0103 extends React.Component {
         isAlertOpen: true,
         alertType: "success",
         alertTitle: "알림",
-        alertContent: "삭제 처리되었습니다."
-      });
-
-      this.setState({
-        empInfo: null,
-        isLeftRefresh: !isLeftRefresh
+        alertContent: "삭제 처리되었습니다.",
+        isLeftRefresh: !isLeftRefresh,
+        empInfo: null
       });
     } else {
       this.setState({

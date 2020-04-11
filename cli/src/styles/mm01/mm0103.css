@@ -70,6 +70,7 @@
 .mm0103__dataBox .dataBox__body .dataBox__col .dataBox__row span.data__info {
   line-height: 1.3;
   color: #535353;
+  cursor: context-menu;
 }
 
 .mm0103__dataBox .dataBox__body .dataBox__col .dataBox__row span.data__icon {

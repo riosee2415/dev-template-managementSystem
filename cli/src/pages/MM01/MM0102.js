@@ -155,7 +155,7 @@ class MM0102 extends React.Component {
           </div>
           <div className="mc__col2">
             <div className="mc__col2__title">
-              <IconComponent iconName="fas fa-play" />
+              <IconComponent iconName="fas fa-file-alt" />
               <span className="subTitle">연차 정보</span>
             </div>
             <div className="mc__col2__desc">

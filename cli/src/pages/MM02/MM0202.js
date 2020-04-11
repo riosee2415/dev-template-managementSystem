@@ -8,7 +8,6 @@ import FormDialog from "../../components/material/FormDialog";
 import { TextField } from "@material-ui/core";
 import ComboBox from "../../components/material/ComboBox";
 import middleware from "../../middleware/common";
-import OutlinedButtonFull from "../../components/material/OutlinedButtonFull";
 import OutlinedButton from "../../components/material/OutlinedButton";
 import DatePickers from "../../components/material/DatePickers";
 import { confirmAlert } from "react-confirm-alert";
@@ -138,14 +137,6 @@ class MM0202 extends React.Component {
                       startDate={projectInfo.startDate}
                       type={projectInfo.type}
                     />
-                    <div className="mc__col2__desc__btnArea">
-                      {/* <OutlinedButtonFull text="거래처정보" color="primary" />
-                      <OutlinedButtonFull
-                        action={() => this._progressBtnHandler(projectInfo.ref)}
-                        text="업무차트"
-                        color="primary"
-                      /> */}
-                    </div>
 
                     <TabBox
                       tabs={[
@@ -223,10 +214,11 @@ class MM0202 extends React.Component {
                           <>
                             <div className="mm-add">
                               <OutlinedButton
-                                text="업무추가"
                                 className="mm-add-btn"
-                                action={() => this._addBtnHandler()}
-                              />
+                                onClick={() => this._addBtnHandler()}
+                              >
+                                업무추가
+                              </OutlinedButton>
                             </div>
 
                             <div>
