@@ -32,6 +32,7 @@ const getWorkTime = async (req, res) => {
 
 const getDetailDataToWorkTime = async (req, res) => {
   const inputData = req.body.inputData;
+  const date = new Date();
 
   let fsRef;
   let queryRef;
@@ -42,6 +43,7 @@ const getDetailDataToWorkTime = async (req, res) => {
 
     await fsRef
       .where("id", "==", inputData.inputId)
+      // .where("month", "==", date.getMonth() + 1)
       .limit(5)
       .get()
       .then((res) => {
@@ -72,7 +74,8 @@ const saveWorkTimeToStart = async (req, res) => {
     id: data.id,
     startTime: data.inputStartTime,
     endTime: "00:00:00",
-    idx: date.getDate(),
+    month: date.getMonth() + 1,
+    idx: date.getMonth() + 1 + "" + date.getDate(),
   };
 
   try {
