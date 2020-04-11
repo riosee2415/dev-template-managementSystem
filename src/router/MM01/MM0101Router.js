@@ -15,7 +15,7 @@ MM0101Router.post(routes.getworkStart, MM0101Controller.getWorkTime);
 
 MM0101Router.post(
   routes.getDetailDataToWorkTime,
-  MM0101Controller.saveWorkTimeToStart
+  MM0101Controller.getDetailDataToWorkTime
 );
 
 export default MM0101Router;

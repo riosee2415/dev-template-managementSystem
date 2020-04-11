@@ -14,12 +14,12 @@ const getWorkTime = async (req, res) => {
       .where("id", "==", inputData.id)
       .where("date", "==", inputData.date)
       .get()
-      .then(res => {
-        res.forEach(doc => {
+      .then((res) => {
+        res.forEach((doc) => {
           sendData = {
             startTime: doc.data().startTime,
             endTime: doc.data().endTime,
-            id: doc.id
+            id: doc.id,
           };
         });
       });
@@ -38,18 +38,18 @@ const getDetailDataToWorkTime = async (req, res) => {
   let sendData = [];
 
   try {
-    fsRef = await firestore.collection("workRecord").orderBy("date", "desc");
+    fsRef = await firestore.collection("workRecord").orderBy("idx", "desc");
 
     await fsRef
       .where("id", "==", inputData.inputId)
       .limit(5)
       .get()
-      .then(res => {
-        res.forEach(doc => {
+      .then((res) => {
+        res.forEach((doc) => {
           sendData.push({
             date: doc.data().date,
             startTime: doc.data().startTime,
-            endTime: doc.data().endTime
+            endTime: doc.data().endTime,
           });
         });
       });
@@ -72,7 +72,7 @@ const saveWorkTimeToStart = async (req, res) => {
     id: data.id,
     startTime: data.inputStartTime,
     endTime: "00:00:00",
-    idx: date.getDate()
+    idx: date.getDate(),
   };
 
   try {
@@ -98,7 +98,7 @@ const saveWorkTimeToEnd = async (req, res) => {
     fsRef = await firestore.collection("workRecord");
 
     await fsRef.doc(inputData.fsId).update({
-      endTime: inputData.inputEndTime
+      endTime: inputData.inputEndTime,
     });
   } catch (e) {
     console.log(e);
@@ -111,7 +111,7 @@ const MM0101Controller = {
   getWorkTime,
   getDetailDataToWorkTime,
   saveWorkTimeToStart,
-  saveWorkTimeToEnd
+  saveWorkTimeToEnd,
 };
 
 export default MM0101Controller;

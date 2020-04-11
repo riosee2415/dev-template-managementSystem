@@ -26,14 +26,14 @@ class MM0101 extends React.Component {
       alertContent: null,
       isConfirmOpen: false,
       confirmTitle: null,
-      confirmContent: null
+      confirmContent: null,
     };
   }
 
   componentDidMount() {
     setInterval(() => {
       setInterval(this._playCurrentTime(), 1000);
-    }, 100);
+    }, 50);
 
     this._getworkStart();
 
@@ -56,7 +56,7 @@ class MM0101 extends React.Component {
       isAlertOpen,
       alertType,
       alertTitle,
-      alertContent
+      alertContent,
     } = this.state;
 
     return (
@@ -198,22 +198,22 @@ class MM0101 extends React.Component {
 
   _getDetailData = async () => {
     const inputData = {
-      inputId: sessionStorage.getItem("login_id")
+      inputId: sessionStorage.getItem("login_id"),
     };
 
     const response = await fetch("/api/getDetailDataToWorkTime", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
         // 'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: JSON.stringify({ inputData })
+      body: JSON.stringify({ inputData }),
     });
 
     let dataList = await response.json();
 
     this.setState({
-      detailList: dataList
+      detailList: dataList,
     });
   };
 
@@ -222,23 +222,23 @@ class MM0101 extends React.Component {
     const inputData = {
       id: sessionStorage.getItem("login_id"),
       date:
-        date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate()
+        date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate(),
     };
 
     const response = await fetch("/api/getworkStart", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
         // 'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: JSON.stringify({ inputData })
+      body: JSON.stringify({ inputData }),
     });
     const data = await response.json();
 
     this.setState({
       workStart: data.startTime,
       workEnd: data.endTime,
-      fsId: data.id
+      fsId: data.id,
     });
   };
 
@@ -250,7 +250,7 @@ class MM0101 extends React.Component {
         isAlertOpen: true,
         alertType: "error",
         alertTitle: "실행불가",
-        alertContent: "출근은 하루 한번만 가능합니다."
+        alertContent: "출근은 하루 한번만 가능합니다.",
       });
       return;
     }
@@ -261,7 +261,7 @@ class MM0101 extends React.Component {
       currentSec,
       currentYear,
       currentMonth,
-      currentDate
+      currentDate,
     } = this.state;
 
     if (currentHour === 0) {
@@ -279,16 +279,16 @@ class MM0101 extends React.Component {
     const inputData = {
       inputDate,
       id,
-      inputStartTime
+      inputStartTime,
     };
 
     await fetch("/api/saveWorkTimeToStart", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
         // 'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: JSON.stringify({ inputData })
+      body: JSON.stringify({ inputData }),
     }).then(this.componentDidMount());
   };
 
@@ -304,16 +304,16 @@ class MM0101 extends React.Component {
 
     const inputData = {
       fsId,
-      inputEndTime
+      inputEndTime,
     };
 
     await fetch("/api/saveWorkTimeToEnd", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
         // 'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: JSON.stringify({ inputData })
+      body: JSON.stringify({ inputData }),
     }).then(this.componentDidMount());
   };
 
@@ -352,7 +352,7 @@ class MM0101 extends React.Component {
       currentDay: currentDay,
       currentYear: date.getFullYear(),
       currentMonth: date.getMonth() + 1,
-      currentDate: date.getDate()
+      currentDate: date.getDate(),
     });
   };
 }
