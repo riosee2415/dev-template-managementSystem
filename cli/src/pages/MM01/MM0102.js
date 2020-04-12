@@ -28,15 +28,13 @@ class MM0102 extends React.Component {
       alertContent: null,
       isUsedFormOpen: false,
       isUsageFormOpen: false,
-      empList: []
+      empList: [],
     };
   }
 
-  // componentDidMount = () => {
-  //   const annualStartDay = document.getElementById("annualStartDay");
-  //   const annualEndDay = document.getElementById("annuaEndDay");
-  //   console.log(annualStartDay, annuaEndDay);
-  // };
+  componentDidMount = () => {
+    this._getEmpList();
+  };
 
   render() {
     const {
@@ -48,7 +46,8 @@ class MM0102 extends React.Component {
       alertTitle,
       alertContent,
       isUsedFormOpen,
-      isUsageFormOpen
+      isUsageFormOpen,
+      empList,
     } = this.state;
 
     const columns = [
@@ -57,26 +56,26 @@ class MM0102 extends React.Component {
         id: "allAnnual",
         label: "총 연차(일)",
         align: "center",
-        minWidth: 100
+        minWidth: 100,
       },
       {
         id: "usedAnnual",
         label: "사용 연차(일)",
         align: "center",
-        minWidth: 100
+        minWidth: 100,
       },
       {
         id: "applicationAnnual",
         label: "연차 사용",
         align: "center",
-        minWidth: 150
+        minWidth: 150,
       },
       {
         id: "paymentSataus",
         label: "결제 상태",
         align: "center",
-        minWidth: 150
-      }
+        minWidth: 150,
+      },
     ];
 
     const usedlist = [
@@ -84,15 +83,15 @@ class MM0102 extends React.Component {
         id: "year",
         label: "사용일",
         align: "center",
-        minWidth: 170
+        minWidth: 170,
       },
       { id: "year", label: "사용 연차(일)", align: "center", minWidth: 170 },
       {
         id: "whtused",
         label: "사유",
         align: "center",
-        minWidth: 170
-      }
+        minWidth: 170,
+      },
     ];
 
     return (
@@ -183,7 +182,7 @@ class MM0102 extends React.Component {
                     {dataInfo ? (
                       <TableHead>
                         <TableRow>
-                          {columns.map(column => (
+                          {columns.map((column) => (
                             <TableCell
                               key={column.id}
                               align={column.align}
@@ -197,7 +196,7 @@ class MM0102 extends React.Component {
                     ) : null}
 
                     {dataInfo
-                      ? dataInfo.annualInfo.map(data => {
+                      ? dataInfo.annualInfo.map((data) => {
                           return (
                             <TableBody className="annualTbody">
                               <TableRow
@@ -273,7 +272,7 @@ class MM0102 extends React.Component {
                 label="종료일"
                 onChange={this._getUseDay}
               />
-              <div id="allusageDay-js">(총 : 일)</div>
+              <div id="allusageDay-js"></div>
             </div>
           </div>
 
@@ -292,11 +291,7 @@ class MM0102 extends React.Component {
 
           <div className="annualSettlement">
             <div className="personSettlement"> 결제자 :</div>
-
-            <ComboBox
-              options={[{ title: "aaa" }, { title: "bbb" }]}
-              label="결제자"
-            />
+            <ComboBox options={empList} label="결제자" />
           </div>
         </FormDialog>
 
@@ -312,7 +307,7 @@ class MM0102 extends React.Component {
           <div>
             총 사용 연차 :
             {dataInfo
-              ? dataInfo.annualInfo.map(data => {
+              ? dataInfo.annualInfo.map((data) => {
                   return (
                     <div>
                       {data.year === new Date().getFullYear + "" ? (
@@ -331,7 +326,7 @@ class MM0102 extends React.Component {
               <Table stickyHeader aria-label="sticky table">
                 <TableHead>
                   <TableRow>
-                    {usedlist.map(column => (
+                    {usedlist.map((column) => (
                       <TableCell
                         key={column.id}
                         align={column.align}
@@ -344,7 +339,7 @@ class MM0102 extends React.Component {
                 </TableHead>
 
                 {dataInfo
-                  ? dataInfo.annualInfo.map(data => {
+                  ? dataInfo.annualInfo.map((data) => {
                       return (
                         <TableBody>
                           <TableRow hover role="checkbox" className="annualTb">
@@ -375,13 +370,13 @@ class MM0102 extends React.Component {
     );
   }
 
-  _annualClickHandler = async key => {
+  _annualClickHandler = async (key) => {
     const response = await fetch("/api/getAnnualInfo", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({ key })
+      body: JSON.stringify({ key }),
     });
 
     const data = await response.json();
@@ -404,18 +399,18 @@ class MM0102 extends React.Component {
 
     if (data.empId === sessionStorage.login_id) {
       this.setState({
-        dataInfo: data
+        dataInfo: data,
       });
     } else {
       this.setState({
-        dataInfo: null
+        dataInfo: null,
       });
       setTimeout(() => {
         this.setState({
           isAlertOpen: true,
           alertType: "error",
           alertTitle: "알림",
-          alertContent: "접근 권한이 없습니다."
+          alertContent: "접근 권한이 없습니다.",
         });
       }, 0);
     }
@@ -435,9 +430,9 @@ class MM0102 extends React.Component {
     eDay = parseInt(eDay);
 
     if (eDay < sDay) {
-      alert("종료일이 시작이보다 ");
+      alert("종료일은 시작일 이후여야 합니다.");
       return;
-    } else if (eDay - sDay > 15) {
+    } else if (eDay - sDay > 14) {
       alert("15일 이상은 신청할 수 없습니다.");
       return;
     }
@@ -446,23 +441,21 @@ class MM0102 extends React.Component {
 
     const eMs = document.getElementById("allusageDay-js");
 
-    eMs.innerHTML = useDay;
-
-    console.log(useDay);
+    eMs.innerHTML = "총 : " + useDay + "일";
   };
 
   _getEmpList = async () => {
     const response = await fetch("/api/getEmpList", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
         // 'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: JSON.stringify({})
+      body: JSON.stringify({}),
     });
     const data = await response.json();
     this.setState({
-      empList: data
+      empList: data,
     });
   };
 
