@@ -36,6 +36,7 @@ app.post(routes.getEmpInfo, MM0103Router);
 app.post(routes.addEmpInfo, MM0103Router);
 app.post(routes.modifyEmpInfo, MM0103Router);
 app.post(routes.removeEmpInfo, MM0103Router);
+app.post(routes.getEmpIdCheck, MM0103Router);
 
 /* MM0202 */
 app.post(routes.deleteWorkList, MM0202Router);

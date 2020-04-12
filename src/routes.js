@@ -19,6 +19,7 @@ const routes = {
   addEmpInfo: "/api/addEmpInfo",
   modifyEmpInfo: "/api/modifyEmpInfo",
   removeEmpInfo: "/api/removeEmpInfo",
+  getEmpIdCheck: "/api/getEmpIdCheck",
 
   /* MM0202 */
   getProjectInfo: "/api/getProjectInfo",
@@ -26,7 +27,7 @@ const routes = {
   getEmpList: "/api/getEmpList",
   addWorkList: "/api/addWorkList",
   deleteWorkList: "/api/deleteWorkList",
-  changedWorkListStatus: "/api/changedWorkListStatus",
+  changedWorkListStatus: "/api/changedWorkListStatus"
 };
 
 export default routes;

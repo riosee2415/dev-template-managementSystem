@@ -37,7 +37,8 @@ class MM0103 extends React.Component {
       empLocList: [],
       empDeptList: [],
       empPositionList: [],
-      empRankList: []
+      empRankList: [],
+      isIdCheck: false
     };
   }
 
@@ -106,7 +107,8 @@ class MM0103 extends React.Component {
       empLocList,
       empDeptList,
       empPositionList,
-      empRankList
+      empRankList,
+      isIdCheck
     } = this.state;
 
     return (
@@ -356,6 +358,11 @@ class MM0103 extends React.Component {
                   fullWidth
                   autoFocus
                   required
+                  onChange={() => {
+                    this.setState({
+                      isIdCheck: false
+                    });
+                  }}
                 />
               </Grid>
               <Grid item container={true} alignItems="flex-end" xs={1}>
@@ -509,7 +516,53 @@ class MM0103 extends React.Component {
     });
   };
 
-  _empIdCheckHandler = async () => {};
+  _empIdCheckHandler = async () => {
+    const empId = document.getElementById("empId-js");
+    if (empId.value.length < 1) {
+      this.setState({
+        isAlertOpen: true,
+        alertType: "warning",
+        alertTitle: "알림",
+        alertContent: "아이디를 입력해주세요."
+      });
+      empId.focus();
+      return;
+    }
+
+    const key = empId.value;
+    const response = await fetch("/api/getEmpIdCheck", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: JSON.stringify({ key })
+    });
+
+    const data = await response.json();
+
+    if (data.result) {
+      this.setState({
+        isAlertOpen: true,
+        alertType: "success",
+        alertTitle: "알림",
+        alertContent: "사용 가능한 아이디입니다.",
+        isIdCheck: true
+      });
+      empId.focus();
+      return;
+    } else {
+      this.setState({
+        isAlertOpen: true,
+        alertType: "error",
+        alertTitle: "알림",
+        alertContent: "이미 사용중인 아이디입니다.",
+        isIdCheck: false
+      });
+      empId.focus();
+      return;
+    }
+  };
 
   _empRegistFormSubmitDialogHandler = async () => {
     const empId = document.getElementById("empId-js");
@@ -523,6 +576,8 @@ class MM0103 extends React.Component {
     const email = document.getElementById("email-js");
     const addr1 = document.getElementById("addr1-js");
 
+    const { isIdCheck } = this.state;
+
     let regExp = null;
 
     if (empId.value.length < 1) {
@@ -531,6 +586,16 @@ class MM0103 extends React.Component {
         alertType: "warning",
         alertTitle: "알림",
         alertContent: "아이디를 입력해주세요."
+      });
+      empId.focus();
+      return;
+    }
+    if (!isIdCheck) {
+      this.setState({
+        isAlertOpen: true,
+        alertType: "warning",
+        alertTitle: "알림",
+        alertContent: "아이디 확인 체크를 해주세요."
       });
       empId.focus();
       return;

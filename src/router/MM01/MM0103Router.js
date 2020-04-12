@@ -12,4 +12,6 @@ MM0103Router.post(routes.modifyEmpInfo, MM0103Controller.modifyEmpInfo);
 
 MM0103Router.post(routes.removeEmpInfo, MM0103Controller.removeEmpInfo);
 
+MM0103Router.post(routes.getEmpIdCheck, MM0103Controller.getEmpIdCheck);
+
 export default MM0103Router;

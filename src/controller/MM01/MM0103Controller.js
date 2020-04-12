@@ -141,11 +141,38 @@ const removeEmpInfo = async (req, res) => {
   return res.json(sendData);
 };
 
+const getEmpIdCheck = async (req, res) => {
+  const key = req.body.key;
+
+  let fsRef;
+  let queryRef;
+  let sendData = {
+    result: true
+  };
+  try {
+    fsRef = await firestore.collection("employee");
+
+    queryRef = await fsRef.where("empId", "==", key);
+
+    await queryRef.get().then(res => {
+      res.forEach(doc => {
+        sendData.result = false;
+      });
+    });
+  } catch (e) {
+    console.log(e);
+  } finally {
+  }
+
+  return res.json(sendData);
+};
+
 const MM0103Controller = {
   getEmpInfo,
   addEmpInfo,
   modifyEmpInfo,
-  removeEmpInfo
+  removeEmpInfo,
+  getEmpIdCheck
 };
 
 export default MM0103Controller;
