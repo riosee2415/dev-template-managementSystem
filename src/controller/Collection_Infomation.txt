@@ -80,3 +80,8 @@
  - insDate          등록일         [String]
  - name             상호명         [String]
  - taxation         과세유형        [String]
+ - tel              전화번호        [String]
+ - manager          담당자          [String]
+ - managerTel       담당자연락처     [String]
+ - managerEmail     담당자이메일     [String]
+ 

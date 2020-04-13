@@ -99,6 +99,10 @@ class MM0701 extends React.Component {
                   <div>{clientInfo.status === "1" ? "정상사업자" : "폐업"}</div>
                   <div>{clientInfo.taxation}</div>
                   <div>{clientInfo.type}</div>
+                  <div>{clientInfo.tel}</div>
+                  <div>{clientInfo.manager}</div>
+                  <div>{clientInfo.managerTel}</div>
+                  <div>{clientInfo.managerEmail}</div>
                 </div>
               ) : null}
             </div>
