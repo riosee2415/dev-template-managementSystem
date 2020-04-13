@@ -93,6 +93,19 @@ class LeftListBox extends React.Component {
                           <td>{data.projectType}</td>
                         </tr>
                       );
+                    } else if (pageCode === "MM0701") {
+                      return (
+                        <tr
+                          key={data.docId}
+                          onClick={() =>
+                            this.props.dataClickHandler(data.docId)
+                          }
+                        >
+                          <td>{idx + 1}</td>
+                          <td>{data.cliName}</td>
+                          <td>{data.cliChief}</td>
+                        </tr>
+                      );
                     } else {
                       return (
                         <tr className="empty">

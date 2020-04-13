@@ -16,7 +16,7 @@
   flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
-  line-height: 3;
+  line-height: 2.4;
 }
 
 .project-info .project-info__box div:nth-child(2n + 1) {
@@ -83,7 +83,7 @@
 .workList-main-box {
   width: calc(100% + 14px);
   height: 300px;
-  min-height: 300px;
+  box-shadow: 2px 2px 6px rgb(235, 235, 235);
 }
 
 .workList-main-box .workList-main {
@@ -160,7 +160,39 @@
   font-weight: 600;
 }
 
+.workList-main-box .workList-main:hover {
+  background-color: #aeaeae1d;
+}
+
+.client-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px;
+}
+
 .clientBlock {
   display: flex;
   flex-direction: row;
+  align-items: center;
+  margin: 30px 0;
+}
+
+.clientBlock div {
+  height: 30px;
+}
+
+.clientBlock > div:first-child {
+  width: 125px;
+  padding-left: 5px;
+  border-left: 3px solid #ffe259;
+  font-weight: 600;
+  line-height: 30px;
+}
+
+.clientBlock > div:nth-child(2) {
+  color: #535353;
+  width: 290px;
+  line-height: 2;
 }

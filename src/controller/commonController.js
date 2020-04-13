@@ -111,6 +111,21 @@ const callCollection = async (req, res) => {
             docId: doc.id,
             projectName: doc.data().name,
             projectType: doc.data().type,
+<<<<<<< HEAD
+=======
+          });
+        });
+      });
+    } else if (pageCode == "MM0701") {
+      fsRef = await firestore.collection(collections[collectionIdx]);
+
+      queryRef = await fsRef.get().then((res) => {
+        res.forEach((doc) => {
+          sendData.push({
+            docId: doc.id,
+            cliName: doc.data().name,
+            cliChief: doc.data().chiefName,
+>>>>>>> refs/remotes/origin/master
           });
         });
       });

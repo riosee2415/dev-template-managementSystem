@@ -5,12 +5,12 @@ import FormDialog from "../material/FormDialog";
 import { withStyles } from "@material-ui/core/styles";
 
 const styles = {
-  workDes: { lineHeight: 1.5 }
+  workDes: { lineHeight: 1.5 },
 };
 
 class WorkList extends React.Component {
   state = {
-    isDescFormOpen: false
+    isDescFormOpen: false,
   };
 
   render() {
@@ -39,12 +39,13 @@ class WorkList extends React.Component {
           <li>
             {this.props.result === "0" ? (
               <OutlinedButton
-                text="개발중"
                 color="secondary"
-                action={() => this.props.changeStatus(this.props.workRef)}
-              />
+                onClick={() => this.props.changeStatus(this.props.workRef)}
+              >
+                개발중
+              </OutlinedButton>
             ) : (
-              <OutlinedButton text="개발완료" isDisabled={true} />
+              <OutlinedButton disabled>개발완료</OutlinedButton>
             )}
           </li>
 
@@ -72,13 +73,13 @@ class WorkList extends React.Component {
 
   _descFormCloseDialogHandler = () => {
     this.setState({
-      isDescFormOpen: false
+      isDescFormOpen: false,
     });
   };
 
   _descViewHandler = () => {
     this.setState({
-      isDescFormOpen: true
+      isDescFormOpen: true,
     });
   };
 }
