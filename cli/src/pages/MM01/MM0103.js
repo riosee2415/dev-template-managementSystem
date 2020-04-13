@@ -13,6 +13,11 @@ import Postcode from "../../components/Postcode";
 import TextField from "../../components/material/TextField";
 import Grid from "@material-ui/core/Grid";
 import Tooltip from "@material-ui/core/Tooltip";
+import IconButton from "@material-ui/core/IconButton";
+import PhotoCamera from "@material-ui/icons/PhotoCamera";
+import Avatar from "@material-ui/core/Avatar";
+import ProfileSample from "../../assets/images/profileSample.png";
+import PersonIcon from "@material-ui/icons/Person";
 
 class MM0103 extends React.Component {
   constructor(props) {
@@ -25,6 +30,7 @@ class MM0103 extends React.Component {
       isLeftRefresh: false,
       isPostcodeOpen: false,
       isEmpRegistFormOpen: false,
+      isEmpModifyFormOpen: false,
       isAlertOpen: false,
       alertType: null,
       alertTitle: null,
@@ -94,6 +100,7 @@ class MM0103 extends React.Component {
       isLeftRefresh,
       isPostcodeOpen,
       isEmpRegistFormOpen,
+      isEmpModifyFormOpen,
       isAlertOpen,
       alertType,
       alertTitle,
@@ -131,7 +138,11 @@ class MM0103 extends React.Component {
                 </button>
               </span>
               <span>
-                <button type="button" className="btn btn-xs bg-orange">
+                <button
+                  type="button"
+                  className="btn btn-xs bg-blue"
+                  onClick={this._empModifyHandler}
+                >
                   수정
                 </button>
               </span>
@@ -350,6 +361,40 @@ class MM0103 extends React.Component {
             closeDialogHandler={this._empRegistFormCloseDialogHandler}
           >
             <Grid container spacing={2}>
+              <Grid
+                item
+                xs={12}
+                container
+                direction="column"
+                alignItems="center"
+              >
+                <Tooltip title="프로필" placement="top">
+                  <Avatar
+                    alt="profile"
+                    src={ProfileSample}
+                    style={{
+                      width: 150,
+                      height: 150,
+                      background: "#fff",
+                      boxShadow: "5px 5px 20px #aeaeae"
+                    }}
+                  />
+                </Tooltip>
+
+                <input
+                  accept="image/*"
+                  id="profile-file"
+                  type="file"
+                  className="d-none"
+                />
+                <label htmlFor="profile-file">
+                  <IconButton component="span" style={{ marginTop: 10 }}>
+                    <Tooltip title="업로드" placement="bottom">
+                      <PhotoCamera style={{ fontSize: 32, color: "#888" }} />
+                    </Tooltip>
+                  </IconButton>
+                </label>
+              </Grid>
               <Grid item xs={11}>
                 <TextField
                   id="empId-js"
@@ -468,6 +513,159 @@ class MM0103 extends React.Component {
                   label="상세주소"
                   type="text"
                   fullWidth
+                />
+              </Grid>
+            </Grid>
+          </FormDialog>
+        ) : null}
+
+        {isEmpModifyFormOpen ? (
+          <FormDialog
+            isOpen={isEmpModifyFormOpen}
+            title="직원정보 변경"
+            submitDialogHandler={this._empModifyFormSubmitDialogHandler}
+            closeDialogHandler={this._empModifyFormCloseDialogHandler}
+            isModified={true}
+          >
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <TextField
+                  id="empId-js"
+                  type="text"
+                  label="아이디"
+                  fullWidth
+                  autoFocus
+                  required
+                  InputProps={{
+                    readOnly: true
+                  }}
+                  defaultValue={empInfo.empId}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  id="name-js"
+                  label="직원명"
+                  type="text"
+                  fullWidth
+                  required
+                  defaultValue={empInfo.name}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <ComboBox
+                  id="loc-js"
+                  options={empLocList}
+                  label="근무위치"
+                  InputLabelProps={{
+                    shrink: true
+                  }}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <ComboBox
+                  id="dept-js"
+                  options={empDeptList}
+                  label="부서"
+                  InputLabelProps={{
+                    shrink: true
+                  }}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <ComboBox
+                  id="position-js"
+                  options={empPositionList}
+                  label="직급"
+                  InputLabelProps={{
+                    shrink: true
+                  }}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <ComboBox
+                  id="rank-js"
+                  options={empRankList}
+                  label="직책"
+                  InputLabelProps={{
+                    shrink: true
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  id="mobile-js"
+                  label="핸드폰"
+                  type="text"
+                  fullWidth
+                  required
+                  helperText="- 를 포함해서 핸드폰 번호를 입력해주세요."
+                  defaultValue={empInfo.mobile}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  id="email-js"
+                  label="이메일"
+                  type="text"
+                  fullWidth
+                  required
+                  defaultValue={empInfo.email}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <DatePickers id="birthday-js" label="생년월일" required />
+              </Grid>
+              <Grid item xs={2}>
+                <TextField
+                  id="zoneCode-js"
+                  type="text"
+                  label="우편번호"
+                  fullWidth
+                  required
+                  InputLabelProps={{
+                    shrink: true
+                  }}
+                  InputProps={{
+                    readOnly: true
+                  }}
+                  defaultValue={empInfo.zoneCode}
+                />
+              </Grid>
+              <Grid item xs={9}>
+                <TextField
+                  id="addr1-js"
+                  type="text"
+                  label="주소"
+                  fullWidth
+                  required
+                  InputLabelProps={{
+                    shrink: true
+                  }}
+                  InputProps={{
+                    readOnly: true
+                  }}
+                  defaultValue={empInfo.addr1}
+                />
+              </Grid>
+              <Grid item container={true} alignItems="flex-end" xs={1}>
+                <OutlinedButton
+                  size="small"
+                  color="primary"
+                  onClick={() => {
+                    this.setState({ isPostcodeOpen: true });
+                  }}
+                >
+                  검색
+                </OutlinedButton>
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  id="addr2-js"
+                  label="상세주소"
+                  type="text"
+                  fullWidth
+                  defaultValue={empInfo.addr2}
                 />
               </Grid>
             </Grid>
@@ -681,7 +879,6 @@ class MM0103 extends React.Component {
       mobile.focus();
       return;
     }
-
     if (email.value.length < 1) {
       this.setState({
         isAlertOpen: true,
@@ -703,7 +900,6 @@ class MM0103 extends React.Component {
       email.focus();
       return;
     }
-
     if (addr1.value.length < 1) {
       this.setState({
         isAlertOpen: true,
@@ -724,11 +920,6 @@ class MM0103 extends React.Component {
   };
 
   _empRegistConfirmSubmitDialogHandler = async () => {
-    this.setState({
-      isEmpRegistFormOpen: false,
-      isConfirmOpen: false
-    });
-
     const date = new Date();
     let y = date.getFullYear();
     let m = date.getMonth() + 1;
@@ -779,6 +970,8 @@ class MM0103 extends React.Component {
       alertType: "success",
       alertTitle: "알림",
       alertContent: "등록 되었습니다.",
+      isEmpRegistFormOpen: false,
+      isConfirmOpen: false,
       isLeftRefresh: !isLeftRefresh,
       empInfo: null
     });
@@ -796,6 +989,243 @@ class MM0103 extends React.Component {
   _empRegistFormCloseDialogHandler = () => {
     this.setState({
       isEmpRegistFormOpen: false
+    });
+  };
+
+  _empModifyHandler = async () => {
+    const { empInfo } = this.state;
+
+    if (!empInfo) {
+      this.setState({
+        isAlertOpen: true,
+        alertType: "warning",
+        alertTitle: "알림",
+        alertContent: "변경할 직원을 선택해주세요."
+      });
+    } else {
+      await this.setState({
+        isEmpModifyFormOpen: true
+      });
+
+      const loc = document.getElementById("loc-js");
+      const dept = document.getElementById("dept-js");
+      const position = document.getElementById("position-js");
+      const rank = document.getElementById("rank-js");
+      const birthday = document.getElementById("birthday-js");
+
+      setTimeout(() => {
+        loc.value = empInfo.loc;
+        dept.value = empInfo.dept;
+        position.value = empInfo.position;
+        rank.value = empInfo.rank;
+        birthday.value = empInfo.birthday;
+        console.log(empInfo.birthday);
+      }, 1);
+    }
+  };
+
+  _empModifyFormSubmitDialogHandler = async () => {
+    const empId = document.getElementById("empId-js");
+    const name = document.getElementById("name-js");
+    const loc = document.getElementById("loc-js");
+    const dept = document.getElementById("dept-js");
+    const position = document.getElementById("position-js");
+    const rank = document.getElementById("rank-js");
+    const birthday = document.getElementById("birthday-js");
+    const mobile = document.getElementById("mobile-js");
+    const email = document.getElementById("email-js");
+    const addr1 = document.getElementById("addr1-js");
+
+    let regExp = null;
+
+    if (empId.value.length < 1) {
+      this.setState({
+        isAlertOpen: true,
+        alertType: "warning",
+        alertTitle: "알림",
+        alertContent: "아이디를 입력해주세요."
+      });
+      empId.focus();
+      return;
+    }
+    if (name.value.length < 1) {
+      this.setState({
+        isAlertOpen: true,
+        alertType: "warning",
+        alertTitle: "알림",
+        alertContent: "직원명을 입력해주세요."
+      });
+      name.focus();
+      return;
+    }
+    if (loc.value.length < 1) {
+      this.setState({
+        isAlertOpen: true,
+        alertType: "warning",
+        alertTitle: "알림",
+        alertContent: "근무위치를 선택해주세요."
+      });
+      loc.focus();
+      return;
+    }
+    if (dept.value.length < 1) {
+      this.setState({
+        isAlertOpen: true,
+        alertType: "warning",
+        alertTitle: "알림",
+        alertContent: "부서를 선택해주세요."
+      });
+      dept.focus();
+      return;
+    }
+    if (position.value.length < 1) {
+      this.setState({
+        isAlertOpen: true,
+        alertType: "warning",
+        alertTitle: "알림",
+        alertContent: "직급을 선택해주세요."
+      });
+      position.focus();
+      return;
+    }
+    if (rank.value.length < 1) {
+      this.setState({
+        isAlertOpen: true,
+        alertType: "warning",
+        alertTitle: "알림",
+        alertContent: "직책을 선택해주세요."
+      });
+      rank.focus();
+      return;
+    }
+    if (birthday.value.length < 1) {
+      this.setState({
+        isAlertOpen: true,
+        alertType: "warning",
+        alertTitle: "알림",
+        alertContent: "생년월일을 입력해주세요."
+      });
+      birthday.focus();
+      return;
+    }
+    if (mobile.value.length < 1) {
+      this.setState({
+        isAlertOpen: true,
+        alertType: "warning",
+        alertTitle: "알림",
+        alertContent: "핸드폰 번호를 입력해주세요."
+      });
+      mobile.focus();
+      return;
+    }
+    regExp = /^01([0|1|6|7|8|9]?)-([0-9]{3,4})-([0-9]{4})$/;
+    if (!regExp.test(mobile.value)) {
+      this.setState({
+        isAlertOpen: true,
+        alertType: "warning",
+        alertTitle: "알림",
+        alertContent: "올바르지 않은 형식입니다."
+      });
+      mobile.focus();
+      return;
+    }
+    if (email.value.length < 1) {
+      this.setState({
+        isAlertOpen: true,
+        alertType: "warning",
+        alertTitle: "알림",
+        alertContent: "이메일을 입력해주세요."
+      });
+      email.focus();
+      return;
+    }
+    regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+    if (!regExp.test(email.value)) {
+      this.setState({
+        isAlertOpen: true,
+        alertType: "warning",
+        alertTitle: "알림",
+        alertContent: "올바르지 않은 형식입니다."
+      });
+      email.focus();
+      return;
+    }
+    if (addr1.value.length < 1) {
+      this.setState({
+        isAlertOpen: true,
+        alertType: "warning",
+        alertTitle: "알림",
+        alertContent: "주소를 검색해주세요."
+      });
+      addr1.focus();
+      return;
+    }
+
+    this.setState({
+      isConfirmOpen: true,
+      confirmTitle: "변경",
+      confirmContent: "입력하신 내용으로 직원정보를 변경하시겠습니까 ?",
+      confirmSubmitHandler: this._empModifyConfirmSubmitDialogHandler
+    });
+  };
+
+  _empModifyConfirmSubmitDialogHandler = async () => {
+    const name = document.getElementById("name-js");
+    const loc = document.getElementById("loc-js");
+    const dept = document.getElementById("dept-js");
+    const position = document.getElementById("position-js");
+    const rank = document.getElementById("rank-js");
+    const birthday = document.getElementById("birthday-js");
+    const mobile = document.getElementById("mobile-js");
+    const email = document.getElementById("email-js");
+    const addr1 = document.getElementById("addr1-js");
+    const addr2 = document.getElementById("addr2-js");
+    const zoneCode = document.getElementById("zoneCode-js");
+
+    const { empInfo } = this.state;
+
+    const data = {
+      key: empInfo.docId,
+      password: birthday.value.replace(/-/gi, "").substring(2, 8) + "a",
+      empNo: "SD202000001",
+      name: name.value,
+      loc: loc.value,
+      dept: dept.value,
+      position: position.value,
+      rank: rank.value,
+      birthday: birthday.value,
+      mobile: mobile.value,
+      email: email.value,
+      addr1: addr1.value,
+      addr2: addr2.value,
+      zoneCode: zoneCode.value,
+      avatar: ".."
+    };
+
+    this.setState({
+      isAlertOpen: true,
+      alertType: "success",
+      alertTitle: "알림",
+      alertContent: "변경 되었습니다.",
+      isEmpModifyFormOpen: false,
+      isConfirmOpen: false
+    });
+
+    const response = await fetch("/api/modifyEmpInfo", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: JSON.stringify({ data })
+    }).then(() => {
+      this._dataClickHandler(empInfo.docId);
+    });
+  };
+
+  _empModifyFormCloseDialogHandler = () => {
+    this.setState({
+      isEmpModifyFormOpen: false
     });
   };
 
