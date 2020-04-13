@@ -257,22 +257,31 @@ class MM0102 extends React.Component {
           {dataInfo ? (
             <>
               <div className="usageSubTitle">
-                <div>{dataInfo.name}</div>
-                <div>신청일 : {dataInfo.currentDate}</div>
+                <div id="userName-js">{dataInfo.name}</div>
+                <div id="applicationDay-js">
+                  <span> 신청일 : </span>
+                  {dataInfo.currentDate}
+                </div>
               </div>
             </>
           ) : null}
           <div className="usageDays">
             <div>기간 : </div>
             <div className="usageStartEnd">
-              <DatePickers id="annualStartDay" label="시작일" />
+              <DatePickers
+                id="annualStartDay-js"
+                label="시작일"
+                onChange={this._getUseDay}
+              />
               <span> ~ </span>
               <DatePickers
-                id="annualEndDay"
+                id="annualEndDay-js"
                 label="종료일"
                 onChange={this._getUseDay}
               />
-              <div id="allusageDay-js"></div>
+              <div>
+                총 : <span id="allusageDay-js" /> 일
+              </div>
             </div>
           </div>
 
@@ -287,11 +296,15 @@ class MM0102 extends React.Component {
             />
           </div>
 
-          <input type="file"></input>
+          <input type="file" id="applicationFile-js"></input>
 
           <div className="annualSettlement">
             <div className="personSettlement"> 결제자 :</div>
-            <ComboBox options={empList} label="결제자" />
+            <ComboBox
+              options={empList}
+              label="결제자"
+              id="annualSettlement-js"
+            />
           </div>
         </FormDialog>
 
@@ -417,31 +430,74 @@ class MM0102 extends React.Component {
   };
 
   _getUseDay = () => {
-    const annualStartDay = document.getElementById("annualStartDay");
-    const annualEndDay = document.getElementById("annualEndDay");
+    const annualStartDay = document.getElementById("annualStartDay-js");
+    const annualEndDay = document.getElementById("annualEndDay-js");
 
-    let sDay = annualStartDay.value.replace("-", "");
-    sDay = sDay.replace("-", "");
+    const { dataInfo } = this.state;
 
-    let eDay = annualEndDay.value.replace("-", "");
+    let sDay = annualStartDay.value.replace(/-/gi, "");
+
+    let eDay = annualEndDay.value.replace(/-/gi, "");
     eDay = eDay.replace("-", "");
 
     sDay = parseInt(sDay);
     eDay = parseInt(eDay);
 
-    if (eDay < sDay) {
-      alert("종료일은 시작일 이후여야 합니다.");
+    if (sDay === parseInt(dataInfo.currentDate.replace(/-/gi, ""))) {
+      this.setState({
+        isAlertOpen: true,
+        alertType: "error",
+        alertTitle: "알림",
+        alertContent: "시작일은 신청일과 같을 수 없습니다.",
+      });
+      return;
+    } else if (eDay < sDay) {
+      this.setState({
+        isAlertOpen: true,
+        alertType: "error",
+        alertTitle: "알림",
+        alertContent: "종료일은 시작일 이후여야 합니다.",
+      });
       return;
     } else if (eDay - sDay > 14) {
-      alert("15일 이상은 신청할 수 없습니다.");
+      this.setState({
+        isAlertOpen: true,
+        alertType: "error",
+        alertTitle: "알림",
+        alertContent: "15일 이상은 신청할 수 없습니다.",
+      });
+
       return;
     }
+
+    // if (eDay < sDay) {
+    //   setTimeout(() => {
+    //     this.setState({
+    //       isAlertOpen: true,
+    //       alertType: "error",
+    //       alertTitle: "알림",
+    //       alertContent: "종료일은 시작일 이후여야 합니다.",
+    //     });
+    //   }, 0);
+    //   return;
+    // } else if (eDay - sDay > 14) {
+    //   setTimeout(() => {
+    //     this.setState({
+    //       isAlertOpen: true,
+    //       alertType: "error",
+    //       alertTitle: "알림",
+    //       alertContent: "15일 이상은 신청할 수 없습니다.",
+    //     });
+    //   }, 0);
+
+    //   return;
+    // }
 
     const useDay = eDay - sDay + 1;
 
     const eMs = document.getElementById("allusageDay-js");
 
-    eMs.innerHTML = "총 : " + useDay + "일";
+    eMs.innerHTML = useDay;
   };
 
   _getEmpList = async () => {
@@ -454,6 +510,9 @@ class MM0102 extends React.Component {
       body: JSON.stringify({}),
     });
     const data = await response.json();
+
+    // empList 에서 sessionStorage랑 같은 거 빼고 넣어주기
+
     this.setState({
       empList: data,
     });
@@ -463,7 +522,63 @@ class MM0102 extends React.Component {
     this.setState({ isUsageFormOpen: true });
   };
 
-  _addApplicationAnnualHandler = () => {};
+  _addApplicationAnnualHandler = async () => {
+    const { annualUsage } = this.setState;
+
+    const userName = document.getElementById("userName-js");
+    const applicationDay = document.getElementById("applicationDay-js");
+    const annualStartDay = document.getElementById("annualStartDay-js");
+    const annualEndDay = document.getElementById("annualEndDay-js");
+    const allusageDay = document.getElementById("allusageDay-js");
+    const usageReason = document.getElementById("applicationReason-js");
+    const applicationFile = document.getElementById("applicationFile-js");
+    const annualSettlement = document.getElementById("annualSettlement-js");
+
+    if (usageReason.value.length < 1) {
+      this.setState({
+        isAlertOpen: true,
+        alertType: "error",
+        alertTitle: "알림",
+        alertContent: "사유를 작성해주세요.",
+      });
+      usageReason.focus();
+      return;
+    } else if (usageReason.value === isNaN) {
+      this.setState({
+        isAlertOpen: true,
+        alertType: "error",
+        alertTitle: "알림",
+        alertContent: "문자를 입력해주세요.",
+      });
+      return;
+    }
+
+    if (annualSettlement.value.length < 1) {
+      this.setState({
+        isAlertOpen: true,
+        alertType: "error",
+        alertTitle: "알림",
+        alertContent: "결제자를 선택해주세요.",
+      });
+      annualSettlement.focus();
+      return;
+    }
+
+    console.dir(allusageDay);
+
+    const addAnnualDate = {
+      userName: userName.innerText,
+      applicationDay: applicationDay.innerText,
+      annualStartDay: annualStartDay.value,
+      annualEndDay: annualEndDay.value,
+      allusageDay: allusageDay.innerText,
+      usageReason: usageReason.value,
+      applicationFile: applicationFile.value,
+      annualSettlement: annualSettlement.value,
+    };
+
+    console.log(addAnnualDate);
+  };
 
   _closeUsageDialogBtnHandler = () => {
     this.setState({ isUsageFormOpen: false });
