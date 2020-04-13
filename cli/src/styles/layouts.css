@@ -236,10 +236,9 @@
 .mh__content__title {
   display: flex;
   flex-direction: row;
+  height: 100%;
 }
-.mh__content__title {
-  padding-bottom: 10px;
-}
+
 .mh__content__title .fas,
 .mh__content__title .fa,
 .mh__content__title .fad {
@@ -291,7 +290,7 @@
   min-height: calc(100% - 40px);
   background: linear-gradient(to left, #fffefb, #ffffff);
   border: 5px solid #fff;
-  box-shadow: 0px 7px 10px #fbf6e5 inset, 5px 3px 12px #d6d6d6;
+  box-shadow: 0px 7px 10px #fffaeb inset, 5px 3px 12px #d6d6d6;
   box-sizing: border-box;
 }
 
