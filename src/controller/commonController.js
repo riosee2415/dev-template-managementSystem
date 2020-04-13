@@ -49,7 +49,9 @@ const callCollection = async (req, res) => {
     if (pageCode === "MM0102") {
       fsRef = await firestore.collection(collections[collectionIdx]);
 
-      queryRef = await fsRef
+      queryRef = await fsRef.where("useyn", "==", "y");
+
+      await queryRef
         .get()
         .then((res) => {
           res.forEach((doc) => {
@@ -109,6 +111,8 @@ const callCollection = async (req, res) => {
             docId: doc.id,
             projectName: doc.data().name,
             projectType: doc.data().type,
+<<<<<<< HEAD
+=======
           });
         });
       });
@@ -121,6 +125,7 @@ const callCollection = async (req, res) => {
             docId: doc.id,
             cliName: doc.data().name,
             cliChief: doc.data().chiefName,
+>>>>>>> refs/remotes/origin/master
           });
         });
       });
