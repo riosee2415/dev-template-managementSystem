@@ -25,6 +25,10 @@ const getClientInfo = async (req, res) => {
         status: res.data().status,
         taxation: res.data().taxation,
         type: res.data().type,
+        tel: res.data().tel,
+        manager: res.data().manager,
+        managerTel: res.data().managerTel,
+        managerEmail: res.data().managerEmail,
       };
     });
   } catch (e) {

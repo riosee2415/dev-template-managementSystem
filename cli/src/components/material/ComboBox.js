@@ -18,7 +18,12 @@ export default function ComboBox(props) {
       className={classes.root}
       getOptionLabel={option => option.title}
       renderInput={params => (
-        <TextField {...params} label={props.label} variant="outlined" />
+        <TextField
+          {...params}
+          label={props.label}
+          variant="outlined"
+          InputLabelProps={props.InputLabelProps}
+        />
       )}
       blurOnSelect
       noOptionsText="없음"

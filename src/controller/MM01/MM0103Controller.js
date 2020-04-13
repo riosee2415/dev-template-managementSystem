@@ -86,7 +86,7 @@ const modifyEmpInfo = async (req, res) => {
   let fsRef;
   let queryRef;
   let sendData = {
-    empId: data.empId,
+    password: data.password,
     empNo: data.empNo,
     name: data.name,
     loc: data.loc,
@@ -101,7 +101,7 @@ const modifyEmpInfo = async (req, res) => {
     addr2: data.addr2,
     zoneCode: data.zoneCode
   };
-
+  console.log(sendData);
   try {
     fsRef = await firestore.collection("employee").doc(data.key);
 
