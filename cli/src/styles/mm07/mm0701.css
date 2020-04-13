@@ -1,0 +1,17 @@
+.client__body {
+  margin: 30px 100px;
+}
+
+.client__body > div {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20px;
+}
+
+.client__body > div:hover span:first-child {
+  color: #ffa751;
+}
+
+.client__body > div > span:first-child {
+  margin-right: 10px;
+}
