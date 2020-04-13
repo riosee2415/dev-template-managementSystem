@@ -7,6 +7,7 @@ import MM0101Router from "./router/MM01/MM0101Router";
 import MM0102Router from "./router/MM01/MM0102Router";
 import MM0103Router from "./router/MM01/MM0103Router";
 import MM0202Router from "./router/MM02/MM0202Router";
+import MM0701Router from "./router/MM07/MM0701Router";
 
 const PORT = 5000;
 
@@ -45,6 +46,9 @@ app.post(routes.addWorkList, MM0202Router);
 app.post(routes.getEmpList, MM0202Router);
 app.post(routes.getProjectWorkListInfo, MM0202Router);
 app.post(routes.getProjectInfo, MM0202Router);
+
+/* MM0701 */
+app.post(routes.getClientDetail, MM0701Router);
 
 app.listen(PORT, () => {
   console.log(`✅ Server Start On ${PORT}`);
