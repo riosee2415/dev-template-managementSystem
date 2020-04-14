@@ -2,6 +2,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import morgan from "morgan";
 import routes from "./routes";
+import fileUpload from "express-fileupload";
 import CommonRouter from "./router/CommonRouter";
 import MM0101Router from "./router/MM01/MM0101Router";
 import MM0102Router from "./router/MM01/MM0102Router";
@@ -16,6 +17,7 @@ const app = express();
 app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(fileUpload());
 
 /* COMMON */
 app.post(routes.loginProcess, CommonRouter);

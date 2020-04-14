@@ -777,7 +777,7 @@ class MM0103 extends React.Component {
     const { isIdCheck } = this.state;
 
     let regExp = null;
-
+    /*
     if (empId.value.length < 1) {
       this.setState({
         isAlertOpen: true,
@@ -910,6 +910,7 @@ class MM0103 extends React.Component {
       addr1.focus();
       return;
     }
+    */
 
     this.setState({
       isConfirmOpen: true,
@@ -942,6 +943,7 @@ class MM0103 extends React.Component {
     const addr1 = document.getElementById("addr1-js");
     const addr2 = document.getElementById("addr2-js");
     const zoneCode = document.getElementById("zoneCode-js");
+    const profile_file = document.getElementById("profile-file");
 
     const data = {
       empId: empId.value,
@@ -960,8 +962,12 @@ class MM0103 extends React.Component {
       addr2: addr2.value,
       zoneCode: zoneCode.value,
       avatar: "..",
-      useyn: "y"
+      useyn: "y",
+      profile_file: profile_file.files[0]
     };
+
+    const formData = new FormData();
+    formData.append("data", JSON.stringify(data));
 
     const { isLeftRefresh } = this.state;
 
@@ -979,10 +985,10 @@ class MM0103 extends React.Component {
     const response = await fetch("/api/addEmpInfo", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
-        // 'Content-Type': 'application/x-www-form-urlencoded',
+        // "Content-Type": "application/json"
+        "Content-Type": "application/x-www-form-urlencoded"
       },
-      body: JSON.stringify({ data })
+      body: formData
     });
   };
 

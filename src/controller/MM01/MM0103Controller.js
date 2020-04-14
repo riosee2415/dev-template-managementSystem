@@ -43,6 +43,10 @@ const getEmpInfo = async (req, res) => {
 };
 
 const addEmpInfo = async (req, res) => {
+  console.log(req);
+  const profile_file = req.file;
+  console.log(profile_file);
+  return;
   const data = req.body.data;
 
   let fsRef;
@@ -101,7 +105,7 @@ const modifyEmpInfo = async (req, res) => {
     addr2: data.addr2,
     zoneCode: data.zoneCode
   };
-  console.log(sendData);
+
   try {
     fsRef = await firestore.collection("employee").doc(data.key);
 
