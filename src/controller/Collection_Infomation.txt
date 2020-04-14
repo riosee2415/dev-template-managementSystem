@@ -78,6 +78,7 @@
  - businessNumber   사업자번호      [String]
  - chiefName        대표자명        [String]
  - insDate          등록일         [String]
+ - status           상태           [String]
  - name             상호명         [String]
  - taxation         과세유형        [String]
  - tel              전화번호        [String]
