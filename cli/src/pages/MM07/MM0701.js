@@ -1,5 +1,6 @@
 import React from "react";
 import LeftListBox from "../../components/LeftListBox";
+import Tooltip from "@material-ui/core/Tooltip";
 import IconComponent from "../../components/material/IconComponent";
 
 class MM0701 extends React.Component {
@@ -88,21 +89,123 @@ class MM0701 extends React.Component {
             </div>
             <div className="mc__col2__desc">
               {clientInfo ? (
-                <div>
-                  <div>{clientInfo.BP}</div>
-                  <div>{clientInfo.address}</div>
-                  <div>{clientInfo.business}</div>
-                  <div>{clientInfo.businessNumber}</div>
-                  <div>{clientInfo.chiefName}</div>
-                  <div>{clientInfo.insDate}</div>
-                  <div>{clientInfo.name}</div>
-                  <div>{clientInfo.status === "1" ? "정상사업자" : "폐업"}</div>
-                  <div>{clientInfo.taxation}</div>
-                  <div>{clientInfo.type}</div>
-                  <div>{clientInfo.tel}</div>
-                  <div>{clientInfo.manager}</div>
-                  <div>{clientInfo.managerTel}</div>
-                  <div>{clientInfo.managerEmail}</div>
+                <div className="client__body">
+                  <Tooltip title="대표자명" placement="left">
+                    <div>
+                      <span>
+                        <IconComponent iconName="fas fa-signature" />
+                      </span>
+                      <span>{clientInfo.chiefName}</span>
+                    </div>
+                  </Tooltip>
+                  <Tooltip title="상호명" placement="left">
+                    <div>
+                      <span>
+                        <IconComponent iconName="fas fa-lightbulb" />
+                      </span>
+                      <span>{clientInfo.name}</span>
+                    </div>
+                  </Tooltip>
+                  <Tooltip title="사업자유형" placement="left">
+                    <div>
+                      <span>
+                        <IconComponent iconName="fas fa-address-book" />
+                      </span>
+                      <span>{clientInfo.BP}</span>
+                    </div>
+                  </Tooltip>
+                  <Tooltip title="사업자번호" placement="left">
+                    <div>
+                      <span>
+                        <IconComponent iconName="fas fa-paperclip" />
+                      </span>
+                      <span>{clientInfo.businessNumber}</span>
+                    </div>
+                  </Tooltip>
+                  <Tooltip title="주소" placement="left">
+                    <div>
+                      <span>
+                        <IconComponent iconName="fas fa-map-pin" />
+                      </span>
+                      <span>{clientInfo.address}</span>
+                    </div>
+                  </Tooltip>
+                  <Tooltip title="업태" placement="left">
+                    <div>
+                      <span>
+                        <IconComponent iconName="far fa-building" />
+                      </span>
+                      <span>{clientInfo.business}</span>
+                    </div>
+                  </Tooltip>
+
+                  <Tooltip title="등록일" placement="left">
+                    <div>
+                      <span>
+                        <IconComponent iconName="fas fa-calendar-plus" />
+                      </span>
+                      <span>{clientInfo.insDate}</span>
+                    </div>
+                  </Tooltip>
+                  <Tooltip title="담당자" placement="left">
+                    <div>
+                      <span>
+                        <IconComponent iconName="fas fa-user" />
+                      </span>
+                      <span>{clientInfo.manager}</span>
+                    </div>
+                  </Tooltip>
+                  <Tooltip title="전화번호" placement="left">
+                    <div>
+                      <span>
+                        <IconComponent iconName="fas fa-phone-volume" />
+                      </span>
+                      <span>{clientInfo.tel}</span>
+                    </div>
+                  </Tooltip>
+
+                  <Tooltip title="담당자연락처" placement="left">
+                    <div>
+                      <span>
+                        <IconComponent iconName="fas fa-mobile-alt" />
+                      </span>
+                      <span>{clientInfo.managerTel}</span>
+                    </div>
+                  </Tooltip>
+                  <Tooltip title="담당자이메일" placement="left">
+                    <div>
+                      <span>
+                        <IconComponent iconName="fas fa-envelope" />
+                      </span>
+                      <span>{clientInfo.managerEmail}</span>
+                    </div>
+                  </Tooltip>
+                  <Tooltip title="상태" placement="left">
+                    <div>
+                      <span>
+                        <IconComponent iconName="fas fa-pen-fancy" />
+                      </span>
+                      <span>
+                        {clientInfo.status === "1" ? "정상사업자" : "폐업"}
+                      </span>
+                    </div>
+                  </Tooltip>
+                  <Tooltip title="과세유형" placement="left">
+                    <div>
+                      <span>
+                        <IconComponent iconName="fas fa-asterisk" />
+                      </span>
+                      <span>{clientInfo.taxation}</span>
+                    </div>
+                  </Tooltip>
+                  <Tooltip title="종목" placement="left">
+                    <div>
+                      <span>
+                        <IconComponent iconName="fas fa-user-tie" />
+                      </span>
+                      <span>{clientInfo.type}</span>
+                    </div>
+                  </Tooltip>
                 </div>
               ) : null}
             </div>

@@ -111,6 +111,7 @@ const callCollection = async (req, res) => {
             docId: doc.id,
             projectName: doc.data().name,
             projectType: doc.data().type,
+            projectType: doc.data().type,
           });
         });
       });
@@ -122,6 +123,7 @@ const callCollection = async (req, res) => {
           sendData.push({
             docId: doc.id,
             cliName: doc.data().name,
+            cliChief: doc.data().chiefName,
             cliChief: doc.data().chiefName,
           });
         });
