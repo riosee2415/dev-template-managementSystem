@@ -1,17 +1,69 @@
 .client__body {
-  margin: 30px 100px;
+  width: 100%;
+  height: 100%;
+  margin: 20px;
 }
 
-.client__body > div {
+.client__body .client-status,
+.client__body .client-date {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.client__body .client-status .client__cont,
+.client__body .client-date .client__cont {
+  width: auto;
+  height: auto;
+  border-radius: 30px;
+  padding: 10px 10px 5px;
+  margin: 0 20px 30px;
+  line-height: 1.5;
+}
+
+.client__body .client-date .client__cont {
+  margin: 50px 20px 0;
+}
+
+.client__body .client__cont {
   display: flex;
   flex-direction: row;
+  width: 500px;
+  height: 30px;
   margin-bottom: 20px;
+  line-height: 1.4;
 }
 
-.client__body > div:hover span:first-child {
+.client__body .client__cont:hover .client-icon {
   color: #ffa751;
 }
 
-.client__body > div > span:first-child {
+.client__body .client-manager {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  padding: 30px;
+  border: 1px solid #ececec;
+  transition: 0.5s;
+  border-radius: 20px;
+}
+
+.client__body .client-manager:hover {
+  box-shadow: 2px 4px 20px #ececec;
+  background-color: #ffe3591d;
+  border: 2px solid #fff;
+}
+
+.client__body .client-manager .client-detail {
+  margin-top: 20px;
+}
+
+.client__body .client-detail {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.client__body .client__cont .client-icon {
   margin-right: 10px;
 }
