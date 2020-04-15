@@ -21,7 +21,9 @@ const getEmpInfo = async (req, res) => {
           name: res.data().name,
           rank: res.data().rank,
           position: res.data().position,
-          avatar: res.data().avatar,
+          avatar:
+            "https://s3.ap-northeast-2.amazonaws.com/management-system.4leaf/" +
+            res.data().avatar,
           addr1: res.data().addr1,
           addr2: res.data().addr2,
           birthday: res.data().birthday,
@@ -44,7 +46,7 @@ const getEmpInfo = async (req, res) => {
 };
 
 const addEmpInfo = async (req, res) => {
-  const data = req.body.data;
+  const data = JSON.parse(req.body.data);
   const profile_file = req.file;
 
   let fsRef;
@@ -66,7 +68,7 @@ const addEmpInfo = async (req, res) => {
     addr2: data.addr2,
     zoneCode: data.zoneCode,
     useyn: data.useyn,
-    avatar: Date.now().toString() + "_" + profile_file.originalname
+    avatar: `uploads/${Date.now().toString()}_${profile_file.originalname}`
   };
 
   try {

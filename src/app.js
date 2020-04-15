@@ -22,8 +22,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 AWS.config.region = "ap-northeast-2";
 AWS.config.update({
-  accessKeyId: "AKIAJ2MXPGY65AZVEQFQ",
-  secretAccessKey: "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"
+  accessKeyId: "AKIAJJXABXCU5ZQB3H6Q",
+  secretAccessKey: "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"
 });
 
 const s3 = new AWS.S3();
@@ -34,7 +34,8 @@ const upload = multer({
     bucket: "management-system.4leaf",
     contentType: multerS3.AUTO_CONTENT_TYPE,
     key: function(req, file, cb) {
-      cb(null, `uploads/${Date.now().toString()}_${file.originalname}`);
+      const path = `uploads/${Date.now().toString()}_${file.originalname}`;
+      cb(null, path);
     },
     acl: "public-read-write"
   })

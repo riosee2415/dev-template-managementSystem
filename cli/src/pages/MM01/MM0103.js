@@ -125,7 +125,10 @@ class MM0103 extends React.Component {
           <div className="mh__content">
             <div className="mh__content__title">
               <IconComponent iconName="fas fa-leaf" />
-              <span>인사 관리 > 직원 정보</span>
+              <span>
+                인사 관리 > 직원 정보
+                {this.state.empInfo ? this.state.empInfo.avatar : null}
+              </span>
             </div>
 
             <div className="mh__content__btn">
