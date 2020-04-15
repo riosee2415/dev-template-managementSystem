@@ -1,4 +1,5 @@
 import firestore from "../../firebase";
+import path from "path";
 
 const getEmpInfo = async (req, res) => {
   const key = req.body.key;
@@ -43,11 +44,8 @@ const getEmpInfo = async (req, res) => {
 };
 
 const addEmpInfo = async (req, res) => {
-  console.log(req);
-  const profile_file = req.file;
-  console.log(profile_file);
-  return;
   const data = req.body.data;
+  const profile_file = req.file;
 
   let fsRef;
   let queryRef;
@@ -61,14 +59,14 @@ const addEmpInfo = async (req, res) => {
     position: data.position,
     rank: data.rank,
     hire: data.hire,
-    avatar: data.avatar,
     birthday: data.birthday,
     mobile: data.mobile,
     email: data.email,
     addr1: data.addr1,
     addr2: data.addr2,
     zoneCode: data.zoneCode,
-    useyn: data.useyn
+    useyn: data.useyn,
+    avatar: Date.now().toString() + "_" + profile_file.originalname
   };
 
   try {

@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import middleware from "../../middleware/common";
 import IconComponent from "../../components/material/IconComponent";
 import LeftListBox from "../../components/LeftListBox";
@@ -370,6 +371,7 @@ class MM0103 extends React.Component {
               >
                 <Tooltip title="프로필" placement="top">
                   <Avatar
+                    id="profile-image-js"
                     alt="profile"
                     src={ProfileSample}
                     style={{
@@ -383,11 +385,13 @@ class MM0103 extends React.Component {
 
                 <input
                   accept="image/*"
-                  id="profile-file"
+                  id="profile-file-js"
+                  name="profile_file"
                   type="file"
                   className="d-none"
+                  onChange={this._profileChangeHandler}
                 />
-                <label htmlFor="profile-file">
+                <label htmlFor="profile-file-js">
                   <IconButton component="span" style={{ marginTop: 10 }}>
                     <Tooltip title="업로드" placement="bottom">
                       <PhotoCamera style={{ fontSize: 32, color: "#888" }} />
@@ -397,6 +401,7 @@ class MM0103 extends React.Component {
               </Grid>
               <Grid item xs={11}>
                 <TextField
+                  name="empId"
                   id="empId-js"
                   type="text"
                   label="아이디"
@@ -777,7 +782,7 @@ class MM0103 extends React.Component {
     const { isIdCheck } = this.state;
 
     let regExp = null;
-    /*
+
     if (empId.value.length < 1) {
       this.setState({
         isAlertOpen: true,
@@ -910,7 +915,6 @@ class MM0103 extends React.Component {
       addr1.focus();
       return;
     }
-    */
 
     this.setState({
       isConfirmOpen: true,
@@ -943,7 +947,7 @@ class MM0103 extends React.Component {
     const addr1 = document.getElementById("addr1-js");
     const addr2 = document.getElementById("addr2-js");
     const zoneCode = document.getElementById("zoneCode-js");
-    const profile_file = document.getElementById("profile-file");
+    const profile_file = document.getElementById("profile-file-js");
 
     const data = {
       empId: empId.value,
@@ -961,13 +965,12 @@ class MM0103 extends React.Component {
       addr1: addr1.value,
       addr2: addr2.value,
       zoneCode: zoneCode.value,
-      avatar: "..",
-      useyn: "y",
-      profile_file: profile_file.files[0]
+      useyn: "y"
     };
 
     const formData = new FormData();
     formData.append("data", JSON.stringify(data));
+    formData.append("profile_file", profile_file.files[0]);
 
     const { isLeftRefresh } = this.state;
 
@@ -982,14 +985,7 @@ class MM0103 extends React.Component {
       empInfo: null
     });
 
-    const response = await fetch("/api/addEmpInfo", {
-      method: "POST",
-      headers: {
-        // "Content-Type": "application/json"
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      body: formData
-    });
+    const response = await axios.post("/api/addEmpInfo", formData);
   };
 
   _empRegistFormCloseDialogHandler = () => {
@@ -1289,6 +1285,21 @@ class MM0103 extends React.Component {
         alertTitle: "알림",
         alertContent: "데이터 처리 중 문제가 발생했습니다."
       });
+    }
+  };
+
+  _profileChangeHandler = () => {
+    const profile_file = document.getElementById("profile-file-js");
+    const profile_image = document.getElementById("profile-image-js");
+
+    if (profile_file.files && profile_file.files[0]) {
+      const reader = new FileReader();
+
+      reader.onload = function(e) {
+        profile_image.firstChild.src = e.target.result;
+      };
+
+      reader.readAsDataURL(profile_file.files[0]);
     }
   };
 }
