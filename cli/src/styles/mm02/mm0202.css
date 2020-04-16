@@ -106,25 +106,34 @@
 }
 .workList-main li:nth-child(2),
 .workList-main-box .workList-main li:nth-child(2) {
-  width: 240px;
-  min-width: 200px;
+  width: 220px;
+  min-width: 190px;
+  text-align: left;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.workList-main li:nth-child(n + 3):nth-child(-n + 4),
+.workList-main-box .workList-main li:nth-child(n + 3):nth-child(-n + 4) {
+  width: 50px;
+  min-width: 50px;
   text-align: left;
 }
-.workList-main li:nth-child(n + 3):nth-child(-n + 5),
-.workList-main-box .workList-main li:nth-child(n + 3):nth-child(-n + 5) {
-  width: 65px;
-  min-width: 50px;
+.workList-main li:nth-child(n + 5),
+.workList-main-box .workList-main li:nth-child(n + 5) {
+  width: 60px;
+  min-width: 55px;
   text-align: left;
 }
 .workList-main li:nth-child(6),
 .workList-main-box .workList-main li:nth-child(6) {
-  width: 100px;
-  min-width: 100px;
-  text-align: left;
+  width: 90px;
+  min-width: 90px;
+  text-align: center;
 }
 .workList-main li:nth-child(7),
 .workList-main-box .workList-main li:nth-child(7) {
-  width: 70px;
+  width: 60px;
   min-width: 60px;
   text-align: center;
 }

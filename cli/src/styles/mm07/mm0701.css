@@ -18,6 +18,10 @@
   line-height: 1.5;
 }
 
+.client__body .client-date .client__cont {
+  border-bottom: 2px solid #888;
+}
+
 .client__body .client-status .client__cont .status-1,
 .client__body .client-status .client__cont .status-0 {
   display: flex;
@@ -27,7 +31,8 @@
 }
 
 .client__body .client-status .client__cont .status-0 {
-  background-color: #e02938e3;
+  background-color: #e029388d;
+  text-decoration: line-through;
   color: #fff;
 }
 

@@ -96,14 +96,14 @@ class MM0701 extends React.Component {
                         {clientInfo.status === "1" ? (
                           <div className="status-1 bg-violet">
                             <span className="client-icon">
-                              <IconComponent iconName="fas fa-store" />
+                              <IconComponent iconName="fas fa-door-open" />
                             </span>
                             정상사업자
                           </div>
                         ) : (
                           <div className="status-0">
                             <span className="client-icon">
-                              <IconComponent iconName="fas fa-store-slash" />
+                              <IconComponent iconName="fas fa-door-closed" />
                             </span>
                             폐업
                           </div>
