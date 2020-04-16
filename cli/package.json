@@ -10,7 +10,11 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+<<<<<<< HEAD
     "axios": "^0.18.1",
+=======
+    "axios": "^0.18.0",
+>>>>>>> c67dab3cba9c403ab8d2f9f56e96a4a7898b0cd3
     "date-fns": "^2.0.0-beta.5",
     "react": "^16.13.1",
     "react-confirm-alert": "^2.6.1",

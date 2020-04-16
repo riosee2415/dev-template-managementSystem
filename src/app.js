@@ -2,6 +2,9 @@ import express from "express";
 import bodyParser from "body-parser";
 import morgan from "morgan";
 import routes from "./routes";
+import AWS from "aws-sdk";
+import multer from "multer";
+import multerS3 from "multer-s3";
 import CommonRouter from "./router/CommonRouter";
 import MM0101Router from "./router/MM01/MM0101Router";
 import MM0102Router from "./router/MM01/MM0102Router";
@@ -16,6 +19,27 @@ const app = express();
 app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+AWS.config.region = "ap-northeast-2";
+AWS.config.update({
+  accessKeyId: "AKIAJJXABXCU5ZQB3H6Q",
+  secretAccessKey: "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"
+});
+
+const s3 = new AWS.S3();
+
+const upload = multer({
+  storage: multerS3({
+    s3: s3,
+    bucket: "management-system.4leaf",
+    contentType: multerS3.AUTO_CONTENT_TYPE,
+    key: function(req, file, cb) {
+      const path = `uploads/${Date.now().toString()}_${file.originalname}`;
+      cb(null, path);
+    },
+    acl: "public-read-write"
+  })
+});
 
 /* COMMON */
 app.post(routes.loginProcess, CommonRouter);
@@ -34,7 +58,7 @@ app.post(routes.getAnnualInfo, MM0102Router);
 
 /* MM0103 */
 app.post(routes.getEmpInfo, MM0103Router);
-app.post(routes.addEmpInfo, MM0103Router);
+app.post(routes.addEmpInfo, upload.single("profile_file"), MM0103Router);
 app.post(routes.modifyEmpInfo, MM0103Router);
 app.post(routes.removeEmpInfo, MM0103Router);
 app.post(routes.getEmpIdCheck, MM0103Router);

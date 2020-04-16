@@ -13,6 +13,7 @@
     "@babel/preset-env": "^7.9.0",
     "@date-io/date-fns": "^2.5.0",
     "@material-ui/core": "^4.9.8",
+    "aws-sdk": "^2.656.0",
     "body-parser": "^1.19.0",
     "express": "^4.16.4",
     "express-router": "^0.0.1",
@@ -20,6 +21,8 @@
     "firebase": "^7.13.1",
     "http-proxy-middleware": "^1.0.3",
     "morgan": "^1.10.0",
+    "multer": "^1.4.2",
+    "multer-s3": "^2.9.0",
     "nodemon": "^2.0.2",
     "react-router-dom": "^5.1.2"
   },

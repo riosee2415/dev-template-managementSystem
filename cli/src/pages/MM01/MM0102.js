@@ -79,18 +79,27 @@ class MM0102 extends React.Component {
     ];
 
     const usedlist = [
+      { id: "number", label: "NO", align: "center", minWidth: 20 },
+      { id: "applicationDay", label: "신청일", align: "center", minWidth: 90 },
       {
-        id: "year",
+        id: "startDay",
+        label: "시작일",
+        align: "center",
+        minWidth: 150,
+      },
+      { id: "endDay", label: "종료일", align: "center", minWidth: 150 },
+      {
+        id: "usedDay",
         label: "사용일",
         align: "center",
-        minWidth: 170,
+        minWidth: 90,
       },
-      { id: "year", label: "사용 연차(일)", align: "center", minWidth: 170 },
+      { id: "usageReason", label: "사유", align: "center", minWidth: 170 },
       {
-        id: "whtused",
-        label: "사유",
+        id: "annualSettlement",
+        label: "결제자",
         align: "center",
-        minWidth: 170,
+        minWidth: 120,
       },
     ];
 
@@ -315,7 +324,7 @@ class MM0102 extends React.Component {
           closeDialogHandler={this._closeDialogBtnHandler}
           isOnlyCheck={true}
         >
-          <ComboBox options={[{ title: "aaa" }, { title: "aaa" }]} label="aa" />
+          <ComboBox options={empList} label="사용 연도" />
 
           <div>
             총 사용 연차 :
