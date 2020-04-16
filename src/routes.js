@@ -31,6 +31,8 @@ const routes = {
 
   /* MM0701 */
   getClientDetail: "/api/getClientDetail",
+
+  fileTest: "/api/fileTest",
 };
 
 export default routes;

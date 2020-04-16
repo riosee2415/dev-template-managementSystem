@@ -76,6 +76,12 @@ app.post(routes.getProjectInfo, MM0202Router);
 /* MM0701 */
 app.post(routes.getClientDetail, MM0701Router);
 
+app.post(routes.fileTest, (req, res) => {
+  const file = req.files.file;
+
+  console.log(file);
+});
+
 app.listen(PORT, () => {
   console.log(`✅ Server Start On ${PORT}`);
 });

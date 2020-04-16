@@ -77,6 +77,16 @@
   margin-right: 20px;
 }
 
+.mm0103__dataBox
+  .dataBox__body
+  .dataBox__col
+  .dataBox__row
+  span.data__icon
+  .fas {
+  width: 30px;
+  height: 26px;
+}
+
 .mm0103__dataBox .form-profile {
   width: 100px;
   height: 100px;
