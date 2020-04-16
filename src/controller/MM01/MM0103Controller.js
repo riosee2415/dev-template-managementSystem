@@ -1,5 +1,4 @@
 import firestore from "../../firebase";
-import path from "path";
 
 const getEmpInfo = async (req, res) => {
   const key = req.body.key;
@@ -68,7 +67,7 @@ const addEmpInfo = async (req, res) => {
     addr2: data.addr2,
     zoneCode: data.zoneCode,
     useyn: data.useyn,
-    avatar: `uploads/${Date.now().toString()}_${profile_file.originalname}`
+    avatar: `uploads/${req.body.upload_path}/${req.body.upload_time}_${profile_file.originalname}`
   };
 
   try {

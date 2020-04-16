@@ -18,7 +18,6 @@ import IconButton from "@material-ui/core/IconButton";
 import PhotoCamera from "@material-ui/icons/PhotoCamera";
 import Avatar from "@material-ui/core/Avatar";
 import ProfileSample from "../../assets/images/profileSample.png";
-import PersonIcon from "@material-ui/icons/Person";
 
 class MM0103 extends React.Component {
   constructor(props) {
@@ -45,7 +44,8 @@ class MM0103 extends React.Component {
       empDeptList: [],
       empPositionList: [],
       empRankList: [],
-      isIdCheck: false
+      isIdCheck: false,
+      isProfileUpload: false
     };
   }
 
@@ -116,7 +116,7 @@ class MM0103 extends React.Component {
       empDeptList,
       empPositionList,
       empRankList,
-      isIdCheck
+      isProfileUpload
     } = this.state;
 
     return (
@@ -125,10 +125,7 @@ class MM0103 extends React.Component {
           <div className="mh__content">
             <div className="mh__content__title">
               <IconComponent iconName="fas fa-leaf" />
-              <span>
-                인사 관리 > 직원 정보
-                {this.state.empInfo ? this.state.empInfo.avatar : null}
-              </span>
+              <span>인사 관리 > 직원 정보</span>
             </div>
 
             <div className="mh__content__btn">
@@ -718,7 +715,8 @@ class MM0103 extends React.Component {
 
   _empRegistHandler = async () => {
     this.setState({
-      isEmpRegistFormOpen: true
+      isEmpRegistFormOpen: true,
+      isProfileUpload: false
     });
   };
 
@@ -782,9 +780,19 @@ class MM0103 extends React.Component {
     const email = document.getElementById("email-js");
     const addr1 = document.getElementById("addr1-js");
 
-    const { isIdCheck } = this.state;
+    const { isIdCheck, isProfileUpload } = this.state;
 
     let regExp = null;
+
+    if (!isProfileUpload) {
+      this.setState({
+        isAlertOpen: true,
+        alertType: "warning",
+        alertTitle: "알림",
+        alertContent: "프로필을 등록해주세요."
+      });
+      return;
+    }
 
     if (empId.value.length < 1) {
       this.setState({
@@ -973,6 +981,8 @@ class MM0103 extends React.Component {
 
     const formData = new FormData();
     formData.append("data", JSON.stringify(data));
+    formData.append("upload_path", "profile");
+    formData.append("upload_time", Date.now().toString());
     formData.append("profile_file", profile_file.files[0]);
 
     const { isLeftRefresh } = this.state;
@@ -1296,10 +1306,38 @@ class MM0103 extends React.Component {
     const profile_image = document.getElementById("profile-image-js");
 
     if (profile_file.files && profile_file.files[0]) {
+      const file_name = profile_file.files[0].name;
+      const file_ext = file_name
+        .substring(file_name.lastIndexOf(".") + 1, file_name.length)
+        .toLowerCase();
+
+      if (
+        !(
+          file_ext == "png" ||
+          file_ext == "gif" ||
+          file_ext == "jpg" ||
+          file_ext == "jpeg"
+        )
+      ) {
+        this.setState({
+          isAlertOpen: true,
+          alertType: "warning",
+          alertTitle: "알림",
+          alertContent: "이미지만 첨부할 수 있습니다.",
+          isProfileUpload: false
+        });
+        profile_image.firstChild.src = ProfileSample;
+        return;
+      }
+
       const reader = new FileReader();
 
-      reader.onload = function(e) {
+      reader.onload = e => {
         profile_image.firstChild.src = e.target.result;
+
+        this.setState({
+          isProfileUpload: true
+        });
       };
 
       reader.readAsDataURL(profile_file.files[0]);
