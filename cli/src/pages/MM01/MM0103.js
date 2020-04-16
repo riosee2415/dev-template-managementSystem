@@ -963,7 +963,6 @@ class MM0103 extends React.Component {
     const data = {
       empId: empId.value,
       password: birthday.value.replace(/-/gi, "").substring(2, 8) + "a",
-      empNo: "SD202000001",
       name: name.value,
       loc: loc.value,
       dept: dept.value,
@@ -1034,7 +1033,6 @@ class MM0103 extends React.Component {
         position.value = empInfo.position;
         rank.value = empInfo.rank;
         birthday.value = empInfo.birthday;
-        console.log(empInfo.birthday);
       }, 1);
     }
   };
