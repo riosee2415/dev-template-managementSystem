@@ -92,15 +92,21 @@ class MM0701 extends React.Component {
                 <div className="client__body">
                   <div className="client-status">
                     <Tooltip title="상태" placement="left">
-                      <div className="client__cont bg-violet">
-                        <span className="client-icon">
-                          <IconComponent iconName="fas fa-pen-fancy" />
-                        </span>
-
+                      <div className="client__cont">
                         {clientInfo.status === "1" ? (
-                          <span className="status-1">정상사업자</span>
+                          <div className="status-1 bg-violet">
+                            <span className="client-icon">
+                              <IconComponent iconName="fas fa-store" />
+                            </span>
+                            정상사업자
+                          </div>
                         ) : (
-                          <span className="status-0">폐업</span>
+                          <div className="status-0">
+                            <span className="client-icon">
+                              <IconComponent iconName="fas fa-store-slash" />
+                            </span>
+                            폐업
+                          </div>
                         )}
                       </div>
                     </Tooltip>
