@@ -88,7 +88,9 @@ const getEmpList = async (req, res) => {
   try {
     fsRef = await firestore.collection("employee");
 
-    await fsRef.get().then((res) => {
+    queryRef = await fsRef.where("useyn", "==", "y");
+
+    await queryRef.get().then((res) => {
       res.forEach((doc) => {
         sendData.push({
           title: doc.data().name,
