@@ -10,6 +10,7 @@ MM0101Router.post(
 );
 
 MM0101Router.post(routes.saveWorkTimeToEnd, MM0101Controller.saveWorkTimeToEnd);
+MM0101Router.post(routes.saveWorkTimeToEnd, MM0101Controller.saveWorkTimeToEnd);
 
 MM0101Router.post(routes.getworkStart, MM0101Controller.getWorkTime);
 
