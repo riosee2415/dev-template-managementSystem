@@ -14,10 +14,40 @@
 .client__body .client-date .client__cont {
   width: auto;
   height: auto;
-  border-radius: 30px;
-  padding: 10px 10px 5px;
   margin: 0 20px 30px;
   line-height: 1.5;
+}
+
+.client__body .client-date .client__cont {
+  border-bottom: 2px solid #888;
+}
+
+.client__body .client-status .client__cont .status-1,
+.client__body .client-status .client__cont .status-0 {
+  display: flex;
+  flex-direction: row;
+  padding: 10px 10px 0px;
+  border-radius: 30px;
+}
+
+.client__body .client-status .client__cont .status-0 {
+  background-color: #e029388d;
+  text-decoration: line-through;
+  color: #fff;
+}
+
+.client__body .client-status .client__cont .status-1 .client-icon .fas,
+.client__body .client-status .client__cont .status-0 .client-icon .fas {
+  width: 30px;
+  height: 30px;
+}
+
+.client__body .client-status .client__cont .status-1:hover .client-icon .fas {
+  color: #3f5efd;
+}
+
+.client__body .client-status .client__cont .status-0:hover .client-icon .fas {
+  color: #ee0979;
 }
 
 .client__body .client-date .client__cont {

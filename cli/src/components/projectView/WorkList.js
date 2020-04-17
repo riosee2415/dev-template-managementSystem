@@ -59,7 +59,7 @@ class WorkList extends React.Component {
         {isDescFormOpen ? (
           <FormDialog
             isOpen={isDescFormOpen}
-            title="업무상세 내용"
+            title={this.props.workName}
             content=""
             closeDialogHandler={this._descFormCloseDialogHandler}
             isOnlyCheck={true}
