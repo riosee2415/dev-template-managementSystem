@@ -267,9 +267,9 @@ class MM0102 extends React.Component {
             <>
               <div className="usageSubTitle">
                 <div id="userName-js">{dataInfo.name}</div>
-                <div id="applicationDay-js">
+                <div>
                   <span> 신청일 : </span>
-                  {dataInfo.currentDate}
+                  <span id="applicationDay-js">{dataInfo.currentDate}</span>
                 </div>
               </div>
             </>
@@ -479,29 +479,6 @@ class MM0102 extends React.Component {
       return;
     }
 
-    // if (eDay < sDay) {
-    //   setTimeout(() => {
-    //     this.setState({
-    //       isAlertOpen: true,
-    //       alertType: "error",
-    //       alertTitle: "알림",
-    //       alertContent: "종료일은 시작일 이후여야 합니다.",
-    //     });
-    //   }, 0);
-    //   return;
-    // } else if (eDay - sDay > 14) {
-    //   setTimeout(() => {
-    //     this.setState({
-    //       isAlertOpen: true,
-    //       alertType: "error",
-    //       alertTitle: "알림",
-    //       alertContent: "15일 이상은 신청할 수 없습니다.",
-    //     });
-    //   }, 0);
-
-    //   return;
-    // }
-
     const useDay = eDay - sDay + 1;
 
     const eMs = document.getElementById("allusageDay-js");
@@ -520,7 +497,12 @@ class MM0102 extends React.Component {
     });
     const data = await response.json();
 
-    // empList 에서 sessionStorage랑 같은 거 빼고 넣어주기
+    // sessionStorage안에 이름과 같은 사람의 값 지워주기
+    const findItem = data.find((item) => {
+      return item.title === sessionStorage.login_name;
+    });
+    const findIndex = data.indexOf(findItem);
+    data.splice(findIndex, 1);
 
     this.setState({
       empList: data,
@@ -543,7 +525,17 @@ class MM0102 extends React.Component {
     const applicationFile = document.getElementById("applicationFile-js");
     const annualSettlement = document.getElementById("annualSettlement-js");
 
-    if (usageReason.value.length < 1) {
+    console.log(allusageDay.innerText);
+
+    if (allusageDay.innerText < 1) {
+      this.setState({
+        isAlertOpen: true,
+        alertType: "error",
+        alertTitle: "알림",
+        alertContent: "기간을 선택해주세요.",
+      });
+      return;
+    } else if (usageReason.value.length < 1) {
       this.setState({
         isAlertOpen: true,
         alertType: "error",
@@ -573,7 +565,7 @@ class MM0102 extends React.Component {
       return;
     }
 
-    console.dir(allusageDay);
+    console.dir(applicationDay);
 
     const addAnnualDate = {
       userName: userName.innerText,
