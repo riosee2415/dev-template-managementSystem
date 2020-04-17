@@ -34,8 +34,10 @@ const upload = multer({
     bucket: "management-system.4leaf",
     contentType: multerS3.AUTO_CONTENT_TYPE,
     key: function (req, file, cb) {
-      const path = `uploads/${Date.now().toString()}_${file.originalname}`;
-      cb(null, path);
+      cb(
+        null,
+        `uploads/${req.body.upload_path}/${req.body.upload_time}_${file.originalname}`
+      );
     },
     acl: "public-read-write",
   }),

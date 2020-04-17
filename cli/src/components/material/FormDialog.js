@@ -6,7 +6,11 @@ import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
 
-const styles = {};
+const styles = {
+  title: {
+    borderBottom: "1px solid #dedede",
+  },
+};
 
 class FormDialog extends React.Component {
   render() {
@@ -19,7 +23,9 @@ class FormDialog extends React.Component {
         fullWidth={true}
         maxWidth="md"
       >
-        <DialogTitle id="form-dialog-title">{this.props.title}</DialogTitle>
+        <DialogTitle className={classes.title} id="form-dialog-title">
+          {this.props.title}
+        </DialogTitle>
         <DialogContent>{this.props.children}</DialogContent>
         <DialogActions>
           {this.props.isOnlyCheck ? (
