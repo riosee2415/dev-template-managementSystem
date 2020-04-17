@@ -15,25 +15,25 @@ const getEmpInfo = async (req, res) => {
       .get()
       .then(res => {
         sendData = {
-          docId: doc.id,
-          empId: doc.data().empId,
-          name: doc.data().name,
-          rank: doc.data().rank,
-          position: doc.data().position,
+          docId: res.id,
+          empId: res.data().empId,
+          name: res.data().name,
+          rank: res.data().rank,
+          position: res.data().position,
           avatar:
             "https://s3.ap-northeast-2.amazonaws.com/management-system.4leaf/" +
-            doc.data().avatar,
-          addr1: doc.data().addr1,
-          addr2: doc.data().addr2,
-          birthday: doc.data().birthday,
-          hire: doc.data().hire,
-          loc: doc.data().loc,
-          zoneCode: doc.data().zoneCode,
-          mobile: doc.data().mobile,
-          email: doc.data().email,
-          empNo: doc.data().empNo,
-          dept: doc.data().dept,
-          useyn: doc.data().useyn
+            res.data().avatar,
+          addr1: res.data().addr1,
+          addr2: res.data().addr2,
+          birthday: res.data().birthday,
+          hire: res.data().hire,
+          loc: res.data().loc,
+          zoneCode: res.data().zoneCode,
+          mobile: res.data().mobile,
+          email: res.data().email,
+          empNo: res.data().empNo,
+          dept: res.data().dept,
+          useyn: res.data().useyn
         };
       });
   } catch (e) {
@@ -53,7 +53,7 @@ const getTotalEmpList = async (req, res) => {
     fsRef = await firestore.collection("employee");
 
     queryRef = await fsRef.get().then(res => {
-      doc.forEach(doc => {
+      res.forEach(doc => {
         sendData.push({
           docId: doc.id,
           empId: doc.data().empId,
@@ -199,7 +199,7 @@ const getEmpIdCheck = async (req, res) => {
     queryRef = await fsRef.where("empId", "==", key);
 
     await queryRef.get().then(res => {
-      doc.forEach(doc => {
+      res.forEach(doc => {
         sendData.result = false;
       });
     });

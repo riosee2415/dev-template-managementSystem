@@ -45,7 +45,7 @@ class MM0103 extends React.Component {
       empPositionList: [],
       empRankList: [],
       isIdCheck: false,
-      isProfileUpload: false,
+      isProfileUpload: false
     };
   }
 
@@ -90,7 +90,7 @@ class MM0103 extends React.Component {
       empLocList: empLocArray,
       empDeptList: empDeptArray,
       empPositionList: empPositionArray,
-      empRankList: empRankArray,
+      empRankList: empRankArray
     });
   };
 
@@ -117,7 +117,7 @@ class MM0103 extends React.Component {
       empPositionList,
       empRankList,
       isIdCheck,
-      isProfileUpload,
+      isProfileUpload
     } = this.state;
 
     return (
@@ -191,15 +191,15 @@ class MM0103 extends React.Component {
                       {
                         label: "기본정보",
                         action: this._tab01ClickHandler,
-                        param1: empInfo.docId,
+                        param1: empInfo.docId
                       },
                       {
                         label: "추가정보",
-                        action: () => {},
-                      },
+                        action: () => {}
+                      }
                     ]}
                     selectedTab={selectedTab}
-                    tabChangeHandler={(value) =>
+                    tabChangeHandler={value =>
                       this.setState({ selectedTab: value })
                     }
                   />
@@ -379,7 +379,7 @@ class MM0103 extends React.Component {
                       width: 150,
                       height: 150,
                       background: "#fff",
-                      boxShadow: "5px 5px 20px #aeaeae",
+                      boxShadow: "5px 5px 20px #aeaeae"
                     }}
                   />
                 </Tooltip>
@@ -411,7 +411,7 @@ class MM0103 extends React.Component {
                   required
                   onChange={() => {
                     this.setState({
-                      isIdCheck: false,
+                      isIdCheck: false
                     });
                   }}
                 />
@@ -480,10 +480,10 @@ class MM0103 extends React.Component {
                   fullWidth
                   required
                   InputLabelProps={{
-                    shrink: true,
+                    shrink: true
                   }}
                   InputProps={{
-                    readOnly: true,
+                    readOnly: true
                   }}
                 />
               </Grid>
@@ -495,10 +495,10 @@ class MM0103 extends React.Component {
                   fullWidth
                   required
                   InputLabelProps={{
-                    shrink: true,
+                    shrink: true
                   }}
                   InputProps={{
-                    readOnly: true,
+                    readOnly: true
                   }}
                 />
               </Grid>
@@ -543,7 +543,7 @@ class MM0103 extends React.Component {
                   autoFocus
                   required
                   InputProps={{
-                    readOnly: true,
+                    readOnly: true
                   }}
                   defaultValue={empInfo.empId}
                 />
@@ -559,12 +559,37 @@ class MM0103 extends React.Component {
                 />
               </Grid>
               <Grid item xs={6}>
+                <Grid container spacing={2}>
+                  <Grid item xs={10}>
+                    <TextField
+                      id="loc-js"
+                      label="근무위치"
+                      type="text"
+                      fullWidth
+                      required
+                      defaultValue={empInfo.loc}
+                      InputLabelProps={{
+                        shrink: true
+                      }}
+                      InputProps={{
+                        readOnly: true
+                      }}
+                    />
+                  </Grid>
+                  <Grid container item xs={2} alignItems="flex-end">
+                    <OutlinedButton size="small" color="primary">
+                      변경
+                    </OutlinedButton>
+                  </Grid>
+                </Grid>
+              </Grid>
+              <Grid item xs={6}>
                 <ComboBox
-                  id="loc-js"
+                  id="cmb-loc-js"
                   options={empLocList}
-                  label="근무위치"
+                  label="변경"
                   InputLabelProps={{
-                    shrink: true,
+                    shrink: true
                   }}
                 />
               </Grid>
@@ -574,7 +599,7 @@ class MM0103 extends React.Component {
                   options={empDeptList}
                   label="부서"
                   InputLabelProps={{
-                    shrink: true,
+                    shrink: true
                   }}
                 />
               </Grid>
@@ -584,7 +609,7 @@ class MM0103 extends React.Component {
                   options={empPositionList}
                   label="직급"
                   InputLabelProps={{
-                    shrink: true,
+                    shrink: true
                   }}
                 />
               </Grid>
@@ -594,7 +619,7 @@ class MM0103 extends React.Component {
                   options={empRankList}
                   label="직책"
                   InputLabelProps={{
-                    shrink: true,
+                    shrink: true
                   }}
                 />
               </Grid>
@@ -630,10 +655,10 @@ class MM0103 extends React.Component {
                   fullWidth
                   required
                   InputLabelProps={{
-                    shrink: true,
+                    shrink: true
                   }}
                   InputProps={{
-                    readOnly: true,
+                    readOnly: true
                   }}
                   defaultValue={empInfo.zoneCode}
                 />
@@ -646,10 +671,10 @@ class MM0103 extends React.Component {
                   fullWidth
                   required
                   InputLabelProps={{
-                    shrink: true,
+                    shrink: true
                   }}
                   InputProps={{
-                    readOnly: true,
+                    readOnly: true
                   }}
                   defaultValue={empInfo.addr1}
                 />
@@ -689,35 +714,35 @@ class MM0103 extends React.Component {
     );
   }
 
-  _dataClickHandler = async (key) => {
+  _dataClickHandler = async key => {
     await this._tab01ClickHandler(key);
   };
 
-  _tab01ClickHandler = async (key) => {
+  _tab01ClickHandler = async key => {
     const response = await fetch("/api/getEmpInfo", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
         // 'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: JSON.stringify({ key }),
+      body: JSON.stringify({ key })
     }).then(
       this.setState({
-        selectedTab: 1,
+        selectedTab: 1
       })
     );
 
     const data = await response.json();
 
     this.setState({
-      empInfo: data,
+      empInfo: data
     });
   };
 
   _empRegistHandler = async () => {
     this.setState({
       isEmpRegistFormOpen: true,
-      isProfileUpload: false,
+      isProfileUpload: false
     });
   };
 
@@ -728,7 +753,7 @@ class MM0103 extends React.Component {
         isAlertOpen: true,
         alertType: "warning",
         alertTitle: "알림",
-        alertContent: "아이디를 입력해주세요.",
+        alertContent: "아이디를 입력해주세요."
       });
       empId.focus();
       return;
@@ -738,10 +763,10 @@ class MM0103 extends React.Component {
     const response = await fetch("/api/getEmpIdCheck", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
         // 'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: JSON.stringify({ key }),
+      body: JSON.stringify({ key })
     });
 
     const data = await response.json();
@@ -752,7 +777,7 @@ class MM0103 extends React.Component {
         alertType: "success",
         alertTitle: "알림",
         alertContent: "사용 가능한 아이디입니다.",
-        isIdCheck: true,
+        isIdCheck: true
       });
       empId.focus();
       return;
@@ -762,7 +787,7 @@ class MM0103 extends React.Component {
         alertType: "error",
         alertTitle: "알림",
         alertContent: "이미 사용중인 아이디입니다.",
-        isIdCheck: false,
+        isIdCheck: false
       });
       empId.focus();
       return;
@@ -790,7 +815,7 @@ class MM0103 extends React.Component {
         isAlertOpen: true,
         alertType: "warning",
         alertTitle: "알림",
-        alertContent: "프로필을 등록해주세요.",
+        alertContent: "프로필을 등록해주세요."
       });
       return;
     }
@@ -800,7 +825,7 @@ class MM0103 extends React.Component {
         isAlertOpen: true,
         alertType: "warning",
         alertTitle: "알림",
-        alertContent: "아이디를 입력해주세요.",
+        alertContent: "아이디를 입력해주세요."
       });
       empId.focus();
       return;
@@ -810,7 +835,7 @@ class MM0103 extends React.Component {
         isAlertOpen: true,
         alertType: "warning",
         alertTitle: "알림",
-        alertContent: "아이디 확인 체크를 해주세요.",
+        alertContent: "아이디 확인 체크를 해주세요."
       });
       empId.focus();
       return;
@@ -820,7 +845,7 @@ class MM0103 extends React.Component {
         isAlertOpen: true,
         alertType: "warning",
         alertTitle: "알림",
-        alertContent: "직원명을 입력해주세요.",
+        alertContent: "직원명을 입력해주세요."
       });
       name.focus();
       return;
@@ -830,7 +855,7 @@ class MM0103 extends React.Component {
         isAlertOpen: true,
         alertType: "warning",
         alertTitle: "알림",
-        alertContent: "근무위치를 선택해주세요.",
+        alertContent: "근무위치를 선택해주세요."
       });
       loc.focus();
       return;
@@ -840,7 +865,7 @@ class MM0103 extends React.Component {
         isAlertOpen: true,
         alertType: "warning",
         alertTitle: "알림",
-        alertContent: "부서를 선택해주세요.",
+        alertContent: "부서를 선택해주세요."
       });
       dept.focus();
       return;
@@ -850,7 +875,7 @@ class MM0103 extends React.Component {
         isAlertOpen: true,
         alertType: "warning",
         alertTitle: "알림",
-        alertContent: "직급을 선택해주세요.",
+        alertContent: "직급을 선택해주세요."
       });
       position.focus();
       return;
@@ -860,7 +885,7 @@ class MM0103 extends React.Component {
         isAlertOpen: true,
         alertType: "warning",
         alertTitle: "알림",
-        alertContent: "직책을 선택해주세요.",
+        alertContent: "직책을 선택해주세요."
       });
       rank.focus();
       return;
@@ -870,7 +895,7 @@ class MM0103 extends React.Component {
         isAlertOpen: true,
         alertType: "warning",
         alertTitle: "알림",
-        alertContent: "생년월일을 입력해주세요.",
+        alertContent: "생년월일을 입력해주세요."
       });
       birthday.focus();
       return;
@@ -880,7 +905,7 @@ class MM0103 extends React.Component {
         isAlertOpen: true,
         alertType: "warning",
         alertTitle: "알림",
-        alertContent: "핸드폰 번호를 입력해주세요.",
+        alertContent: "핸드폰 번호를 입력해주세요."
       });
       mobile.focus();
       return;
@@ -891,7 +916,7 @@ class MM0103 extends React.Component {
         isAlertOpen: true,
         alertType: "warning",
         alertTitle: "알림",
-        alertContent: "올바르지 않은 형식입니다.",
+        alertContent: "올바르지 않은 형식입니다."
       });
       mobile.focus();
       return;
@@ -901,7 +926,7 @@ class MM0103 extends React.Component {
         isAlertOpen: true,
         alertType: "warning",
         alertTitle: "알림",
-        alertContent: "이메일을 입력해주세요.",
+        alertContent: "이메일을 입력해주세요."
       });
       email.focus();
       return;
@@ -912,7 +937,7 @@ class MM0103 extends React.Component {
         isAlertOpen: true,
         alertType: "warning",
         alertTitle: "알림",
-        alertContent: "올바르지 않은 형식입니다.",
+        alertContent: "올바르지 않은 형식입니다."
       });
       email.focus();
       return;
@@ -922,7 +947,7 @@ class MM0103 extends React.Component {
         isAlertOpen: true,
         alertType: "warning",
         alertTitle: "알림",
-        alertContent: "주소를 검색해주세요.",
+        alertContent: "주소를 검색해주세요."
       });
       addr1.focus();
       return;
@@ -932,7 +957,7 @@ class MM0103 extends React.Component {
       isConfirmOpen: true,
       confirmTitle: "등록",
       confirmContent: "입력하신 내용으로 직원을 등록하시겠습니까 ?",
-      confirmSubmitHandler: this._empRegistConfirmSubmitDialogHandler,
+      confirmSubmitHandler: this._empRegistConfirmSubmitDialogHandler
     });
   };
 
@@ -976,7 +1001,7 @@ class MM0103 extends React.Component {
       addr1: addr1.value,
       addr2: addr2.value,
       zoneCode: zoneCode.value,
-      useyn: "y",
+      useyn: "y"
     };
 
     const formData = new FormData();
@@ -995,7 +1020,7 @@ class MM0103 extends React.Component {
       isEmpRegistFormOpen: false,
       isConfirmOpen: false,
       isLeftRefresh: !isLeftRefresh,
-      empInfo: null,
+      empInfo: null
     });
 
     const response = await axios.post("/api/addEmpInfo", formData);
@@ -1003,7 +1028,7 @@ class MM0103 extends React.Component {
 
   _empRegistFormCloseDialogHandler = () => {
     this.setState({
-      isEmpRegistFormOpen: false,
+      isEmpRegistFormOpen: false
     });
   };
 
@@ -1015,11 +1040,11 @@ class MM0103 extends React.Component {
         isAlertOpen: true,
         alertType: "warning",
         alertTitle: "알림",
-        alertContent: "변경할 직원을 선택해주세요.",
+        alertContent: "변경할 직원을 선택해주세요."
       });
     } else {
       await this.setState({
-        isEmpModifyFormOpen: true,
+        isEmpModifyFormOpen: true
       });
 
       const loc = document.getElementById("loc-js");
@@ -1057,7 +1082,7 @@ class MM0103 extends React.Component {
         isAlertOpen: true,
         alertType: "warning",
         alertTitle: "알림",
-        alertContent: "아이디를 입력해주세요.",
+        alertContent: "아이디를 입력해주세요."
       });
       empId.focus();
       return;
@@ -1067,7 +1092,7 @@ class MM0103 extends React.Component {
         isAlertOpen: true,
         alertType: "warning",
         alertTitle: "알림",
-        alertContent: "직원명을 입력해주세요.",
+        alertContent: "직원명을 입력해주세요."
       });
       name.focus();
       return;
@@ -1077,7 +1102,7 @@ class MM0103 extends React.Component {
         isAlertOpen: true,
         alertType: "warning",
         alertTitle: "알림",
-        alertContent: "근무위치를 선택해주세요.",
+        alertContent: "근무위치를 선택해주세요."
       });
       loc.focus();
       return;
@@ -1087,7 +1112,7 @@ class MM0103 extends React.Component {
         isAlertOpen: true,
         alertType: "warning",
         alertTitle: "알림",
-        alertContent: "부서를 선택해주세요.",
+        alertContent: "부서를 선택해주세요."
       });
       dept.focus();
       return;
@@ -1097,7 +1122,7 @@ class MM0103 extends React.Component {
         isAlertOpen: true,
         alertType: "warning",
         alertTitle: "알림",
-        alertContent: "직급을 선택해주세요.",
+        alertContent: "직급을 선택해주세요."
       });
       position.focus();
       return;
@@ -1107,7 +1132,7 @@ class MM0103 extends React.Component {
         isAlertOpen: true,
         alertType: "warning",
         alertTitle: "알림",
-        alertContent: "직책을 선택해주세요.",
+        alertContent: "직책을 선택해주세요."
       });
       rank.focus();
       return;
@@ -1117,7 +1142,7 @@ class MM0103 extends React.Component {
         isAlertOpen: true,
         alertType: "warning",
         alertTitle: "알림",
-        alertContent: "생년월일을 입력해주세요.",
+        alertContent: "생년월일을 입력해주세요."
       });
       birthday.focus();
       return;
@@ -1127,7 +1152,7 @@ class MM0103 extends React.Component {
         isAlertOpen: true,
         alertType: "warning",
         alertTitle: "알림",
-        alertContent: "핸드폰 번호를 입력해주세요.",
+        alertContent: "핸드폰 번호를 입력해주세요."
       });
       mobile.focus();
       return;
@@ -1138,7 +1163,7 @@ class MM0103 extends React.Component {
         isAlertOpen: true,
         alertType: "warning",
         alertTitle: "알림",
-        alertContent: "올바르지 않은 형식입니다.",
+        alertContent: "올바르지 않은 형식입니다."
       });
       mobile.focus();
       return;
@@ -1148,7 +1173,7 @@ class MM0103 extends React.Component {
         isAlertOpen: true,
         alertType: "warning",
         alertTitle: "알림",
-        alertContent: "이메일을 입력해주세요.",
+        alertContent: "이메일을 입력해주세요."
       });
       email.focus();
       return;
@@ -1159,7 +1184,7 @@ class MM0103 extends React.Component {
         isAlertOpen: true,
         alertType: "warning",
         alertTitle: "알림",
-        alertContent: "올바르지 않은 형식입니다.",
+        alertContent: "올바르지 않은 형식입니다."
       });
       email.focus();
       return;
@@ -1169,7 +1194,7 @@ class MM0103 extends React.Component {
         isAlertOpen: true,
         alertType: "warning",
         alertTitle: "알림",
-        alertContent: "주소를 검색해주세요.",
+        alertContent: "주소를 검색해주세요."
       });
       addr1.focus();
       return;
@@ -1179,7 +1204,7 @@ class MM0103 extends React.Component {
       isConfirmOpen: true,
       confirmTitle: "변경",
       confirmContent: "입력하신 내용으로 직원정보를 변경하시겠습니까 ?",
-      confirmSubmitHandler: this._empModifyConfirmSubmitDialogHandler,
+      confirmSubmitHandler: this._empModifyConfirmSubmitDialogHandler
     });
   };
 
@@ -1213,7 +1238,7 @@ class MM0103 extends React.Component {
       addr1: addr1.value,
       addr2: addr2.value,
       zoneCode: zoneCode.value,
-      avatar: "..",
+      avatar: ".."
     };
 
     this.setState({
@@ -1222,16 +1247,16 @@ class MM0103 extends React.Component {
       alertTitle: "알림",
       alertContent: "변경 되었습니다.",
       isEmpModifyFormOpen: false,
-      isConfirmOpen: false,
+      isConfirmOpen: false
     });
 
     const response = await fetch("/api/modifyEmpInfo", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
         // 'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: JSON.stringify({ data }),
+      body: JSON.stringify({ data })
     }).then(() => {
       this._dataClickHandler(empInfo.docId);
     });
@@ -1239,7 +1264,7 @@ class MM0103 extends React.Component {
 
   _empModifyFormCloseDialogHandler = () => {
     this.setState({
-      isEmpModifyFormOpen: false,
+      isEmpModifyFormOpen: false
     });
   };
 
@@ -1251,7 +1276,7 @@ class MM0103 extends React.Component {
         isAlertOpen: true,
         alertType: "info",
         alertTitle: "알림",
-        alertContent: "삭제할 직원을 선택해주세요.",
+        alertContent: "삭제할 직원을 선택해주세요."
       });
       return;
     }
@@ -1259,7 +1284,7 @@ class MM0103 extends React.Component {
       isConfirmOpen: true,
       confirmTitle: "확인",
       confirmContent: "[" + empInfo.name + "] 님을 삭제하시겠습니까 ?",
-      confirmSubmitHandler: this._empRemoveConfirmSubmitDialogHandler,
+      confirmSubmitHandler: this._empRemoveConfirmSubmitDialogHandler
     });
   };
 
@@ -1267,16 +1292,16 @@ class MM0103 extends React.Component {
     const { empInfo, isLeftRefresh } = this.state;
 
     this.setState({
-      isConfirmOpen: false,
+      isConfirmOpen: false
     });
 
     const response = await fetch("/api/removeEmpInfo", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
         // 'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: JSON.stringify({ empInfo }),
+      body: JSON.stringify({ empInfo })
     });
 
     const data = await response.json();
@@ -1288,14 +1313,14 @@ class MM0103 extends React.Component {
         alertTitle: "알림",
         alertContent: "삭제 처리되었습니다.",
         isLeftRefresh: !isLeftRefresh,
-        empInfo: null,
+        empInfo: null
       });
     } else {
       this.setState({
         isAlertOpen: true,
         alertType: "error",
         alertTitle: "알림",
-        alertContent: "데이터 처리 중 문제가 발생했습니다.",
+        alertContent: "데이터 처리 중 문제가 발생했습니다."
       });
     }
   };
@@ -1323,7 +1348,7 @@ class MM0103 extends React.Component {
           alertType: "warning",
           alertTitle: "알림",
           alertContent: "이미지만 첨부할 수 있습니다.",
-          isProfileUpload: false,
+          isProfileUpload: false
         });
         profile_image.firstChild.src = ProfileSample;
         return;
@@ -1331,17 +1356,15 @@ class MM0103 extends React.Component {
 
       const reader = new FileReader();
 
-      reader.onload = function (e) {
-        reader.onload = (e) => {
-          profile_image.firstChild.src = e.target.result;
+      reader.onload = e => {
+        profile_image.firstChild.src = e.target.result;
 
-          this.setState({
-            isProfileUpload: true,
-          });
-        };
-
-        reader.readAsDataURL(profile_file.files[0]);
+        this.setState({
+          isProfileUpload: true
+        });
       };
+
+      reader.readAsDataURL(profile_file.files[0]);
     }
   };
 }
