@@ -17,15 +17,13 @@ class TabBox extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const { selectedTab } = this.state;
 
     return (
       <>
         {this.props.tabs ? (
           <Paper style={{ margin: 10 }}>
             <Tabs
-              value={selectedTab - 1}
-              onChange={this._tabChangeHandler}
+              value={this.props.selectedTab - 1}
               indicatorColor="primary"
               textColor="primary"
               centered
@@ -47,13 +45,6 @@ class TabBox extends React.Component {
       </>
     );
   }
-
-  _tabChangeHandler = (event, newValue) => {
-    this.props.tabChangeHandler(newValue + 1);
-    this.setState({
-      selectedTab: newValue + 1
-    });
-  };
 }
 
 export default withStyles(styles)(TabBox);
