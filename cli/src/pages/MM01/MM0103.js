@@ -559,29 +559,20 @@ class MM0103 extends React.Component {
                 />
               </Grid>
               <Grid item xs={6}>
-                <Grid container spacing={2}>
-                  <Grid item xs={10}>
-                    <TextField
-                      id="loc-js"
-                      label="근무위치"
-                      type="text"
-                      fullWidth
-                      required
-                      defaultValue={empInfo.loc}
-                      InputLabelProps={{
-                        shrink: true
-                      }}
-                      InputProps={{
-                        readOnly: true
-                      }}
-                    />
-                  </Grid>
-                  <Grid container item xs={2} alignItems="flex-end">
-                    <OutlinedButton size="small" color="primary">
-                      변경
-                    </OutlinedButton>
-                  </Grid>
-                </Grid>
+                <TextField
+                  id="loc-js"
+                  label="근무위치"
+                  type="text"
+                  fullWidth
+                  required
+                  defaultValue={empInfo.loc}
+                  InputLabelProps={{
+                    shrink: true
+                  }}
+                  InputProps={{
+                    readOnly: true
+                  }}
+                />
               </Grid>
               <Grid item xs={6}>
                 <ComboBox
@@ -594,30 +585,78 @@ class MM0103 extends React.Component {
                 />
               </Grid>
               <Grid item xs={6}>
-                <ComboBox
+                <TextField
                   id="dept-js"
-                  options={empDeptList}
                   label="부서"
+                  type="text"
+                  fullWidth
+                  required
+                  defaultValue={empInfo.dept}
+                  InputLabelProps={{
+                    shrink: true
+                  }}
+                  InputProps={{
+                    readOnly: true
+                  }}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <ComboBox
+                  id="cmb-dept-js"
+                  options={empDeptList}
+                  label="변경"
                   InputLabelProps={{
                     shrink: true
                   }}
                 />
               </Grid>
               <Grid item xs={6}>
-                <ComboBox
+                <TextField
                   id="position-js"
-                  options={empPositionList}
                   label="직급"
+                  type="text"
+                  fullWidth
+                  required
+                  defaultValue={empInfo.position}
+                  InputLabelProps={{
+                    shrink: true
+                  }}
+                  InputProps={{
+                    readOnly: true
+                  }}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <ComboBox
+                  id="cmb-position-js"
+                  options={empPositionList}
+                  label="변경"
                   InputLabelProps={{
                     shrink: true
                   }}
                 />
               </Grid>
               <Grid item xs={6}>
-                <ComboBox
+                <TextField
                   id="rank-js"
-                  options={empRankList}
                   label="직책"
+                  type="text"
+                  fullWidth
+                  required
+                  defaultValue={empInfo.rank}
+                  InputLabelProps={{
+                    shrink: true
+                  }}
+                  InputProps={{
+                    readOnly: true
+                  }}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <ComboBox
+                  id="cmb-rank-js"
+                  options={empRankList}
+                  label="변경"
                   InputLabelProps={{
                     shrink: true
                   }}
@@ -1006,9 +1045,9 @@ class MM0103 extends React.Component {
 
     const formData = new FormData();
     formData.append("data", JSON.stringify(data));
-    formData.append("upload_path", "profile");
-    formData.append("upload_time", Date.now().toString());
-    formData.append("profile_file", profile_file.files[0]);
+    formData.append("uploadPath", "profile");
+    formData.append("uploadTime", Date.now().toString());
+    formData.append("profileFile", profile_file.files[0]);
 
     const { isLeftRefresh } = this.state;
 
@@ -1326,21 +1365,21 @@ class MM0103 extends React.Component {
   };
 
   _profileChangeHandler = () => {
-    const profile_file = document.getElementById("profile-file-js");
-    const profile_image = document.getElementById("profile-image-js");
+    const profileFile = document.getElementById("profile-file-js");
+    const profileImage = document.getElementById("profile-image-js");
 
-    if (profile_file.files && profile_file.files[0]) {
-      const file_name = profile_file.files[0].name;
-      const file_ext = file_name
-        .substring(file_name.lastIndexOf(".") + 1, file_name.length)
+    if (profileFile.files && profileFile.files[0]) {
+      const fileName = profileFile.files[0].name;
+      const fileExt = fileName
+        .substring(fileName.lastIndexOf(".") + 1, fileName.length)
         .toLowerCase();
 
       if (
         !(
-          file_ext == "png" ||
-          file_ext == "gif" ||
-          file_ext == "jpg" ||
-          file_ext == "jpeg"
+          fileExt === "png" ||
+          fileExt === "gif" ||
+          fileExt === "jpg" ||
+          fileExt === "jpeg"
         )
       ) {
         this.setState({
@@ -1350,22 +1389,28 @@ class MM0103 extends React.Component {
           alertContent: "이미지만 첨부할 수 있습니다.",
           isProfileUpload: false
         });
-        profile_image.firstChild.src = ProfileSample;
+        profileImage.firstChild.src = ProfileSample;
         return;
       }
 
       const reader = new FileReader();
 
       reader.onload = e => {
-        profile_image.firstChild.src = e.target.result;
+        profileImage.firstChild.src = e.target.result;
 
         this.setState({
           isProfileUpload: true
         });
       };
 
-      reader.readAsDataURL(profile_file.files[0]);
+      reader.readAsDataURL(profileFile.files[0]);
     }
+  };
+
+  _inputChangeHandler = e => {
+    let nextState = {};
+    nextState[e.target.name] = e.target.value;
+    this.setState(nextState);
   };
 }
 

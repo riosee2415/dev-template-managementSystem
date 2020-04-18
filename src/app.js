@@ -22,8 +22,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 AWS.config.region = "ap-northeast-2";
 AWS.config.update({
-  accessKeyId: "AKIAJJXABXCU5ZQB3H6Q",
-  secretAccessKey: "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",
+  accessKeyId: "AKIAJ6BP7PKCYN6MB7FQ",
+  secretAccessKey: "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"
 });
 
 const s3 = new AWS.S3();
@@ -33,14 +33,14 @@ const upload = multer({
     s3: s3,
     bucket: "management-system.4leaf",
     contentType: multerS3.AUTO_CONTENT_TYPE,
-    key: function (req, file, cb) {
+    key: function(req, file, cb) {
       cb(
         null,
-        `uploads/${req.body.upload_path}/${req.body.upload_time}_${file.originalname}`
+        `uploads/${req.body.uploadPath}/${req.body.uploadTime}_${file.originalname}`
       );
     },
-    acl: "public-read-write",
-  }),
+    acl: "public-read-write"
+  })
 });
 
 /* COMMON */
@@ -60,7 +60,7 @@ app.post(routes.getAnnualInfo, MM0102Router);
 
 /* MM0103 */
 app.post(routes.getEmpInfo, MM0103Router);
-app.post(routes.addEmpInfo, upload.single("profile_file"), MM0103Router);
+app.post(routes.addEmpInfo, upload.single("profileFile"), MM0103Router);
 app.post(routes.modifyEmpInfo, MM0103Router);
 app.post(routes.removeEmpInfo, MM0103Router);
 app.post(routes.getEmpIdCheck, MM0103Router);

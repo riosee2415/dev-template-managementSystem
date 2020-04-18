@@ -87,7 +87,7 @@ const getTotalEmpList = async (req, res) => {
 
 const addEmpInfo = async (req, res) => {
   const data = JSON.parse(req.body.data);
-  const profile_file = req.file;
+  const profileFile = req.file;
 
   let fsRef;
   let queryRef;
@@ -108,7 +108,7 @@ const addEmpInfo = async (req, res) => {
     addr2: data.addr2,
     zoneCode: data.zoneCode,
     useyn: data.useyn,
-    avatar: `uploads/${req.body.upload_path}/${req.body.upload_time}_${profile_file.originalname}`
+    avatar: `uploads/${req.body.uploadPath}/${req.body.uploadTime}_${profileFile.originalname}`
   };
 
   try {
