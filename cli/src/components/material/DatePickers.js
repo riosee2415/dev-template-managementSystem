@@ -26,7 +26,7 @@ export default function DatePickers(props) {
       className={classes.root}
       type="date"
       margin="dense"
-      defaultValue={currentDate}
+      defaultValue={props.defaultValue ? props.defaultValue : currentDate}
       InputLabelProps={{
         shrink: true
       }}
