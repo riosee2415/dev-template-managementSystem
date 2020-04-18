@@ -616,6 +616,10 @@ class MM0103 extends React.Component {
                   InputLabelProps={{
                     shrink: true
                   }}
+                  onChange={(event, value) => {
+                    if (value)
+                      document.getElementById("loc-js").value = value.title;
+                  }}
                 />
               </Grid>
               <Grid item xs={6}>
@@ -641,6 +645,10 @@ class MM0103 extends React.Component {
                   label="변경"
                   InputLabelProps={{
                     shrink: true
+                  }}
+                  onChange={(event, value) => {
+                    if (value)
+                      document.getElementById("dept-js").value = value.title;
                   }}
                 />
               </Grid>
@@ -668,6 +676,11 @@ class MM0103 extends React.Component {
                   InputLabelProps={{
                     shrink: true
                   }}
+                  onChange={(event, value) => {
+                    if (value)
+                      document.getElementById("position-js").value =
+                        value.title;
+                  }}
                 />
               </Grid>
               <Grid item xs={6}>
@@ -693,6 +706,10 @@ class MM0103 extends React.Component {
                   label="변경"
                   InputLabelProps={{
                     shrink: true
+                  }}
+                  onChange={(event, value) => {
+                    if (value)
+                      document.getElementById("rank-js").value = value.title;
                   }}
                 />
               </Grid>
@@ -811,7 +828,7 @@ class MM0103 extends React.Component {
     });
 
     const data = await response.json();
-    console.log(data);
+
     this.setState({
       empInfo: data
     });
@@ -1305,7 +1322,7 @@ class MM0103 extends React.Component {
     const zoneCode = document.getElementById("zoneCode-js");
     const profileFile = document.getElementById("profile-file-js");
 
-    const { empInfo } = this.state;
+    const { empInfo, isLeftRefresh } = this.state;
 
     const data = {
       key: empInfo.docId,
@@ -1336,7 +1353,8 @@ class MM0103 extends React.Component {
       alertTitle: "알림",
       alertContent: "변경 되었습니다.",
       isEmpModifyFormOpen: false,
-      isConfirmOpen: false
+      isConfirmOpen: false,
+      isLeftRefresh: !isLeftRefresh
     });
 
     await axios.post("/api/modifyEmpInfo", formData).then(() => {
