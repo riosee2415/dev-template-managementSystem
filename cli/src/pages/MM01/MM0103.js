@@ -195,13 +195,10 @@ class MM0103 extends React.Component {
                       },
                       {
                         label: "추가정보",
-                        action: () => {}
+                        action: this._tab02ClickHandler
                       }
                     ]}
                     selectedTab={selectedTab}
-                    tabChangeHandler={value =>
-                      this.setState({ selectedTab: value })
-                    }
                   />
 
                   {selectedTab === 1 ? (
@@ -274,17 +271,6 @@ class MM0103 extends React.Component {
                         </div>
 
                         <div className="dataBox__col">
-                          <Tooltip title="근무위치" placement="left">
-                            <div className="dataBox__row">
-                              <span className="data__icon">
-                                <IconComponent iconName="fas fa-map-marker-alt" />
-                              </span>
-                              <span className="data__info">
-                                {this.state.empInfo.loc}
-                              </span>
-                            </div>
-                          </Tooltip>
-
                           <Tooltip title="사번" placement="left">
                             <div className="dataBox__row">
                               <span className="data__icon">
@@ -292,6 +278,17 @@ class MM0103 extends React.Component {
                               </span>
                               <span className="data__info">
                                 {this.state.empInfo.empNo}
+                              </span>
+                            </div>
+                          </Tooltip>
+
+                          <Tooltip title="근무위치" placement="left">
+                            <div className="dataBox__row">
+                              <span className="data__icon">
+                                <IconComponent iconName="fas fa-map-marker-alt" />
+                              </span>
+                              <span className="data__info">
+                                {this.state.empInfo.loc}
                               </span>
                             </div>
                           </Tooltip>
@@ -534,6 +531,43 @@ class MM0103 extends React.Component {
             isModified={true}
           >
             <Grid container spacing={2}>
+              <Grid
+                item
+                xs={12}
+                container
+                direction="column"
+                alignItems="center"
+              >
+                <Tooltip title="프로필" placement="top">
+                  <Avatar
+                    id="profile-image-js"
+                    alt="profile"
+                    src={empInfo.avatar}
+                    style={{
+                      width: 150,
+                      height: 150,
+                      background: "#fff",
+                      boxShadow: "5px 5px 20px #aeaeae"
+                    }}
+                  />
+                </Tooltip>
+
+                <input
+                  accept="image/*"
+                  id="profile-file-js"
+                  name="profile_file"
+                  type="file"
+                  className="d-none"
+                  onChange={this._profileChangeHandler}
+                />
+                <label htmlFor="profile-file-js">
+                  <IconButton component="span" style={{ marginTop: 10 }}>
+                    <Tooltip title="업로드" placement="bottom">
+                      <PhotoCamera style={{ fontSize: 32, color: "#888" }} />
+                    </Tooltip>
+                  </IconButton>
+                </label>
+              </Grid>
               <Grid item xs={12}>
                 <TextField
                   id="empId-js"
@@ -684,7 +718,12 @@ class MM0103 extends React.Component {
                 />
               </Grid>
               <Grid item xs={12}>
-                <DatePickers id="birthday-js" label="생년월일" required />
+                <DatePickers
+                  id="birthday-js"
+                  label="생년월일"
+                  required
+                  defaultValue={empInfo.birthday}
+                />
               </Grid>
               <Grid item xs={2}>
                 <TextField
@@ -753,11 +792,15 @@ class MM0103 extends React.Component {
     );
   }
 
-  _dataClickHandler = async key => {
-    await this._tab01ClickHandler(key);
+  _dataClickHandler = key => {
+    this._tab01ClickHandler(key);
   };
 
   _tab01ClickHandler = async key => {
+    this.setState({
+      selectedTab: 1
+    });
+
     const response = await fetch("/api/getEmpInfo", {
       method: "POST",
       headers: {
@@ -765,16 +808,18 @@ class MM0103 extends React.Component {
         // 'Content-Type': 'application/x-www-form-urlencoded',
       },
       body: JSON.stringify({ key })
-    }).then(
-      this.setState({
-        selectedTab: 1
-      })
-    );
+    });
 
     const data = await response.json();
-
+    console.log(data);
     this.setState({
       empInfo: data
+    });
+  };
+
+  _tab02ClickHandler = async key => {
+    this.setState({
+      selectedTab: 2
     });
   };
 
@@ -1023,7 +1068,7 @@ class MM0103 extends React.Component {
     const addr1 = document.getElementById("addr1-js");
     const addr2 = document.getElementById("addr2-js");
     const zoneCode = document.getElementById("zoneCode-js");
-    const profile_file = document.getElementById("profile-file-js");
+    const profileFile = document.getElementById("profile-file-js");
 
     const data = {
       empId: empId.value,
@@ -1047,7 +1092,7 @@ class MM0103 extends React.Component {
     formData.append("data", JSON.stringify(data));
     formData.append("uploadPath", "profile");
     formData.append("uploadTime", Date.now().toString());
-    formData.append("profileFile", profile_file.files[0]);
+    formData.append("profileFile", profileFile.files[0]);
 
     const { isLeftRefresh } = this.state;
 
@@ -1062,7 +1107,7 @@ class MM0103 extends React.Component {
       empInfo: null
     });
 
-    const response = await axios.post("/api/addEmpInfo", formData);
+    await axios.post("/api/addEmpInfo", formData);
   };
 
   _empRegistFormCloseDialogHandler = () => {
@@ -1083,22 +1128,9 @@ class MM0103 extends React.Component {
       });
     } else {
       await this.setState({
-        isEmpModifyFormOpen: true
+        isEmpModifyFormOpen: true,
+        isProfileUpload: true
       });
-
-      const loc = document.getElementById("loc-js");
-      const dept = document.getElementById("dept-js");
-      const position = document.getElementById("position-js");
-      const rank = document.getElementById("rank-js");
-      const birthday = document.getElementById("birthday-js");
-
-      setTimeout(() => {
-        loc.value = empInfo.loc;
-        dept.value = empInfo.dept;
-        position.value = empInfo.position;
-        rank.value = empInfo.rank;
-        birthday.value = empInfo.birthday;
-      }, 1);
     }
   };
 
@@ -1114,7 +1146,19 @@ class MM0103 extends React.Component {
     const email = document.getElementById("email-js");
     const addr1 = document.getElementById("addr1-js");
 
+    const { isProfileUpload } = this.state;
+
     let regExp = null;
+
+    if (!isProfileUpload) {
+      this.setState({
+        isAlertOpen: true,
+        alertType: "warning",
+        alertTitle: "알림",
+        alertContent: "프로필을 등록해주세요."
+      });
+      return;
+    }
 
     if (empId.value.length < 1) {
       this.setState({
@@ -1259,13 +1303,14 @@ class MM0103 extends React.Component {
     const addr1 = document.getElementById("addr1-js");
     const addr2 = document.getElementById("addr2-js");
     const zoneCode = document.getElementById("zoneCode-js");
+    const profileFile = document.getElementById("profile-file-js");
 
     const { empInfo } = this.state;
 
     const data = {
       key: empInfo.docId,
+      empNo: empInfo.empNo,
       password: birthday.value.replace(/-/gi, "").substring(2, 8) + "a",
-      empNo: "SD202000001",
       name: name.value,
       loc: loc.value,
       dept: dept.value,
@@ -1276,9 +1321,14 @@ class MM0103 extends React.Component {
       email: email.value,
       addr1: addr1.value,
       addr2: addr2.value,
-      zoneCode: zoneCode.value,
-      avatar: ".."
+      zoneCode: zoneCode.value
     };
+
+    const formData = new FormData();
+    formData.append("data", JSON.stringify(data));
+    formData.append("uploadPath", "profile");
+    formData.append("uploadTime", Date.now().toString());
+    formData.append("profileFile", profileFile.files[0]);
 
     this.setState({
       isAlertOpen: true,
@@ -1289,14 +1339,7 @@ class MM0103 extends React.Component {
       isConfirmOpen: false
     });
 
-    const response = await fetch("/api/modifyEmpInfo", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-        // 'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: JSON.stringify({ data })
-    }).then(() => {
+    await axios.post("/api/modifyEmpInfo", formData).then(() => {
       this._dataClickHandler(empInfo.docId);
     });
   };
@@ -1369,7 +1412,9 @@ class MM0103 extends React.Component {
     const profileImage = document.getElementById("profile-image-js");
 
     if (profileFile.files && profileFile.files[0]) {
+      console.log("들어옴");
       const fileName = profileFile.files[0].name;
+      console.log(fileName);
       const fileExt = fileName
         .substring(fileName.lastIndexOf(".") + 1, fileName.length)
         .toLowerCase();
@@ -1396,6 +1441,7 @@ class MM0103 extends React.Component {
       const reader = new FileReader();
 
       reader.onload = e => {
+        console.log(e.target.result);
         profileImage.firstChild.src = e.target.result;
 
         this.setState({

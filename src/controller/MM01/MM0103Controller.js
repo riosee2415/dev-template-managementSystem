@@ -1,4 +1,6 @@
 import firestore from "../../firebase";
+import path from "path";
+import AWS from "aws-sdk";
 
 const getEmpInfo = async (req, res) => {
   const key = req.body.key;
@@ -39,6 +41,7 @@ const getEmpInfo = async (req, res) => {
   } catch (e) {
     console.log(e);
   } finally {
+    fsRef = null;
   }
 
   return req.body.isController ? sendData : res.json(sendData);
@@ -80,6 +83,7 @@ const getTotalEmpList = async (req, res) => {
   } catch (e) {
     console.log(e);
   } finally {
+    fsRef = null;
   }
 
   return req.body.isController ? sendData : res.json(sendData);
@@ -121,23 +125,23 @@ const addEmpInfo = async (req, res) => {
     fsRef = null;
   }
 
-  return null;
+  return res.json(sendData);
 };
 
 const modifyEmpInfo = async (req, res) => {
-  const data = req.body.data;
+  const data = JSON.parse(req.body.data);
+  const profileFile = req.file;
 
   let fsRef;
   let queryRef;
   let sendData = {
     password: data.password,
-    empNo: data.empNo,
+    empNo: getDeptCode(data.dept) + data.empNo.substring(2, 10),
     name: data.name,
     loc: data.loc,
     dept: data.dept,
     position: data.position,
     rank: data.rank,
-    avatar: data.avatar,
     birthday: data.birthday,
     mobile: data.mobile,
     email: data.email,
@@ -145,6 +149,34 @@ const modifyEmpInfo = async (req, res) => {
     addr2: data.addr2,
     zoneCode: data.zoneCode
   };
+
+  if (profileFile) {
+    const extension = path.extname(profileFile.originalname);
+    const avatar = `uploads/${req.body.uploadPath}/${req.body.uploadTime}${extension}`;
+
+    sendData.avatar = avatar;
+
+    req.body.key = data.key;
+    req.body.isController = true;
+
+    const empInfo = await getEmpInfo(req, res);
+    const key = empInfo.avatar.substring(
+      empInfo.avatar.indexOf("uploads/"),
+      empInfo.avatar.length
+    );
+
+    const s3 = new AWS.S3();
+    const params = {
+      Bucket: "management-system.4leaf",
+      Key: key
+    };
+
+    s3.deleteObject(params, (err, data) => {
+      if (err) {
+        console.log(err, err.stack);
+      }
+    });
+  }
 
   try {
     fsRef = await firestore.collection("employee").doc(data.key);
@@ -155,8 +187,7 @@ const modifyEmpInfo = async (req, res) => {
   } finally {
     fsRef = null;
   }
-
-  return null;
+  return res.json(sendData);
 };
 
 const removeEmpInfo = async (req, res) => {
@@ -180,6 +211,7 @@ const removeEmpInfo = async (req, res) => {
   } catch (e) {
     console.log(e);
   } finally {
+    fsRef = null;
   }
 
   return res.json(sendData);
@@ -206,36 +238,39 @@ const getEmpIdCheck = async (req, res) => {
   } catch (e) {
     console.log(e);
   } finally {
+    fsRef = null;
   }
 
   return res.json(sendData);
 };
 
+const getDeptCode = dept => {
+  let deptCode;
+  if (dept == "솔루션개발팀") deptCode = "SD";
+  else if (dept == "정보화사업개발팀") deptCode = "ID";
+
+  return deptCode;
+};
+
 const getEmpNo = async (req, res) => {
   const data = JSON.parse(req.body.data);
 
-  let dept_code;
-  if (data.dept == "솔루션개발팀") dept_code = "SD";
-  else if (data.dept == "정보화사업개발팀") dept_code = "ID";
-
+  const deptCode = await getDeptCode(data.dept);
   const year = new Date().getFullYear();
 
   req.body.isController = true;
 
-  const sendData = getTotalEmpList(req, res);
+  const sendData = await getTotalEmpList(req, res);
   const numbers = new Array();
   sendData.map(data => {
     numbers.push(parseInt(data.empNo.substring(6, 10)));
   });
-  numbers = numbers.sort();
+  numbers.sort();
 
-  const number = numbers[numbers.length - 1] + 1;
-  const util = require("util");
-  number = util.format("%4d", number);
+  const number = String(numbers[numbers.length - 1] + 1);
+  const numberCode = number.padStart(4, "0");
 
-  console.log(numbers);
-  console.log(number);
-  return dept_code + year + number;
+  return deptCode + year + numberCode;
 };
 
 const MM0103Controller = {

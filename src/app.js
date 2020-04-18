@@ -5,6 +5,7 @@ import routes from "./routes";
 import AWS from "aws-sdk";
 import multer from "multer";
 import multerS3 from "multer-s3";
+import path from "path";
 import CommonRouter from "./router/CommonRouter";
 import MM0101Router from "./router/MM01/MM0101Router";
 import MM0102Router from "./router/MM01/MM0102Router";
@@ -34,9 +35,10 @@ const upload = multer({
     bucket: "management-system.4leaf",
     contentType: multerS3.AUTO_CONTENT_TYPE,
     key: function(req, file, cb) {
+      const extension = path.extname(file.originalname);
       cb(
         null,
-        `uploads/${req.body.uploadPath}/${req.body.uploadTime}_${file.originalname}`
+        `uploads/${req.body.uploadPath}/${req.body.uploadTime}${extension}`
       );
     },
     acl: "public-read-write"
@@ -61,7 +63,7 @@ app.post(routes.getAnnualInfo, MM0102Router);
 /* MM0103 */
 app.post(routes.getEmpInfo, MM0103Router);
 app.post(routes.addEmpInfo, upload.single("profileFile"), MM0103Router);
-app.post(routes.modifyEmpInfo, MM0103Router);
+app.post(routes.modifyEmpInfo, upload.single("profileFile"), MM0103Router);
 app.post(routes.removeEmpInfo, MM0103Router);
 app.post(routes.getEmpIdCheck, MM0103Router);
 

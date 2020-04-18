@@ -7,7 +7,7 @@ const loginProcess = async (req, res) => {
   let fsRef;
   let queryRef;
   let sendData = {
-    loginResult: false,
+    loginResult: false
   };
 
   try {
@@ -17,14 +17,16 @@ const loginProcess = async (req, res) => {
       .where("empId", "==", id)
       .where("password", "==", pass);
 
-    await queryRef.get().then((res) => {
-      res.forEach((doc) => {
+    await queryRef.get().then(res => {
+      res.forEach(doc => {
         sendData = {
           empId: doc.data().empId,
           name: doc.data().name,
           rank: doc.data().rank,
-          avatar: doc.data().avatar,
-          loginResult: true,
+          avatar:
+            "https://s3.ap-northeast-2.amazonaws.com/management-system.4leaf/" +
+            doc.data().avatar,
+          loginResult: true
         };
       });
     });
@@ -53,13 +55,13 @@ const callCollection = async (req, res) => {
 
       await queryRef
         .get()
-        .then((res) => {
-          res.forEach((doc) => {
+        .then(res => {
+          res.forEach(doc => {
             sendData.push({
               docId: doc.id,
               empId: doc.data().empId,
               name: doc.data().name,
-              position: doc.data().position,
+              position: doc.data().position
             });
           });
         })
@@ -73,12 +75,12 @@ const callCollection = async (req, res) => {
 
               queryRef = await fsRef.where("userRef", "==", data.docId);
 
-              await queryRef.get().then((res) => {
-                res.docs.map((doc) => {
+              await queryRef.get().then(res => {
+                res.docs.map(doc => {
                   annualHolidays.push({
                     year: doc.data().year,
                     allAnnual: doc.data().allAnnual,
-                    usedAnnual: doc.data().usedAnnual,
+                    usedAnnual: doc.data().usedAnnual
                   });
                 });
                 data.annualHolidays = annualHolidays;
@@ -92,39 +94,39 @@ const callCollection = async (req, res) => {
 
       queryRef = await fsRef.where("useyn", "==", "y");
 
-      await queryRef.get().then((res) => {
-        res.forEach((doc) => {
+      await queryRef.get().then(res => {
+        res.forEach(doc => {
           sendData.push({
             docId: doc.id,
             empId: doc.data().empId,
             name: doc.data().name,
-            position: doc.data().position,
+            position: doc.data().position
           });
         });
       });
     } else if (pageCode == "MM0202") {
       fsRef = await firestore.collection(collections[collectionIdx]);
 
-      queryRef = await fsRef.get().then((res) => {
-        res.forEach((doc) => {
+      queryRef = await fsRef.get().then(res => {
+        res.forEach(doc => {
           sendData.push({
             docId: doc.id,
             projectName: doc.data().name,
             projectType: doc.data().type,
-            projectType: doc.data().type,
+            projectType: doc.data().type
           });
         });
       });
     } else if (pageCode == "MM0701") {
       fsRef = await firestore.collection(collections[collectionIdx]);
 
-      queryRef = await fsRef.get().then((res) => {
-        res.forEach((doc) => {
+      queryRef = await fsRef.get().then(res => {
+        res.forEach(doc => {
           sendData.push({
             docId: doc.id,
             cliName: doc.data().name,
             cliChief: doc.data().chiefName,
-            cliChief: doc.data().chiefName,
+            cliChief: doc.data().chiefName
           });
         });
       });
@@ -151,7 +153,7 @@ const getCommonData = async (req, res) => {
     queryRef = await fsRef
       .doc(docName)
       .get()
-      .then((res) => (sendData = res.data()));
+      .then(res => (sendData = res.data()));
   } catch (e) {
     console.log(e);
   } finally {
@@ -173,7 +175,7 @@ const getClientInfo = async (req, res) => {
     queryRef = await fsRef
       .doc(cliRef)
       .get()
-      .then((res) => (sendData = res.data()));
+      .then(res => (sendData = res.data()));
   } catch (e) {
     console.log(e);
   } finally {
@@ -186,7 +188,7 @@ const CommonController = {
   loginProcess,
   callCollection,
   getCommonData,
-  getClientInfo,
+  getClientInfo
 };
 
 export default CommonController;

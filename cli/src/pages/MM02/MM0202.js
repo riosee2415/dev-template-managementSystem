@@ -29,7 +29,7 @@ class MM0202 extends React.Component {
       empList: [],
       isReload: false,
       selectedTab: 0,
-      clientInfo: null,
+      clientInfo: null
     };
   }
 
@@ -44,7 +44,7 @@ class MM0202 extends React.Component {
     this._getEmpList();
 
     this.setState({
-      workType: arr,
+      workType: arr
     });
   };
 
@@ -59,7 +59,7 @@ class MM0202 extends React.Component {
       empList,
       isRegistFormOpen,
       selectedTab,
-      clientInfo,
+      clientInfo
     } = this.state;
 
     return (
@@ -146,7 +146,7 @@ class MM0202 extends React.Component {
                           param1: projectInfo.clientRef,
                           param2: null,
                           param3: null,
-                          param4: null,
+                          param4: null
                         },
                         {
                           label: "업무차트",
@@ -154,13 +154,10 @@ class MM0202 extends React.Component {
                           param1: projectInfo.ref,
                           param2: null,
                           param3: null,
-                          param4: null,
-                        },
+                          param4: null
+                        }
                       ]}
                       selectedTab={selectedTab}
-                      tabChangeHandler={(value) => {
-                        this.setState({ selectedTab: value });
-                      }}
                     />
                     {selectedTab === 1 ? (
                       <div>
@@ -319,26 +316,30 @@ class MM0202 extends React.Component {
     );
   }
 
-  _clientInfoHandler = async (cliRef) => {
+  _clientInfoHandler = async cliRef => {
     const { clientInfo } = this.state;
+
+    this.setState({
+      selectedTab: 1
+    });
 
     const response = await fetch("/api/getClientInfo", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
         // 'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: JSON.stringify({ cliRef }),
+      body: JSON.stringify({ cliRef })
     });
 
     const data = await response.json();
 
     this.setState({
-      clientInfo: data,
+      clientInfo: data
     });
   };
 
-  _deleteConfirm = (workRef) => {
+  _deleteConfirm = workRef => {
     console.log(sessionStorage.getItem("login_name"));
 
     const { projectInfo } = this.state;
@@ -350,9 +351,9 @@ class MM0202 extends React.Component {
         buttons: [
           {
             label: "닫기",
-            onClick: () => {},
-          },
-        ],
+            onClick: () => {}
+          }
+        ]
       });
 
       return;
@@ -364,13 +365,13 @@ class MM0202 extends React.Component {
       buttons: [
         {
           label: "예",
-          onClick: () => this._workDeleteHandler(workRef),
+          onClick: () => this._workDeleteHandler(workRef)
         },
         {
           label: "취소",
-          onClick: () => {},
-        },
-      ],
+          onClick: () => {}
+        }
+      ]
     });
   };
 
@@ -386,9 +387,9 @@ class MM0202 extends React.Component {
         buttons: [
           {
             label: "닫기",
-            onClick: () => {},
-          },
-        ],
+            onClick: () => {}
+          }
+        ]
       });
 
       return;
@@ -397,31 +398,31 @@ class MM0202 extends React.Component {
     this._addBtnHandler();
   };
 
-  _changedStatus = async (workRef) => {
+  _changedStatus = async workRef => {
     const { projectInfo } = this.state;
     const parentKey = projectInfo.ref;
 
     const response = await fetch("/api/changedWorkListStatus", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
         // 'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: JSON.stringify({ workRef, parentKey }),
+      body: JSON.stringify({ workRef, parentKey })
     }).then(this._progressBtnHandler(projectInfo.ref));
   };
 
-  _workDeleteHandler = async (workRef) => {
+  _workDeleteHandler = async workRef => {
     const { projectInfo } = this.state;
     const parentKey = projectInfo.ref;
 
     const response = await fetch("/api/deleteWorkList", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
         // 'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: JSON.stringify({ workRef, parentKey }),
+      body: JSON.stringify({ workRef, parentKey })
     }).then(this._progressBtnHandler(projectInfo.ref));
   };
 
@@ -429,20 +430,20 @@ class MM0202 extends React.Component {
     const response = await fetch("/api/getEmpList", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
         // 'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: JSON.stringify({}),
+      body: JSON.stringify({})
     });
     const data = await response.json();
     this.setState({
-      empList: data,
+      empList: data
     });
   };
 
   _addBtnHandler = () => {
     this.setState({
-      isRegistFormOpen: true,
+      isRegistFormOpen: true
     });
   };
 
@@ -489,58 +490,62 @@ class MM0202 extends React.Component {
       workEmp: workEmp.value,
       result: "0",
       workDate: workDate.value,
-      key: projectInfo.ref,
+      key: projectInfo.ref
     };
 
     this.setState({
-      isRegistFormOpen: false,
+      isRegistFormOpen: false
     });
 
     const response = await fetch("/api/addWorkList", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
         // 'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: JSON.stringify({ addData }),
+      body: JSON.stringify({ addData })
     }).then(this._progressBtnHandler(projectInfo.ref));
   };
 
   _addBtnCloseDialogHandler = () => {
     this.setState({
-      isRegistFormOpen: false,
+      isRegistFormOpen: false
     });
   };
 
-  _progressBtnHandler = async (projectId) => {
+  _progressBtnHandler = async projectId => {
+    this.setState({
+      selectedTab: 2
+    });
+
     const response = await fetch("/api/getProjectWorkListInfo", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
         // 'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: JSON.stringify({ projectId }),
+      body: JSON.stringify({ projectId })
     });
     const data = await response.json();
 
     this.setState({
-      projectWorkList: data,
+      projectWorkList: data
     });
   };
 
-  _dataClickHandler = async (key) => {
+  _dataClickHandler = async key => {
     const response = await fetch("/api/getProjectInfo", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
         // 'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: JSON.stringify({ key }),
+      body: JSON.stringify({ key })
     });
     const data = await response.json();
     this.setState({
       projectInfo: data,
-      selectedTab: 2,
+      selectedTab: 2
     });
 
     this._progressBtnHandler(this.state.projectInfo.ref);
