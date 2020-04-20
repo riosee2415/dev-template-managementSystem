@@ -1,5 +1,6 @@
 import React from "react";
 import IconComponent from "../../components/material/IconComponent";
+import FixedHeaderTable from "../../components/material/FixedHeaderTable";
 
 class MM0401 extends React.Component {
   render() {
@@ -51,7 +52,7 @@ class MM0401 extends React.Component {
                 <IconComponent iconName="fas fa-clipboard-list" />
                 <span className="subTitle">공지사항</span>
               </div>
-              <div className="mc__col2__desc">desc</div>
+              <FixedHeaderTable />
             </div>
           </div>
         </div>
