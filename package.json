@@ -13,7 +13,7 @@
     "@babel/preset-env": "^7.9.0",
     "@date-io/date-fns": "^2.5.0",
     "@material-ui/core": "^4.9.8",
-    "aws-sdk": "^2.656.0",
+    "aws-sdk": "^2.814.0",
     "body-parser": "^1.19.0",
     "express": "^4.16.4",
     "express-router": "^0.0.1",
